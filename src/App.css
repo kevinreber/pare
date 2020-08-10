@@ -38,6 +38,26 @@
 
 body {
   background-color: var(--bg-color);
+  color: var(--secondary-color)
+}
+
+ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+input, .mate-form-input{
+  border: 1px solid var(--tertiary-color);
+  background-color: var(--bg-color);
+  color: var(--secondary-color);
+}
+
+input:focus, .mate-form-input:focus{
+  border-color: var(--bg-color);
+  background-color: var(--tertiary-color);
+  color: var(--secondary-color);
+  outline: none;
+  box-shadow:none;
 }
 
 .mate-text-primary {
@@ -45,15 +65,26 @@ body {
 }
 
 .mate-text-secondary{
-color: var(--secondary-color);
+  color: var(--secondary-color);
 }
 
 .mate-text-danger{
-color: var(--danger-color);
+  color: var(--danger-color);
 }
 
 .mate-text-active{
-color: var(--tertiary-color);
+  color: var(--tertiary-color);
+}
+
+.mate-btn, input, .mate-form-input{
+  border-radius: 15px;
+  height: 45px;
+  font-size: 20px;
+}
+
+.mate-btn-primary{
+  color: var(--bg-color);
+  background-color: var(--primary-color);
 }
 
 @keyframes App-logo-spin {

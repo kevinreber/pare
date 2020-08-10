@@ -1,0 +1,8 @@
+.NavBar{
+    border-top: 2px solid var(--tertiary-color); 
+    height: 92px;
+}
+
+.study-group-icon{
+    width: 56px;
+}

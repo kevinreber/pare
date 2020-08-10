@@ -1,8 +1,8 @@
 import React from 'react';
 import Logo from '../../images/logo/mate-logo.png';
-import { ReactComponent as NotifyLogo } from './icons/notification-icon.svg';
+import { ReactComponent as NotifyIcon } from './icons/notification-icon.svg';
 import UserAvatar from '../user/UserAvatar';
-import './Header.css';
+import './styles/Header.css';
 
 function Header() {
 	return (
@@ -12,10 +12,10 @@ function Header() {
                     <UserAvatar />
                 </div>
                 <div className="Header-Logo mt-auto mb-auto">
-                    <img src={Logo} />
+                    <img src={Logo} alt="Mate"/>
                 </div>            
                 <div className="Header-Notif mt-auto mb-auto">
-                    <NotifyLogo />
+                    <NotifyIcon />
                 </div>
 		    </div>
 		</div>

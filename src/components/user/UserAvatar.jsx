@@ -6,7 +6,7 @@ function UserAvatar(){
 
     return(
         <>
-            <img className='UserAvatar' src={Avatar} />
+            <img className='UserAvatar' src={Avatar} alt='User Avatar'/>
         </>
     )
 }
