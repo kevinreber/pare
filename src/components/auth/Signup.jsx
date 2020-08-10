@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import LoginHeader from './LoginHeader';
 import useFields from '../../hooks/useFields';
 
 /** User Signup Form */
@@ -24,9 +25,7 @@ function Signup() {
 
 	return (
 		<>
-            <div className="Signup-Header"> 
-                <h5 className='mate-text-primary font-italic w-50 m-auto'>Stay connected with your College Mates!</h5>
-            </div>
+            <LoginHeader />
             <form className="container" onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor='username' className="mate-text-primary float-left">Username</label>
