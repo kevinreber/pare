@@ -1,6 +1,9 @@
 import React from 'react';
 import Class from './Class';
 
+/** Creates a List of User's Classes
+ * Classes -> ClassList -> Class
+ */
 function ClassList({ classes=[] }) {
 
 	const List = classes.map(course => 
@@ -10,7 +13,6 @@ function ClassList({ classes=[] }) {
 	
 	return (
 		<>
-		{/* <h1>Hi</h1> */}
 			{List}
 		</>
 	);

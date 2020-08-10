@@ -1,6 +1,8 @@
 import React from 'react';
 
-/** Card displaying course information */
+/** Card displaying course information 
+ * Classes -> ClassList -> Class
+ */
 function Course({course}) {
 	return (
 		<div className="Class Class-Card p-3 d-flex justify-content-between">
