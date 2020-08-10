@@ -4,9 +4,9 @@ import React from 'react';
 function Course({course}) {
 	return (
 		<div className="Class Class-Card p-3 d-flex justify-content-between">
-			<div className="Class-Card-Content d-flex justify-content-between">
+			<div className="Class-Card-Content d-flex">
 				<p className='mate-text-primary'>{course}</p>
-				<p>Name of class</p>
+				<p className="ml-auto">Name of class</p>
 			</div>
 			<div className="Class-Card-Semester">
 				<p className="font-italic">Fall 2020</p>

@@ -1,10 +1,10 @@
 import React from 'react';
 
 /** Card displaying course information */
-function ClassForm({course}) {
+function ClassForm() {
 	return (
 		<div className="ClassForm p-3">
-			<p className="font-italic">+ Add Class</p>
+			<h1>Add Class</h1>
 		</div>
 	);
 }

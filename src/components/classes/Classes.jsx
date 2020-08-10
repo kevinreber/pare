@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import ClassList from './ClassList';
-import ClassForm from './Classform';
+import ClassForm from './ClassForm';
+import Modal from '../general/Modal';
 import './styles/Classes.css';
 
 /** Displays a ClassList of user's Current and Past Semester classes. 
@@ -11,6 +12,13 @@ function Classes() {
     // State will determine what classes to show in ClassList
     const [ active, setActive ] = useState('current');
     const toggleClasses = (e) => {setActive(e.target.id); console.log(e.target.id);};
+
+    const [ showForm, setShowForm ] = useState(false);
+    const toggleForm = () => setShowForm(show => !show);
+
+    if (showForm) {
+        return <Modal content={<ClassForm />} closeModal={toggleForm} />
+    }
 
     const classList=[{name:'61a'},{name: '61b'}, {name: '61c'}, {name: 'math1a'}, {name: 'math1b'}];
 
@@ -33,7 +41,10 @@ function Classes() {
         <div className="Classes-ClassList">
             <ClassList classes={classList}/>
         </div>
-        <ClassForm />
+        {/* <ClassForm /> */}
+        <div className="ClassForm p-3">
+			<p onClick={toggleForm} className="font-italic">+ Add Class</p>
+		</div>
 		</>
 	);
 }
