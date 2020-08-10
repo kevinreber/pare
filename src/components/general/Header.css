@@ -1,0 +1,7 @@
+.Header{
+    border-bottom: 2px solid var(--tertiary-color); 
+}
+
+.Header-Logo img{
+    width: 64px;
+}

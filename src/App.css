@@ -1,3 +1,11 @@
+:root{
+  --primary-color: #75F3E7;
+  --secondary-color: #eeeeee;
+  --tertiary-color: #393E46;
+  --danger-color: #E15554;
+  --bg-color: #222831
+}
+
 .App {
   text-align: center;
 }
@@ -28,10 +36,31 @@
   color: #61dafb;
 }
 
+body {
+  background-color: var(--bg-color);
+}
+
+.mate-text-primary {
+  color: var(--primary-color);
+}
+
+.mate-text-secondary{
+color: var(--secondary-color);
+}
+
+.mate-text-danger{
+color: var(--danger-color);
+}
+
+.mate-text-active{
+color: var(--tertiary-color);
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
