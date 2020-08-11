@@ -5,7 +5,7 @@ import Course from './Course';
  * Courses -> CourseList -> Course -> CourseInfo
  */
 function CourseList({ courses = [] }) {
-	const List = courses.map((course) => <Course course={course.name} />);
+	const List = courses.map((course) => <Course course={course} />);
 
 	return (
 		<>

@@ -1,0 +1,41 @@
+.CourseInfoHeader {
+    margin-left: 2.5rem;
+}
+
+.CourseInfoHeaderTitle h5 {
+    font-size: 18px;
+}
+
+.CourseInfoHeaderTitle p {
+    font-size: 14px;
+}
+
+.CourseDetailsTable {
+    font-size: 12px;
+}
+
+.CourseGradesTable {
+    font-size: 16px;
+}
+
+.CourseGradesTable th {
+    padding-right: 1rem;
+    text-align: left;
+}
+
+.CourseDetailsTable th {
+    padding-right: 1rem;
+}
+
+.CourseDetailsTable th,
+.CourseDetailsTable td {
+    text-align: left;
+}
+
+.OverallGrading,
+.CourseGradesTable th,
+.CourseGradesTable td,
+.CourseDetailsTable th,
+.CourseDetailsTable td {
+    font-weight: 400;
+}

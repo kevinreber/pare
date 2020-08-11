@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 /** Card displaying course information
  * Courses -> CourseList -> Course -> CourseInfo
@@ -6,13 +7,21 @@ import React from 'react';
 function Course({ course }) {
 	return (
 		<>
+			{/* <Link to={`/${course.id}`}> */}
 			<tr className='Course Course-Card'>
 				<th className='mate-text-primary pt-3 pb-3 pl-4 text-left' scope='row'>
-					{course}
+					{course.id}
 				</th>
-				<td className='mate-text-secondary pt-3 pb-3'>Name of course</td>
-				<td className='mate-text-secondary font-italic pt-3 pb-3'>Fall 2020</td>
+				<td className='mate-text-secondary pt-3 pb-3'>
+					<Link to={`/courses/${course.id}`} className='mate-text-secondary'>
+						{course.description}
+					</Link>
+				</td>
+				<td className='mate-text-secondary font-italic pt-3 pb-3'>
+					{course.semester}
+				</td>
 			</tr>
+			{/* </Link> */}
 		</>
 	);
 }
