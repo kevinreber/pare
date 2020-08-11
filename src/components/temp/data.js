@@ -1,10 +1,10 @@
 // Data for Classes
 const courseList = [
-	{ name: '61a' },
-	{ name: '61b' },
-	{ name: '61c' },
-	{ name: 'math1a' },
-	{ name: 'math1b' },
+	{ id: 'CS61a', semester: 'FALL 2020', description: 'This is a course' },
+	{ id: 'CS61b', semester: 'FALL 2020', description: 'This is a course' },
+	{ id: 'CS61c', semester: 'FALL 2020', description: 'This is a course' },
+	{ id: 'MATH1a', semester: 'FALL 2020', description: 'This is a course' },
+	{ id: 'MATH1b', semester: 'FALL 2020', description: 'This is a course' },
 ];
 
 export { courseList };
