@@ -1,19 +1,19 @@
 import React from 'react';
 
-/** Card displaying course information 
+/** Card displaying course information
  * Classes -> ClassList -> Class
  */
-function Course({course}) {
+function Course({ course }) {
 	return (
-		<div className="Class Class-Card p-3 d-flex justify-content-between">
-			<div className="Class-Card-Content d-flex">
-				<p className='mate-text-primary'>{course}</p>
-				<p className="ml-auto">Name of class</p>
-			</div>
-			<div className="Class-Card-Semester">
-				<p className="font-italic">Fall 2020</p>
-			</div>
-		</div>
+		<>
+			<tr className='Class Class-Card'>
+				<th className='mate-text-primary pt-3 pb-3 pl-4 text-left' scope='row'>
+					{course}
+				</th>
+				<td className='mate-text-secondary pt-3 pb-3'>Name of class</td>
+				<td className='mate-text-secondary font-italic pt-3 pb-3'>Fall 2020</td>
+			</tr>
+		</>
 	);
 }
 
