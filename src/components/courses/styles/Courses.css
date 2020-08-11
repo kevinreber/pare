@@ -1,8 +1,8 @@
-.Classes-Header {
+.Courses-Header {
     border-bottom: 2px solid var(--tertiary-color);
 }
 
-.Class-Card {
+.Course-Card {
     border-bottom: 1px solid var(--tertiary-color);
 }
 
