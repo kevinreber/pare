@@ -1,9 +1,13 @@
-:root{
+:root {
   --primary-color: #75F3E7;
   --secondary-color: #eeeeee;
   --tertiary-color: #393E46;
   --danger-color: #E15554;
   --bg-color: #222831
+}
+
+body {
+  font-family: 'Rubik', sans-serif;
 }
 
 .App {
@@ -46,43 +50,54 @@ ul {
   list-style-type: none;
 }
 
-input, .mate-form-input{
+input,
+.mate-form-input {
   border: 1px solid var(--tertiary-color);
   background-color: var(--bg-color);
   color: var(--secondary-color);
 }
 
-input:focus, .mate-form-input:focus{
+input:focus,
+.mate-form-input:focus {
   border-color: var(--bg-color);
   background-color: var(--tertiary-color);
   color: var(--secondary-color);
   outline: none;
-  box-shadow:none;
+  box-shadow: none;
 }
 
-h1,h2,h3,h4,h5, h6, label, .mate-text-primary {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label,
+.mate-text-primary {
   color: var(--primary-color);
 }
 
-.mate-text-secondary{
+.mate-text-secondary {
   color: var(--secondary-color);
 }
 
-.mate-text-danger{
+.mate-text-danger {
   color: var(--danger-color);
 }
 
-.mate-text-active{
+.mate-text-active {
   color: var(--tertiary-color);
 }
 
-.mate-btn, input, .mate-form-input{
+.mate-btn,
+input,
+.mate-form-input {
   border-radius: 15px;
   height: 45px;
   font-size: 20px;
 }
 
-.mate-btn-primary{
+.mate-btn-primary {
   color: var(--bg-color);
   background-color: var(--primary-color);
 }
