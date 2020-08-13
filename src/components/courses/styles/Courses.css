@@ -2,7 +2,8 @@
     border-bottom: 2px solid var(--tertiary-color);
 }
 
-.Course-Card {
+.Course-Card,
+.Assignment.Assignment-Card {
     border-bottom: 1px solid var(--tertiary-color);
 }
 
