@@ -9,7 +9,9 @@ function CourseList({ courses = [] }) {
 
 	return (
 		<>
-			<table className='mate-table table-hover'>{List}</table>
+			<table className='mate-table table-hover'>
+				<tbody>{List}</tbody>
+			</table>
 		</>
 	);
 }
