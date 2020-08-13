@@ -8,7 +8,7 @@ import './styles/NavBar.css';
 
 function NavBar() {
 	return (
-		<nav className='NavBar fixed-bottom d-flex justify-content-around'>
+		<nav className='NavBar fixed-bottom d-flex justify-content-around mate-bg-primary'>
 			<ul className='d-flex m-auto'>
 				<li className='nav-item mt-auto mb-auto p-0'>
 					<NavLink className='nav-link mate-text-primary' exact to='/courses'>
