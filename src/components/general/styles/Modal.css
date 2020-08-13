@@ -1,0 +1,17 @@
+.Modal {
+    background-color: var(--bg-color);
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100000000;
+}
+
+.Modal .mate-btn-submit {
+    position: absolute;
+    width: 350px;
+    bottom: 6rem;
+    left: 50%;
+    margin-left: -175px;
+}
