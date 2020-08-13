@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import CourseAssignmentList from './CourseAssignmentList';
+import CourseAssignmentList from './courseAssignments/CourseAssignmentList';
 
 /** Displays Body information of Course Info Page */
 function CourseInfoHeader({ course }) {

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import CourseAssignment from './CourseAssignment';
 import AssignmentForm from './AssignmentForm';
-import Modal from '../../general/Modal';
-import { assignmentList } from '../../temp/data';
+import Modal from '../../../general/Modal';
+import { assignmentList } from '../../../temp/data';
 
 /** Displays List of Assignments */
 function CourseAssignmentList({ assignments = [] }) {

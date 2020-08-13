@@ -1,6 +1,6 @@
 import React from 'react';
-import useFields from '../../../hooks/useFields';
-import SubmitButton from '../../general/SubmitButton';
+import useFields from '../../../../hooks/useFields';
+import SubmitButton from '../../../general/SubmitButton';
 
 /** Form to add a assignment. */
 function AssignmentForm({ save }) {
