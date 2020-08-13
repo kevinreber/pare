@@ -39,3 +39,49 @@
 .CourseDetailsTable td {
     font-weight: 400;
 }
+
+.Course-Info-Body .Course-Info-Title {
+    font-size: 14px;
+}
+
+.Assignment.Assignment-Card .Assignment-Due {
+    font-size: 12px;
+}
+
+.Assignment.Assignment-Card .Assignment-Grade {
+    font-size: 12px;
+}
+
+.Assignment.Assignment-Card .Assignment-Title {
+    font-size: 14px;
+}
+
+.Assignment.Assignment-Card {
+    position: relative;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    border-collapse: separate;
+}
+
+.Assignment .Enter-Grade-Btn {
+    background-color: var(--danger-color);
+    font-size: 12px;
+    padding: .2rem;
+}
+
+.Assignment .Assignment-Status {
+    position: absolute;
+    left: .5rem;
+    top: 1.2rem;
+    font-size: 9px;
+}
+
+.Assignment .Change-Grade {
+    color: var(--tertiary-color);
+    position: absolute;
+    right: .4rem;
+    bottom: .6rem;
+    font-size: 14px;
+}
