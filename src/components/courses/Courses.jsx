@@ -13,7 +13,6 @@ function Courses() {
 	const [active, setActive] = useState('current');
 	const toggleCourses = (e) => {
 		setActive(e.target.id);
-		console.log(e.target.id);
 	};
 
 	// Toggle form for User to Add Course
