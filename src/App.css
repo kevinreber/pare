@@ -73,15 +73,21 @@ h4,
 h5,
 h6,
 label,
-.mate-text-primary {
+.mate-text-primary,
+.success {
   color: var(--primary-color);
+}
+
+.mate-bg-primary {
+  background-color: var(--bg-color);
 }
 
 .mate-text-secondary {
   color: var(--secondary-color);
 }
 
-.mate-text-danger {
+.mate-text-danger,
+.danger {
   color: var(--danger-color);
 }
 
