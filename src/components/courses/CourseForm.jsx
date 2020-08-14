@@ -9,7 +9,8 @@ function CourseForm({ save }) {
 	// Form Data
 	const INITIAL_STATE = {
 		courseMajor: '',
-		courseId: '',
+		courseNumber: '',
+		courseSemester: '',
 	};
 
 	const [formData, handleChange, resetFormData] = useFields(INITIAL_STATE);
@@ -28,7 +29,7 @@ function CourseForm({ save }) {
 			<form className='container mb-3' onSubmit={handleSubmit}>
 				<div className='form-group'>
 					<label htmlFor='courseMajor' className='float-left'>
-						Course Major
+						Subject
 					</label>
 					<input
 						id='courseMajor'
@@ -40,16 +41,29 @@ function CourseForm({ save }) {
 					/>
 				</div>
 				<div className='form-group'>
-					<label htmlFor='courseId' className='float-left'>
-						Course ID
+					<label htmlFor='courseNumber' className='float-left'>
+						Course Number
 					</label>
 					<input
-						id='courseId'
+						id='courseNumber'
 						className='form-control mate-form-input'
 						type='text'
 						onChange={handleChange}
-						name='courseId'
-						value={formData.courseId}
+						name='courseNumber'
+						value={formData.courseNumber}
+					/>
+				</div>
+				<div className='form-group'>
+					<label htmlFor='courseSemester' className='float-left'>
+						Semester
+					</label>
+					<input
+						id='courseSemester'
+						className='form-control mate-form-input'
+						type='text'
+						onChange={handleChange}
+						name='courseSemester'
+						value={formData.courseSemester}
 					/>
 				</div>
 				<SubmitButton text='Add' />

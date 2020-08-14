@@ -2,13 +2,27 @@ import React, { useState } from 'react';
 import CourseList from './CourseList';
 import CourseForm from './CourseForm';
 import Modal from '../general/Modal';
-import { courseList } from '../temp/data';
+import NoData from '../general/NoData';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchCoursesFromFB, addCourseToFB } from '../../store/actions/courses';
 import './styles/Courses.css';
 
 /** Displays a CourseList of user's Current and Past Semester courses. 
     Courses will fetch which courses to display from API and pass courses into CourseList.
 */
 function Courses() {
+	// get courses from Store
+	const courses = useSelector((state) => state.courses);
+	const dispatch = useDispatch();
+
+	// build list of courses, if no courses exist return 'No courses added'
+	const courseList =
+		courses && courses.length !== 0 ? (
+			<CourseList courses={courses} />
+		) : (
+			<NoData text={'courses'} />
+		);
+
 	// State will determine what courses to show in CourseList
 	const [active, setActive] = useState('current');
 	const toggleCourses = (e) => {
@@ -21,6 +35,7 @@ function Courses() {
 
 	const addCourse = (courseData) => {
 		console.log(courseData);
+		dispatch(addCourseToFB(courseData));
 		setShowForm(false);
 	};
 
@@ -58,7 +73,8 @@ function Courses() {
 				</div>
 			</div>
 			<div className='Courses-CourseList'>
-				<CourseList courses={courseList} />
+				{/* <CourseList courses={courses} /> */}
+				{courseList}
 			</div>
 			<div className='CourseForm p-3'>
 				<p onClick={toggleForm} className='font-italic'>

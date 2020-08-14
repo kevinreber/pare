@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import CourseAssignmentList from './courseAssignments/CourseAssignmentList';
 
 /** Displays Body information of Course Info Page */
-function CourseInfoHeader({ course }) {
+function CourseInfoHeader({ assignments }) {
 	// State will determine what courses to show in CourseList
 	const [active, setActive] = useState('assignments');
 	const toggleCourses = (e) => {
@@ -38,7 +38,7 @@ function CourseInfoHeader({ course }) {
 				</div>
 			</div>
 			<div className='Course-Info-Body-List'>
-				<CourseAssignmentList />
+				<CourseAssignmentList assignments={assignments} />
 			</div>
 		</div>
 	);

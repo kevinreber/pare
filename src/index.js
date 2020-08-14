@@ -4,17 +4,41 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+/** React Router */
+import { BrowserRouter } from 'react-router-dom';
+
+/** React & React-Redux */
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import rootReducer from './store/reducers/rootReducer';
+
+/** Redux Thunk */
+import thunk from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
+
+/** Firebase */
+import firebase from './config/fbConfig';
+
+// Initialize Redux store
+const store = createStore(
+	rootReducer,
+	composeWithDevTools(applyMiddleware(thunk))
+);
+
+console.log(firebase);
+
 ReactDOM.render(
-	<BrowserRouter>
-		<React.StrictMode>
-			<App />
-		</React.StrictMode>
-	</BrowserRouter>,
+	<Provider store={store}>
+		<BrowserRouter>
+			<React.StrictMode>
+				<App />
+			</React.StrictMode>
+		</BrowserRouter>
+	</Provider>,
 	document.getElementById('root')
 );
 
