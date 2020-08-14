@@ -6,7 +6,7 @@ import {
 } from './types';
 
 export function fetchCoursesfromFB(courses) {
-	return (dispatch) => {
+	return (dispatch, { getFirebase, getFirestore }) => {
 		const response = courses;
 
 		// make async call to DB
@@ -23,16 +23,40 @@ function getCourses(courses) {
 }
 
 export function addCourseToFB(courseMajor, courseNumber, courseSemester) {
-	return (dispatch) => {
+	return (dispatch, getState, { getFirebase }) => {
+		console.log(getFirebase);
 		// const response = { courseMajor, courseNumber, courseSemester };
-		const response = {
-			id: 'MA1D',
-			semester: 'FALL 2020',
-			description: 'This is a course',
+
+		const course = {
+			department: 'ARCH',
+			instructor: 'Orkand David',
+			meetingTime: 'MW,15:00:00-17:59:00',
+			number: '100B',
+			name: 'Fundamentals of Architectural Design II',
+			section: 1,
+			term: 'FALL 2020',
+			id: 355,
 		};
 
-		// make async call to DB
-		return dispatch(addCourse(response));
+		const firestore = getFirebase().firestore();
+
+		firestore
+			.collection('class')
+			.add(course)
+			.then(() => {
+				// make async call to DB
+				dispatch(addCourse(course));
+			})
+			.catch((err) => {
+				dispatch(dispatchError('ADD_COURSE_ERROR', err));
+			});
+	};
+}
+
+function dispatchError(type, error) {
+	return {
+		type,
+		error,
 	};
 }
 
@@ -45,7 +69,7 @@ function addCourse(course) {
 }
 
 export function removeCourseFromFB(course) {
-	return (dispatch) => {
+	return (dispatch, { getFirebase, getFirestore }) => {
 		const response = course;
 
 		// make async call to DB
@@ -62,7 +86,7 @@ function removeCourse(course) {
 }
 
 export function addAssignmentToFB(assignment) {
-	return (dispatch) => {
+	return (dispatch, { getFirebase, getFirestore }) => {
 		const response = assignment;
 
 		// make async call to DB

@@ -12,7 +12,7 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
 
 /** React & React-Redux */
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import rootReducer from './store/reducers/rootReducer';
 
@@ -22,22 +22,48 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 /** Firebase */
 import firebase from './config/fbConfig';
+// import firebase from 'firebase/app';
+import {
+	reduxFirestore,
+	getFirestore,
+	createFirestoreInstance,
+} from 'redux-firestore';
+import { ReactReduxFirebaseProvider, getFirebase } from 'react-redux-firebase';
 
 // Initialize Redux store
 const store = createStore(
 	rootReducer,
-	composeWithDevTools(applyMiddleware(thunk))
+	// compose(
+	// reactReduxFirebase(firebase, fbConfig),
+	applyMiddleware(thunk.withExtraArgument({ getFirebase }))
+	// reduxFirestore(fbConfig)
+	// applyMiddleware(thunk.withExtraArgument({ getFirebase }))
+	// )
 );
 
-console.log(firebase);
+// const rrfProps = {
+// 	firebase,
+// 	config: fbConfig,
+// 	dispatch: store.dispatch,
+// 	createFirestoreInstance,
+// };
+
+const rrfProps = {
+	firebase,
+	config: {},
+	dispatch: store.dispatch,
+	createFirestoreInstance,
+};
 
 ReactDOM.render(
 	<Provider store={store}>
-		<BrowserRouter>
-			<React.StrictMode>
-				<App />
-			</React.StrictMode>
-		</BrowserRouter>
+		<ReactReduxFirebaseProvider {...rrfProps}>
+			<BrowserRouter>
+				<React.StrictMode>
+					<App />
+				</React.StrictMode>
+			</BrowserRouter>
+		</ReactReduxFirebaseProvider>
 	</Provider>,
 	document.getElementById('root')
 );

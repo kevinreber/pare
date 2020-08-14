@@ -60,7 +60,12 @@ const courseReducer = (state = INITIAL_STATE, action) => {
 		case FETCH_COURSES:
 			return console.log('fetching courses');
 		case ADD_COURSE:
-			return [...state, action.course];
+			console.log('created', action.course);
+			// return [...state, action.course];
+			return state;
+		case 'ADD_COURSE_ERROR':
+			console.log('add course error', action.error);
+			return state;
 		case REMOVE_COURSE:
 			return console.log('removing course');
 		case ADD_ASSIGNMENT:
