@@ -66,6 +66,22 @@ input:focus,
   box-shadow: none;
 }
 
+/* Change Autocomplete styles in Chrome*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: 1px solid var(--tertiary-color);
+  -webkit-text-fill-color: var(--secondary-color);
+  -webkit-box-shadow: 0 0 0px 1000px var(--bg-color) inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 h1,
 h2,
 h3,
@@ -106,6 +122,26 @@ input,
 .mate-btn-primary {
   color: var(--bg-color);
   background-color: var(--primary-color);
+}
+
+.mate-btn-secondary {
+  color: var(--primary-color);
+  background-color: var(--bg-color);
+  border: 1px solid var(--primary-color);
+}
+
+.mate-btn-secondary:hover {
+  color: var(--bg-color);
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+.mate-btn-cta {
+  position: absolute;
+  width: 350px;
+  bottom: 7.5rem;
+  left: 50%;
+  margin-left: -175px;
 }
 
 @keyframes App-logo-spin {

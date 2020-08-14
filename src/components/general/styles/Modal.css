@@ -11,7 +11,11 @@
 .Modal .mate-btn-submit {
     position: absolute;
     width: 350px;
-    bottom: 6rem;
+    bottom: 7.5rem;
     left: 50%;
     margin-left: -175px;
+}
+
+.Modal .CourseForm {
+    margin-top: 50%;
 }
