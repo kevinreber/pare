@@ -1,8 +1,16 @@
-.NavBar{
-    border-top: 2px solid var(--tertiary-color); 
+.NavBar {
+    border-top: 2px solid var(--tertiary-color);
     height: 92px;
 }
 
-.study-group-icon{
+.nav-link {
+    opacity: .3;
+}
+
+.nav-link.active {
+    opacity: 1;
+}
+
+.study-group-icon {
     width: 56px;
 }

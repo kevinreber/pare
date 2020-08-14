@@ -11,12 +11,12 @@ function NavBar() {
 		<nav className='NavBar fixed-bottom d-flex justify-content-around mate-bg-primary'>
 			<ul className='d-flex m-auto'>
 				<li className='nav-item mt-auto mb-auto p-0'>
-					<NavLink className='nav-link mate-text-primary' exact to='/courses'>
+					<NavLink className='nav-link mate-text-primary' to='/courses'>
 						<CoursesIcon />
 					</NavLink>
 				</li>
 				<li className='nav-item mt-auto mb-auto p-0'>
-					<NavLink className='nav-link mate-text-primary' exact to='/connect'>
+					<NavLink className='nav-link mate-text-primary' to='/connect'>
 						<img
 							className='study-group-icon'
 							src={StudyGroupIcon}
@@ -25,7 +25,7 @@ function NavBar() {
 					</NavLink>
 				</li>
 				<li className='nav-item mt-auto mb-auto p-0'>
-					<NavLink className='nav-link mate-text-primary' exact to='/tutor'>
+					<NavLink className='nav-link mate-text-primary' to='/tutor'>
 						<TutorIcon />
 					</NavLink>
 				</li>
