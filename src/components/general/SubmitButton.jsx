@@ -1,5 +1,6 @@
 import React from 'react';
 
+/** Submit Button for forms */
 function SubmitButton({ text }) {
 	return (
 		<div className='container w-75'>

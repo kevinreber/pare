@@ -1,5 +1,6 @@
 import React from 'react';
 
+/** Call To Action Button */
 function CTAButton({ text }) {
 	return (
 		<div className='container w-75'>

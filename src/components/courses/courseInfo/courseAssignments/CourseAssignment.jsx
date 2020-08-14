@@ -3,7 +3,9 @@ import AssignmentStatusIcon from './AssignmentStatusIcon';
 import UserGrade from './UserGrade';
 import EnterGradeBtn from './EnterGradeBtn';
 
-/** Displays Assignment Data */
+/** Displays Assignment Data
+ * Courses -> CourseList -> Course -> CourseInfo -> CourseInfoBody -> CourseAssignmentList -> CourseAssignment
+ */
 function CourseAssignment({ assignment }) {
 	/** assignmentStatus will display 'danger' or success if depending if assignment
 	 * was submitted before assignment.dueDate

@@ -3,7 +3,7 @@ import useFields from '../../hooks/useFields';
 import SubmitButton from '../general/SubmitButton';
 
 /** Form to add a course.
- * Courses -> Modal -> CourseForm
+ * Courses -> 'Join Class' Button -> Modal -> CourseForm
  */
 function CourseForm({ save }) {
 	// Form Data

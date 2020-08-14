@@ -5,7 +5,9 @@ import Modal from '../../../general/Modal';
 import NoData from '../../../general/NoData';
 // import { useSelector, useDispatch } from 'react-redux';
 
-/** Displays List of Assignments */
+/** Displays List of Assignments
+ * Courses -> CourseList -> Course -> CourseInfo -> CourseInfoBody -> CourseAssignmentList -> CourseAssignment
+ */
 function CourseAssignmentList({ assignments }) {
 	// build list of courses, if no courses exist return 'No courses added'
 	const AssignmentList =

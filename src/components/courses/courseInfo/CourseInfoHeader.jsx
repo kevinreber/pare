@@ -3,7 +3,9 @@ import BackButton from '../../general/BackButton';
 import CourseDetails from './CourseDetails';
 import CourseOverallGrades from './CourseOverallGrades';
 
-/** Displays Header information of Course Info Page */
+/** Displays Header information of Course Info Page
+ * Courses -> CourseList -> Course -> CourseInfo -> CourseInfoHeader -> CourseDetails && CourseOverallGrades
+ */
 function CourseInfoHeader({ course }) {
 	return (
 		<div className='CourseInfoHeader'>

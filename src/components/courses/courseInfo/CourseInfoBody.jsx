@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import CourseAssignmentList from './courseAssignments/CourseAssignmentList';
 
-/** Displays Body information of Course Info Page */
+/** Displays Body information of Course Info Page
+ * Courses -> CourseList -> Course -> CourseInfo -> CourseInfoBody -> CourseAssignmentList -> CourseAssignment
+ */
 function CourseInfoHeader({ assignments }) {
 	// State will determine what courses to show in CourseList
 	const [active, setActive] = useState('assignments');

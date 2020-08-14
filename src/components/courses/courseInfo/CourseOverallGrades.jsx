@@ -1,6 +1,8 @@
 import React from 'react';
 
-/** Displays Course Overall Grades */
+/** Displays Course Overall Grades
+ * Courses -> CourseList -> Course -> CourseInfo -> CourseInfoHeader -> CourseOverallGrades
+ */
 function CourseOverallGrades({ course }) {
 	return (
 		<>

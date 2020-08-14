@@ -1,6 +1,8 @@
 import React from 'react';
 
-/** Displays Details */
+/** Displays Details
+ * Courses -> CourseList -> Course -> CourseInfo -> CourseDetails
+ */
 function CourseDetails({ course }) {
 	return (
 		<>
