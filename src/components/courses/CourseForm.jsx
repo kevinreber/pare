@@ -25,11 +25,11 @@ function CourseForm({ save }) {
 
 	return (
 		<div className='CourseForm p-3'>
-			<h4>Add Class</h4>
+			<h4>Join Class</h4>
 			<form className='container mb-3' onSubmit={handleSubmit}>
 				<div className='form-group'>
 					<label htmlFor='courseMajor' className='float-left'>
-						Subject
+						Search
 					</label>
 					<input
 						id='courseMajor'
@@ -38,19 +38,6 @@ function CourseForm({ save }) {
 						onChange={handleChange}
 						name='courseMajor'
 						value={formData.courseMajor}
-					/>
-				</div>
-				<div className='form-group'>
-					<label htmlFor='courseNumber' className='float-left'>
-						Course Number
-					</label>
-					<input
-						id='courseNumber'
-						className='form-control mate-form-input'
-						type='text'
-						onChange={handleChange}
-						name='courseNumber'
-						value={formData.courseNumber}
 					/>
 				</div>
 				<div className='form-group'>
@@ -66,7 +53,7 @@ function CourseForm({ save }) {
 						value={formData.courseSemester}
 					/>
 				</div>
-				<SubmitButton text='Add' />
+				<SubmitButton text='Join' />
 			</form>
 		</div>
 	);

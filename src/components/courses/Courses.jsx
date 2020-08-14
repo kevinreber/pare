@@ -3,6 +3,7 @@ import CourseList from './CourseList';
 import CourseForm from './CourseForm';
 import Modal from '../general/Modal';
 import NoData from '../general/NoData';
+import CTAButton from '../general/CTAButton';
 import { useDispatch } from 'react-redux';
 import { addCourseToFB } from '../../store/actions/courses';
 import { firestoreConnect } from 'react-redux-firebase';
@@ -76,7 +77,7 @@ function Courses({ courses }) {
 			<div className='Courses-CourseList'>{courseList}</div>
 			<div className='CourseForm p-3'>
 				<p onClick={toggleForm} className='font-italic'>
-					+ Add Class
+					<CTAButton text='Join Class' />
 				</p>
 			</div>
 		</>
