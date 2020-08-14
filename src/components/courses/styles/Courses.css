@@ -1,3 +1,11 @@
+.Course.Course-Card {
+    font-size: 14px;
+}
+
+.Course.Course-Card .Course-Term {
+    font-size: 12px;
+}
+
 .Courses-Header {
     border-bottom: 2px solid var(--tertiary-color);
 }
