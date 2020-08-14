@@ -31,7 +31,7 @@ export function addCourseToFB(courseMajor, courseNumber, courseSemester) {
 			department: 'ARCH',
 			instructor: 'Orkand David',
 			meetingTime: 'MW,15:00:00-17:59:00',
-			number: '100B',
+			number: '100D',
 			name: 'Fundamentals of Architectural Design II',
 			section: 1,
 			term: 'FALL 2020',

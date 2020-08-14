@@ -1,7 +1,7 @@
+/** Bootstrap */
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import $ from 'jquery';
-// import Popper from 'popper.js';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -12,7 +12,7 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
 
 /** React & React-Redux */
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import rootReducer from './store/reducers/rootReducer';
 
@@ -22,31 +22,14 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 /** Firebase */
 import firebase from './config/fbConfig';
-// import firebase from 'firebase/app';
-import {
-	reduxFirestore,
-	getFirestore,
-	createFirestoreInstance,
-} from 'redux-firestore';
+import { createFirestoreInstance } from 'redux-firestore';
 import { ReactReduxFirebaseProvider, getFirebase } from 'react-redux-firebase';
 
 // Initialize Redux store
 const store = createStore(
 	rootReducer,
-	// compose(
-	// reactReduxFirebase(firebase, fbConfig),
-	applyMiddleware(thunk.withExtraArgument({ getFirebase }))
-	// reduxFirestore(fbConfig)
-	// applyMiddleware(thunk.withExtraArgument({ getFirebase }))
-	// )
+	composeWithDevTools(applyMiddleware(thunk.withExtraArgument({ getFirebase })))
 );
-
-// const rrfProps = {
-// 	firebase,
-// 	config: fbConfig,
-// 	dispatch: store.dispatch,
-// 	createFirestoreInstance,
-// };
 
 const rrfProps = {
 	firebase,
