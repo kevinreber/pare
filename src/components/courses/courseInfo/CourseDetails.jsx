@@ -10,7 +10,7 @@ function CourseDetails({ course }) {
 				<tbody>
 					<tr>
 						<th>Instructor:</th>
-						<td>John DeNero</td>
+						<td>{course.instructor}</td>
 					</tr>
 					<tr>
 						<th>Students:</th>

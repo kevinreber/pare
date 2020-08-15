@@ -96,7 +96,7 @@ export default compose(
 	firestoreConnect((ownProps) => [
 		{
 			collection: 'class',
-			orderBy: ['department', 'desc'],
+			orderBy: ['department'],
 		},
 	])
 )(Courses);
