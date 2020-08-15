@@ -17,9 +17,8 @@ function CourseInfo() {
 
 	return (
 		<>
-			(isLoading ? <Loader /> :
 			<CourseInfoHeader course={courseId} />
-			<CourseInfoBody assignments={assignments} />)
+			<CourseInfoBody assignments={assignments} />
 		</>
 	);
 }
