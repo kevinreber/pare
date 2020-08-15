@@ -1,20 +1,51 @@
-.Course.Course-Card {
+table .Course.Course-Card {
     font-size: 14px;
 }
 
-.Course.Course-Card .Course-Term {
+table {
+    table-layout: fixed;
+}
+
+table .Course.Course-Card .Course-Card-Term {
     font-size: 12px;
+    font-style: italic;
+}
+
+.Course.Course-Card tr th,
+.Course.Course-Card tr td {
+    text-align: left;
+}
+
+.Course.Course-Card tr {
+    display: flex;
+}
+
+.Course.Course-Card .Course-Name,
+.Course.Course-Card .Course-Title {
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+}
+
+.Course.Course-Card .Course-Name {
+    width: 120px;
+    padding-left: 1.25rem;
+}
+
+.Course.Course-Card .Course-Title {
+    margin: auto;
+    padding-right: 1.25rem;
 }
 
 .Courses-Header {
     border-bottom: 2px solid var(--tertiary-color);
 }
 
-.Course-Card,
+/* .Course-Card, */
 .Assignment.Assignment-Card {
     border-bottom: 1px solid var(--tertiary-color);
 }
 
 .mate-table {
     width: 100%;
+    border-bottom: 1px solid var(--tertiary-color);
 }

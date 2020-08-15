@@ -7,13 +7,7 @@ import Course from './Course';
 function CourseList({ courses = [] }) {
 	const List = courses.map((course) => <Course course={course} />);
 
-	return (
-		<>
-			<table className='mate-table table-hover'>
-				<tbody>{List}</tbody>
-			</table>
-		</>
-	);
+	return <div className='Course-List'>{List}</div>;
 }
 
 export default CourseList;
