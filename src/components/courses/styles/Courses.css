@@ -16,10 +16,6 @@ table .Course.Course-Card .Course-Card-Term {
     text-align: left;
 }
 
-.Course.Course-Card tr {
-    display: flex;
-}
-
 .Course.Course-Card .Course-Name,
 .Course.Course-Card .Course-Title {
     padding-top: .5rem;
@@ -40,7 +36,6 @@ table .Course.Course-Card .Course-Card-Term {
     border-bottom: 2px solid var(--tertiary-color);
 }
 
-/* .Course-Card, */
 .Assignment.Assignment-Card {
     border-bottom: 1px solid var(--tertiary-color);
 }
