@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import CourseList from './CourseList';
 import CourseForm from './CourseForm';
 import Modal from '../general/Modal';
@@ -10,6 +11,8 @@ import { firestoreConnect } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import './styles/Courses.css';
+
+// const BASE_URL = 'https://www.berkeleytime.com/api';
 
 /** Displays a CourseList of user's Current and Past Semester courses. 
     Courses will fetch which courses to display from API and pass courses into CourseList.
@@ -31,6 +34,8 @@ function Courses({ courses }) {
 		setActive(e.target.id);
 	};
 
+	const [courseCatalog, setCourseCatalog] = useState({});
+
 	// Toggle form for User to Add Course
 	const [showForm, setShowForm] = useState(false);
 	const toggleForm = () => setShowForm((show) => !show);
@@ -40,6 +45,37 @@ function Courses({ courses }) {
 		dispatch(addCourseToFB(courseData));
 		setShowForm(false);
 	};
+
+	useEffect(() => {
+		async function getCourseCatalog() {
+			try {
+				const resp = await axios.get('/api/catalog/catalog_json/', {
+					headers: {
+						'User-Agent':
+							'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/605.1.12 (KHTML, like Gecko) Version/11.1 Safari/605.1.12',
+						Accept: 'application/json',
+					},
+				});
+				/** 
+				await fetch('/api/catalog/catalog_json/', {
+					method: 'GET',
+					mode: 'cors', // no-cors, *cors, same-origin
+					cache: 'no-cache',
+					credentials: 'same-origin', // include, *same-origin, omit
+					headers: {
+						'Content-Type': 'application/json',
+						// 'Content-Type': 'application/x-www-form-urlencoded',
+					},
+				}).then((resp) => console.log(resp));
+				*/
+				console.log(resp.data);
+			} catch (error) {
+				console.log(error);
+			}
+		}
+
+		getCourseCatalog();
+	}, []);
 
 	if (showForm) {
 		return (
