@@ -1,5 +1,6 @@
 import {
 	FETCH_COURSES,
+	FETCH_COURSE,
 	ADD_COURSE,
 	REMOVE_COURSE,
 	ADD_ASSIGNMENT,
@@ -19,6 +20,29 @@ function getCourses(courses) {
 	return {
 		type: FETCH_COURSES,
 		courses,
+	};
+}
+
+export function fetchCoursefromFB(courses) {
+	return (dispatch, getState, { getFirebase, getFirestore }) => {
+		const firestore = getFirebase().firestore();
+
+		firestore
+			.get({ collection: 'class', where: ['id', '==', 355] })
+			.then((resp) => {
+				dispatch(getCourse(resp));
+			})
+			.catch((err) => {
+				dispatch(dispatchError('GET_COURSE_ERROR', err));
+			});
+	};
+}
+
+/** Formats action data to input to dispatch */
+function getCourse(course) {
+	return {
+		type: FETCH_COURSE,
+		course,
 	};
 }
 

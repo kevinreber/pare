@@ -1,4 +1,5 @@
 export const FETCH_COURSES = 'FETCH_COURSES';
+export const FETCH_COURSE = 'FETCH_COURSE';
 export const ADD_COURSE = 'ADD_COURSE';
 export const REMOVE_COURSE = 'REMOVE_COURSE';
 export const FETCH_ASSIGNMENTS = 'FETCH_ASSIGNMENTS';
