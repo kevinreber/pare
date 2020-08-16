@@ -1,9 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import CourseAssignment from './CourseAssignment';
-import AssignmentForm from './AssignmentForm';
-import Modal from '../../../general/Modal';
 import NoData from '../../../general/NoData';
-// import { useSelector, useDispatch } from 'react-redux';
 
 /** Displays List of Assignments
  * Courses -> CourseList -> Course -> CourseInfo -> CourseInfoBody -> CourseAssignmentList -> CourseAssignment
@@ -13,7 +10,16 @@ function CourseAssignmentList({ assignments }) {
 	const AssignmentList =
 		assignments && assignments.length !== 0 ? (
 			assignments.map((assignment) => (
-				<CourseAssignment assignment={assignment} />
+				<CourseAssignment
+					key={assignment.id}
+					id={assignment.id}
+					title={assignment.title}
+					dueDate={assignment.dueDate}
+					classGrade={assignment.classGrade}
+					userGrade={assignment.userGrade}
+					submitStatus={assignment.submitStatus}
+					classSubmittals={assignment.classSubmittals}
+				/>
 			))
 		) : (
 			<NoData text={'assignments'} />

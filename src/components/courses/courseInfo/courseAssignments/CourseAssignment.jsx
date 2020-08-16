@@ -6,37 +6,43 @@ import EnterGradeBtn from './EnterGradeBtn';
 /** Displays Assignment Data
  * Courses -> CourseList -> Course -> CourseInfo -> CourseInfoBody -> CourseAssignmentList -> CourseAssignment
  */
-function CourseAssignment({ assignment }) {
+function CourseAssignment({
+	key,
+	id,
+	title,
+	dueDate,
+	classGrade,
+	userGrade,
+	submitStatus,
+	classSubmittals,
+}) {
 	/** assignmentStatus will display 'danger' or success if depending if assignment
 	 * was submitted before assignment.dueDate
 	 */
-	const assignmentStatus = 'success';
+	const assignmentStatus = submitStatus ? 'success' : 'danger';
 
 	return (
 		<>
 			<table
-				id={assignment.id}
+				key={key}
+				id={id}
 				className='Assignment Assignment-Card mate-table table-hover'>
 				<AssignmentStatusIcon color={assignmentStatus} />
 				<tbody>
-					<tr className=''>
+					<tr>
 						<td className='mate-text-primary Assignment-Title text-left'>
-							{assignment.title}
+							{title}
 						</td>
 						<td className='mate-text-secondary Assignment-Grade text-right pr-1'>
-							Class Grade: {assignment.classGrade}%
+							Class Grade: {classGrade}%
 						</td>
 					</tr>
-					<tr className=''>
+					<tr>
 						<td className='mate-text-secondary Assignment-Due font-italic text-left'>
-							Due: {assignment.dueDate}
+							Due: {dueDate}
 						</td>
 						<td className='mate-text-secondary Assignment-Grade text-right pr-1'>
-							{assignment.userGrade ? (
-								<UserGrade grade={assignment.userGrade} />
-							) : (
-								<EnterGradeBtn />
-							)}
+							{userGrade ? <UserGrade grade={userGrade} /> : <EnterGradeBtn />}
 						</td>
 					</tr>
 				</tbody>

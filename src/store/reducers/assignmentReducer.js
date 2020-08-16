@@ -32,7 +32,7 @@ const INITIAL_STATE = [
 		dueDate: 'Aug. 2,2020 @2:30pm',
 		classGrade: 76,
 		userGrade: 80,
-		submitStatus: true,
+		submitStatus: false,
 		classSubmittals: 10,
 	},
 ];
