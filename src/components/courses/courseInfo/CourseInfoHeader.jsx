@@ -30,7 +30,7 @@ function CourseInfoHeader({ course }) {
 						CS61A
 						<i
 							onClick={toggleShowCourseDetails}
-							class='mate-more-info fas fa-info-circle'></i>
+							className='mate-more-info fas fa-info-circle'></i>
 					</h5>
 					<span className='mate-text-secondary Course-Card-Term'>
 						FALL 2020
