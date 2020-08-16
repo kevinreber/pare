@@ -4,9 +4,9 @@ import UserGrade from './UserGrade';
 import EnterGradeBtn from './EnterGradeBtn';
 
 /** Displays Assignment Data
- * Courses -> CourseList -> Course -> CourseInfo -> CourseInfoBody -> CourseAssignmentList -> CourseAssignmentCard
+ * Courses -> CourseList -> Course -> CourseInfo -> CourseInfoBody -> CourseAssignmentList -> CourseAssignment
  */
-function CourseAssignmentCard({
+function CourseAssignment({
 	key,
 	id,
 	title,
@@ -51,4 +51,4 @@ function CourseAssignmentCard({
 	);
 }
 
-export default CourseAssignmentCard;
+export default CourseAssignment;

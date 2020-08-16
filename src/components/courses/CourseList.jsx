@@ -1,11 +1,11 @@
 import React from 'react';
-import Course from './Course';
+import CourseCard from './CourseCard';
 
 /** Creates a List of User's Courses
- * Courses -> CourseList -> Course -> CourseInfo
+ * Courses -> CourseList -> CourseCard -> CourseInfo
  */
 function CourseList({ courses = [] }) {
-	const List = courses.map((course) => <Course course={course} />);
+	const List = courses.map((course) => <CourseCard course={course} />);
 
 	return <div className='Course-List'>{List}</div>;
 }

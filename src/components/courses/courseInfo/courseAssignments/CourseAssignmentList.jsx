@@ -1,16 +1,16 @@
 import React from 'react';
-import CourseAssignment from './CourseAssignment';
+import CourseAssignmentCard from './CourseAssignmentCard';
 import NoData from '../../../general/NoData';
 
 /** Displays List of Assignments
- * Courses -> CourseList -> Course -> CourseInfo -> CourseInfoBody -> CourseAssignmentList -> CourseAssignment
+ * Courses -> CourseList -> Course -> CourseInfo -> CourseInfoBody -> CourseAssignmentList -> CourseAssignmentCard
  */
 function CourseAssignmentList({ assignments }) {
 	// build list of courses, if no courses exist return 'No courses added'
 	const AssignmentList =
 		assignments && assignments.length !== 0 ? (
 			assignments.map((assignment) => (
-				<CourseAssignment
+				<CourseAssignmentCard
 					key={assignment.id}
 					id={assignment.id}
 					title={assignment.title}
