@@ -1,23 +1,37 @@
-import React from 'react';
-import useFields from '../../../../hooks/useFields';
+import React, { useState } from 'react';
 import SubmitButton from '../../../general/SubmitButton';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import './styles/AssignmentForm.css';
 
 /** Form to add a assignment. */
 function AssignmentForm({ save }) {
 	// Form Data
 	const INITIAL_STATE = {
 		title: '',
-		dueDate: '',
+		type: '',
+		dueDate: new Date(),
 	};
 
-	const [formData, handleChange, resetFormData] = useFields(INITIAL_STATE);
+	const [formData, setFormData] = useState(INITIAL_STATE);
+
+	/** Handles general fields in form */
+	const handleChange = (e) => {
+		const { name, value } = e.target;
+		setFormData((fData) => ({ ...fData, [name]: value }));
+	};
+
+	/** Handles 'dueDate' field */
+	const handleDate = (date) => {
+		setFormData((fData) => ({ ...fData, dueDate: date }));
+	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		save(formData);
 
 		// Clear state of form
-		resetFormData();
+		setFormData(INITIAL_STATE);
 	};
 
 	return (
@@ -26,7 +40,7 @@ function AssignmentForm({ save }) {
 			<form className='container mb-3' onSubmit={handleSubmit}>
 				<div className='form-group'>
 					<label htmlFor='title' className='float-left'>
-						Name of Assignment
+						Name
 					</label>
 					<input
 						id='title'
@@ -38,18 +52,35 @@ function AssignmentForm({ save }) {
 					/>
 				</div>
 				<div className='form-group'>
-					<label htmlFor='dueDate' className='float-left'>
+					<label className='float-left' for='type'>
+						Type
+					</label>
+					<select
+						onChange={handleChange}
+						name='type'
+						className='Assignment-Form-Type Mate-Form-Select mate-form-input form-control'
+						id='type'>
+						<option value='' disabled selected className='text-disabled'>
+							Select a type
+						</option>
+						<option>Homework</option>
+						<option>Project</option>
+						<option>Lab</option>
+					</select>
+				</div>
+				<div className='form-group'>
+					<label htmlFor='dueDate' className='float-left Assignment-Due-Date'>
 						Due Date
 					</label>
-					<input
-						id='dueDate'
-						className='form-control mate-form-input'
-						type='text'
-						onChange={handleChange}
-						name='dueDate'
-						value={formData.dueDate}
-					/>
 				</div>
+				<DatePicker
+					name='dueDate'
+					selected={formData.dueDate}
+					onChange={handleDate}
+					timeInputLabel='Time:'
+					dateFormat='MM/dd/yyyy h:mm aa'
+					showTimeInput
+				/>
 				<SubmitButton text='Add' />
 			</form>
 		</div>

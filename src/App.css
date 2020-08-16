@@ -111,11 +111,23 @@ label,
   color: var(--tertiary-color);
 }
 
+label,
 .mate-btn,
 input,
 .mate-form-input {
   border-radius: 15px;
   height: 45px;
+}
+
+label,
+input,
+.mate-form-input {
+  border-radius: 15px;
+  height: 45px;
+  font-size: 18px;
+}
+
+.mate-btn {
   font-size: 20px;
 }
 
