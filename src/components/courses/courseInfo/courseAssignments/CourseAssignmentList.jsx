@@ -19,34 +19,7 @@ function CourseAssignmentList({ assignments }) {
 			<NoData text={'assignments'} />
 		);
 
-	// Toggle form for User to Add Course
-	const [showForm, setShowForm] = useState(false);
-	const toggleForm = () => setShowForm((show) => !show);
-
-	const addAssignment = (assignmentData) => {
-		console.log(assignmentData);
-		setShowForm(false);
-	};
-
-	if (showForm) {
-		return (
-			<Modal
-				content={<AssignmentForm save={addAssignment} />}
-				closeModal={toggleForm}
-			/>
-		);
-	}
-
-	return (
-		<>
-			{AssignmentList}
-			<div className='CourseForm p-3'>
-				<p onClick={toggleForm} className='font-italic'>
-					+ Add Assignment
-				</p>
-			</div>
-		</>
-	);
+	return <>{AssignmentList}</>;
 }
 
 export default CourseAssignmentList;

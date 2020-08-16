@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import CourseInfoHeader from './CourseInfoHeader';
 import CourseInfoBody from './CourseInfoBody';
+import CTAButton from '../../general/CTAButton';
+import Modal from '../../general/Modal';
+import AssignmentForm from './courseAssignments/AssignmentForm';
 import Loader from '../../general/Loader';
 import { useSelector, useDispatch } from 'react-redux';
 import './styles/CourseInfo.css';
@@ -12,13 +15,36 @@ import './styles/CourseInfo.css';
 function CourseInfo() {
 	const { courseId } = useParams();
 
+	// Toggle form for User to Add Course
+	const [showForm, setShowForm] = useState(false);
+	const toggleForm = () => setShowForm((show) => !show);
+
+	const addAssignment = (assignmentData) => {
+		console.log(assignmentData);
+		setShowForm(false);
+	};
+
 	// get course assignments
 	const assignments = useSelector((state) => state.assignments);
+
+	if (showForm) {
+		return (
+			<Modal
+				content={<AssignmentForm save={addAssignment} />}
+				closeModal={toggleForm}
+			/>
+		);
+	}
 
 	return (
 		<>
 			<CourseInfoHeader course={courseId} />
 			<CourseInfoBody assignments={assignments} />
+			<div className='AssignmentForm p-3'>
+				<p onClick={toggleForm} className='font-italic'>
+					<CTAButton text='Add Assignment' />
+				</p>
+			</div>
 		</>
 	);
 }

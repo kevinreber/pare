@@ -5,40 +5,9 @@ import CourseAssignmentList from './courseAssignments/CourseAssignmentList';
  * Courses -> CourseList -> Course -> CourseInfo -> CourseInfoBody -> CourseAssignmentList -> CourseAssignment
  */
 function CourseInfoHeader({ assignments = [] }) {
-	// State will determine what courses to show in CourseList
-	const [active, setActive] = useState('assignments');
-	const toggleCourses = (e) => {
-		setActive(e.target.id);
-	};
-
 	return (
 		<div className='Course-Info-Body'>
-			<div className='Courses-Header d-flex justify-content-around pt-3 pb-1'>
-				<div className='Course-Info-Assignments Course-Info-Title'>
-					<p
-						id='assignments'
-						className={
-							active === 'assignments'
-								? 'mate-text-primary'
-								: 'mate-text-active'
-						}
-						onClick={toggleCourses}>
-						Assignments
-					</p>
-				</div>
-				<div className='Course-Info-Discussions Course-Info-Title'>
-					<p
-						id='discussions'
-						className={
-							active === 'discussions'
-								? 'mate-text-primary'
-								: 'mate-text-active'
-						}
-						onClick={toggleCourses}>
-						Discussions
-					</p>
-				</div>
-			</div>
+			<div className='Courses-Header pt-2 pb-1'></div>
 			<div className='Course-Info-Body-List'>
 				<CourseAssignmentList assignments={assignments} />
 			</div>

@@ -10,8 +10,18 @@
     font-size: 14px;
 }
 
+.CourseDetails,
+.CourseDetails table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.CourseDetails {
+    margin-top: 5rem;
+}
+
 .CourseDetailsTable {
-    font-size: 12px;
+    font-size: 16px;
 }
 
 .CourseGradesTable {
@@ -84,4 +94,18 @@
     right: .4rem;
     bottom: .6rem;
     font-size: 14px;
+}
+
+.CourseInfoHeader .Course-Card-Term {
+    font-size: 12px;
+}
+
+.mate-more-info {
+    margin-left: 6px;
+    font-size: 14px;
+    color: var(--tertiary-color);
+}
+
+.CourseInfoTitle {
+    margin-bottom: 0;
 }

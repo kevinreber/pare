@@ -5,12 +5,13 @@ import React from 'react';
  */
 function CourseDetails({ course }) {
 	return (
-		<>
+		<div className='CourseDetails'>
+			<h4>CS61A</h4>
 			<table className='CourseDetailsTable'>
 				<tbody>
 					<tr>
 						<th>Instructor:</th>
-						<td>{course.instructor}</td>
+						<td>John Denero</td>
 					</tr>
 					<tr>
 						<th>Students:</th>
@@ -33,7 +34,7 @@ function CourseDetails({ course }) {
 					</tr>
 				</tbody>
 			</table>
-		</>
+		</div>
 	);
 }
 
