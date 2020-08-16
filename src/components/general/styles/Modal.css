@@ -8,6 +8,12 @@
     z-index: 100000000;
 }
 
+.Modal-Close {
+    position: absolute;
+    top: 2.5%;
+    left: 5%;
+}
+
 .Modal .mate-btn-submit {
     position: absolute;
     width: 350px;
