@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import CourseAssignmentList from './courseAssignments/CourseAssignmentList';
 
 /** Displays Body information of Course Info Page
