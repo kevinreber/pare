@@ -1,27 +1,27 @@
 .Modal {
-    background-color: var(--bg-color);
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 100000000;
+	background-color: var(--bg-color);
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 100000000;
 }
 
 .Modal-Close {
-    position: absolute;
-    top: 2.5%;
-    left: 5%;
+	position: absolute;
+	top: 2.5%;
+	left: 5%;
 }
 
 .Modal .mate-btn-submit {
-    position: absolute;
-    width: 350px;
-    bottom: 7.5rem;
-    left: 50%;
-    margin-left: -175px;
+	position: absolute;
+	width: 350px;
+	bottom: 7.5rem;
+	left: 50%;
+	margin-left: -175px;
 }
 
-.Modal .CourseForm {
-    margin-top: 50%;
+.Modal .Modal-Content {
+	margin-top: 50%;
 }
