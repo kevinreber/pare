@@ -18,7 +18,7 @@ function Tutor() {
 
 	return (
 		<>
-			<div className='Tutors-Header d-flex justify-content-around pt-2 pb-3'>
+			<div className='Tutors-Header Body-Header'>
 				<div className='Tutor-Find-Tutor'>
 					<h5
 						id='findTutor'

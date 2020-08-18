@@ -94,6 +94,18 @@ label,
   color: var(--primary-color);
 }
 
+.Body-Header {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 1.2rem;
+  padding-bottom: 1.2rem;
+}
+
+.Body-Header h4,
+.Body-Header h5 {
+  margin: 0;
+}
+
 .mate-bg-primary {
   background-color: var(--bg-color);
 }

@@ -6,18 +6,18 @@ import './styles/Header.css';
 
 function Header() {
 	return (
-		<div className="Header container mb-3">
-		    <div className="Header-Content d-flex justify-content-between mt-5 mb-4">
-                <div className="Header-Avatar mt-auto mb-auto">
-                    <UserAvatar />
-                </div>
-                <div className="Header-Logo mt-auto mb-auto">
-                    <img src={Logo} alt="Mate"/>
-                </div>            
-                <div className="Header-Notif mt-auto mb-auto">
-                    <NotifyIcon />
-                </div>
-		    </div>
+		<div className='Header container'>
+			<div className='Header-Content d-flex justify-content-between mt-5 mb-4'>
+				<div className='Header-Avatar mt-auto mb-auto'>
+					<UserAvatar />
+				</div>
+				<div className='Header-Logo mt-auto mb-auto'>
+					<img src={Logo} alt='Mate' />
+				</div>
+				<div className='Header-Notif mt-auto mb-auto'>
+					<NotifyIcon />
+				</div>
+			</div>
 		</div>
 	);
 }

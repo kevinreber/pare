@@ -68,7 +68,7 @@ function Courses({ courses }) {
 					},
 				}).then((resp) => console.log(resp));
 				*/
-				console.log(resp.data);
+				console.log(resp);
 			} catch (error) {
 				console.log(error);
 			}
@@ -88,7 +88,7 @@ function Courses({ courses }) {
 
 	return (
 		<>
-			<div className='Courses-Header d-flex justify-content-around pt-2 pb-3'>
+			<div className='Courses-Header Body-Header'>
 				<div className='Courses-Current'>
 					<h5
 						id='current'
