@@ -4,9 +4,9 @@ import { useHistory } from 'react-router-dom';
 import './styles/BackButton.css';
 
 /** Back Button */
-function BackButton({ url }) {
+function BackButton() {
 	const history = useHistory();
-	const goBack = () => history.push(url);
+	const goBack = () => history.goBack();
 
 	return (
 		<div className='BackButton'>

@@ -23,7 +23,7 @@ function CourseInfoHeader({ course }) {
 
 	return (
 		<div className='CourseInfoHeader'>
-			<BackButton url={'/courses'} />
+			<BackButton />
 			<div className='CourseInfoHeaderTitle d-flex justify-content-around pt-1'>
 				<div className='Course-Id mr-4 text-left'>
 					<h5 className='CourseInfoTitle'>
