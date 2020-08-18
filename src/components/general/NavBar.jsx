@@ -25,7 +25,7 @@ function NavBar() {
 					</NavLink>
 				</li>
 				<li className='nav-item mt-auto mb-auto p-0'>
-					<NavLink className='nav-link mate-text-primary' to='/tutor'>
+					<NavLink className='nav-link mate-text-primary' to='/tutors'>
 						<TutorIcon />
 					</NavLink>
 				</li>

@@ -1,0 +1,24 @@
+.Tutor.Tutor-Card {
+    display: flex;
+    padding: 1rem;
+    font-size: 14px;
+}
+
+.Tutor.Tutor-Card .Tutor-Card-Term {
+    font-size: 12px;
+}
+
+.Tutor.Tutor-Card .Tutor-Name,
+.Tutor.Tutor-Card .Tutor-Title {
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+}
+
+.Tutors-Header {
+    border-bottom: 2px solid var(--tertiary-color);
+}
+
+.mate-table {
+    width: 100%;
+    border-bottom: 1px solid var(--tertiary-color);
+}
