@@ -6,6 +6,7 @@ import Courses from '../components/courses/Courses';
 import CourseInfo from '../components/courses/courseInfo/CourseInfo';
 import Connect from '../components/connect/Connect';
 import Tutors from '../components/tutors/Tutors';
+import UserProfile from '../components/user/UserProfile';
 
 function Routes() {
 	return (
@@ -17,7 +18,7 @@ function Routes() {
 				<Route exact path='/courses/:courseId/' component={CourseInfo} />
 				<Route exact path='/connect' component={Connect} />
 				<Route exact path='/tutors' component={Tutors} />
-
+				<Route exact path='/users/:id' component={UserProfile} />
 				<Redirect to='/login' />
 			</Switch>
 		</>

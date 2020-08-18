@@ -1,0 +1,36 @@
+.Avatar,
+.UserAvatar {
+    overflow: hidden;
+    object-fit: cover;
+    border-radius: 100%;
+}
+
+.Avatar {
+    width: 40px;
+    height: 40px;
+}
+
+.UserAvatar {
+    width: 48px;
+    height: 48px;
+    border: 2px solid var(--primary-color);
+}
+
+.Avatar.User-Profile-Avatar {
+    height: 72px;
+    width: 72px;
+}
+
+.User-Profile.User-Profile-Header {
+    background-size: cover;
+    height: 160px;
+}
+
+.Image-Overlay {
+    box-shadow: inset 2000px 0 0 0 rgba(34, 40, 49, 0.9);
+}
+
+.User-Profile.User-Profile-Header .User-Profile-Username {
+    text-align: left;
+    margin-left: 2.5rem;
+}

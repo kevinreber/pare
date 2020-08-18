@@ -17,7 +17,7 @@ const INITIAL_STATE = [
 		organizations: 'Cal Boxing',
 		password: '',
 		phoneNumber: '(555)555-5555',
-		image: 'https://randomuser.me/api/portraits/thumb/women/70.jpg',
+		image: 'https://randomuser.me/api/portraits/women/70.jpg',
 		backgroundImage: '',
 		social: {
 			facebook: '',
@@ -27,6 +27,7 @@ const INITIAL_STATE = [
 			google: '',
 		},
 		school: 'U.C. Berkeley',
+		keywords: 'Photoshop, Figma, Python',
 	},
 	{
 		id: 2,
@@ -46,7 +47,7 @@ const INITIAL_STATE = [
 		organizations: 'Cal Boxing',
 		password: '',
 		phoneNumber: '(555)555-5555',
-		image: 'https://randomuser.me/api/portraits/thumb/women/75.jpg',
+		image: 'https://randomuser.me/api/portraits/women/75.jpg',
 		backgroundImage: '',
 		social: {
 			facebook: '',
@@ -56,6 +57,7 @@ const INITIAL_STATE = [
 			google: '',
 		},
 		school: 'U.C. Berkeley',
+		keywords: 'Calculus, Figma, Python',
 	},
 	{
 		id: 3,
@@ -75,7 +77,7 @@ const INITIAL_STATE = [
 		organizations: 'Cal Boxing',
 		password: '',
 		phoneNumber: '(555)555-5555',
-		image: 'https://randomuser.me/api/portraits/thumb/men/75.jpg',
+		image: 'https://randomuser.me/api/portraits/men/75.jpg',
 		backgroundImage: '',
 		social: {
 			facebook: '',
@@ -85,6 +87,7 @@ const INITIAL_STATE = [
 			google: '',
 		},
 		school: 'U.C. Berkeley',
+		keywords: 'Photoshop, Figma, Python',
 	},
 ];
 
