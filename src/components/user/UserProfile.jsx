@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import UserProfileHeader from './components/UserProfileHeader';
 import UserProfileBody from './components/UserProfileBody';
 import CTAButton from '../general/CTAButton';
-import SubmitButton from '../general/SubmitButton';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import './styles/UserProfile.css';
@@ -11,6 +10,9 @@ import db from '../../config/fbConfig';
 /** User Profile component */
 function UserProfile() {
 	const { id } = useParams();
+	/**
+	 * ! Fix to map through array or object
+	 */
 	const user = useSelector((state) => state.user[id]);
 
 	/*
@@ -26,7 +28,7 @@ function UserProfile() {
 
 	/** if User is viewing their own profile, show edit button instead of message button */
 	const DisplayButton = user ? (
-		<SubmitButton text='Send Message' />
+		<CTAButton text='Send Message' />
 	) : (
 		<CTAButton text='Edit' />
 	);
@@ -47,8 +49,10 @@ function UserProfile() {
 				organizations={user.organizations}
 				classes={user.classes}
 				email={user.email}
+				isTutor={user.isTutor}
 				social={user.social}
 				keywords={user.keywords}
+				availability={user.availability}
 			/>
 			{DisplayButton}
 		</>

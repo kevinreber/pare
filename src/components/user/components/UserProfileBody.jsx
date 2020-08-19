@@ -1,11 +1,45 @@
 import React from 'react';
+import UserFields from './UserFields';
 
 /** Body for User Profile */
-function UserProfileBody({ user }) {
-	return (
+function UserProfileBody({
+	posts,
+	bio,
+	organizations,
+	classes,
+	email,
+	isTutor,
+	social,
+	keywords,
+	availability,
+}) {
+	const obj = {
+		email,
+		social,
+	};
+	const showTutorFields = isTutor ? (
 		<>
-			<h1>This is the body</h1>
+			<UserFields label={'I can help in...'} content={keywords} />
+			<UserFields label={'Portfolio'} content={'www.google.com'} />
+			<UserFields label={'Availability'} content={availability} />
+			{/* <UserFields label={'test'} content={obj} />
+			<UserFields label={'test'} content={obj} />
+			<UserFields label={'test'} content={obj} />
+			<UserFields label={'test'} content={obj} />
+			<UserFields label={'test'} content={obj} />
+			<UserFields label={'test'} content={obj} /> */}
 		</>
+	) : (
+		<></>
+	);
+
+	return (
+		<div className='User-Profile User-Profile-Body'>
+			<UserFields label={'About'} content={bio} />
+			<UserFields label={'Organizations'} content={organizations} />
+			<UserFields label={'Classes Taken'} content={classes} />
+			{showTutorFields}
+		</div>
 	);
 }
 

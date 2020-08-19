@@ -27,11 +27,11 @@ function UserProfileHeader({
 		<>
 			<div
 				style={headerStyle}
-				className='User-Profile User-Profile-Header Image-Overlay'>
+				className='User-Profile User-Profile-Header Image-Overlay pt-3 pb-3'>
 				<BackButton />
-				<h4 className='User-Profile-Username mb-3'>
+				<h5 className='User-Profile-Username mb-3'>
 					{name.first} {name.last}
-				</h4>
+				</h5>
 				<img
 					className='Avatar User-Profile-Avatar mb-3'
 					src={avatar}

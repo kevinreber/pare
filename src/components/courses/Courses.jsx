@@ -74,6 +74,13 @@ function Courses({ courses }) {
 			}
 		}
 
+		// async function getData() {
+		// 	await fetch(
+		// 		'https://www.berkeleytime.com/api/catalog/catalog_json/'
+		// 	).then((resp) => console.log(resp));
+		// }
+
+		// getData();
 		getCourseCatalog();
 	}, []);
 
