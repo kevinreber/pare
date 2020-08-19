@@ -2,6 +2,7 @@ import authReducer from './authReducer';
 import courseReducer from './courseReducer';
 import assignmentReducer from './assignmentReducer';
 import user from './userReducer';
+import courseCatalogReducer from './courseCatalogReducer';
 import { combineReducers } from 'redux';
 
 /** Sync to data in Firebase/Firestore */
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
 	auth: authReducer,
 	courses: courseReducer,
 	assignments: assignmentReducer,
+	courseCatalog: courseCatalogReducer,
 });
 
 export default rootReducer;

@@ -8,8 +8,9 @@ import CTAButton from '../general/CTAButton';
 import { useDispatch } from 'react-redux';
 import { addCourseToFB } from '../../store/actions/courses';
 import { firestoreConnect } from 'react-redux-firebase';
-import { connect } from 'react-redux';
+import { connect, dispatch } from 'react-redux';
 import { compose } from 'redux';
+import { fetchCourseCatalog } from '../../store/actions/courseCatalog';
 import './styles/Courses.css';
 
 // const BASE_URL = 'https://www.berkeleytime.com/api';
@@ -48,41 +49,18 @@ function Courses({ courses }) {
 
 	useEffect(() => {
 		async function getCourseCatalog() {
-			try {
-				const resp = await axios.get('/api/catalog/catalog_json/', {
-					headers: {
-						'User-Agent':
-							'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/605.1.12 (KHTML, like Gecko) Version/11.1 Safari/605.1.12',
-						Accept: 'application/json',
-					},
-				});
-				/** 
-				await fetch('/api/catalog/catalog_json/', {
-					method: 'GET',
-					mode: 'cors', // no-cors, *cors, same-origin
-					cache: 'no-cache',
-					credentials: 'same-origin', // include, *same-origin, omit
-					headers: {
-						'Content-Type': 'application/json',
-						// 'Content-Type': 'application/x-www-form-urlencoded',
-					},
-				}).then((resp) => console.log(resp));
-				*/
-				console.log(resp);
-			} catch (error) {
-				console.log(error);
-			}
+			await dispatch(fetchCourseCatalog());
+			// try {
+			// 	const resp = await axios.get(
+			// 		'https://www.berkeleytime.com/api/catalog/catalog_json/'
+			// 	);
+			// 	console.log(resp);
+			// } catch (error) {
+			// 	console.log(error);
+			// }
 		}
-
-		// async function getData() {
-		// 	await fetch(
-		// 		'https://www.berkeleytime.com/api/catalog/catalog_json/'
-		// 	).then((resp) => console.log(resp));
-		// }
-
-		// getData();
 		getCourseCatalog();
-	}, []);
+	}, [dispatch]);
 
 	if (showForm) {
 		return (
