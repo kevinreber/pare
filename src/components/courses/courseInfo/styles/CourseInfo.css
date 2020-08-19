@@ -1,5 +1,8 @@
 .CourseInfoHeader {
     margin-left: 2.5rem;
+    display: flex;
+    justify-content: space-around;
+    padding-top: 1.2rem;
 }
 
 .CourseInfoHeaderTitle h5 {

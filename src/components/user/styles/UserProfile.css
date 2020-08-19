@@ -1,36 +1,56 @@
 .Avatar,
 .UserAvatar {
-    overflow: hidden;
-    object-fit: cover;
-    border-radius: 100%;
+	overflow: hidden;
+	object-fit: cover;
+	border-radius: 100%;
 }
 
 .Avatar {
-    width: 40px;
-    height: 40px;
+	width: 40px;
+	height: 40px;
 }
 
 .UserAvatar {
-    width: 48px;
-    height: 48px;
-    border: 2px solid var(--primary-color);
+	width: 48px;
+	height: 48px;
+	border: 2px solid var(--primary-color);
 }
 
 .Avatar.User-Profile-Avatar {
-    height: 72px;
-    width: 72px;
+	height: 72px;
+	width: 72px;
 }
 
 .User-Profile.User-Profile-Header {
-    background-size: cover;
-    height: 160px;
+	background-size: cover;
+	height: 180px;
 }
 
 .Image-Overlay {
-    box-shadow: inset 2000px 0 0 0 rgba(34, 40, 49, 0.9);
+	box-shadow: inset 2000px 0 0 0 rgba(34, 40, 49, 0.9);
 }
 
 .User-Profile.User-Profile-Header .User-Profile-Username {
-    text-align: left;
-    margin-left: 2.5rem;
+	text-align: left;
+	margin-left: 2.5rem;
+}
+
+.User-Profile.User-Profile-Body {
+	text-align: left;
+	padding-left: 2.5rem;
+	padding-right: 2.5rem;
+}
+
+.User-Profile.User-Profile-Body p {
+	margin: 0;
+}
+
+.User-Profile.User-Profile-Body .User-Profile-Body-Field {
+	padding-top: 1rem;
+}
+
+.User-Profile.User-Profile-Body
+	.User-Profile-Body-Field
+	.User-Profile-Body-Input {
+	margin-left: 0.5rem;
 }
