@@ -8,7 +8,7 @@ const INITIAL_STATE = [
 		bio: 'I am a test',
 		classes: ['CS61A', 'CS61B', 'MATH100A'],
 		email: 'test@test.com',
-		isTutor: false,
+		isTutor: true,
 		location: {
 			city: 'Berkeley',
 			state: 'California',
@@ -27,7 +27,22 @@ const INITIAL_STATE = [
 			google: '',
 		},
 		school: 'U.C. Berkeley',
-		keywords: 'Photoshop, Figma, Python',
+		keywords: ['Photoshop', 'Figma', 'Python'],
+		availability: {
+			Mon: [{ start: '9am', end: '11am' }],
+			Tue: null,
+			Wed: [
+				{ start: '9am', end: '11:30am' },
+				{ start: '2pm', end: '4pm' },
+			],
+			Thu: null,
+			Fri: null,
+			Sat: [
+				{ start: '9am', end: '11am' },
+				{ start: '2pm', end: '4:30pm' },
+			],
+			Sun: null,
+		},
 	},
 	{
 		id: 2,
@@ -57,7 +72,7 @@ const INITIAL_STATE = [
 			google: '',
 		},
 		school: 'U.C. Berkeley',
-		keywords: 'Calculus, Figma, Python',
+		keywords: ['Figma', 'Python'],
 	},
 	{
 		id: 3,
@@ -87,7 +102,7 @@ const INITIAL_STATE = [
 			google: '',
 		},
 		school: 'U.C. Berkeley',
-		keywords: 'Photoshop, Figma, Python',
+		keywords: ['Photoshop', 'Figma', 'Python'],
 	},
 ];
 
