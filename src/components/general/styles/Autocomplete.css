@@ -1,0 +1,16 @@
+.Autocomplete {
+    position: relative;
+}
+
+.Autocomplete .options {
+    background-color: var(--tertiary-color-light);
+    box-shadow: 0 0 12px 0 #222222;
+    width: 100%;
+    position: absolute;
+    z-index: 99999999999;
+}
+
+.Autocomplete .options .option {
+    padding: .5rem;
+    border-bottom: 1px solid var(--tertiary-color);
+}

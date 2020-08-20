@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import SubmitButton from '../general/SubmitButton';
 import { useSelector } from 'react-redux';
-import Autocomplete from './Autocomplete';
+import Autocomplete from '../general/Autocomplete';
 
 /** Form to add a course.
  * Courses -> 'Join Class' Button -> Modal -> CourseForm

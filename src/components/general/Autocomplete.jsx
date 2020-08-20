@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './styles/Autocomplete.css';
 
 function Autocomplete({
 	id,
@@ -37,6 +38,7 @@ function Autocomplete({
 		setId(e);
 	}
 
+	/** Build list of autofill options */
 	let optionList;
 	if (showOptions && value) {
 		optionList = filteredOptions.length ? (
@@ -46,6 +48,7 @@ function Autocomplete({
 						<li
 							id={option.id}
 							key={`${option.abbreviation}-${option.course_number}`}
+							className='option'
 							data-name={name}
 							data-value={`${option.abbreviation} ${option.course_number}`}
 							onClick={onClick}>
@@ -62,8 +65,8 @@ function Autocomplete({
 	}
 
 	return (
-		<div className='form-group'>
-			<label htmlFor='courseMajor' className='float-left'>
+		<div className='Autocomplete form-group'>
+			<label htmlFor={id} className='float-left'>
 				{label}
 			</label>
 			<input
