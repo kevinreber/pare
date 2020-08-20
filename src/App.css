@@ -197,6 +197,24 @@ input:-moz-placeholder {
   text-transform: lowercase;
 }
 
+.mate-form-input option:disabled.option-disabled {
+  color: var(--secondary-color);
+  font-size: small;
+  text-transform: lowercase;
+}
+
+select option:disabled {
+  color: var(--secondary-color);
+  font-size: small;
+  text-transform: lowercase;
+}
+
+form .errors {
+  color: var(--danger-color);
+  font-size: smaller;
+  font-style: italic;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

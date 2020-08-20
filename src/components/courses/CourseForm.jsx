@@ -11,12 +11,14 @@ function CourseForm({ save }) {
 	const INITIAL_STATE = {
 		courseName: '',
 		courseSemester: '',
-		courseYear: '',
-		courseId: '',
+		courseYear: null,
+		courseId: null,
 	};
 
 	/** Get courseCatalog from redux store */
 	const courseCatalog = useSelector((state) => state.courseCatalog);
+
+	const [errors, setErrors] = useState('');
 
 	const [formData, setFormData] = useState(INITIAL_STATE);
 
@@ -42,12 +44,32 @@ function CourseForm({ save }) {
 
 	const resetFormData = () => setFormData(INITIAL_STATE);
 
+	/** User must enter in a class with a valid class ID */
+	const validateFormData = () => {
+		/** Clear any existing errors */
+		setErrors('');
+		if (!formData.courseId) {
+			setErrors('Course does not exist');
+			return false;
+		}
+		if (!formData.courseSemester) {
+			setErrors('Invalid semester');
+			return false;
+		}
+		if (!formData.courseYear) {
+			setErrors('Invalid year');
+			return false;
+		}
+		return true;
+	};
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		save(formData);
-
-		// Clear state of form
-		resetFormData();
+		if (validateFormData()) {
+			save(formData);
+			// Clear state of form
+			resetFormData();
+		}
 	};
 
 	return (
@@ -65,45 +87,37 @@ function CourseForm({ save }) {
 					setId={setId}
 					placeholder={'ex: COMPSCI 61A'}
 				/>
-				<div className='form-group CourseFormSemester'>
-					<label htmlFor='courseSemester' className='float-left'>
-						Semester
-					</label>
-					<div className='CourseFormSemesterFields'>
-						<select
-							id='courseSemester'
-							className='form-control mate-form-input mr-2'
-							onChange={handleChange}
-							name='courseSemester'
-							value={formData.courseSemester}>
-							<option>FALL</option>
-							<option>SPRING</option>
-							<option>SUMMER</option>
-						</select>
-						<select
-							id='courseYear'
-							className='form-control mate-form-input ml-2'
-							onChange={handleChange}
-							name='courseYear'
-							value={formData.courseYear}>
-							<option>2020</option>
-							<option>2019</option>
-							<option>2018</option>
-							<option>2017</option>
-							<option>2016</option>
-						</select>
-					</div>
-					{/* <input
+				<div className='form-group CourseFormSemesterFields'>
+					<select
 						id='courseSemester'
-						className='form-control mate-form-input'
-						type='text'
+						className='form-control mate-form-input mr-2'
 						onChange={handleChange}
 						name='courseSemester'
-						autoComplete='off'
-						value={formData.courseSemester}
-						placeholder='ex: FALL 2020'
-					/> */}
+						value={formData.courseSemester}>
+						<option className='option-disabled' value='' disabled selected>
+							Semester
+						</option>
+						<option>FALL</option>
+						<option>SPRING</option>
+						<option>SUMMER</option>
+					</select>
+					<select
+						id='courseYear'
+						className='form-control mate-form-input ml-2'
+						onChange={handleChange}
+						name='courseYear'
+						value={formData.courseYear}>
+						<option className='option-disabled' value='' disabled selected>
+							Year
+						</option>
+						<option>2020</option>
+						<option>2019</option>
+						<option>2018</option>
+						<option>2017</option>
+						<option>2016</option>
+					</select>
 				</div>
+				<div className='alert errors'>{errors}</div>
 				<SubmitButton text='Join' />
 			</form>
 		</div>

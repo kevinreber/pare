@@ -31,14 +31,11 @@ function Courses({ courses }) {
 		setActive(e.target.id);
 	};
 
-	// const [courseCatalog, setCourseCatalog] = useState({});
-
 	// Toggle form for User to Add Course
 	const [showForm, setShowForm] = useState(false);
 	const toggleForm = () => setShowForm((show) => !show);
 
 	const addCourse = (courseData) => {
-		console.log(courseData);
 		dispatch(addCourseToFB(courseData));
 		setShowForm(false);
 	};
