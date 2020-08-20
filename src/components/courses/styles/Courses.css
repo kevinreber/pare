@@ -44,3 +44,17 @@ table .Course.Course-Card .Course-Card-Term {
     width: 100%;
     border-bottom: 1px solid var(--tertiary-color);
 }
+
+.CourseFormSemester {
+    display: flex;
+    flex-direction: column;
+}
+
+.CourseFormSemester label {
+    margin-right: auto;
+}
+
+.CourseFormSemesterFields {
+    display: flex;
+    justify-content: space-between;
+}

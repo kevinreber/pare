@@ -169,6 +169,34 @@ input,
   margin-left: -175px;
 }
 
+input::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: var(--secondary-color);
+  text-transform: lowercase;
+  font-size: small;
+}
+
+input::-moz-placeholder {
+  /* Firefox 19+ */
+  color: var(--secondary-color);
+  text-transform: lowercase;
+  font-size: small;
+}
+
+input:-ms-input-placeholder {
+  /* IE 10+ */
+  color: var(--secondary-color);
+  font-size: small;
+  text-transform: lowercase;
+}
+
+input:-moz-placeholder {
+  /* Firefox 18- */
+  color: var(--secondary-color);
+  font-size: small;
+  text-transform: lowercase;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

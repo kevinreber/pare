@@ -9,6 +9,7 @@ function Autocomplete({
 	label,
 	options,
 	type,
+	placeholder,
 	setId,
 }) {
 	const [filteredOptions, setFilteredOptions] = useState([]);
@@ -76,6 +77,8 @@ function Autocomplete({
 				onChange={onSearch}
 				name={name}
 				value={value}
+				autoComplete='off'
+				placeholder={placeholder}
 			/>
 			{optionList}
 		</div>
