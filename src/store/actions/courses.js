@@ -6,6 +6,7 @@ import {
 	ADD_ASSIGNMENT,
 } from './types';
 import axios from 'axios';
+import db from '../../config/fbConfig';
 
 export function fetchCoursesfromFB(courses) {
 	return (dispatch, { getFirebase, getFirestore }) => {
@@ -54,7 +55,7 @@ export function addCourseToFB({
 	courseYear,
 	courseId,
 }) {
-	return async (dispatch, getState, { getFirebase }) => {
+	return async (dispatch) => {
 		const BASE_URL = 'https://www.berkeleytime.com';
 
 		try {
@@ -62,12 +63,12 @@ export function addCourseToFB({
 				`${BASE_URL}/api/catalog/catalog_json/course_box/?course_id=${courseId}`
 			);
 			const course = response.data;
+			// append semester
+			course.semester = `${courseSemester} ${courseYear}`;
+
 			console.log(course);
 
-			const firestore = getFirebase().firestore();
-
-			firestore
-				.collection('class')
+			db.collection('class')
 				.add(course)
 				.then(() => {
 					// make async call to DB
