@@ -97,9 +97,9 @@ function CourseForm({ save }) {
 						<option className='option-disabled' value='' disabled selected>
 							Semester
 						</option>
-						<option>FALL</option>
-						<option>SPRING</option>
-						<option>SUMMER</option>
+						<option>Fall</option>
+						<option>Spring</option>
+						<option>Summer</option>
 					</select>
 					<select
 						id='courseYear'
