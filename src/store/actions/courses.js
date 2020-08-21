@@ -5,6 +5,7 @@ import {
 	REMOVE_COURSE,
 	ADD_ASSIGNMENT,
 } from './types';
+import axios from 'axios';
 
 export function fetchCoursesfromFB(courses) {
 	return (dispatch, { getFirebase, getFirestore }) => {
@@ -53,33 +54,31 @@ export function addCourseToFB({
 	courseYear,
 	courseId,
 }) {
-	return (dispatch, getState, { getFirebase }) => {
-		// console.log(getFirebase);
-		const response = { courseName, courseSemester, courseYear, courseId };
-		console.log(response);
-		// const course = {
-		// 	department: 'ARCH',
-		// 	instructor: 'Orkand David',
-		// 	meetingTime: 'MW,15:00:00-17:59:00',
-		// 	number: '100D',
-		// 	name: 'Fundamentals of Architectural Design II',
-		// 	section: 1,
-		// 	term: 'FALL 2020',
-		// 	id: 355,
-		// };
+	return async (dispatch, getState, { getFirebase }) => {
+		const BASE_URL = 'https://www.berkeleytime.com';
 
-		// const firestore = getFirebase().firestore();
+		try {
+			const response = await axios.get(
+				`${BASE_URL}/api/catalog/catalog_json/course_box/?course_id=${courseId}`
+			);
+			const course = response.data;
+			console.log(course);
 
-		// firestore
-		// 	.collection('class')
-		// 	.add(course)
-		// 	.then(() => {
-		// 		// make async call to DB
-		// 		dispatch(addCourse(course));
-		// 	})
-		// 	.catch((err) => {
-		// 		dispatch(dispatchError('ADD_COURSE_ERROR', err));
-		// 	});
+			const firestore = getFirebase().firestore();
+
+			firestore
+				.collection('class')
+				.add(course)
+				.then(() => {
+					// make async call to DB
+					dispatch(addCourse(course));
+				})
+				.catch((err) => {
+					dispatch(dispatchError('ADD_COURSE_ERROR', err));
+				});
+		} catch (err) {
+			console.log(err);
+		}
 	};
 }
 
