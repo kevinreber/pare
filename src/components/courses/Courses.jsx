@@ -9,13 +9,15 @@ import { firestoreConnect } from 'react-redux-firebase';
 import { connect, useDispatch } from 'react-redux';
 import { compose } from 'redux';
 import { fetchCourseCatalog } from '../../store/actions/courseCatalog';
+import db from '../../config/fbConfig';
 import './styles/Courses.css';
 
 /** Displays a CourseList of user's Current and Past Semester courses. 
     Courses will fetch which courses to display from API and pass courses into CourseList.
 */
-function Courses({ courses }) {
+function Courses() {
 	const dispatch = useDispatch();
+	const [courses, setCourses] = useState([]);
 
 	// build list of courses, if no courses exist return 'No courses added'
 	const courseList =
@@ -39,6 +41,17 @@ function Courses({ courses }) {
 		dispatch(addCourseToFB(courseData));
 		setShowForm(false);
 	};
+
+	useEffect(() => {
+		db.collection('class').onSnapshot((snapshot) =>
+			setCourses(
+				snapshot.docs.map((doc) => ({
+					id: doc.id,
+					data: doc.data(),
+				}))
+			)
+		);
+	}, []);
 
 	useEffect(() => {
 		/** get course catalog on page load */
@@ -91,19 +104,21 @@ function Courses({ courses }) {
 	);
 }
 
-const mapStateToProps = (state) => {
-	return {
-		courses: state.firestore.ordered.class,
-	};
-};
+export default Courses;
+
+// const mapStateToProps = (state) => {
+// 	return {
+// 		courses: state.firestore.ordered.class,
+// 	};
+// };
 
 /** connect to FB collection */
-export default compose(
-	connect(mapStateToProps),
-	firestoreConnect((ownProps) => [
-		{
-			collection: 'class',
-			orderBy: ['department'],
-		},
-	])
-)(Courses);
+// export default compose(
+// 	connect(mapStateToProps),
+// 	firestoreConnect((ownProps) => [
+// 		{
+// 			collection: 'class',
+// 			orderBy: ['department'],
+// 		},
+// 	])
+// )(Courses);
