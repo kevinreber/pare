@@ -9,10 +9,10 @@ function CourseList({ courses = [] }) {
 		<CourseCard
 			id={course.id}
 			key={course.id}
-			department={course.department}
-			number={course.number}
-			term={course.term}
-			name={course.name}
+			department={course.data.course.abbreviation}
+			number={course.data.course.course_number}
+			// term={course.data.course}
+			// name={course.data.course}
 		/>
 	));
 
