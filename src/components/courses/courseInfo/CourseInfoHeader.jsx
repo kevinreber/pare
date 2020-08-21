@@ -8,30 +8,19 @@ import db from '../../../config/fbConfig';
 /** Displays Header information of Course Info Page
  * Courses -> CourseList -> Course -> CourseInfo -> CourseInfoHeader -> CourseDetails && CourseOverallGrades
  */
-function CourseInfoHeader({ courseId, semester, sections, title }) {
+function CourseInfoHeader({ course, semester, sections, title }) {
 	const [showCourseDetails, setShowCourseDetails] = useState(false);
-	console.log(courseId, semester, sections);
-
-	// const [course, setCourse] = useState({});
 
 	const toggleShowCourseDetails = () => setShowCourseDetails((show) => !show);
 
-	// useEffect(() => {
-	// 	if (courseId) {
-	// 		db.collection('class')
-	// 			.doc(courseId)
-	// 			.onSnapshot((snapshot) => setCourse(snapshot.data()));
-	// 	}
-	// }, [courseId]);
-
-	// if (showCourseDetails) {
-	// 	return (
-	// 		<Modal
-	// 			content={<CourseDetails course={course} />}
-	// 			closeModal={toggleShowCourseDetails}
-	// 		/>
-	// 	);
-	// }
+	if (showCourseDetails) {
+		return (
+			<Modal
+				content={<CourseDetails course={course} />}
+				closeModal={toggleShowCourseDetails}
+			/>
+		);
+	}
 
 	return (
 		<div className='CourseInfoHeader'>
@@ -40,7 +29,6 @@ function CourseInfoHeader({ courseId, semester, sections, title }) {
 				<div className='Course-Id mr-4 text-left'>
 					<h5 className='CourseInfoTitle'>
 						{title}
-						{/* {`${course.abbreviation} ${course.course_number}`} */}
 						<i
 							onClick={toggleShowCourseDetails}
 							className='mate-more-info fas fa-info-circle'></i>
@@ -50,7 +38,7 @@ function CourseInfoHeader({ courseId, semester, sections, title }) {
 					</span>
 				</div>
 				<div className='CourseOverallGrade mr-4'>
-					<CourseOverallGrades />
+					<CourseOverallGrades course={course} />
 				</div>
 			</div>
 		</div>

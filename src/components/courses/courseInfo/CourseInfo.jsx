@@ -50,8 +50,7 @@ function CourseInfo() {
 	const courseInfo = course ? (
 		<>
 			<CourseInfoHeader
-				// course={course.course}
-				courseId={courseId}
+				course={course}
 				semester={course.semester}
 				sections={course.sections}
 				title={`${course.course.abbreviation} ${course.course.course_number}`}
@@ -69,70 +68,5 @@ function CourseInfo() {
 
 	return <>{courseInfo}</>;
 }
-
-/*
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import {
-	firebaseConnect,
-	useFirestoreConnect,
-	firestoreConnect,
-	withFirestore,
-	isLoaded,
-	isEmpty,
-} from 'react-redux-firebase';
-*/
-
-/*
-// const mapStateToProps = (state, ownProps) => {
-// 	const id = ownProps.match.params.courseId;
-// 	const courses = state.firestore.data.class;
-// 	const course = courses ? courses[id] : null;
-// 	return {
-// 		course: course,
-// 	};
-// };
-
-// const mapStateToProps = (state) => {
-// 	return {
-// 		course: state.firestore.data.course,
-// 	};
-// };
-
-//  connect to FB collection 
-// export default compose(
-// 	connect(mapStateToProps),
-// 	firestoreConnect((ownProps) => [
-// 		{
-// 			collection: 'class',
-// 			doc: ownProps.match.params.courseId,
-// 			storeAs: 'course',
-// 		},
-// 	])
-// )(CourseInfo);
-
-// ! 
-const mapStateToProps = (state, ownProps) => {
-	console.log(state.firestore);
-	return {
-		course: state.firestore.data.course,
-	};
-};
-
-// connect to FB collection 
-export default compose(
-	connect(mapStateToProps),
-	firestoreConnect((ownProps) => {
-		return [
-			{
-				collection: 'class',
-				where: ['courseId', '==', 355],
-				storeAs: 'course',
-			},
-		];
-	})
-)(CourseInfo);
-
-*/
 
 export default CourseInfo;
