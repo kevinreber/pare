@@ -16,7 +16,7 @@ function CourseInfoHeader({ course, semester, sections, title }) {
 	if (showCourseDetails) {
 		return (
 			<Modal
-				content={<CourseDetails course={course} />}
+				content={<CourseDetails course={course} title={title} />}
 				closeModal={toggleShowCourseDetails}
 			/>
 		);

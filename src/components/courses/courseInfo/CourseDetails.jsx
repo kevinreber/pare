@@ -3,10 +3,10 @@ import React from 'react';
 /** Displays Details
  * Courses -> CourseList -> Course -> CourseInfo -> CourseDetails
  */
-function CourseDetails({ course }) {
+function CourseDetails({ course, title }) {
 	return (
 		<div className='CourseDetails'>
-			<h4>CS61A</h4>
+			<h4>{title}</h4>
 			<table className='CourseDetailsTable'>
 				<tbody>
 					<tr>
