@@ -11,8 +11,8 @@ function CourseList({ courses = [] }) {
 			key={course.id}
 			department={course.data.course.abbreviation}
 			number={course.data.course.course_number}
-			// term={course.data.course}
-			// name={course.data.course}
+			term={course.data.semester}
+			title={course.data.course.title}
 		/>
 	));
 

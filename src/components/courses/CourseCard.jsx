@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 /** Card displaying course information
  * Courses -> CourseList -> CourseCard -> CourseInfo
  */
-function CourseCard({ id, key, department, number, term, name }) {
+function CourseCard({ id, key, department, number, term, title }) {
 	return (
 		<>
 			<Link to={`/courses/${id}`} className='mate-text-secondary'>
@@ -17,7 +17,7 @@ function CourseCard({ id, key, department, number, term, name }) {
 									{term}
 								</span>
 							</td>
-							<td className='pl-3 Course-Title'>{name}</td>
+							<td className='pl-3 Course-Title'>{title}</td>
 						</tr>
 					</tbody>
 				</table>

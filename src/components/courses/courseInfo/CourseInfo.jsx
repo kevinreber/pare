@@ -15,7 +15,7 @@ import './styles/CourseInfo.css';
 function CourseInfo() {
 	const { courseId } = useParams();
 
-	const [course, setCourse] = useState({});
+	const [course, setCourse] = useState(null);
 
 	// Toggle form for User to Add Course
 	const [showForm, setShowForm] = useState(false);
@@ -33,7 +33,7 @@ function CourseInfo() {
 		if (courseId) {
 			db.collection('class')
 				.doc(courseId)
-				.onSnapshot((snapshot) => setCourse(snapshot.data().course));
+				.onSnapshot((snapshot) => setCourse(snapshot.data()));
 		}
 	}, [courseId]);
 
@@ -46,9 +46,16 @@ function CourseInfo() {
 		);
 	}
 
-	return (
+	console.log(course);
+	const courseInfo = course ? (
 		<>
-			<CourseInfoHeader course={courseId} />
+			<CourseInfoHeader
+				// course={course.course}
+				courseId={courseId}
+				semester={course.semester}
+				sections={course.sections}
+				title={`${course.course.abbreviation} ${course.course.course_number}`}
+			/>
 			<CourseInfoBody assignments={assignments} />
 			<div className='AssignmentForm p-3'>
 				<p onClick={toggleForm} className='font-italic'>
@@ -56,7 +63,11 @@ function CourseInfo() {
 				</p>
 			</div>
 		</>
+	) : (
+		<p>Loading...</p>
 	);
+
+	return <>{courseInfo}</>;
 }
 
 /*
