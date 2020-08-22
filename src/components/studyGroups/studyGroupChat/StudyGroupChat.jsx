@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import db from '../../config/fbConfig';
+import StudyGroupChatHeader from './StudyGroupChatHeader';
+import StudyGroupChatBody from './StudyGroupChatBody';
+import db from '../../../config/fbConfig';
 
 /** Displays Study Group's Chat
  * StudyGroups -> StudyGroupsList -> StudyGroupCard -> StudyGroupChat
  */
-function StudyGroupChat({ id, key, department, number, term, title }) {
+function StudyGroupChat() {
 	const { studyGroupId } = useParams();
 	const [studyGroup, setStudyGroup] = useState({});
 
@@ -17,9 +19,14 @@ function StudyGroupChat({ id, key, department, number, term, title }) {
 		}
 	}, [studyGroupId]);
 
+	if (!studyGroup) {
+		return <p>Loading...</p>;
+	}
+
 	return (
 		<>
-			<h1>{studyGroup.title}</h1>
+			<StudyGroupChatHeader title={studyGroup.title} />
+			<StudyGroupChatBody messages={studyGroup.messages} />
 		</>
 	);
 }

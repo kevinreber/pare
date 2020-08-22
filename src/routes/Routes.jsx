@@ -5,7 +5,7 @@ import Signup from '../components/auth/Signup';
 import Courses from '../components/courses/Courses';
 import CourseInfo from '../components/courses/courseInfo/CourseInfo';
 import StudyGroups from '../components/studyGroups/StudyGroups';
-import StudyGroupChat from '../components/studyGroups/StudyGroupChat';
+import StudyGroupChat from '../components/studyGroups/studyGroupChat/StudyGroupChat';
 import Tutors from '../components/tutors/Tutors';
 import UserProfile from '../components/user/UserProfile';
 
