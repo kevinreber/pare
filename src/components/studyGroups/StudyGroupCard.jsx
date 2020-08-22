@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 function StudyGroupCard({ id, key, department, number, term, title }) {
 	return (
 		<>
-			<Link to={`/studygroup/${id}`} className='mate-text-secondary'>
+			<Link to={`/study-groups/${id}`} className='mate-text-secondary'>
 				<table key={key} className='mate-table table-hover'>
 					<tbody className='Course Course-Card'>
 						<tr>
