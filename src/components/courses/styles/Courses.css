@@ -32,10 +32,6 @@ table .Course.Course-Card .Course-Card-Term {
     padding-right: 1.25rem;
 }
 
-.Courses-Header {
-    border-bottom: 2px solid var(--tertiary-color);
-}
-
 .Assignment.Assignment-Card {
     border-bottom: 1px solid var(--tertiary-color);
 }

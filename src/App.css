@@ -4,7 +4,8 @@
   --tertiary-color: #393E46;
   --tertiary-color-light: rgb(43, 47, 58);
   --danger-color: #E15554;
-  --bg-color: #222831
+  --bg-color: #222831;
+  --user-chat-color: #65CAC3;
 }
 
 body {
@@ -167,6 +168,11 @@ input,
   bottom: 7.5rem;
   left: 50%;
   margin-left: -175px;
+}
+
+.Courses-Header,
+.bottom-border-header {
+  border-bottom: 2px solid var(--tertiary-color);
 }
 
 input::-webkit-input-placeholder {
