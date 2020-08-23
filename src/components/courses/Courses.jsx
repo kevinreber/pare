@@ -5,9 +5,7 @@ import Modal from '../general/Modal';
 import NoData from '../general/NoData';
 import CTAButton from '../general/CTAButton';
 import { addCourseToFB } from '../../store/actions/courses';
-import { firestoreConnect } from 'react-redux-firebase';
-import { connect, useDispatch } from 'react-redux';
-import { compose } from 'redux';
+import { useDispatch } from 'react-redux';
 import { fetchCourseCatalog } from '../../store/actions/courseCatalog';
 import db from '../../config/fbConfig';
 import './styles/Courses.css';
@@ -105,20 +103,3 @@ function Courses() {
 }
 
 export default Courses;
-
-// const mapStateToProps = (state) => {
-// 	return {
-// 		courses: state.firestore.ordered.class,
-// 	};
-// };
-
-/** connect to FB collection */
-// export default compose(
-// 	connect(mapStateToProps),
-// 	firestoreConnect((ownProps) => [
-// 		{
-// 			collection: 'class',
-// 			orderBy: ['department'],
-// 		},
-// 	])
-// )(Courses);
