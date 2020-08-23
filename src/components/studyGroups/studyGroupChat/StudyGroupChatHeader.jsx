@@ -15,7 +15,7 @@ function StudyGroupChatHeader({ title }) {
 	return (
 		<>
 			<BackButton />
-			<h1>{title}</h1>
+			<h5>{title}</h5>
 		</>
 	);
 }

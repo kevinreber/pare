@@ -1,0 +1,81 @@
+.StudyGroupChat {
+    /* flex: 0.65; */
+    display: flex;
+    flex-direction: column;
+}
+
+.StudyGroupChat__Body {
+    flex: 1;
+    padding: 30px;
+    overflow: scroll;
+}
+
+.chat__message {
+    position: relative;
+    padding: 8px;
+    font-size: 14px;
+    background-color: var(--tertiary-color);
+    border-radius: 10px;
+    width: fit-content;
+    margin-bottom: 1.25rem;
+}
+
+.chat__receiver {
+    margin-left: auto;
+    background-color: var(--user-chat-color);
+    color: var(--bg-color);
+}
+
+.chat__timestamp {
+    margin-left: 1rem;
+    font-size: xx-small;
+}
+
+.chat__name {
+    position: absolute;
+    top: -1rem;
+    font-size: x-small;
+    font-weight: 800;
+    color: var(--primary-color);
+}
+
+.StudyGroupChat__Footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin: auto;
+    /* height: 62px; */
+    /* border-top: 1px solid var(--tertiary-color); */
+}
+
+.StudyGroupChat__Footer>form {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.StudyGroupChat__Footer>form>input {
+    flex: 1;
+    padding: 1rem;
+}
+
+.StudyGroupChat__Footer>form>input::placeholder {
+    color: var(--tertiary-color);
+    font-style: italic;
+}
+
+.StudyGroupChat__Footer>form>button {
+    display: none;
+}
+
+.message__attachments>i {
+    color: var(--tertiary-color);
+    margin-right: .5rem;
+    /* padding: 1rem; */
+}
+
+.message__attachments>i:hover {
+    color: var(--primary-color);
+}
