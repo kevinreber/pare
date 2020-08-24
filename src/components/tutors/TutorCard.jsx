@@ -20,7 +20,9 @@ function TutorCard({ id, key, name, avatar, tutorSubjects, classes }) {
 								{classes}
 							</span>
 						</div>
-						<div className='Tutor-Title text-left'>{tutorSubjects}</div>
+						<div className='Tutor-Title mate-text-secondary text-left'>
+							{tutorSubjects}
+						</div>
 					</div>
 				</div>
 			</Link>
