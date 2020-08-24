@@ -221,6 +221,11 @@ form .errors {
   font-style: italic;
 }
 
+a:hover {
+  text-decoration: none;
+  background-color: #12151a;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

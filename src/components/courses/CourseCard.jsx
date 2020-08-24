@@ -17,7 +17,7 @@ function CourseCard({ id, key, department, number, term, title }) {
 									{term}
 								</span>
 							</td>
-							<td className='pl-3 Course-Title'>{title}</td>
+							<td className='pl-3 Course-Title mate-text-secondary'>{title}</td>
 						</tr>
 					</tbody>
 				</table>
