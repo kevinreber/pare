@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import TutorList from './TutorList';
-import BeTutorForm from './BeTutorForm';
+import TutorList from '../components/tutors/TutorList';
+import BeTutorForm from '../components/tutors/BeTutorForm';
 import './styles/Tutors.css';
 
 function Tutor() {

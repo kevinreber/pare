@@ -1,6 +1,5 @@
 import React from 'react';
 import Avatar from '../../images/temp/avatar.jpg';
-import './styles/UserProfile.css';
 
 function UserAvatar() {
 	return (

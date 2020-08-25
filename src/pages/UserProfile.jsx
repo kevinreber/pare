@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import UserProfileHeader from './components/UserProfileHeader';
-import UserProfileBody from './components/UserProfileBody';
-import CTAButton from '../general/CTAButton';
+import UserProfileHeader from '../components/user/UserProfileHeader';
+import UserProfileBody from '../components/user/UserProfileBody';
+import CTAButton from '../components/general/CTAButton';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import './styles/UserProfile.css';
-import db from '../../config/fbConfig';
+import db from '../config/fbConfig';
 
 /** User Profile component */
 function UserProfile() {

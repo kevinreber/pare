@@ -1,5 +1,5 @@
 import React from 'react';
-import BackButton from '../../general/BackButton';
+import BackButton from '../general/BackButton';
 
 /** Header for User Profile */
 function UserProfileHeader({

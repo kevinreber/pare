@@ -1,13 +1,13 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import Login from '../components/auth/Login';
-import Signup from '../components/auth/Signup';
+import Login from '../pages/auth/Login';
+import Signup from '../pages/auth/Signup';
 import Courses from '../pages/Courses';
-import CourseInfo from '../components/courses/courseInfo/CourseInfo';
-import StudyGroups from '../components/studyGroups/StudyGroups';
-import StudyGroupChat from '../components/studyGroups/studyGroupChat/StudyGroupChat';
-import Tutors from '../components/tutors/Tutors';
-import UserProfile from '../components/user/UserProfile';
+import CourseInfo from '../pages/CourseInfo';
+import StudyGroups from '../pages/StudyGroups';
+import StudyGroupChat from '../pages/StudyGroupChat';
+import Tutors from '../pages/Tutors';
+import UserProfile from '../pages/UserProfile';
 
 function Routes() {
 	return (

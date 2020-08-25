@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import CTAButton from '../general/CTAButton';
-import Autocomplete from '../general/Autocomplete';
-import NoData from '../general/NoData';
-import StudyGroupList from './StudyGroupList';
-import db from '../../config/fbConfig';
+import CTAButton from '../components/general/CTAButton';
+import Autocomplete from '../components/general/Autocomplete';
+import NoData from '../components/general/NoData';
+import StudyGroupList from '../components/studyGroups/StudyGroupList';
+import db from '../config/fbConfig';
 
 function Connect() {
 	const [studyGroups, setStudyGroups] = useState([]);

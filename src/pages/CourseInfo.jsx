@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import CourseInfoHeader from './CourseInfoHeader';
-import CourseInfoBody from './CourseInfoBody';
-import CTAButton from '../../general/CTAButton';
-import Modal from '../../general/Modal';
-import AssignmentForm from './courseAssignments/AssignmentForm';
+import CourseInfoHeader from '../components/courses/courseInfo/CourseInfoHeader';
+import CourseInfoBody from '../components/courses/courseInfo/CourseInfoBody';
+import CTAButton from '../components/general/CTAButton';
+import Modal from '../components/general/Modal';
+import AssignmentForm from '../components/courses/courseInfo/courseAssignments/AssignmentForm';
 import { useSelector } from 'react-redux';
-import db from '../../../config/fbConfig';
+import db from '../config/fbConfig';
 import './styles/CourseInfo.css';
 
 /** Displays Course Information such as assignments and discussion boards

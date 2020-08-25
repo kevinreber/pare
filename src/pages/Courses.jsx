@@ -8,7 +8,7 @@ import { addCourseToFB } from '../store/actions/courses';
 import { useDispatch } from 'react-redux';
 import { fetchCourseCatalog } from '../store/actions/courseCatalog';
 import db from '../config/fbConfig';
-import '../components/courses/styles/Courses.css';
+import './styles/Courses.css';
 
 /** Displays a CourseList of user's Current and Past Semester courses. 
     Courses will fetch which courses to display from API and pass courses into CourseList.

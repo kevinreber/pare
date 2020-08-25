@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import StudyGroupChatHeader from './StudyGroupChatHeader';
-import StudyGroupChatBody from './StudyGroupChatBody';
-import StudyGroupChatFooter from './StudyGroupChatFooter';
-import db from '../../../config/fbConfig';
+import StudyGroupChatHeader from '../components/studyGroups/studyGroupChat/StudyGroupChatHeader';
+import StudyGroupChatBody from '../components/studyGroups/studyGroupChat/StudyGroupChatBody';
+import StudyGroupChatFooter from '../components/studyGroups/studyGroupChat/StudyGroupChatFooter';
+import db from '../config/fbConfig';
 import './styles/StudyGroupChat.css';
 
 /** Displays Study Group's Chat
