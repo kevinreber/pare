@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import CourseList from './CourseList';
-import CourseForm from './CourseForm';
-import Modal from '../general/Modal';
-import NoData from '../general/NoData';
-import CTAButton from '../general/CTAButton';
-import { addCourseToFB } from '../../store/actions/courses';
+import CourseList from '../components/courses/CourseList';
+import CourseForm from '../components/courses/CourseForm';
+import Modal from '../components/general/Modal';
+import NoData from '../components/general/NoData';
+import CTAButton from '../components/general/CTAButton';
+import { addCourseToFB } from '../store/actions/courses';
 import { useDispatch } from 'react-redux';
-import { fetchCourseCatalog } from '../../store/actions/courseCatalog';
-import db from '../../config/fbConfig';
-import './styles/Courses.css';
+import { fetchCourseCatalog } from '../store/actions/courseCatalog';
+import db from '../config/fbConfig';
+import '../components/courses/styles/Courses.css';
 
 /** Displays a CourseList of user's Current and Past Semester courses. 
     Courses will fetch which courses to display from API and pass courses into CourseList.

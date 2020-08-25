@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Login from '../components/auth/Login';
 import Signup from '../components/auth/Signup';
-import Courses from '../components/courses/Courses';
+import Courses from '../pages/Courses';
 import CourseInfo from '../components/courses/courseInfo/CourseInfo';
 import StudyGroups from '../components/studyGroups/StudyGroups';
 import StudyGroupChat from '../components/studyGroups/studyGroupChat/StudyGroupChat';

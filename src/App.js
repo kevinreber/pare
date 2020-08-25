@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from './components/general/Header';
-import NavBar from './components/general/NavBar';
+import Header from './components/layout/Header';
+import NavBar from './components/layout/NavBar';
 import Routes from './routes/Routes';
 import './App.css';
 
