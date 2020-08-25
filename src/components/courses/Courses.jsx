@@ -17,19 +17,30 @@ function Courses() {
 	const dispatch = useDispatch();
 	const [courses, setCourses] = useState([]);
 
-	// build list of courses, if no courses exist return 'No courses added'
-	const courseList =
-		courses && courses.length !== 0 ? (
-			<CourseList courses={courses} />
-		) : (
-			<NoData text={'courses'} />
-		);
+	/** Separate courses by semester */
+	const currentCourses = courses.filter((course) => {
+		console.log(course.data);
+		return course.data.semester === 'FALL 2020';
+	});
+	const pastCourses = courses.filter(
+		(course) => course.data.semester !== 'FALL 2020'
+	);
 
 	// State will determine what courses to show in CourseList
 	const [active, setActive] = useState('current');
 	const toggleCourses = (e) => {
 		setActive(e.target.id);
 	};
+
+	// build list of courses, if no courses exist return 'No courses added'
+	const courseList =
+		courses && courses.length !== 0 ? (
+			<CourseList
+				courses={active === 'current' ? currentCourses : pastCourses}
+			/>
+		) : (
+			<NoData text={'courses'} />
+		);
 
 	// Toggle form for User to Add Course
 	const [showForm, setShowForm] = useState(false);
