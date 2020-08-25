@@ -175,6 +175,15 @@ input,
   border-bottom: 2px solid var(--tertiary-color);
 }
 
+.MuiButtonBase-root.MuiIconButton-root {
+  font-size: large;
+  color: var(--tertiary-color);
+}
+
+.MuiButtonBase-root.MuiIconButton-root:hover {
+  color: var(--primary-color);
+}
+
 input::-webkit-input-placeholder {
   /* Chrome/Opera/Safari */
   color: var(--secondary-color);
