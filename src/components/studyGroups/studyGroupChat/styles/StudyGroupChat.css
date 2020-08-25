@@ -10,6 +10,11 @@
     overflow: scroll;
 }
 
+.StudyGroupChat__Header .StudyGroupChat__Title {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
 .chat__message {
     position: relative;
     padding: 8px;
