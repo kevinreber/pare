@@ -17,11 +17,11 @@ function Courses() {
 	const dispatch = useDispatch();
 	const [courses, setCourses] = useState([]);
 
-	/** Separate courses by semester */
-	const currentCourses = courses.filter((course) => {
-		console.log(course.data);
-		return course.data.semester === 'FALL 2020';
-	});
+	/** Current Semester courses */
+	const currentCourses = courses.filter(
+		(course) => course.data.semester === 'FALL 2020'
+	);
+	/** Past Semester Courses */
 	const pastCourses = courses.filter(
 		(course) => course.data.semester !== 'FALL 2020'
 	);
