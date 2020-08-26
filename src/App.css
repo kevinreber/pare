@@ -141,6 +141,10 @@ input,
   font-size: 18px;
 }
 
+.NavBar>a:hover {
+  color: var(--primary-color);
+}
+
 .mate-btn {
   font-size: 20px;
 }
@@ -182,6 +186,10 @@ input,
 
 .MuiButtonBase-root.MuiIconButton-root:hover {
   color: var(--primary-color);
+}
+
+.Mate-Card {
+  padding: 1.2rem;
 }
 
 input::-webkit-input-placeholder {
