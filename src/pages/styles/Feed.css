@@ -1,0 +1,22 @@
+.Post-Card {
+    display: flex;
+    justify-content: space-between;
+}
+
+.Post-Card>a {
+    color: var(--secondary-color);
+}
+
+.Post-Card .Post-Card__Center {
+    text-align: left;
+    width: 75%;
+}
+
+.Post-Card .Post-Card__Center .Post-Card__Body {
+    font-size: 14px;
+}
+
+.Post-Card .Post-Card__Center .Post-Card__Footer {
+    display: flex;
+    justify-content: space-between;
+}
