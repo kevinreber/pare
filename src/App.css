@@ -101,6 +101,8 @@ label,
   justify-content: space-around;
   padding-top: 1.2rem;
   padding-bottom: 1.2rem;
+  border-bottom: 2px solid var(--tertiary-color);
+  cursor: pointer;
 }
 
 .Body-Header h4,
@@ -172,11 +174,6 @@ input,
   bottom: 7.5rem;
   left: 50%;
   margin-left: -175px;
-}
-
-.Courses-Header,
-.bottom-border-header {
-  border-bottom: 2px solid var(--tertiary-color);
 }
 
 .MuiButtonBase-root.MuiIconButton-root {

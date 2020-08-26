@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Logo from '../../images/logo/mate-logo.png';
+import { Link } from 'react-router-dom';
 import { ReactComponent as NotifyIcon } from './icons/notification-icon.svg';
 /** Material UI */
 import {
@@ -114,10 +115,12 @@ function Header() {
 					<img src={Logo} alt='Mate' />
 				</div>
 				<div className='Header-Notif mt-auto mb-auto'>
-					{/* <NotifyIcon /> */}
-					<IconButton>
-						<NotificationsNoneOutlinedIcon style={{ fontSize: 45 }} />
-					</IconButton>
+					<Link to='/notifications'>
+						{/* <NotifyIcon /> */}
+						<IconButton>
+							<NotificationsNoneOutlinedIcon style={{ fontSize: 45 }} />
+						</IconButton>
+					</Link>
 				</div>
 			</div>
 		</div>

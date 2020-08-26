@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Login from '../pages/auth/Login';
 import Signup from '../pages/auth/Signup';
+import Notifications from '../pages/Notifications';
 import Feed from '../pages/Feed';
 import PostInfo from '../pages/PostInfo';
 import Search from '../pages/Search';
@@ -18,6 +19,7 @@ function Routes() {
 			<Switch>
 				<Route exact path='/login' component={Login} />
 				<Route exact path='/signup' component={Signup} />
+				<Route exact path='/notifications' component={Notifications} />
 				<Route exact path='/feed' component={Feed} />
 				<Route exact path='/post/:postId' component={PostInfo} />
 				<Route exact path='/search' component={Search} />
