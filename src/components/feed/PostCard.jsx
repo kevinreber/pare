@@ -44,22 +44,22 @@ function PostCard({
 						<p>{content}</p>
 						<span>{location}</span>
 					</div>
-					<div className='Post-Card__Footer'>
-						<IconButton>
-							<ModeCommentOutlinedIcon />
-						</IconButton>
-						<IconButton>
-							<CalendarTodayOutlinedIcon />
-						</IconButton>
-						<IconButton>{BookmarkStatus}</IconButton>
-						<IconButton>
-							<SendIcon />
-						</IconButton>
-						<IconButton>
-							<ShareIcon />
-						</IconButton>
-					</div>
 				</Link>
+				<div className='Post-Card__Footer'>
+					<IconButton>
+						<ModeCommentOutlinedIcon />
+					</IconButton>
+					<IconButton>
+						<CalendarTodayOutlinedIcon />
+					</IconButton>
+					<IconButton>{BookmarkStatus}</IconButton>
+					<IconButton>
+						<SendIcon />
+					</IconButton>
+					<IconButton>
+						<ShareIcon />
+					</IconButton>
+				</div>
 			</div>
 			<div className='Post-Card__Right'>
 				<p>3hrs</p>
