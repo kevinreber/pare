@@ -2,6 +2,9 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Login from '../pages/auth/Login';
 import Signup from '../pages/auth/Signup';
+import Feed from '../pages/Feed';
+import PostInfo from '../pages/PostInfo';
+import Search from '../pages/Search';
 import Courses from '../pages/Courses';
 import CourseInfo from '../pages/CourseInfo';
 import StudyGroups from '../pages/StudyGroups';
@@ -15,6 +18,9 @@ function Routes() {
 			<Switch>
 				<Route exact path='/login' component={Login} />
 				<Route exact path='/signup' component={Signup} />
+				<Route exact path='/feed' component={Feed} />
+				<Route exact path='/post/:postId' component={PostInfo} />
+				<Route exact path='/search' component={Search} />
 				<Route exact path='/courses' component={Courses} />
 				<Route exact path='/courses/:courseId/' component={CourseInfo} />
 				<Route exact path='/study-groups' component={StudyGroups} />
