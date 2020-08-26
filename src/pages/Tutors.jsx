@@ -3,6 +3,30 @@ import TutorList from '../components/tutors/TutorList';
 import BeTutorForm from '../components/tutors/BeTutorForm';
 import './styles/Tutors.css';
 
+const tutorsDemo = [
+	{
+		id: 1,
+		name: 'John',
+		avatar: 'https://randomuser.me/api/portraits/thumb/men/75.jpg',
+		tutorSubjects: 'Computer Science',
+		classes: 'Math1A, CS61A, CS61B',
+	},
+	{
+		id: 2,
+		name: 'Angela',
+		avatar: 'https://randomuser.me/api/portraits/thumb/men/75.jpg',
+		tutorSubjects: 'Computer Science',
+		classes: 'Math1A, CS61A, CS61B',
+	},
+	{
+		id: 3,
+		name: 'Tony',
+		avatar: 'https://randomuser.me/api/portraits/thumb/men/75.jpg',
+		tutorSubjects: 'Math',
+		classes: 'Math1A, CS61A, CS61B',
+	},
+];
+
 function Tutor() {
 	// State will determine what courses to show in CourseList
 	const [active, setActive] = useState('findTutor');
@@ -14,7 +38,12 @@ function Tutor() {
 	const [showSearch, setShowSearch] = useState(false);
 	const toggleSearch = () => setShowSearch((show) => !show);
 
-	const TutorsBody = active === 'findTutor' ? <TutorList /> : <BeTutorForm />;
+	const TutorsBody =
+		active === 'findTutor' ? (
+			<TutorList tutors={tutorsDemo} />
+		) : (
+			<BeTutorForm />
+		);
 
 	return (
 		<>
