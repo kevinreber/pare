@@ -1,20 +1,25 @@
 import React, { useState } from 'react';
 import Logo from '../../images/logo/mate-logo.png';
 import { ReactComponent as NotifyIcon } from './icons/notification-icon.svg';
-import { makeStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import IconButton from '@material-ui/core/IconButton';
+/** Material UI */
+import {
+	Drawer,
+	IconButton,
+	List,
+	ListItem,
+	ListItemText,
+	ListItemIcon,
+	Avatar,
+} from '@material-ui/core';
 import NotificationsNoneOutlinedIcon from '@material-ui/icons/NotificationsNoneOutlined';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import PersonIcon from '@material-ui/icons/Person';
 import BookmarkIcon from '@material-ui/icons/Bookmark';
 import SettingsIcon from '@material-ui/icons/Settings';
 import UserAvatar from '../user/UserAvatar';
-import Avatar from '@material-ui/core/Avatar';
+import { makeStyles } from '@material-ui/core/styles';
+
+/** Stylesheets */
 import './styles/Header.css';
 
 /** Temp Dummy Code */
