@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import FeedList from '../components/feed/FeedList';
+import NoData from '../components/general/NoData';
 import db from '../config/fbConfig';
 import './styles/Feed.css';
 
@@ -19,7 +20,7 @@ function Feed() {
 
 	return (
 		<div className='Feed'>
-			<FeedList posts={posts} />
+			{posts ? <FeedList posts={posts} /> : <NoData text='posts' />}
 		</div>
 	);
 }
