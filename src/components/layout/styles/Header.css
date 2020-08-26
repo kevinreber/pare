@@ -1,7 +1,29 @@
-.Header{
-    border-bottom: 2px solid var(--tertiary-color); 
+.Header {
+    border-bottom: 2px solid var(--tertiary-color);
 }
 
-.Header-Logo img{
+.Header-Logo img {
     width: 64px;
+}
+
+.makeStyles-list-1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+    width: 250px;
+}
+
+.MuiList-root.MuiList-padding {
+    margin-left: 2rem;
+    text-align: left;
+}
+
+.MuiPaper-root.MuiDrawer-paper.MuiDrawer-paperAnchorLeft.MuiPaper-elevation16 {
+    background-color: var(--bg-color);
+    color: var(--secondary-color);
+}
+
+.MuiPaper-root.MuiDrawer-paper.MuiDrawer-paperAnchorLeft.MuiPaper-elevation16 .MuiSvgIcon-root {
+    fill: var(--secondary-color);
 }
