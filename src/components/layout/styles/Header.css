@@ -27,3 +27,17 @@
 .MuiPaper-root.MuiDrawer-paper.MuiDrawer-paperAnchorLeft.MuiPaper-elevation16 .MuiSvgIcon-root {
     fill: var(--secondary-color);
 }
+
+.MuiButtonBase-root.MuiFab-root {
+    position: absolute;
+    right: 1.5rem;
+    bottom: 7rem;
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+}
+
+.MuiButtonBase-root.MuiFab-root:hover {
+    background-color: var(--bg-color);
+    color: var(--primary-color);
+    box-shadow: 0 0 5px 3px rgba(117, 243, 231, .8);
+}
