@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import LoginHeader from './LoginHeader';
 import useFields from '../../hooks/useFields';
+import { Button } from '@material-ui/core';
+import { auth, provider } from '../../config/fbConfig';
 
 /** User Signup Form */
 function Signup() {
@@ -23,10 +25,17 @@ function Signup() {
 		resetFormData();
 	};
 
+	const signIn = () => {
+		auth
+			.signInWithPopup(provider)
+			.then((result) => console.log(result))
+			.catch((error) => alert(error.message));
+	};
+
 	return (
-		<>
+		<div className='Login__container'>
 			<LoginHeader />
-			<form className='container' onSubmit={handleSubmit}>
+			<form className='Login__form mb-3' onSubmit={handleSubmit}>
 				<div className='form-group'>
 					<label htmlFor='username' className='mate-text-primary float-left'>
 						Username
@@ -94,15 +103,20 @@ function Signup() {
 						value={formData.confirmPassword}
 					/>
 				</div>
-				<button className='btn mate-btn w-100 mate-btn-primary'>Sign Up</button>
+				<div className='Login__buttons'>
+					<button id='Login__btn'>Sign Up</button>
+					<Button id='Login-Google__btn' onClick={signIn}>
+						Sign Up With Google
+					</Button>
+				</div>
 			</form>
 			<p>
-				Have an account?{' '}
-				<Link to='/login' className='mate-text-primary'>
+				Have an account?
+				<Link to='/login' className='mate-text-primary ml-2'>
 					Login
 				</Link>
 			</p>
-		</>
+		</div>
 	);
 }
 

@@ -2,6 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import LoginHeader from './LoginHeader';
 import useFields from '../../hooks/useFields';
+import { Button } from '@material-ui/core';
+import '../styles/Login.css';
+import { auth, provider } from '../../config/fbConfig';
 
 /** User Login Form */
 function Login() {
@@ -20,10 +23,17 @@ function Login() {
 		resetFormData();
 	};
 
+	const signIn = () => {
+		auth
+			.signInWithPopup(provider)
+			.then((result) => console.log(result))
+			.catch((error) => alert(error.message));
+	};
+
 	return (
-		<>
+		<div className='Login__container'>
 			<LoginHeader />
-			<form className='container mb-3' onSubmit={handleSubmit}>
+			<form className='Login__form mb-3' onSubmit={handleSubmit}>
 				<div className='form-group'>
 					<label htmlFor='email' className='mate-text-primary float-left'>
 						Email
@@ -53,21 +63,26 @@ function Login() {
 				<div className='form-group'>
 					<Link
 						to='#'
-						className='mate-text-secondary text-sm float-right font-italic'>
+						className='mate-text-secondary mb-3 text-sm float-right font-italic'>
 						Forgot Password?
 					</Link>
 				</div>
-				<button className='btn mate-btn w-100 mate-btn-primary'>Log In</button>
+				<div className='Login__buttons'>
+					<button id='Login__btn'>Log In</button>
+					<Button id='Login-Google__btn' onClick={signIn}>
+						Log In With Google
+					</Button>
+				</div>
 			</form>
-			<div className='Login-Footer d-flex justify-content-center'>
+			<div className='Login-Footer'>
 				<p>
-					Have an account?{' '}
-					<Link className='mate-text-primary' to='/signup'>
+					Don't have an account?
+					<Link className='mate-text-primary ml-2' to='/signup'>
 						Sign Up
-					</Link>{' '}
+					</Link>
 				</p>
 			</div>
-		</>
+		</div>
 	);
 }
 
