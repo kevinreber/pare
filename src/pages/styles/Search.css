@@ -1,0 +1,35 @@
+.Search-Header {
+    /* width: 90%;
+    margin: auto; */
+    padding: 2rem 2rem 0 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.Search-Categories {
+    /* display: flex;
+    flex-direction: row; */
+    overflow-x: auto;
+    white-space: nowrap;
+    border-bottom: 1px solid var(--tertiary-color);
+}
+
+/* .Search-Categories>.MuiTypography-root.MuiListItemText-primary.MuiTypography-body1.MuiTypography-displayBlock {
+    display: inline-block;
+    text-decoration: none;
+} */
+
+.MuiList-root.MuiList-padding {
+    margin: 0;
+}
+
+.Search-Categories .MuiButtonBase-root.MuiListItem-root.MuiListItem-gutters.MuiListItem-button {
+    display: inline-block;
+    width: auto;
+    margin-left: 0;
+}
+
+.Search-Categories .MuiTypography-body1 {
+    font-size: .8rem;
+}
