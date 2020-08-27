@@ -4,10 +4,13 @@ import LoginHeader from './LoginHeader';
 import useFields from '../../hooks/useFields';
 import { Button } from '@material-ui/core';
 import '../styles/Login.css';
-import { auth, provider } from '../../config/fbConfig';
+import { useDispatch } from 'react-redux';
+import { googleLogin } from '../../store/actions/auth';
 
 /** User Login Form */
 function Login() {
+	const dispatch = useDispatch();
+
 	const INITIAL_STATE = {
 		email: '',
 		password: '',
@@ -23,11 +26,9 @@ function Login() {
 		resetFormData();
 	};
 
-	const signIn = () => {
-		auth
-			.signInWithPopup(provider)
-			.then((result) => console.log(result))
-			.catch((error) => alert(error.message));
+	/** if user signs in using Google, store their data to redux store */
+	const googleSignIn = () => {
+		dispatch(googleLogin());
 	};
 
 	return (
@@ -69,7 +70,7 @@ function Login() {
 				</div>
 				<div className='Login__buttons'>
 					<button id='Login__btn'>Log In</button>
-					<Button id='Login-Google__btn' onClick={signIn}>
+					<Button id='Login-Google__btn' onClick={googleSignIn}>
 						Log In With Google
 					</Button>
 				</div>

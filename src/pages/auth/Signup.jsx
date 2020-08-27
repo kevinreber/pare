@@ -3,10 +3,13 @@ import { Link } from 'react-router-dom';
 import LoginHeader from './LoginHeader';
 import useFields from '../../hooks/useFields';
 import { Button } from '@material-ui/core';
-import { auth, provider } from '../../config/fbConfig';
+import { useDispatch } from 'react-redux';
+import { googleLogin } from '../../store/actions/auth';
 
 /** User Signup Form */
 function Signup() {
+	const dispatch = useDispatch();
+
 	const INITIAL_STATE = {
 		username: '',
 		email: '',
@@ -25,11 +28,9 @@ function Signup() {
 		resetFormData();
 	};
 
-	const signIn = () => {
-		auth
-			.signInWithPopup(provider)
-			.then((result) => console.log(result))
-			.catch((error) => alert(error.message));
+	/** if user signs in using Google, store their data to redux store */
+	const googleSignIn = () => {
+		dispatch(googleLogin());
 	};
 
 	return (
@@ -105,7 +106,7 @@ function Signup() {
 				</div>
 				<div className='Login__buttons'>
 					<button id='Login__btn'>Sign Up</button>
-					<Button id='Login-Google__btn' onClick={signIn}>
+					<Button id='Login-Google__btn' onClick={googleSignIn}>
 						Sign Up With Google
 					</Button>
 				</div>

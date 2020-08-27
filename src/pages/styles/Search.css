@@ -33,3 +33,10 @@
 .Search-Categories .MuiTypography-body1 {
     font-size: .8rem;
 }
+
+/* Hides side scroll scrollbar */
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+    /* make scrollbar transparent */
+}

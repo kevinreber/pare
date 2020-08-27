@@ -1,3 +1,5 @@
+export const SET_AUTH = 'SET_AUTH';
+export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const FETCH_COURSES = 'FETCH_COURSES';
 export const FETCH_COURSE = 'FETCH_COURSE';
 export const ADD_COURSE = 'ADD_COURSE';
