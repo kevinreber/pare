@@ -12,6 +12,7 @@ import StudyGroups from '../pages/StudyGroups';
 import StudyGroupChat from '../pages/StudyGroupChat';
 import Tutors from '../pages/Tutors';
 import UserProfile from '../pages/UserProfile';
+import PrivateRoute from '../auth/PrivateRoute';
 
 function Routes() {
 	return (
@@ -19,20 +20,20 @@ function Routes() {
 			<Switch>
 				<Route exact path='/login' component={Login} />
 				<Route exact path='/signup' component={Signup} />
-				<Route exact path='/notifications' component={Notifications} />
-				<Route exact path='/feed' component={Feed} />
-				<Route exact path='/post/:postId' component={PostInfo} />
-				<Route exact path='/search' component={Search} />
-				<Route exact path='/courses' component={Courses} />
-				<Route exact path='/courses/:courseId/' component={CourseInfo} />
-				<Route exact path='/study-groups' component={StudyGroups} />
-				<Route
+				<PrivateRoute exact path='/notifications' component={Notifications} />
+				<PrivateRoute exact path='/feed' component={Feed} />
+				<PrivateRoute exact path='/post/:postId' component={PostInfo} />
+				<PrivateRoute exact path='/search' component={Search} />
+				<PrivateRoute exact path='/courses' component={Courses} />
+				<PrivateRoute exact path='/courses/:courseId/' component={CourseInfo} />
+				<PrivateRoute exact path='/study-groups' component={StudyGroups} />
+				<PrivateRoute
 					exact
 					path='/study-groups/:studyGroupId'
 					component={StudyGroupChat}
 				/>
-				<Route exact path='/tutors' component={Tutors} />
-				<Route exact path='/users/:id' component={UserProfile} />
+				<PrivateRoute exact path='/tutors' component={Tutors} />
+				<PrivateRoute exact path='/users/:id' component={UserProfile} />
 				<Redirect to='/login' />
 			</Switch>
 		</>
