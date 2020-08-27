@@ -2,6 +2,15 @@
     border-bottom: 2px solid var(--tertiary-color);
 }
 
+.Header .MuiPaper-root.MuiAppBar-root.MuiAppBar-positionStatic.MuiAppBar-colorPrimary.Header-Content.MuiPaper-elevation4 {
+    padding: 1rem;
+}
+
+.MuiToolbar-root.MuiToolbar-regular.MuiToolbar-gutters {
+    display: flex;
+    justify-content: space-between;
+}
+
 .Header-Logo img {
     width: 64px;
 }
@@ -40,4 +49,18 @@
     background-color: var(--bg-color);
     color: var(--primary-color);
     box-shadow: 0 0 5px 3px rgba(117, 243, 231, .8);
+}
+
+.MuiPaper-root.MuiAppBar-root.MuiAppBar-positionStatic.MuiAppBar-colorPrimary.Header-Content.MuiPaper-elevation4 {
+    background-color: var(--bg-color);
+
+}
+
+.MuiBadge-root .MuiSvgIcon-root {
+    fill: var(--primary-color);
+}
+
+.MuiBadge-badge.MuiBadge-anchorOriginTopRightRectangle {
+    background-color: var(--primary-color);
+    color: var(--bg-color);
 }

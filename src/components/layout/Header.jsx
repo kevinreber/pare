@@ -11,6 +11,9 @@ import {
 	ListItemText,
 	ListItemIcon,
 	Avatar,
+	AppBar,
+	Toolbar,
+	Badge,
 } from '@material-ui/core';
 import NotificationsNoneOutlinedIcon from '@material-ui/icons/NotificationsNoneOutlined';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
@@ -99,30 +102,28 @@ function Header() {
 	);
 
 	return (
-		<div className='Header container'>
-			<div className='Header-Content d-flex justify-content-between mt-5 mb-4'>
-				<div className='Header-Avatar mt-auto mb-auto'>
-					<React.Fragment key={'left'}>
-						<IconButton onClick={toggleDrawer}>
-							<UserAvatar />
-						</IconButton>
-						<Drawer anchor={'left'} open={drawer} onClose={toggleDrawer}>
-							{SideBar('left')}
-						</Drawer>
-					</React.Fragment>
-				</div>
-				<div className='Header-Logo mt-auto mb-auto'>
-					<img src={Logo} alt='Mate' />
-				</div>
-				<div className='Header-Notif mt-auto mb-auto'>
-					<Link to='/notifications'>
-						{/* <NotifyIcon /> */}
-						<IconButton>
-							<NotificationsNoneOutlinedIcon style={{ fontSize: 45 }} />
-						</IconButton>
-					</Link>
-				</div>
-			</div>
+		<div className='Header'>
+			<AppBar position='static' className='Header-Content'>
+				<Toolbar>
+					<IconButton onClick={toggleDrawer}>
+						<UserAvatar />
+					</IconButton>
+					<Drawer anchor={'left'} open={drawer} onClose={toggleDrawer}>
+						{SideBar('left')}
+					</Drawer>
+					<div className='Header-Logo'>
+						<img src={Logo} alt='Mate' />
+					</div>
+					<IconButton>
+						<Link to='/notifications'>
+							{/* <NotifyIcon /> */}
+							<Badge badgeContent={4}>
+								<NotificationsNoneOutlinedIcon style={{ fontSize: 45 }} />
+							</Badge>
+						</Link>
+					</IconButton>
+				</Toolbar>
+			</AppBar>
 		</div>
 	);
 }
