@@ -4,6 +4,7 @@ import LoginHeader from './LoginHeader';
 import useFields from '../../hooks/useFields';
 import { Button } from '@material-ui/core';
 import '../styles/Login.css';
+import { Redirect } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { googleLogin } from '../../store/actions/auth';
 
@@ -26,9 +27,12 @@ function Login() {
 		resetFormData();
 	};
 
-	/** if user signs in using Google, store their data to redux store */
+	/** if user signs in using Google, store their data to redux store
+	 * and redirect to home page feed
+	 */
 	const googleSignIn = () => {
 		dispatch(googleLogin());
+		return <Redirect to='/feed' />;
 	};
 
 	return (
