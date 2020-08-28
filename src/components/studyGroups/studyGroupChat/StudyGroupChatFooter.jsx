@@ -8,18 +8,19 @@ import PanoramaOutlinedIcon from '@material-ui/icons/PanoramaOutlined';
 /** Displays Study Group's Chat Footer that allows the user to enter a message
  * StudyGroups -> StudyGroupsList -> StudyGroupCard -> StudyGroupChat -> StudyGroupChatFooter
  */
-function StudyGroupChatFooter({ send }) {
+function StudyGroupChatFooter({ send, username }) {
 	const INITIAL_STATE = {
-		id: 7,
+		id: '',
 		message: '',
 		timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-		name: 'Tony Stark',
+		name: username,
 	};
 
 	const [formData, handleChange, resetFormData] = useFields(INITIAL_STATE);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		// Check if field is empty or white space
 		if (formData.message && formData.message.trim() !== '') {
 			send(formData);
 			resetFormData();

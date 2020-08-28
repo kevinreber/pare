@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import StudyGroupChatHeader from '../components/studyGroups/studyGroupChat/StudyGroupChatHeader';
 import StudyGroupChatBody from '../components/studyGroups/studyGroupChat/StudyGroupChatBody';
 import StudyGroupChatFooter from '../components/studyGroups/studyGroupChat/StudyGroupChatFooter';
@@ -11,6 +12,8 @@ import './styles/StudyGroupChat.css';
  */
 function StudyGroupChat() {
 	const { studyGroupId } = useParams();
+	const currentUser = useSelector((state) => state.auth.auth);
+
 	const [studyGroup, setStudyGroup] = useState({});
 	const [messages, setMessages] = useState([]);
 
@@ -35,14 +38,13 @@ function StudyGroupChat() {
 	}
 
 	const sendMessage = (message) => {
-		console.log(message);
 		try {
 			db.collection('study-group')
 				.doc(studyGroupId)
 				.collection('messages')
 				.add(message);
-		} catch (e) {
-			console.log(e);
+		} catch (err) {
+			console.log(err);
 		}
 	};
 
@@ -52,10 +54,16 @@ function StudyGroupChat() {
 				<StudyGroupChatHeader title={studyGroup.title} />
 			</div>
 			<div className='StudyGroupChat__Body'>
-				<StudyGroupChatBody messages={messages} />
+				<StudyGroupChatBody
+					messages={messages}
+					username={currentUser.displayName}
+				/>
 			</div>
 			<div className='StudyGroupChat__Footer'>
-				<StudyGroupChatFooter send={sendMessage} />
+				<StudyGroupChatFooter
+					send={sendMessage}
+					username={currentUser.displayName}
+				/>
 			</div>
 		</div>
 	);
