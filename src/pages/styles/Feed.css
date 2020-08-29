@@ -1,3 +1,15 @@
+.Feed {
+    display: flex;
+    flex-direction: column;
+}
+
+.Feed__List {
+    flex: 1;
+    overflow: scroll;
+    margin-top: 10vh;
+    margin-bottom: 7rem;
+}
+
 .Post-Card {
     display: flex;
     justify-content: space-between;

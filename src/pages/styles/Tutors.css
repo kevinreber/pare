@@ -1,3 +1,15 @@
+.Tutors {
+    display: flex;
+    flex-direction: column;
+}
+
+.Tutors__Body {
+    flex: 1;
+    overflow: scroll;
+    margin-top: 18vh;
+    margin-bottom: 7rem;
+}
+
 .Tutor.Tutor-Card {
     display: flex;
     padding: 1rem;

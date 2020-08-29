@@ -18,7 +18,7 @@ function feedList({ posts }) {
 		/>
 	));
 
-	return <div>{List}</div>;
+	return <>{List}</>;
 }
 
 export default feedList;

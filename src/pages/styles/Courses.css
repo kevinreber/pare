@@ -1,3 +1,15 @@
+.Courses {
+    display: flex;
+    flex-direction: column;
+}
+
+.Courses__CourseList {
+    flex: 1;
+    margin-top: 18vh;
+    margin-bottom: 7rem;
+    overflow: scroll;
+}
+
 table .Course.Course-Card {
     font-size: 14px;
 }

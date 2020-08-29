@@ -46,7 +46,7 @@ function Tutor() {
 		);
 
 	return (
-		<>
+		<div className='Tutors'>
 			<div className='Tutors-Header Body-Header'>
 				<div className='Tutor-Find-Tutor'>
 					<h5
@@ -69,14 +69,16 @@ function Tutor() {
 					</h5>
 				</div>
 			</div>
-			{TutorsBody}
-			{/* <div className='Courses-CourseList'>{courseList}</div>
+			<div className='Tutors__Body'>
+				{TutorsBody}
+				{/* <div className='Courses-CourseList'>{courseList}</div>
 			<div className='CourseForm p-3'>
 				<p onClick={toggleForm} className='font-italic'>
 					<CTAButton text='Join Class' />
 				</p>
 			</div> */}
-		</>
+			</div>
+		</div>
 	);
 }
 

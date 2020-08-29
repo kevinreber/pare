@@ -13,7 +13,7 @@ function TutorList({ tutors = [] }) {
 		/>
 	));
 
-	return <div>{List}</div>;
+	return <>{List}</>;
 }
 
 export default TutorList;

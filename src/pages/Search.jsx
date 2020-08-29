@@ -77,7 +77,7 @@ function Search() {
 
 	return (
 		<div className='Search'>
-			<div className='Search-Header'>
+			<div className='Body-Header Search-Header'>
 				<div className={classes.search}>
 					<div className={classes.searchIcon}>
 						<SearchIcon />

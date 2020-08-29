@@ -80,7 +80,7 @@ function Courses() {
 	}
 
 	return (
-		<>
+		<div className='Courses'>
 			<div className='Courses-Header Body-Header'>
 				<div className='Courses-Current'>
 					<h5
@@ -103,13 +103,13 @@ function Courses() {
 					</h5>
 				</div>
 			</div>
-			<div className='Courses-CourseList'>{courseList}</div>
+			<div className='Courses__CourseList'>{courseList}</div>
 			<div className='CourseForm p-3'>
 				<p onClick={toggleForm} className='font-italic'>
 					<CTAButton text='Join Class' />
 				</p>
 			</div>
-		</>
+		</div>
 	);
 }
 

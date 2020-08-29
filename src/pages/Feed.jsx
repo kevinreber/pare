@@ -22,7 +22,9 @@ function Feed() {
 
 	return (
 		<div className='Feed'>
-			{posts ? <FeedList posts={posts} /> : <NoData text='posts' />}
+			<div className='Feed__List'>
+				{posts ? <FeedList posts={posts} /> : <NoData text='posts' />}
+			</div>
 			<Fab aria-label='add'>
 				<AddIcon />
 			</Fab>
