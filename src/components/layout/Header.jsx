@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Logo from '../../images/logo/mate-logo.png';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { logOut } from '../../store/actions/auth';
 import { ReactComponent as NotifyIcon } from './icons/notification-icon.svg';
 /** Material UI */
 import {
@@ -38,6 +40,12 @@ const useStyles = makeStyles({
 });
 
 function Header() {
+	const dispatch = useDispatch();
+
+	const logOutUser = () => {
+		dispatch(logOut());
+	};
+
 	/** Initialize useStyles */
 	const classes = useStyles();
 	const [drawer, setDrawer] = useState(false);
@@ -95,7 +103,7 @@ function Header() {
 					<ListItemIcon>
 						<SettingsIcon />
 					</ListItemIcon>
-					<ListItemText primary={'Logout'} />
+					<ListItemText onClick={logOutUser} primary={'Logout'} />
 				</ListItem>
 			</List>
 		</div>
