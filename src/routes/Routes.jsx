@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import Login from '../pages/auth/Login';
 import Signup from '../pages/auth/Signup';
 import Notifications from '../pages/Notifications';
@@ -13,14 +13,11 @@ import StudyGroupChat from '../pages/StudyGroupChat';
 import Tutors from '../pages/Tutors';
 import UserProfile from '../pages/UserProfile';
 import PrivateRoute from '../auth/PrivateRoute';
-import CheckLogin from '../auth/CheckLogin';
 
 function Routes() {
 	return (
 		<>
 			<Switch>
-				<CheckLogin exact path='/login' component={Login} />
-				<CheckLogin exact path='/signup' component={Signup} />
 				<PrivateRoute exact path='/notifications' component={Notifications} />
 				<PrivateRoute exact path='/feed' component={Feed} />
 				<PrivateRoute exact path='/post/:postId' component={PostInfo} />
@@ -35,6 +32,8 @@ function Routes() {
 				/>
 				<PrivateRoute exact path='/tutors' component={Tutors} />
 				<PrivateRoute exact path='/users/:id' component={UserProfile} />
+				<Route exact path='/login' component={Login} />
+				<Route exact path='/signup' component={Signup} />
 				<Redirect to='/login' />
 			</Switch>
 		</>

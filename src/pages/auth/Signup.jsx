@@ -1,14 +1,23 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import LoginHeader from './LoginHeader';
 import useFields from '../../hooks/useFields';
 import { Button } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { googleLogin } from '../../store/actions/auth';
 
 /** User Signup Form */
 function Signup() {
 	const dispatch = useDispatch();
+
+	/** Use history to redirect after user logs in/signs up */
+	const history = useHistory();
+
+	const currentUser = useSelector((state) => state.auth.user);
+
+	if (currentUser) {
+		history.push('/feed');
+	}
 
 	const INITIAL_STATE = {
 		username: '',
@@ -31,6 +40,7 @@ function Signup() {
 	/** if user signs in using Google, store their data to redux store */
 	const googleSignIn = () => {
 		dispatch(googleLogin());
+		history.push('/feed');
 	};
 
 	return (
