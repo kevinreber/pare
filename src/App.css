@@ -109,6 +109,7 @@ label,
   margin-top: 10vh;
   width: 100%;
   z-index: 25;
+  box-shadow: 0 20px 20px -20px rgba(0, 0, 0, .6);
 }
 
 .Body-Header h4,
