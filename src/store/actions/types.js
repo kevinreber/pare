@@ -1,5 +1,7 @@
-export const SET_AUTH = 'SET_AUTH';
+export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
+export const LOGOUT_USER = 'LOGOUT_USER';
+export const LOGOUT_FAIL = 'LOGOUT_FAIL';
 export const FETCH_COURSES = 'FETCH_COURSES';
 export const FETCH_COURSE = 'FETCH_COURSE';
 export const ADD_COURSE = 'ADD_COURSE';
