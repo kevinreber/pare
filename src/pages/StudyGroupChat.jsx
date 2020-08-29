@@ -12,7 +12,7 @@ import './styles/StudyGroupChat.css';
  */
 function StudyGroupChat() {
 	const { studyGroupId } = useParams();
-	const currentUser = useSelector((state) => state.auth.auth);
+	const currentUser = useSelector((state) => state.auth.user);
 
 	const [studyGroup, setStudyGroup] = useState({});
 	const [messages, setMessages] = useState([]);
@@ -53,7 +53,7 @@ function StudyGroupChat() {
 			<div className='StudyGroupChat__Header Body-Header bottom-border-header'>
 				<StudyGroupChatHeader title={studyGroup.title} />
 			</div>
-			<div className='StudyGroupChat__Body'>
+			<div className='StudyGroupChat__Body Page__Body'>
 				<StudyGroupChatBody
 					messages={messages}
 					username={currentUser.displayName}

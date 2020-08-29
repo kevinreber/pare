@@ -54,6 +54,7 @@
     align-items: center;
     width: 97%;
     margin: auto;
+    z-index: 25;
     /* height: 62px; */
     /* border-top: 1px solid var(--tertiary-color); */
 }
