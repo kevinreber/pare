@@ -1,6 +1,7 @@
 .NavBar {
     border-top: 2px solid var(--tertiary-color);
     height: 92px;
+    box-shadow: 0 0 100px 5px rgba(0, 0, 0, .6);
 }
 
 .nav-link {
