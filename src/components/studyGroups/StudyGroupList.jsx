@@ -1,11 +1,12 @@
 import React from 'react';
 import StudyGroupCard from './StudyGroupCard';
+import { List } from '@material-ui/core';
 
 /** Creates a List of User's StudyGroups
  * StudyGroups -> StudyGroupsList -> StudyGroupCard -> StudyGroupChat
  */
 function StudyGroupList({ studyGroups = [] }) {
-	const List = studyGroups.map((studyGroup) => (
+	const groupList = studyGroups.map((studyGroup) => (
 		<StudyGroupCard
 			title={studyGroup.data.title}
 			id={studyGroup.id}
@@ -17,7 +18,11 @@ function StudyGroupList({ studyGroups = [] }) {
 		/>
 	));
 
-	return <div className='Course-List'>{List}</div>;
+	return (
+		<div className='Course-List'>
+			<List>{groupList}</List>
+		</div>
+	);
 }
 
 export default StudyGroupList;

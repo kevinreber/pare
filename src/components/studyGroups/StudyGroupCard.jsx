@@ -6,12 +6,12 @@ import { Link } from 'react-router-dom';
  */
 function StudyGroupCard({ id, key, department, number, term, title }) {
 	return (
-		<>
-			<Link to={`/study-groups/${id}`} className='mate-text-secondary'>
-				<table key={key} className='mate-table table-hover'>
-					<tbody className='Course Course-Card'>
+		<div className='StudyGroups__Card'>
+			<Link to={`/study-groups/${id}`}>
+				<table key={key} className='table-hover StudyGroups__table'>
+					<tbody>
 						<tr>
-							<td className='mate-text-primary Course-Name'>
+							<td className='mate-text-secondary Course-Name'>
 								{title}
 
 								{/* {`${department} ${number}`} <br />
@@ -24,7 +24,7 @@ function StudyGroupCard({ id, key, department, number, term, title }) {
 					</tbody>
 				</table>
 			</Link>
-		</>
+		</div>
 	);
 }
 

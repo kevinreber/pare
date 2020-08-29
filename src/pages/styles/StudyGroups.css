@@ -1,0 +1,27 @@
+.StudyGroups {
+    display: flex;
+    flex-direction: column;
+}
+
+.StudyGroups__Header {
+    flex-direction: column;
+}
+
+.StudyGroups__Body {
+    flex: 1;
+    /* padding: 30px; */
+    overflow: scroll;
+    margin-top: 18vh;
+    margin-bottom: 7rem;
+}
+
+.StudyGroups__Card {
+    padding-top: .8rem;
+    padding-bottom: .8rem;
+    width: 100%;
+    border-bottom: 1px solid var(--tertiary-color);
+}
+
+.StudyGroups__table {
+    margin-left: 1.25rem;
+}
