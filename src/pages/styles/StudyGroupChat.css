@@ -8,6 +8,8 @@
     flex: 1;
     padding: 30px;
     overflow: scroll;
+    margin-top: 18vh;
+    margin-bottom: 7rem;
 }
 
 .StudyGroupChat__Header .StudyGroupChat__Title {
@@ -45,10 +47,12 @@
 }
 
 .StudyGroupChat__Footer {
+    position: fixed;
+    bottom: 100px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 90%;
+    width: 97%;
     margin: auto;
     /* height: 62px; */
     /* border-top: 1px solid var(--tertiary-color); */

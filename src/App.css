@@ -98,16 +98,30 @@ label,
 
 .Body-Header {
   display: flex;
+  position: fixed;
   justify-content: space-around;
   padding-top: 1.2rem;
   padding-bottom: 1.2rem;
   border-bottom: 2px solid var(--tertiary-color);
   cursor: pointer;
+  height: 8vh;
+  background-color: var(--bg-color);
+  margin-top: 10vh;
+  width: 100%;
+  z-index: 25;
 }
 
 .Body-Header h4,
 .Body-Header h5 {
   margin: 0;
+}
+
+.Page__Body {
+  flex: 1;
+  padding: 30px;
+  overflow: scroll;
+  margin-top: 18vh;
+  margin-bottom: 7rem;
 }
 
 .mate-bg-primary {
