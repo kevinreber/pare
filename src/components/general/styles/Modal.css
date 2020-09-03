@@ -11,7 +11,6 @@
 .Modal-Close {
 	position: absolute;
 	top: 2.5%;
-	left: 5%;
 }
 
 .mate-btn-submit {
@@ -24,4 +23,8 @@
 
 .Modal .Modal-Content {
 	margin-top: 50%;
+}
+
+.Modal .Modal-Full-Content {
+	margin-top: 15%;
 }
