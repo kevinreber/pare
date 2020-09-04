@@ -32,3 +32,9 @@
     display: flex;
     justify-content: space-between;
 }
+
+.char-count {
+    color: var(--tertiary-color);
+    float: right;
+    font-style: italic;
+}

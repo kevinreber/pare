@@ -1,11 +1,11 @@
 :root {
-  --primary-color: #75F3E7;
+  --primary-color: #75f3e7;
   --secondary-color: #eeeeee;
-  --tertiary-color: #393E46;
+  --tertiary-color: #393e46;
   --tertiary-color-light: rgb(43, 47, 58);
-  --danger-color: #E15554;
+  --danger-color: #e15554;
   --bg-color: #222831;
-  --user-chat-color: #65CAC3;
+  --user-chat-color: #65cac3;
 }
 
 body {
@@ -44,7 +44,7 @@ body {
 
 body {
   background-color: var(--bg-color);
-  color: var(--secondary-color)
+  color: var(--secondary-color);
 }
 
 ul {
@@ -109,7 +109,7 @@ label,
   margin-top: 10vh;
   width: 100%;
   z-index: 25;
-  box-shadow: 0 20px 20px -20px rgba(0, 0, 0, .6);
+  box-shadow: 0 20px 20px -20px rgba(0, 0, 0, 0.6);
 }
 
 .Body-Header h4,
@@ -142,20 +142,24 @@ label,
   color: var(--tertiary-color);
 }
 
-label,
 .mate-btn,
 input,
 .mate-form-input {
   border-radius: 15px;
+}
+
+.description-input {
+  height: 74px;
+}
+
+.mate-btn {
   height: 45px;
 }
 
 label,
 input,
 .mate-form-input {
-  border-radius: 15px;
-  height: 45px;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .NavBar>a:hover {
@@ -244,8 +248,12 @@ select option:disabled {
   text-transform: lowercase;
 }
 
-form .errors {
+form .errors,
+.error-limit {
   color: var(--danger-color);
+}
+
+form .errors {
   font-size: smaller;
   font-style: italic;
 }
@@ -253,6 +261,37 @@ form .errors {
 a:hover {
   text-decoration: none;
   background-color: #12151a;
+}
+
+/********************************* */
+/** Forms                          *
+/********************************* */
+
+/* form>.MuiInputBase-root.MuiInput-root.MuiInput-underline.MuiInputBase-formControl.MuiInput-formControl>input[type='datetime-local'].MuiInputBase-input {
+  color: var(--secondary-color);
+} */
+
+.date-input-group {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.MuiInputBase-input,
+.MuiInput-input {
+  color: var(--secondary-color) !important;
+}
+
+.MuiInput-underline::after {
+  border-bottom: 1px solid var(--secondary-color) !important;
+}
+
+.MuiInput-underline::before {
+  border-bottom: 1px solid var(--tertiary-color) !important;
+}
+
+.PostForm__Footer {
+  float: right;
 }
 
 @keyframes App-logo-spin {

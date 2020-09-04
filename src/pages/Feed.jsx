@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import FeedList from '../components/feed/FeedList';
+import PostForm from '../components/feed/PostForm';
 import NoData from '../components/general/NoData';
+import Modal from '../components/general/Modal';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import db from '../config/fbConfig';
@@ -20,13 +22,32 @@ function Feed() {
 		);
 	}, []);
 
+	// Toggle form for User to Add Course
+	const [showForm, setShowForm] = useState(false);
+	const toggleForm = () => setShowForm((show) => !show);
+
+	const addPost = (postData) => {
+		// dispatch(addCourseToFB(courseData));
+		setShowForm(false);
+	};
+
+	if (showForm) {
+		return (
+			<Modal
+				content={<PostForm save={addPost} />}
+				closeModal={toggleForm}
+				full={true}
+			/>
+		);
+	}
+
 	return (
 		<div className='Feed'>
 			<div className='Feed__List'>
 				{posts ? <FeedList posts={posts} /> : <NoData text='posts' />}
 			</div>
 			<Fab aria-label='add'>
-				<AddIcon />
+				<AddIcon onClick={toggleForm} />
 			</Fab>
 		</div>
 	);
