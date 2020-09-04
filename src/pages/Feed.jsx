@@ -28,6 +28,7 @@ function Feed() {
 
 	const addPost = (postData) => {
 		// dispatch(addCourseToFB(courseData));
+		console.log(postData);
 		setShowForm(false);
 	};
 

@@ -248,12 +248,12 @@ select option:disabled {
   text-transform: lowercase;
 }
 
-form .errors,
+.errors,
 .error-limit {
   color: var(--danger-color);
 }
 
-form .errors {
+.errors {
   font-size: smaller;
   font-style: italic;
 }
@@ -266,10 +266,6 @@ a:hover {
 /********************************* */
 /** Forms                          *
 /********************************* */
-
-/* form>.MuiInputBase-root.MuiInput-root.MuiInput-underline.MuiInputBase-formControl.MuiInput-formControl>input[type='datetime-local'].MuiInputBase-input {
-  color: var(--secondary-color);
-} */
 
 .date-input-group {
   display: flex;
@@ -292,6 +288,11 @@ a:hover {
 
 .PostForm__Footer {
   float: right;
+}
+
+.message__attachments svg {
+  fill: var(--tertiary-color);
+  color: var(--tertiary-color);
 }
 
 @keyframes App-logo-spin {

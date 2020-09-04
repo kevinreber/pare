@@ -29,20 +29,58 @@ function PostForm({ save }) {
 		type: null,
 		start: null,
 		end: null,
-		attachment: null,
+		preview: '',
+		raw: '',
 	};
 
 	const [errors, setErrors] = useState('');
-
 	const [formData, setFormData] = useState(INITIAL_STATE);
 
 	/** Update state in formData */
 	const handleChange = (e) => {
-		let { name, value } = e.target;
+		// Reset errors each change
+		setErrors('');
+		// if uploading media file, update formData
+		if (e.target.files) {
+			resetAttachment();
+			const file = e.target.files[0];
+			if (validateAttachment(file)) {
+				setFormData((fData) => ({
+					...fData,
+					preview: URL.createObjectURL(file),
+					raw: file,
+				}));
+			}
+		} else {
+			let { name, value } = e.target;
 
+			setFormData((fData) => ({
+				...fData,
+				[name]: value,
+			}));
+		}
+	};
+
+	/** Validates attachment and prompts error */
+	const validateAttachment = (file) => {
+		if (file.type.indexOf('image') === -1) {
+			setErrors('*File not supported');
+			return false;
+		}
+		return true;
+	};
+
+	/** Reset all formData */
+	const resetFormData = () => {
+		setFormData(INITIAL_STATE);
+	};
+
+	/** Resets attachment data */
+	const resetAttachment = () => {
 		setFormData((fData) => ({
 			...fData,
-			[name]: value,
+			preview: '',
+			raw: '',
 		}));
 	};
 
@@ -51,17 +89,18 @@ function PostForm({ save }) {
 		/** Clear any existing errors */
 		setErrors('');
 		if (!formData.title) {
-			setErrors('Title required');
+			setErrors('*Title required');
 			return false;
 		}
 		if (!formData.description) {
-			setErrors('Description required');
+			setErrors('*Description required');
 			return false;
 		}
 		return true;
 	};
 
 	const handleSubmit = (e) => {
+		console.log(formData);
 		e.preventDefault();
 		if (validateFormData()) {
 			save(formData);
@@ -130,13 +169,13 @@ function PostForm({ save }) {
 						value={formData.location}
 					/>
 				</div>
-				<div className='form-group'>
-					<label htmlFor='type' className='float-left'>
+				<div className='form-group d-flex justify-content-between align-items-baseline'>
+					<label htmlFor='type' className='float-left mr-4'>
 						Type
 					</label>
 					<select
 						id='postType'
-						className='form-control mate-form-input mr-2'
+						className='form-control mate-form-input'
 						onChange={handleChange}
 						name='type'
 						value={formData.type}>
@@ -150,57 +189,65 @@ function PostForm({ save }) {
 						<option>Events</option>
 					</select>
 				</div>
-				<div className='form-group date-input-group'>
+				<div className='form-group date-input-group align-items-baseline'>
 					<label htmlFor='event-start mb-3' className='float-left'>
 						Start
 					</label>
-					{/* <div className='float-right'> */}
-					{/* <div className='form-control mate-form-input'> */}
 					<TextField
 						id='event-start'
 						type='datetime-local'
 						className='float-right'
-						// defaultValue='2017-05-24T10:30'
 						defaultValue={formData.start}
 						InputLabelProps={{
 							shrink: true,
 						}}
 					/>
-					{/* </div> */}
-
-					{/* </div> */}
 				</div>
-				<div className='form-group'>
+				<div className='form-group align-items-baseline'>
 					<label htmlFor='event-end' className='float-left'>
 						End
 					</label>
-					{/* <div className='float-right'> */}
 					<TextField
 						id='event-end'
 						type='datetime-local'
 						className='float-right'
-						// defaultValue='2017-05-24T10:30'
 						defaultValue={formData.end}
 						InputLabelProps={{
 							shrink: true,
 						}}
 					/>
-					{/* </div> */}
 				</div>
 				<div className='PostForm__Footer'>
 					<div className='message__attachments'>
-						{/* <i className='fas fa-camera fa-2x'></i>
-					<i className='fas fa-image fa-2x'></i> */}
-						<IconButton>
+						{formData.preview ? (
+							<img
+								src={formData.preview}
+								alt='preview'
+								className='attachment__preview'
+							/>
+						) : (
+							''
+						)}
+						<label htmlFor='attachment' className='attachment__label'>
 							<PanoramaOutlinedIcon fontSize='large' />
-						</IconButton>
+						</label>
+						<input
+							type='file'
+							id='attachment'
+							style={{ display: 'none' }}
+							onChange={handleChange}
+						/>
 					</div>
-					<SubmitButton text='Post' />
 				</div>
+				<SubmitButton text='Post' reset={true} resetForm={resetFormData} />
+			</form>
+			{errors ? (
 				<div className='Form__Errors'>
 					<div className='alert errors'>{errors}</div>
 				</div>
-			</form>
+			) : (
+				''
+			)}
 		</div>
 	);
 }

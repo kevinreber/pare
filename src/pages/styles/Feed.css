@@ -33,8 +33,31 @@
     justify-content: space-between;
 }
 
+/********************************* */
+/** Post Form                      *
+/********************************* */
+
+.PostForm {
+    display: flex;
+    flex-direction: column;
+}
+
 .char-count {
     color: var(--tertiary-color);
     float: right;
     font-style: italic;
+}
+
+.message__attachments {
+    display: flex;
+}
+
+.attachment__label {
+    margin-left: .6rem;
+    margin-top: .2rem;
+}
+
+.attachment__preview {
+    max-height: 100px;
+    margin-top: .6rem;
 }
