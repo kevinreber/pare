@@ -13,12 +13,20 @@
 	top: 2.5%;
 }
 
-.mate-btn-submit {
+.mate-btn-submit,
+.mate-btn-reset {
 	position: absolute;
 	width: 350px;
-	bottom: 7.5rem;
 	left: 50%;
 	margin-left: -175px;
+}
+
+.mate-btn-submit {
+	bottom: 7.5rem;
+}
+
+.mate-btn-reset {
+	bottom: 3.5rem;
 }
 
 .Modal .Modal-Content {
@@ -26,5 +34,5 @@
 }
 
 .Modal .Modal-Full-Content {
-	margin-top: 15%;
+	margin-top: 6%;
 }
