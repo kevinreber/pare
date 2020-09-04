@@ -61,9 +61,14 @@ function PostForm({ save }) {
 		}
 	};
 
+	// !fileInput.files[0].name.match(/.(jpg|jpeg|png|gif)$/i)
+
 	/** Validates attachment and prompts error */
 	const validateAttachment = (file) => {
-		if (file.type.indexOf('image') === -1) {
+		if (
+			file.type.indexOf('image') === -1 ||
+			!file.name.match(/.(jpg|jpeg|png|gif)$/i)
+		) {
 			setErrors('*File not supported');
 			return false;
 		}
