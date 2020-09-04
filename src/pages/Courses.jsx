@@ -19,11 +19,11 @@ function Courses() {
 
 	/** Current Semester courses */
 	const currentCourses = courses.filter(
-		(course) => course.data.semester === 'FALL 2020'
+		(course) => course.data.semester.toLowerCase() === 'fall 2020'
 	);
 	/** Past Semester Courses */
 	const pastCourses = courses.filter(
-		(course) => course.data.semester !== 'FALL 2020'
+		(course) => course.data.semester.toLowerCase() !== 'fall 2020'
 	);
 
 	// State will determine what courses to show in CourseList
