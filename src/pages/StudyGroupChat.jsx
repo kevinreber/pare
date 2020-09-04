@@ -19,10 +19,12 @@ function StudyGroupChat() {
 
 	useEffect(() => {
 		if (studyGroupId) {
+			/** Get Study Group Info */
 			db.collection('study-group')
 				.doc(studyGroupId)
 				.onSnapshot((snapshot) => setStudyGroup(snapshot.data()));
 
+			/** Get Study Group Messages */
 			db.collection('study-group')
 				.doc(studyGroupId)
 				.collection('messages')
