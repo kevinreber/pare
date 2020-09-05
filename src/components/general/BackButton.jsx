@@ -1,16 +1,24 @@
 import React from 'react';
 import { ReactComponent as BackspaceIcon } from './icons/backspace-icon.svg';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import { IconButton } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import './styles/BackButton.css';
 
 /** Back Button */
 function BackButton() {
 	const history = useHistory();
-	const goBack = () => history.goBack();
+	const goBack = () => {
+		console.log('click');
+		history.goBack();
+	};
 
 	return (
 		<div className='BackButton'>
-			<BackspaceIcon onClick={goBack} />
+			<IconButton onClick={goBack}>
+				<ArrowBackIosIcon />
+			</IconButton>
+			{/* <BackspaceIcon onClick={goBack} /> */}
 		</div>
 	);
 }

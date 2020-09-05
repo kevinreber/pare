@@ -1,5 +1,10 @@
 .BackButton {
     position: absolute;
     padding: 3px;
-    left: 14px;
+    left: -4px;
+    top: 7px;
+}
+
+.BackButton .MuiButtonBase-root.MuiIconButton-root .MuiIconButton-label .MuiSvgIcon-root {
+    color: var(--primary-color);
 }
