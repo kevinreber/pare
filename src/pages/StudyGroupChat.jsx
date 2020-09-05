@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import moment from 'moment';
+import NoData from '../components/general/NoData';
 import StudyGroupChatHeader from '../components/studyGroups/studyGroupChat/StudyGroupChatHeader';
-import StudyGroupChatBody from '../components/studyGroups/studyGroupChat/StudyGroupChatBody';
+// import StudyGroupChatBody from '../components/studyGroups/studyGroupChat/StudyGroupChatBody';
 import StudyGroupChatFooter from '../components/studyGroups/studyGroupChat/StudyGroupChatFooter';
 import db from '../config/fbConfig';
 import './styles/StudyGroupChat.css';
@@ -17,7 +19,12 @@ function StudyGroupChat() {
 	const [studyGroup, setStudyGroup] = useState({});
 	const [messages, setMessages] = useState([]);
 
-	const lastMessage = useRef();
+	/** Scroll to Bottom of Chat */
+	const setRef = useCallback((node) => {
+		if (node) {
+			node.scrollIntoView({ smooth: true });
+		}
+	}, []);
 
 	useEffect(() => {
 		if (studyGroupId) {
@@ -37,19 +44,9 @@ function StudyGroupChat() {
 		}
 	}, [studyGroupId]);
 
-	useEffect(() => {}, []);
-
 	if (!studyGroup) {
 		return <p>Loading...</p>;
 	}
-
-	/** Scroll to Bottom of Chat */
-	const scrollToBottom = () => {
-		// const chat = document.getElementById('StudyGroupChat__Body');
-		// chat.scrollTop = chat.scrollHeight;
-
-		lastMessage.scrollIntoView({ behavior: 'smooth' });
-	};
 
 	const sendMessage = (message) => {
 		try {
@@ -57,14 +54,40 @@ function StudyGroupChat() {
 				.doc(studyGroupId)
 				.collection('messages')
 				.add(message);
-
-			console.log('scrolling...');
-			scrollToBottom();
-			console.log('scrolling done...');
 		} catch (err) {
 			console.log(err);
 		}
 	};
+
+	/** Displays Study Group's Chat Messages */
+	const StudyGroupChatBody =
+		messages && messages.length !== 0 ? (
+			messages.map((message, index) => {
+				const lastMessage = messages.length - 1 === index;
+				return (
+					<div ref={lastMessage ? setRef : null}>
+						<p
+							className={`StudyGroupChatBody__message chat__message ${
+								currentUser.displayName === message.name ? 'chat__receiver' : ''
+							}`}>
+							{currentUser.displayName !== message.name ? (
+								<span className='chat__name'>{message.name}</span>
+							) : (
+								''
+							)}
+							{message.message}
+							<span className='chat__timestamp'>
+								{message.timestamp
+									? moment(message.timestamp.toDate()).calendar()
+									: ''}
+							</span>
+						</p>
+					</div>
+				);
+			})
+		) : (
+			<NoData text='messages' />
+		);
 
 	return (
 		<div className='StudyGroupChat'>
@@ -74,11 +97,7 @@ function StudyGroupChat() {
 			<div
 				id='StudyGroupChat__Body'
 				className='StudyGroupChat__Body Page__Body'>
-				<StudyGroupChatBody
-					messages={messages}
-					username={currentUser.displayName}
-				/>
-				<div style={{ display: 'none' }} className='Chat__Bottom'></div>
+				{StudyGroupChatBody}
 			</div>
 			<div className='StudyGroupChat__Footer'>
 				<StudyGroupChatFooter
