@@ -12,10 +12,6 @@ function CommentCard({
 	avatar,
 	timestamp,
 }) {
-	const convertedTimestamp = moment(timestamp.toDate())
-		.startOf('day')
-		.fromNow();
-
 	return (
 		<div id={key} className='Comment-Card'>
 			<div className='Comment-Card__Main'>
@@ -30,7 +26,9 @@ function CommentCard({
 				</div>
 			</div>
 			<div className='Comment-Card__Timestamp'>
-				<p>{convertedTimestamp}</p>
+				<p>
+					{timestamp ? moment(timestamp.toDate()).startOf('day').fromNow() : ''}
+				</p>
 			</div>
 		</div>
 	);

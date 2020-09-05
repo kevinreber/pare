@@ -82,6 +82,7 @@
 .Comment-Card .username {
     font-size: small;
     font-style: italic;
+    color: var(--primary-color);
 }
 
 .username {

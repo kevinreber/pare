@@ -35,9 +35,9 @@ function PostCard({
 		<BookmarkIcon />
 	);
 
-	const convertedTimestamp = moment(timestamp.toDate())
-		.startOf('day')
-		.fromNow();
+	// const convertedTimestamp = moment(timestamp.toDate())
+	// 	.startOf('day')
+	// 	.fromNow();
 
 	/** converts time */
 	const convertTime = (time) => {
@@ -84,12 +84,17 @@ function PostCard({
 							<span className='mate-text-secondary username'>{username}</span>
 						</div>
 						<div className='Post-Card__Body mate-text-secondary'>
-							<p>{description}</p>
+							<p className='description'>{description}</p>
 							{showAttachment}
-							<span className='location'>
-								<LocationOnIcon />
-								{location}
-							</span>
+							{location ? (
+								<span className='location'>
+									<LocationOnIcon />
+									{location}
+								</span>
+							) : (
+								''
+							)}
+
 							<span>{eventTime}</span>
 						</div>
 					</Link>
@@ -111,7 +116,10 @@ function PostCard({
 				</IconButton>
 			</div>
 			<div className='Post-Card__Right Post__timestamp'>
-				<p>{convertedTimestamp}</p>
+				{/* <p>{convertedTimestamp}</p> */}
+				<p>
+					{timestamp ? moment(timestamp.toDate()).startOf('day').fromNow() : ''}
+				</p>
 			</div>
 		</div>
 	);

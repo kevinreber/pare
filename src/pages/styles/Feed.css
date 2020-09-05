@@ -12,6 +12,7 @@
 
 .Post-Card__Header {
     margin-bottom: .5rem;
+    width: 80%;
 }
 
 .Post-Card__Header>h5 {
@@ -21,12 +22,12 @@
 .Post-Card__Header>.username {
     font-size: small;
     font-style: italic;
+    color: var(--tertiary-color);
 }
 
 .Post-Card__Right.Post__timestamp {
     color: var(--tertiary-color);
     position: absolute;
-    top: 8%;
     padding-right: 1.2rem;
     right: 0;
 }
@@ -97,6 +98,10 @@
     margin-right: .5rem;
     width: .7em;
     height: .7em;
+}
+
+.Post-Card__Body>.description {
+    margin-bottom: 0;
 }
 
 .Post-Card .Post-Card__Attachment {
