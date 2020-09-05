@@ -10,27 +10,79 @@
     margin-bottom: 7rem;
 }
 
+.Post-Card__Header {
+    margin-bottom: .5rem;
+}
+
+.Post-Card__Header>h5 {
+    margin: 0;
+}
+
+.Post-Card__Header>.username {
+    font-size: x-small;
+}
+
+.Post-Card__Right.Post__timestamp {
+    position: absolute;
+    top: 8%;
+    right: 7%;
+}
+
 .Post-Card {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
+    position: relative;
+    border-bottom: 1px solid var(--tertiary-color);
+    padding: 1.2rem 1.2rem .2rem 1.2rem;
 }
 
 .Post-Card>a {
     color: var(--secondary-color);
 }
 
+.Post-Card__Left {
+    margin-right: 1rem;
+}
+
 .Post-Card .Post-Card__Center {
     text-align: left;
-    width: 75%;
+    display: flex;
+    flex-direction: column;
 }
 
 .Post-Card .Post-Card__Center .Post-Card__Body {
     font-size: 14px;
 }
 
-.Post-Card .Post-Card__Center .Post-Card__Footer {
+.Post-Card__Main {
     display: flex;
-    justify-content: space-between;
+}
+
+.Post-Card .Post-Card__Footer {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.Post__timestamp {
+    font-size: x-small;
+    font-style: italic;
+}
+
+.event__time {
+    margin-bottom: 0;
+}
+
+.event__timestamp {
+    font-size: smaller;
+    font-style: italic;
+    padding: 0;
+    margin-left: 1rem;
+}
+
+.Post-Card>.location {
+    font-size: x-small;
+
 }
 
 /********************************* */
