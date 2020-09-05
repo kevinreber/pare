@@ -63,3 +63,49 @@
 .PostInfo__Footer>form>button {
     display: none;
 }
+
+/********************************* */
+/** COMMENTS                       *
+/********************************* */
+
+.Comment-Card {
+    position: relative;
+    border-bottom: 1px solid var(--tertiary-color);
+}
+
+.Comment-Card__Main {
+    padding: 1rem 1.2rem 1rem 1.2rem;
+    display: flex;
+    font-size: 14px;
+}
+
+.Comment-Card .username {
+    font-size: small;
+    font-style: italic;
+}
+
+.username {
+    font-weight: lighter;
+}
+
+.Comment-Card__Center {
+    text-align: left;
+}
+
+.Comment-Card__Left {
+    margin-right: 1rem;
+}
+
+.Comment-Card__Message {
+    margin-bottom: 0;
+}
+
+.Comment-Card .Comment-Card__Timestamp {
+    color: var(--tertiary-color);
+    font-size: x-small;
+    font-style: italic;
+    position: absolute;
+    top: 1.2rem;
+    padding-right: 1.2rem;
+    right: 0;
+}

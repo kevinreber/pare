@@ -19,13 +19,15 @@
 }
 
 .Post-Card__Header>.username {
-    font-size: x-small;
+    font-size: small;
+    font-style: italic;
 }
 
 .Post-Card__Right.Post__timestamp {
+    color: var(--tertiary-color);
     position: absolute;
     top: 8%;
-    padding-right: 1rem;
+    padding-right: 1.2rem;
     right: 0;
 }
 

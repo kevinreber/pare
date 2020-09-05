@@ -5,6 +5,7 @@ function CommentsList({ comments }) {
 	const List = comments.map((comment) => (
 		<CommentCard
 			id={comment.id}
+			key={comment.id}
 			message={comment.data.message}
 			userId={comment.data.userId}
 			username={comment.data.username}
