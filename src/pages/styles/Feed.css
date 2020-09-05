@@ -30,6 +30,12 @@
     position: absolute;
     padding-right: 1.2rem;
     right: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.Post-Card__Right.Post__timestamp>p {
+    margin-bottom: 0;
 }
 
 .Post-Card {

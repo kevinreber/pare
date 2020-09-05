@@ -1,16 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
+import { deletePostFromFB } from '../../store/actions/posts';
+
+/** MUI */
 import IconButton from '@material-ui/core/IconButton';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import ModeCommentOutlinedIcon from '@material-ui/icons/ModeCommentOutlined';
 import CalendarTodayOutlinedIcon from '@material-ui/icons/CalendarTodayOutlined';
 import BookmarkBorderOutlinedIcon from '@material-ui/icons/BookmarkBorderOutlined';
+import MoreHorizOutlinedIcon from '@material-ui/icons/MoreHorizOutlined';
 import BookmarkIcon from '@material-ui/icons/Bookmark';
 import ShareIcon from '@material-ui/icons/Share';
 import SendIcon from '@material-ui/icons/Send';
 import Avatar from '@material-ui/core/Avatar';
 
+/** PostCard
+ *  If user created Post, they will see an option to delete the Post
+ *  Feed -> FeedList -> PostCard
+ */
 function PostCard({
 	id,
 	key,
@@ -29,6 +38,9 @@ function PostCard({
 	comments = null,
 	isBookmarked = false,
 }) {
+	const dispatch = useDispatch();
+	const currentUser = useSelector((state) => state.auth.user);
+
 	const BookmarkStatus = !isBookmarked ? (
 		<BookmarkBorderOutlinedIcon />
 	) : (
@@ -63,6 +75,10 @@ function PostCard({
 	) : (
 		''
 	);
+
+	const deletePost = () => {
+		dispatch(deletePostFromFB(id));
+	};
 
 	return (
 		<div id={key} className='Post-Card'>
@@ -114,6 +130,13 @@ function PostCard({
 				<p>
 					{timestamp ? moment(timestamp.toDate()).startOf('day').fromNow() : ''}
 				</p>
+				{currentUser.uid === userId ? (
+					<IconButton onClick={deletePost}>
+						<MoreHorizOutlinedIcon />
+					</IconButton>
+				) : (
+					''
+				)}
 			</div>
 		</div>
 	);

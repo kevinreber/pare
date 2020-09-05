@@ -10,7 +10,6 @@ import {
 } from './types';
 import db from '../../config/fbConfig';
 
-/** Formats action data to input to dispatch */
 export function addPostToFB(post) {
 	return (dispatch) => {
 		db.collection('feeds')
@@ -23,10 +22,32 @@ export function addPostToFB(post) {
 	};
 }
 
+/** Formats action data to input to dispatch */
 function addPost(post) {
 	return {
 		type: ADD_POST,
 		post,
+	};
+}
+
+export function deletePostFromFB(postId) {
+	return (dispatch) => {
+		db.collection('feeds')
+			.doc(postId)
+			.delete()
+			.then(() => {
+				console.log('Post removed');
+				dispatch(deletePost(postId));
+			})
+			.catch((err) => dispatch(dispatchError(DELETE_POST_FAIL, err)));
+	};
+}
+
+/** Formats action data to input to dispatch */
+function deletePost(postId) {
+	return {
+		type: DELETE_POST,
+		postId,
 	};
 }
 
