@@ -2,6 +2,7 @@ import authReducer from './authReducer';
 import courseReducer from './courseReducer';
 import assignmentReducer from './assignmentReducer';
 import user from './userReducer';
+import postsReducer from './postsReducer';
 import courseCatalogReducer from './courseCatalogReducer';
 import { combineReducers } from 'redux';
 
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
 	firestore: firestoreReducer,
 	users: user,
 	auth: authReducer,
+	posts: postsReducer,
 	courses: courseReducer,
 	assignments: assignmentReducer,
 	courseCatalog: courseCatalogReducer,
