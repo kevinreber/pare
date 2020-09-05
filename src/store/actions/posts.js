@@ -1,10 +1,14 @@
 import {
 	ADD_POST,
 	ADD_POST_FAIL,
+	EDIT_POST,
+	EDIT_POST_FAIL,
 	DELETE_POST,
 	DELETE_POST_FAIL,
 	ADD_COMMENT_ON_POST,
 	ADD_COMMENT_ON_POST_FAIL,
+	EDIT_COMMENT_ON_POST,
+	EDIT_COMMENT_ON_POST_FAIL,
 	REMOVE_COMMENT_ON_POST,
 	REMOVE_COMMENT_ON_POST_FAIL,
 } from './types';
@@ -69,6 +73,31 @@ function addComment(post) {
 	return {
 		type: ADD_COMMENT_ON_POST,
 		post,
+	};
+}
+
+export function deleteCommentFromPost(postId, commentId) {
+	return (dispatch) => {
+		db.collection('feeds')
+			.doc(postId)
+			.collection('comments')
+			.doc(commentId)
+			.delete()
+			.then(() => {
+				console.log('Post removed');
+				dispatch(deleteComment(commentId));
+			})
+			.catch((err) =>
+				dispatch(dispatchError(REMOVE_COMMENT_ON_POST_FAIL, err))
+			);
+	};
+}
+
+/** Formats action data to input to dispatch */
+function deleteComment(postId) {
+	return {
+		type: REMOVE_COMMENT_ON_POST,
+		postId,
 	};
 }
 
