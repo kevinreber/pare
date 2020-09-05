@@ -30,6 +30,27 @@ function addPost(post) {
 	};
 }
 
+export function addCommentToPost(postId, comment) {
+	return (dispatch) => {
+		db.collection('feeds')
+			.doc(postId)
+			.collection('comments')
+			.add(comment)
+			.then(() => {
+				console.log('Comment successful');
+				dispatch(addComment(comment));
+			})
+			.catch((err) => dispatch(dispatchError(ADD_COMMENT_ON_POST_FAIL, err)));
+	};
+}
+
+function addComment(post) {
+	return {
+		type: ADD_COMMENT_ON_POST,
+		post,
+	};
+}
+
 function dispatchError(type, error) {
 	return {
 		type,
