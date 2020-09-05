@@ -19,14 +19,14 @@ function PostCard({
 	userId,
 	avatar,
 	description,
-	location,
-	type,
-	start,
-	end,
-	attachment_preview,
-	attachment,
+	location = null,
+	type = null,
+	start = null,
+	end = null,
+	attachment_preview = null,
+	attachment = null,
 	timestamp,
-	comments,
+	comments = null,
 	isBookmarked = false,
 }) {
 	const BookmarkStatus = !isBookmarked ? (
@@ -59,8 +59,18 @@ function PostCard({
 			''
 		);
 
+	const showAttachment = attachment ? (
+		<img
+			className='Post-Card__Attachment'
+			src={attachment_preview}
+			alt={attachment.name}
+		/>
+	) : (
+		''
+	);
+
 	return (
-		<div key={key} className='Post-Card'>
+		<div id={key} className='Post-Card'>
 			<div className='Post-Card__Main'>
 				<div className='Post-Card__Left'>
 					<Link to={`/users/${userId}`} className='mate-text-secondary'>
@@ -75,6 +85,7 @@ function PostCard({
 						</div>
 						<div className='Post-Card__Body mate-text-secondary'>
 							<p>{description}</p>
+							{showAttachment}
 							<span className='location'>
 								<LocationOnIcon />
 								{location}

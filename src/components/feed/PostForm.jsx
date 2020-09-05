@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SubmitButton from '../general/SubmitButton';
 import { useSelector } from 'react-redux';
+import firebase from 'firebase';
 
 /** MUI */
 import IconButton from '@material-ui/core/IconButton';
@@ -17,20 +18,24 @@ function PostForm({ save }) {
 		return {
 			userId: state.auth.user.uid,
 			username: state.auth.user.displayName,
+			avatar: state.auth.user.photoURL,
 		};
 	});
 
 	const INITIAL_STATE = {
 		userId: user.userId,
 		username: user.username,
+		avatar: user.avatar,
 		title: '',
 		description: '',
 		location: null,
 		type: null,
 		start: null,
 		end: null,
-		preview: '',
-		raw: '',
+		attachment_preview: '',
+		attachment: '',
+		timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+		comments: [],
 	};
 
 	const [errors, setErrors] = useState('');
@@ -47,8 +52,8 @@ function PostForm({ save }) {
 			if (validateAttachment(file)) {
 				setFormData((fData) => ({
 					...fData,
-					preview: URL.createObjectURL(file),
-					raw: file,
+					attachment_preview: URL.createObjectURL(file),
+					attachment: file,
 				}));
 			}
 		} else {
@@ -60,8 +65,6 @@ function PostForm({ save }) {
 			}));
 		}
 	};
-
-	// !fileInput.files[0].name.match(/.(jpg|jpeg|png|gif)$/i)
 
 	/** Validates attachment and prompts error */
 	const validateAttachment = (file) => {
@@ -84,8 +87,8 @@ function PostForm({ save }) {
 	const resetAttachment = () => {
 		setFormData((fData) => ({
 			...fData,
-			preview: '',
-			raw: '',
+			attachment_preview: '',
+			attachment: '',
 		}));
 	};
 
@@ -224,9 +227,9 @@ function PostForm({ save }) {
 				</div>
 				<div className='PostForm__Footer'>
 					<div className='message__attachments'>
-						{formData.preview ? (
+						{formData.attachment_preview ? (
 							<img
-								src={formData.preview}
+								src={formData.attachment_preview}
 								alt='preview'
 								className='attachment__preview'
 							/>
