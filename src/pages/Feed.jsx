@@ -15,14 +15,16 @@ function Feed() {
 	const [posts, setPosts] = useState([]);
 
 	useEffect(() => {
-		db.collection('feeds').onSnapshot((snapshot) =>
-			setPosts(
-				snapshot.docs.map((doc) => ({
-					id: doc.id,
-					data: doc.data(),
-				}))
-			)
-		);
+		db.collection('feeds')
+			.orderBy('timestamp', 'desc')
+			.onSnapshot((snapshot) =>
+				setPosts(
+					snapshot.docs.map((doc) => ({
+						id: doc.id,
+						data: doc.data(),
+					}))
+				)
+			);
 	}, []);
 
 	// Toggle form for User to Add Course
