@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import IconButton from '@material-ui/core/IconButton';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
 import ModeCommentOutlinedIcon from '@material-ui/icons/ModeCommentOutlined';
 import CalendarTodayOutlinedIcon from '@material-ui/icons/CalendarTodayOutlined';
 import BookmarkBorderOutlinedIcon from '@material-ui/icons/BookmarkBorderOutlined';
@@ -74,7 +75,10 @@ function PostCard({
 						</div>
 						<div className='Post-Card__Body mate-text-secondary'>
 							<p>{description}</p>
-							<span className='location'>{location}</span>
+							<span className='location'>
+								<LocationOnIcon />
+								{location}
+							</span>
 							<span>{eventTime}</span>
 						</div>
 					</Link>

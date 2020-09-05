@@ -60,6 +60,7 @@
 }
 
 .Post-Card .Post-Card__Footer {
+    margin-top: .5rem;
     display: flex;
     justify-content: space-evenly;
 }
@@ -83,6 +84,13 @@
 .Post-Card>.location {
     font-size: x-small;
 
+}
+
+.Post-Card .MuiSvgIcon-root {
+    margin-bottom: .3rem;
+    margin-right: .5rem;
+    width: .7em;
+    height: .7em;
 }
 
 /********************************* */
