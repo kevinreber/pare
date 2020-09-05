@@ -85,7 +85,7 @@ function PostInfo() {
 				</div>
 				<div id='PostInfo__CommentList' className='PostInfo__CommentList'>
 					{comments ? (
-						<CommentsList comments={comments} />
+						<CommentsList postId={postId} comments={comments} />
 					) : (
 						<NoData text='comments' />
 					)}

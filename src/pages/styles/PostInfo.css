@@ -116,3 +116,9 @@
     padding-right: 1.2rem;
     right: 0;
 }
+
+.Comment-Card .Comment-Card__Timestamp .MuiButtonBase-root.MuiIconButton-root {
+    position: absolute;
+    top: .5rem;
+    right: 1.5rem;
+}

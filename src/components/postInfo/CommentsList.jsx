@@ -1,9 +1,10 @@
 import React from 'react';
 import CommentCard from './CommentCard';
 
-function CommentsList({ comments }) {
+function CommentsList({ postId, comments }) {
 	const List = comments.map((comment) => (
 		<CommentCard
+			postId={postId}
 			id={comment.id}
 			key={comment.id}
 			message={comment.data.message}

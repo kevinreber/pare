@@ -84,7 +84,7 @@ export function deleteCommentFromPost(postId, commentId) {
 			.doc(commentId)
 			.delete()
 			.then(() => {
-				console.log('Post removed');
+				console.log('Comment removed');
 				dispatch(deleteComment(commentId));
 			})
 			.catch((err) =>
