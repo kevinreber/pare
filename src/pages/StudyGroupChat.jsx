@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import StudyGroupChatHeader from '../components/studyGroups/studyGroupChat/StudyGroupChatHeader';
@@ -16,6 +16,8 @@ function StudyGroupChat() {
 
 	const [studyGroup, setStudyGroup] = useState({});
 	const [messages, setMessages] = useState([]);
+
+	const lastMessage = useRef();
 
 	useEffect(() => {
 		if (studyGroupId) {
@@ -35,9 +37,19 @@ function StudyGroupChat() {
 		}
 	}, [studyGroupId]);
 
+	useEffect(() => {}, []);
+
 	if (!studyGroup) {
 		return <p>Loading...</p>;
 	}
+
+	/** Scroll to Bottom of Chat */
+	const scrollToBottom = () => {
+		// const chat = document.getElementById('StudyGroupChat__Body');
+		// chat.scrollTop = chat.scrollHeight;
+
+		lastMessage.scrollIntoView({ behavior: 'smooth' });
+	};
 
 	const sendMessage = (message) => {
 		try {
@@ -45,6 +57,10 @@ function StudyGroupChat() {
 				.doc(studyGroupId)
 				.collection('messages')
 				.add(message);
+
+			console.log('scrolling...');
+			scrollToBottom();
+			console.log('scrolling done...');
 		} catch (err) {
 			console.log(err);
 		}
@@ -55,11 +71,14 @@ function StudyGroupChat() {
 			<div className='StudyGroupChat__Header Body-Header bottom-border-header'>
 				<StudyGroupChatHeader title={studyGroup.title} />
 			</div>
-			<div className='StudyGroupChat__Body Page__Body'>
+			<div
+				id='StudyGroupChat__Body'
+				className='StudyGroupChat__Body Page__Body'>
 				<StudyGroupChatBody
 					messages={messages}
 					username={currentUser.displayName}
 				/>
+				<div style={{ display: 'none' }} className='Chat__Bottom'></div>
 			</div>
 			<div className='StudyGroupChat__Footer'>
 				<StudyGroupChatFooter
