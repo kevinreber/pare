@@ -1,14 +1,100 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import BackButton from '../components/general/BackButton';
+import PostCard from '../components/feed/PostCard';
+import ChatFooter from '../components/general/ChatFooter';
+import NoData from '../components/general/NoData';
+import CommentsList from '../components/postInfo/CommentsList';
+import { addCommentToPost } from '../store/actions/posts';
+import { useDispatch } from 'react-redux';
+import db from '../config/fbConfig';
+import './styles/PostInfo.css';
 
+/** Displays PostInfo
+ *  Feed -> PostInfo
+ */
 function PostInfo() {
+	const dispatch = useDispatch();
 	const { postId } = useParams();
+	// const currentUser = useSelector((state) => state.auth.user);
 
 	const [post, setPost] = useState(null);
+	const [comments, setComments] = useState([]);
+
+	useEffect(() => {
+		/** Get Post Info */
+		if (postId) {
+			db.collection('feeds')
+				.doc(postId)
+				.onSnapshot((snapshot) => setPost(snapshot.data()));
+
+			/** Get Post Comments */
+			db.collection('feeds')
+				.doc(postId)
+				.collection('comments')
+				.orderBy('timestamp', 'desc')
+				.onSnapshot((snapshot) =>
+					setComments(
+						snapshot.docs.map((doc) => {
+							return { id: doc.id, data: doc.data() };
+						})
+					)
+				);
+		}
+	}, [postId]);
+
+	if (!post) {
+		return <p>Loading...</p>;
+	}
+
+	/** Sends Comment from ChatFooter */
+	const sendComment = (data) => {
+		try {
+			dispatch(addCommentToPost(postId, data));
+		} catch (err) {
+			console.log(err);
+		}
+	};
 
 	return (
-		<div>
-			<h5>This is a Post</h5>
+		<div className='PostInfo'>
+			<div className='PostInfo__Header bottom-border-header Body-Header'>
+				<BackButton />
+				<h5 className='text-center'>{post.type ? post.type : 'Post'}</h5>
+			</div>
+			<div className='PostInfo__Body'>
+				<div className='PostInfo__Post'>
+					<PostCard
+						id={postId}
+						key={postId}
+						title={post.title}
+						username={post.username}
+						user_id={post.userId}
+						avatar={'https://randomuser.me/api/portraits/thumb/women/75.jpg'}
+						description={post.description}
+						location={post.location}
+						type={post.type}
+						start={post.start}
+						end={post.end}
+						attachment_preview={post.attachment_preview}
+						attachment={post.attachment}
+						timestamp={post.timestamp}
+						comments={[]}
+						isBookmarked={false}
+					/>
+				</div>
+				<div id='PostInfo__CommentList' className='PostInfo__CommentList'>
+					{comments ? (
+						<CommentsList comments={comments} />
+					) : (
+						<NoData text='comments' />
+					)}
+				</div>
+			</div>
+
+			<div className='PostInfo__Footer'>
+				<ChatFooter send={sendComment} type={'comment'} />
+			</div>
 		</div>
 	);
 }
