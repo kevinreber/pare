@@ -96,6 +96,10 @@ label,
   color: var(--primary-color);
 }
 
+/********************************* */
+/** BASE                           *
+/********************************* */
+
 .Body-Header {
   display: flex;
   position: fixed;
@@ -124,6 +128,8 @@ label,
   margin-top: 18vh;
   margin-bottom: 7rem;
 }
+
+/********************************* */
 
 .mate-bg-primary {
   background-color: var(--bg-color);
