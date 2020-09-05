@@ -35,13 +35,8 @@ function PostCard({
 		<BookmarkIcon />
 	);
 
-	// const convertedTimestamp = moment(timestamp.toDate())
-	// 	.startOf('day')
-	// 	.fromNow();
-
 	/** converts time */
 	const convertTime = (time) => {
-		// const converted = new Date(time?.toDate()).toUTCString();
 		return moment(time.toDate()).calendar();
 	};
 
@@ -116,7 +111,6 @@ function PostCard({
 				</IconButton>
 			</div>
 			<div className='Post-Card__Right Post__timestamp'>
-				{/* <p>{convertedTimestamp}</p> */}
 				<p>
 					{timestamp ? moment(timestamp.toDate()).startOf('day').fromNow() : ''}
 				</p>
