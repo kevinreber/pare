@@ -16,7 +16,7 @@
     margin: auto;
 }
 
-.StudyGroupChat__Header .MuiButtonBase-root.muiIconButton-root {
+.StudyGroupChat__Header>button.MuiButtonBase-root.MuiIconButton-root {
     position: absolute;
     top: 12px;
     right: 1rem;
