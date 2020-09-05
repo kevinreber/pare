@@ -68,7 +68,7 @@
 
 .StudyGroupChat__Footer>form>input {
     flex: 1;
-    padding: 1rem;
+    padding: .5rem;
 }
 
 .StudyGroupChat__Footer>form>input::placeholder {

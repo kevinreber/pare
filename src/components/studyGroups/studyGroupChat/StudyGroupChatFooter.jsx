@@ -10,7 +10,6 @@ import PanoramaOutlinedIcon from '@material-ui/icons/PanoramaOutlined';
  */
 function StudyGroupChatFooter({ send, username }) {
 	const INITIAL_STATE = {
-		id: '',
 		message: '',
 		timestamp: firebase.firestore.FieldValue.serverTimestamp(),
 		name: username,
