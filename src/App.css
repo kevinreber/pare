@@ -295,6 +295,20 @@ a:hover {
   color: var(--tertiary-color);
 }
 
+/********************************* */
+/** Chat                           *
+/********************************* */
+
+.message__attachments>i {
+  color: var(--tertiary-color);
+  margin-right: .5rem;
+  /* padding: 1rem; */
+}
+
+.message__attachments>i:hover {
+  color: var(--primary-color);
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

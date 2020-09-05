@@ -5,10 +5,13 @@ import NoData from '../components/general/NoData';
 import Modal from '../components/general/Modal';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+import { addPostToFB } from '../store/actions/posts';
+import { useDispatch } from 'react-redux';
 import db from '../config/fbConfig';
 import './styles/Feed.css';
 
 function Feed() {
+	const dispatch = useDispatch();
 	const [posts, setPosts] = useState([]);
 
 	useEffect(() => {
@@ -27,8 +30,7 @@ function Feed() {
 	const toggleForm = () => setShowForm((show) => !show);
 
 	const addPost = (postData) => {
-		// dispatch(addCourseToFB(courseData));
-		console.log(postData);
+		dispatch(addPostToFB(postData));
 		setShowForm(false);
 	};
 
@@ -47,7 +49,7 @@ function Feed() {
 			<div className='Feed__List'>
 				{posts ? <FeedList posts={posts} /> : <NoData text='posts' />}
 			</div>
-			<Fab aria-label='add'>
+			<Fab id='Feed-Add-Post-Btn' aria-label='add'>
 				<AddIcon onClick={toggleForm} />
 			</Fab>
 		</div>
