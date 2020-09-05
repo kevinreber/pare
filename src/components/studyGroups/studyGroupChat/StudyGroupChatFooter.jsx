@@ -1,7 +1,11 @@
 import React from 'react';
 import firebase from 'firebase';
 import useFields from '../../../hooks/useFields';
+
+/** MUI */
 import IconButton from '@material-ui/core/IconButton';
+import SendIcon from '@material-ui/icons/Send';
+import ImageIcon from '@material-ui/icons/Image';
 import CameraAltOutlinedIcon from '@material-ui/icons/CameraAltOutlined';
 import PanoramaOutlinedIcon from '@material-ui/icons/PanoramaOutlined';
 
@@ -31,16 +35,6 @@ function StudyGroupChatFooter({ send, username }) {
 	return (
 		<>
 			<form onSubmit={handleSubmit}>
-				<div className='message__attachments'>
-					{/* <i className='fas fa-camera fa-2x'></i>
-					<i className='fas fa-image fa-2x'></i> */}
-					<IconButton>
-						<CameraAltOutlinedIcon fontSize='large' />
-					</IconButton>
-					<IconButton>
-						<PanoramaOutlinedIcon fontSize='large' />
-					</IconButton>
-				</div>
 				<input
 					name='message'
 					onChange={handleChange}
@@ -48,7 +42,25 @@ function StudyGroupChatFooter({ send, username }) {
 					type='text'
 					placeholder='Type message here...'
 				/>
-				<button type='submit'>Send</button>
+				<div className='message__attachments'>
+					{/* <i className='fas fa-camera fa-2x'></i>
+					<i className='fas fa-image fa-2x'></i> */}
+					{/* <IconButton>
+						<CameraAltOutlinedIcon fontSize='large' />
+					</IconButton>
+					<IconButton>
+						<PanoramaOutlinedIcon fontSize='large' />
+					</IconButton> */}
+					<IconButton>
+						<ImageIcon fontSize='large' />
+					</IconButton>
+				</div>
+				<IconButton
+					type='submit'
+					disabled={!formData.message}
+					variant='contained'>
+					<SendIcon />
+				</IconButton>
 			</form>
 		</>
 	);

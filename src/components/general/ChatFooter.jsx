@@ -2,9 +2,11 @@ import React from 'react';
 import firebase from 'firebase';
 import { useSelector } from 'react-redux';
 import useFields from '../../hooks/useFields';
+
+/** MUI */
 import IconButton from '@material-ui/core/IconButton';
-import CameraAltOutlinedIcon from '@material-ui/icons/CameraAltOutlined';
-import PanoramaOutlinedIcon from '@material-ui/icons/PanoramaOutlined';
+import SendIcon from '@material-ui/icons/Send';
+import ImageIcon from '@material-ui/icons/Image';
 
 /** Re-usable Chat Footer for any features that involves submitting a message/comment */
 function ChatFooter({ send, type = 'message' }) {
@@ -34,14 +36,6 @@ function ChatFooter({ send, type = 'message' }) {
 	return (
 		<>
 			<form onSubmit={handleSubmit}>
-				<div className='message__attachments'>
-					<IconButton>
-						<CameraAltOutlinedIcon fontSize='large' />
-					</IconButton>
-					<IconButton>
-						<PanoramaOutlinedIcon fontSize='large' />
-					</IconButton>
-				</div>
 				<input
 					name='message'
 					onChange={handleChange}
@@ -49,7 +43,17 @@ function ChatFooter({ send, type = 'message' }) {
 					type='text'
 					placeholder={`Type ${type} here...`}
 				/>
-				<button type='submit'>Send</button>
+				<div className='message__attachments'>
+					<IconButton>
+						<ImageIcon fontSize='large' />
+					</IconButton>
+				</div>
+				<IconButton
+					type='submit'
+					disabled={!formData.message}
+					variant='contained'>
+					<SendIcon />
+				</IconButton>
 			</form>
 		</>
 	);

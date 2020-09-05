@@ -80,6 +80,10 @@ function PostCard({
 		dispatch(deletePostFromFB(id));
 	};
 
+	const editPost = () => {
+		console.log('editing..');
+	};
+
 	return (
 		<div id={key} className='Post-Card'>
 			<div className='Post-Card__Main'>

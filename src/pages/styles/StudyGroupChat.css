@@ -13,8 +13,13 @@
 }
 
 .StudyGroupChat__Header .StudyGroupChat__Title {
-    margin-top: auto;
-    margin-bottom: auto;
+    margin: auto;
+}
+
+.StudyGroupChat__Header .MuiButtonBase-root.muiIconButton-root {
+    position: absolute;
+    top: 12px;
+    right: 1rem;
 }
 
 .chat__message {
@@ -52,7 +57,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 97%;
+    width: 100%;
+    padding-left: 1.2rem;
     margin: auto;
     z-index: 25;
     /* height: 62px; */
@@ -76,8 +82,13 @@
     font-style: italic;
 }
 
-.StudyGroupChat__Footer>form>button {
-    display: none;
+.StudyGroupChat__Footer>form>.MuiButtonBase-root.MuiIconButton-root.Mui-disabled {
+    color: var(--tertiary-color);
+}
+
+.StudyGroupChat__Footer>form>.MuiButtonBase-root.MuiIconButton-root {
+    color: var(--primary-color);
+    /* display: none; */
 }
 
 .message__attachments>i {
