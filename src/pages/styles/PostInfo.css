@@ -24,12 +24,6 @@
     margin-bottom: 7rem;
 }
 
-.PostInfo__CommentList {
-    flex: 1;
-    overflow: scroll;
-    margin-bottom: 7rem;
-}
-
 .PostInfo__Footer {
     position: fixed;
     bottom: 100px;
@@ -73,6 +67,12 @@
 /********************************* */
 /** COMMENTS                       *
 /********************************* */
+
+.PostInfo__CommentList {
+    flex: 1;
+    overflow: scroll;
+    /* margin-bottom: 7rem; */
+}
 
 .Comment-Card {
     position: relative;
