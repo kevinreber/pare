@@ -1,8 +1,12 @@
-import React from 'react';
+/** Dependencies */
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
+
+/** Components & Helpers */
 import { deletePostFromFB } from '../../store/actions/posts';
+import PopoverActions from '../general/PopoverActions';
 
 /** MUI */
 import IconButton from '@material-ui/core/IconButton';
@@ -14,7 +18,10 @@ import MoreHorizOutlinedIcon from '@material-ui/icons/MoreHorizOutlined';
 import BookmarkIcon from '@material-ui/icons/Bookmark';
 import ShareIcon from '@material-ui/icons/Share';
 import SendIcon from '@material-ui/icons/Send';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 import Avatar from '@material-ui/core/Avatar';
+import Popover from '@material-ui/core/Popover';
 
 /** PostCard
  *  If user created Post, they will see an option to delete the Post
@@ -84,6 +91,16 @@ function PostCard({
 		console.log('editing..');
 	};
 
+	/** PopoverActions Props ***************/
+	const [anchorEl, setAnchorEl] = useState(null);
+	const togglePopover = (e) => {
+		setAnchorEl(e.currentTarget);
+	};
+	const handleClose = () => setAnchorEl(null);
+	const open = Boolean(anchorEl);
+	const popoverId = open ? 'simple-popover' : undefined;
+	/************************************* */
+
 	return (
 		<div id={key} className='Post-Card'>
 			<div className='Post-Card__Main'>
@@ -135,9 +152,19 @@ function PostCard({
 					{timestamp ? moment(timestamp.toDate()).startOf('day').fromNow() : ''}
 				</p>
 				{currentUser.uid === userId ? (
-					<IconButton onClick={deletePost}>
-						<MoreHorizOutlinedIcon />
-					</IconButton>
+					<>
+						<IconButton onClick={togglePopover}>
+							<MoreHorizOutlinedIcon />
+						</IconButton>
+						<PopoverActions
+							remove={deletePost}
+							edit={editPost}
+							id={popoverId}
+							open={open}
+							anchorEl={anchorEl}
+							close={handleClose}
+						/>
+					</>
 				) : (
 					''
 				)}

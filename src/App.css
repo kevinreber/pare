@@ -270,6 +270,22 @@ a:hover {
 }
 
 /********************************* */
+/** Popovers                       *
+/********************************* */
+
+.MuiPaper-root.MuiPopover-paper.MuiPaper-elevation8.MuiPaper-rounded {
+  background-color: var(--tertiary-color);
+}
+
+.MuiButtonBase-root.MuiIconButton-root.Delete__Btn {
+  color: var(--danger-color);
+}
+
+.MuiButtonBase-root.MuiIconButton-root.Edit__Btn {
+  color: var(--user-chat-color);
+}
+
+/********************************* */
 /** Forms                          *
 /********************************* */
 

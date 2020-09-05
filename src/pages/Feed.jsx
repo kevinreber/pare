@@ -1,15 +1,23 @@
+/** Dependencies */
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+
+/** Components & Helpers */
 import FeedList from '../components/feed/FeedList';
 import PostForm from '../components/feed/PostForm';
 import NoData from '../components/general/NoData';
 import Modal from '../components/general/Modal';
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
 import { addPostToFB } from '../store/actions/posts';
-import { useDispatch } from 'react-redux';
 import db from '../config/fbConfig';
 import './styles/Feed.css';
 
+/** MUI */
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+
+/** Feed displays a list of latest Posts
+ *  Feed -> FeedList -> PostCard
+ */
 function Feed() {
 	const dispatch = useDispatch();
 	const [posts, setPosts] = useState([]);
