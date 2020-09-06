@@ -1,6 +1,9 @@
+/** Dependencies */
 import React, { useState } from 'react';
-import SubmitButton from '../general/SubmitButton';
 import { useSelector } from 'react-redux';
+
+/** Components & Helpers */
+import SubmitButton from '../general/SubmitButton';
 import Autocomplete from '../general/Autocomplete';
 
 /** Form to add a course.

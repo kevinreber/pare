@@ -1,5 +1,5 @@
 import React from 'react';
-import CourseAssignmentList from './courseAssignments/CourseAssignmentList';
+import CourseAssignmentList from './CourseAssignments/CourseAssignmentList';
 
 /** Displays Body information of Course Info Page
  * Courses -> CourseList -> Course -> CourseInfo -> CourseInfoBody -> CourseAssignmentList -> CourseAssignment

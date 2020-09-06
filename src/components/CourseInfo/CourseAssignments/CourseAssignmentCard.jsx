@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import AssignmentStatusIcon from './AssignmentStatusIcon';
 import EnterGradeBtn from './EnterGradeBtn';
 import EditGradeForm from './EditGradeForm';
-import Modal from '../../../general/Modal';
+import Modal from '../../general/Modal';
 
 /** Displays Assignment Data
  * Courses -> CourseList -> Course -> CourseInfo -> CourseInfoBody -> CourseAssignmentList -> CourseAssignment

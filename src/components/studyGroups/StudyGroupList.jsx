@@ -1,5 +1,10 @@
+/** Dependencies */
 import React from 'react';
+
+/** Components & Helpers */
 import StudyGroupCard from './StudyGroupCard';
+
+/** MUI */
 import { List } from '@material-ui/core';
 
 /** Creates a List of User's StudyGroups

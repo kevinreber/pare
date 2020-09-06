@@ -1,7 +1,12 @@
+/** Dependencies */
 import React, { useState } from 'react';
+
+/** Components & Helpers */
 import StudyGroupChatAdmin from './StudyGroupChatAdmin';
-import Modal from '../../general/Modal';
-import BackButton from '../../general/BackButton';
+import Modal from '../general/Modal';
+import BackButton from '../general/BackButton';
+
+/** MUI */
 import IconButton from '@material-ui/core/IconButton';
 import MoreHorizOutlinedIcon from '@material-ui/icons/MoreHorizOutlined';
 

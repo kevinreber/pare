@@ -1,7 +1,12 @@
+/** Dependencies */
 import React, { useState } from 'react';
+
+/** Components & Helpers */
 import DatePicker from 'react-datepicker';
 import SubmitButton from '../general/SubmitButton';
 import useFields from '../../hooks/useFields';
+
+/** MUI */
 import { TextField } from '@material-ui/core';
 
 function BeTutorForm({ user, save }) {

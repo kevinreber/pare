@@ -1,4 +1,7 @@
+/** Dependencies */
 import React from 'react';
+
+/** Components & Helpers */
 import CommentCard from './CommentCard';
 
 function CommentsList({ postId, comments }) {

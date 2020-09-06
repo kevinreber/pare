@@ -1,4 +1,7 @@
+/** Dependencies */
 import React from 'react';
+
+/** Components & Helpers */
 import PostCard from './PostCard';
 
 function feedList({ posts }) {

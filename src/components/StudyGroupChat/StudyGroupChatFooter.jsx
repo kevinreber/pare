@@ -1,6 +1,9 @@
+/** Dependencies */
 import React from 'react';
 import firebase from 'firebase';
-import useFields from '../../../hooks/useFields';
+
+/** Components & Helpers */
+import useFields from '../../hooks/useFields';
 
 /** MUI */
 import IconButton from '@material-ui/core/IconButton';

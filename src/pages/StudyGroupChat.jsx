@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 import NoData from '../components/general/NoData';
-import StudyGroupChatHeader from '../components/studyGroups/studyGroupChat/StudyGroupChatHeader';
-import StudyGroupChatFooter from '../components/studyGroups/studyGroupChat/StudyGroupChatFooter';
+import StudyGroupChatHeader from '../components/StudyGroupChat/StudyGroupChatHeader';
+import StudyGroupChatFooter from '../components/StudyGroupChat/StudyGroupChatFooter';
 import db from '../config/fbConfig';
 import './styles/StudyGroupChat.css';
 

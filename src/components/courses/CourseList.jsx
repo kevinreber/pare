@@ -1,4 +1,7 @@
+/** Dependencies */
 import React from 'react';
+
+/** Components & Helpers */
 import CourseCard from './CourseCard';
 
 /** Creates a List of User's Courses

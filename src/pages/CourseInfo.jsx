@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import CourseInfoHeader from '../components/courses/courseInfo/CourseInfoHeader';
-import CourseInfoBody from '../components/courses/courseInfo/CourseInfoBody';
+import CourseInfoHeader from '../components/CourseInfo/CourseInfoHeader';
+import CourseInfoBody from '../components/CourseInfo/CourseInfoBody';
 import CTAButton from '../components/general/CTAButton';
 import Modal from '../components/general/Modal';
-import AssignmentForm from '../components/courses/courseInfo/courseAssignments/AssignmentForm';
+import AssignmentForm from '../components/CourseInfo/CourseAssignments/AssignmentForm';
 import { useSelector } from 'react-redux';
 import db from '../config/fbConfig';
 import './styles/CourseInfo.css';

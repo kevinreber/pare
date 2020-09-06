@@ -1,6 +1,6 @@
 import React from 'react';
 import CourseAssignmentCard from './CourseAssignmentCard';
-import NoData from '../../../general/NoData';
+import NoData from '../../general/NoData';
 
 /** Displays List of Assignments
  * Courses -> CourseList -> Course -> CourseInfo -> CourseInfoBody -> CourseAssignmentList -> CourseAssignmentCard

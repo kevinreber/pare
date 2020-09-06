@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 /** Components & Helpers */
-import FeedList from '../components/feed/FeedList';
-import PostForm from '../components/feed/PostForm';
+import FeedList from '../components/Feed/FeedList';
+import PostForm from '../components/Feed/PostForm';
 import NoData from '../components/general/NoData';
 import Modal from '../components/general/Modal';
 import { addPostToFB } from '../store/actions/posts';

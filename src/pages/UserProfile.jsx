@@ -1,9 +1,12 @@
+/** Dependencies */
 import React, { useState, useEffect } from 'react';
-import UserProfileHeader from '../components/user/UserProfileHeader';
-import UserProfileBody from '../components/user/UserProfileBody';
-import CTAButton from '../components/general/CTAButton';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+
+/** Components & Helpers */
+import UserProfileHeader from '../components/User/UserProfileHeader';
+import UserProfileBody from '../components/User/UserProfileBody';
+import CTAButton from '../components/general/CTAButton';
 import './styles/UserProfile.css';
 import db from '../config/fbConfig';
 

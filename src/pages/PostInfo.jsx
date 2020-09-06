@@ -1,12 +1,15 @@
+/** Dependencies */
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+/** Components & Helpers */
 import BackButton from '../components/general/BackButton';
-import PostCard from '../components/feed/PostCard';
+import PostCard from '../components/Feed/PostCard';
 import ChatFooter from '../components/general/ChatFooter';
 import NoData from '../components/general/NoData';
-import CommentsList from '../components/postInfo/CommentsList';
+import CommentsList from '../components/PostInfo/CommentsList';
 import { addCommentToPost } from '../store/actions/posts';
-import { useDispatch } from 'react-redux';
 import db from '../config/fbConfig';
 import './styles/PostInfo.css';
 

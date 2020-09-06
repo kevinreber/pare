@@ -1,4 +1,7 @@
+/** Dependencies */
 import React from 'react';
+
+/** Components & Helpers */
 import UserFields from './UserFields';
 
 /** Body for User Profile */

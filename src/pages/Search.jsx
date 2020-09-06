@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import TextField from '@material-ui/core/TextField';
-import FeedList from '../components/feed/FeedList';
+import FeedList from '../components/Feed/FeedList';
 import './styles/Search.css';
 
 const useStyles = makeStyles((theme) => ({

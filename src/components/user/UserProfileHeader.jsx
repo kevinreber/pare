@@ -1,4 +1,7 @@
+/** Dependencies */
 import React from 'react';
+
+/** Components & Helpers */
 import BackButton from '../general/BackButton';
 
 /** Header for User Profile */

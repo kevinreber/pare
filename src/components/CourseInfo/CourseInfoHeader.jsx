@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import BackButton from '../../general/BackButton';
+import React, { useState } from 'react';
+import BackButton from '../general/BackButton';
 import CourseDetails from './CourseDetails';
 import CourseOverallGrades from './CourseOverallGrades';
-import Modal from '../../general/Modal';
-import db from '../../../config/fbConfig';
+import Modal from '../general/Modal';
+import db from '../../config/fbConfig';
 
 /** Displays Header information of Course Info Page
  * Courses -> CourseList -> Course -> CourseInfo -> CourseInfoHeader -> CourseDetails && CourseOverallGrades

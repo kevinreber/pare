@@ -1,6 +1,9 @@
+/** Dependencies */
 import React, { useState } from 'react';
-import NotificationsList from '../components/alerts/NotificationsList';
-import MessagesList from '../components/alerts/MessagesList';
+
+/** Components & Helpers */
+import NotificationsList from '../components/Notifications/NotificationsList';
+import MessagesList from '../components/Notifications/MessagesList';
 
 /** User can see notifications and messages */
 function Notifications() {

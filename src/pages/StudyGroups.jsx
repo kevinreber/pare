@@ -1,8 +1,11 @@
+/** Dependencies */
 import React, { useState, useEffect } from 'react';
+
+/** Components & Helpers */
 import CTAButton from '../components/general/CTAButton';
 import Autocomplete from '../components/general/Autocomplete';
 import NoData from '../components/general/NoData';
-import StudyGroupList from '../components/studyGroups/StudyGroupList';
+import StudyGroupList from '../components/StudyGroups/StudyGroupList';
 import db from '../config/fbConfig';
 import './styles/StudyGroups.css';
 

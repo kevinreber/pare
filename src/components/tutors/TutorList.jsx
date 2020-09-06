@@ -1,4 +1,7 @@
+/** Dependencies */
 import React from 'react';
+
+/** Components & Helpers */
 import TutorCard from './TutorCard';
 
 function TutorList({ tutors = [] }) {

@@ -1,11 +1,14 @@
+/** Dependencies */
 import React, { useState, useEffect } from 'react';
-import CourseList from '../components/courses/CourseList';
-import CourseForm from '../components/courses/CourseForm';
+import { useDispatch } from 'react-redux';
+
+/** Components & Helpers */
+import CourseList from '../components/Courses/CourseList';
+import CourseForm from '../components/Courses/CourseForm';
 import Modal from '../components/general/Modal';
 import NoData from '../components/general/NoData';
 import CTAButton from '../components/general/CTAButton';
 import { addCourseToFB } from '../store/actions/courses';
-import { useDispatch } from 'react-redux';
 import { fetchCourseCatalog } from '../store/actions/courseCatalog';
 import db from '../config/fbConfig';
 import './styles/Courses.css';

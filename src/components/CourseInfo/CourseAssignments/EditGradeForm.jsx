@@ -1,6 +1,6 @@
 import React from 'react';
-import SubmitButton from '../../../general/SubmitButton';
-import useFields from '../../../../hooks/useFields';
+import SubmitButton from '../../general/SubmitButton';
+import useFields from '../../../hooks/useFields';
 
 function EditGradeForm({ assignmentName, userGrade = 0, save }) {
 	const INITIAL_STATE = {

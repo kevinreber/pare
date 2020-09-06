@@ -1,6 +1,9 @@
+/** Dependencies */
 import React, { useState } from 'react';
-import TutorList from '../components/tutors/TutorList';
-import BeTutorForm from '../components/tutors/BeTutorForm';
+
+/** Components & Helpers */
+import TutorList from '../components/Tutors/TutorList';
+import BeTutorForm from '../components/Tutors/BeTutorForm';
 import './styles/Tutors.css';
 
 const tutorsDemo = [

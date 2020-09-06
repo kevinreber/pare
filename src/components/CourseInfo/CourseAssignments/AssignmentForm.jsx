@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import SubmitButton from '../../../general/SubmitButton';
+import SubmitButton from '../../general/SubmitButton';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './styles/AssignmentForm.css';
