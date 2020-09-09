@@ -22,7 +22,6 @@ import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import PersonIcon from '@material-ui/icons/Person';
 import BookmarkIcon from '@material-ui/icons/Bookmark';
 import SettingsIcon from '@material-ui/icons/Settings';
-import UserAvatar from '../user/UserAvatar';
 import { makeStyles } from '@material-ui/core/styles';
 
 /** Stylesheets */
@@ -114,7 +113,7 @@ function Header() {
 			<AppBar position='static' className='Header-Content'>
 				<Toolbar>
 					<IconButton onClick={toggleDrawer}>
-						<UserAvatar />
+						<Avatar alt='Tony' src={DummyAvatar} />
 					</IconButton>
 					<Drawer anchor={'left'} open={drawer} onClose={toggleDrawer}>
 						{SideBar('left')}
