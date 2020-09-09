@@ -149,3 +149,19 @@
     max-height: 100px;
     margin-top: .6rem;
 }
+
+.preview__attachment {
+    position: relative;
+    margin-right: 2.5rem;
+}
+
+.preview__attachment>.MuiButtonBase-root.MuiIconButton-root {
+    position: absolute;
+    right: -42px;
+    top: -6px;
+}
+
+.message__attachments .preview__attachment .MuiSvgIcon-root.remove__attachment {
+    fill: var(--danger-color);
+    color: var(--danger-color);
+}

@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
 import CameraAltOutlinedIcon from '@material-ui/icons/CameraAltOutlined';
 import PanoramaOutlinedIcon from '@material-ui/icons/PanoramaOutlined';
+import CancelIcon from '@material-ui/icons/Cancel';
 
 /** Form for user's to create a Post
  *  Feed -> PostForm
@@ -227,15 +228,22 @@ function PostForm({ save }) {
 				</div>
 				<div className='PostForm__Footer'>
 					<div className='message__attachments'>
-						{formData.attachment_preview ? (
-							<img
-								src={formData.attachment_preview}
-								alt='preview'
-								className='attachment__preview'
-							/>
-						) : (
-							''
-						)}
+						<div className='preview__attachment'>
+							{formData.attachment_preview ? (
+								<>
+									<img
+										src={formData.attachment_preview}
+										alt='preview'
+										className='attachment__preview'
+									/>
+									<IconButton onClick={resetAttachment}>
+										<CancelIcon className='remove__attachment' />
+									</IconButton>
+								</>
+							) : (
+								''
+							)}
+						</div>
 						<label htmlFor='attachment' className='attachment__label'>
 							<PanoramaOutlinedIcon fontSize='large' />
 						</label>
