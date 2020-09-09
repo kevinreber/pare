@@ -60,6 +60,11 @@ function PostForm({ save }) {
 		} else {
 			let { name, value } = e.target;
 
+			/** Handles 'start' and 'end' date fields */
+			if (name === 'end' || name === 'start') {
+				const date = new Date(value);
+				value = firebase.firestore.Timestamp.fromDate(date);
+			}
 			setFormData((fData) => ({
 				...fData,
 				[name]: value,
@@ -108,6 +113,7 @@ function PostForm({ save }) {
 		return true;
 	};
 
+	/** Handle's submitted form data */
 	const handleSubmit = (e) => {
 		console.log(formData);
 		e.preventDefault();
@@ -207,6 +213,8 @@ function PostForm({ save }) {
 						type='datetime-local'
 						className='float-right'
 						defaultValue={formData.start}
+						name='start'
+						onChange={handleChange}
 						InputLabelProps={{
 							shrink: true,
 						}}
@@ -221,6 +229,8 @@ function PostForm({ save }) {
 						type='datetime-local'
 						className='float-right'
 						defaultValue={formData.end}
+						name='end'
+						onChange={handleChange}
 						InputLabelProps={{
 							shrink: true,
 						}}
