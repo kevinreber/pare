@@ -62,18 +62,25 @@ const SearchCategories = [
 	'Events',
 ];
 
-const SearchCategoryList = SearchCategories.map((category) => (
-	<ListItem button>
-		{/* <p>{category}</p> */}
-		<ListItemText primary={category} />
-	</ListItem>
-));
-
 function Search() {
-	const classes = useStyles();
+	const [quickSearch, setQuickSearch] = useState('today');
+	const toggleQuickSearch = (e) => {
+		setQuickSearch(e.target.innerText.toLowerCase());
+	};
 
 	const [search, setSearch] = useState('');
 	const [posts, setPosts] = useState([]);
+
+	const SearchCategoryList = SearchCategories.map((category, index) => (
+		<ListItem
+			button
+			id={category.toLowerCase()}
+			onClick={toggleQuickSearch}
+			className={`${index === SearchCategories.length - 1 ? 'mr' : ''}
+			${quickSearch === category.toLowerCase() ? 'active' : 'inactive'}`}>
+			<ListItemText primary={category} />
+		</ListItem>
+	));
 
 	return (
 		<div className='Search'>

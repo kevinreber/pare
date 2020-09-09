@@ -25,10 +25,17 @@
     border-bottom: 1px solid var(--tertiary-color);
 }
 
-/* .Search-Categories>.MuiTypography-root.MuiListItemText-primary.MuiTypography-body1.MuiTypography-displayBlock {
-    display: inline-block;
-    text-decoration: none;
-} */
+.Search-Categories>ul.MuiList-root.MuiList-padding:first-child {
+    margin-left: 1rem;
+}
+
+.Search-Categories>ul.MuiList-root.MuiList-padding>.MuiButtonBase-root.MuiListItem-root.MuiListItem-gutters.MuiListItem-button.mr {
+    margin-right: 1rem;
+}
+
+.MuiButtonBase-root.MuiListItem-root.inactive.MuiListItem-gutters.MuiListItem-button {
+    color: var(--tertiary-color);
+}
 
 .MuiList-root.MuiList-padding {
     margin: 0;
