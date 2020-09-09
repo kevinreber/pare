@@ -22,6 +22,12 @@
     width: 64px;
 }
 
+.Header .MuiAvatar-root {
+    border: 1px solid var(--primary-color);
+    width: 48px;
+    height: 48px;
+}
+
 .makeStyles-list-1 {
     display: flex;
     flex-direction: column;
