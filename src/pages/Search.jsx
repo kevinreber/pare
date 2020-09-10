@@ -1,4 +1,12 @@
-import React, { useState } from 'react';
+/** Dependencies */
+import React, { useState, useEffect } from 'react';
+
+/** Components & Helpers */
+import NoData from '../components/general/NoData';
+import db from '../config/fbConfig';
+import './styles/Search.css';
+
+/** MUI */
 import {
 	fade,
 	makeStyles,
@@ -10,7 +18,6 @@ import {
 import SearchIcon from '@material-ui/icons/Search';
 import TextField from '@material-ui/core/TextField';
 import FeedList from '../components/Feed/FeedList';
-import './styles/Search.css';
 
 const useStyles = makeStyles((theme) => ({
 	search: {
@@ -71,6 +78,21 @@ function Search() {
 	const [search, setSearch] = useState('');
 	const [posts, setPosts] = useState([]);
 
+	useEffect(() => {
+		console.log(quickSearch);
+		db.collection('feeds')
+			.where('type', '==', quickSearch)
+			.onSnapshot((snapshot) =>
+				setPosts(
+					snapshot.docs.map((doc) => ({
+						id: doc.id,
+						data: doc.data(),
+					}))
+				)
+			);
+	}, [quickSearch]);
+
+	/** Quick Search Category List */
 	const SearchCategoryList = SearchCategories.map((category, index) => (
 		<ListItem
 			button
@@ -118,7 +140,7 @@ function Search() {
 			<div className='Search-Categories'>
 				<List>{SearchCategoryList}</List>
 			</div>
-			<FeedList posts={posts} />
+			{posts ? <FeedList posts={posts} /> : <NoData text={'posts'} />}
 		</div>
 	);
 }
