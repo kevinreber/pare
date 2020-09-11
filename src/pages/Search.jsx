@@ -99,8 +99,9 @@ function Search() {
 			button
 			id={category.toLowerCase()}
 			onClick={toggleQuickSearch}
-			className={`${index === SearchCategories.length - 1 ? 'mr' : ''}
-			${quickSearch === category.toLowerCase() ? 'active' : 'inactive'}`}>
+			className={
+				quickSearch === category.toLowerCase() ? 'active' : 'inactive'
+			}>
 			<ListItemText primary={category} />
 		</ListItem>
 	));

@@ -26,7 +26,7 @@
     padding-left: 2.5rem;
 }
 
-.Search__Elements>input::placeholder {
+input::placeholder {
     font-style: italic;
     text-transform: capitalize;
 }
@@ -47,14 +47,6 @@
 
 .Search__List {
     margin-top: 26vh;
-}
-
-.Search-Categories>ul.MuiList-root.MuiList-padding:first-child {
-    margin-left: 1rem;
-}
-
-.Search-Categories>ul.MuiList-root.MuiList-padding>.MuiButtonBase-root.MuiListItem-root.MuiListItem-gutters.MuiListItem-button.mr {
-    margin-right: 1rem;
 }
 
 .MuiButtonBase-root.MuiListItem-root.inactive.MuiListItem-gutters.MuiListItem-button {
