@@ -107,35 +107,21 @@ function Search() {
 	return (
 		<div className='Search'>
 			<div className='Body-Header Search-Header'>
-				<input
-					id='search'
-					className='form-control mate-form-input'
-					type='search'
-					onChange={(e) => setSearch(e.target.value)}
-					name='search'
-					value={search}
-					maxLength='30'
-					required
-				/>
-				{/* <div className={classes.search}>
-					<div className={classes.searchIcon}>
+				<div className='Search__Elements'>
+					<div className='Search__Icon'>
 						<SearchIcon />
 					</div>
-					<InputBase
-						placeholder='Search…'
-						classes={{
-							root: classes.inputRoot,
-							input: classes.inputInput,
-						}}
-						inputProps={{ 'aria-label': 'search' }}
-					/> */}
-				{/* <TextField
-						id='outlined-search'
-						label='Search field'
+					<input
+						id='search'
+						className='form-control mate-form-input'
 						type='search'
-						variant='outlined'
-					/> */}
-				{/* </div> */}
+						onChange={(e) => setSearch(e.target.value)}
+						name='search'
+						value={search}
+						maxLength='30'
+						placeholder='Search...'
+					/>
+				</div>
 			</div>
 			<div className='Search-Categories'>
 				<List>{SearchCategoryList}</List>

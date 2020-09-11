@@ -14,6 +14,26 @@
     box-shadow: none;
 }
 
+.Search__Elements {
+    position: relative;
+}
+
+.Search__Elements>input {
+    padding-left: 2.5rem;
+}
+
+.Search__Elements>input::placeholder {
+    font-style: italic;
+    text-transform: capitalize;
+}
+
+.Search__Icon {
+    position: absolute;
+    left: 10px;
+    top: 6px;
+    color: var(--primary-color);
+}
+
 .Search-Categories {
     /* display: flex;
     flex-direction: row; */
