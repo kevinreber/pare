@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 
 /** Components & Helpers */
 import NoData from '../components/general/NoData';
+import CTAButton from '../components/general/CTAButton';
 import db from '../config/fbConfig';
 import './styles/Search.css';
 
@@ -106,7 +107,7 @@ function Search() {
 
 	return (
 		<div className='Search'>
-			<div className='Body-Header Search-Header'>
+			<div className='Search-Header'>
 				<div className='Search__Elements'>
 					<div className='Search__Icon'>
 						<SearchIcon />
@@ -122,11 +123,23 @@ function Search() {
 						placeholder='Search...'
 					/>
 				</div>
+				<div className='Search-Categories'>
+					<List>{SearchCategoryList}</List>
+				</div>
 			</div>
-			<div className='Search-Categories'>
-				<List>{SearchCategoryList}</List>
+			<div className='Search__List'>
+				{posts.length > 0 ? (
+					<FeedList posts={posts} />
+				) : (
+					<NoData text={'posts'} />
+				)}
 			</div>
-			{posts ? <FeedList posts={posts} /> : <NoData text={'posts'} />}
+			<div
+				className={`Search__Footer ${
+					search.length === 0 ? 'disabled-btn' : ''
+				}`}>
+				<CTAButton text='Search' />
+			</div>
 		</div>
 	);
 }

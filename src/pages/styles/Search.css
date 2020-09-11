@@ -4,14 +4,18 @@
 }
 
 .Search-Header {
-    /* width: 90%;
-    margin: auto; */
     padding: 2rem 2rem 0 2rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border-bottom: none;
-    box-shadow: none;
+    position: fixed;
+    border-bottom: 2px solid var(--tertiary-color);
+    cursor: pointer;
+    background-color: var(--bg-color);
+    margin-top: 10vh;
+    width: 100%;
+    z-index: 25;
+    box-shadow: 0 20px 20px -20px rgba(0, 0, 0, 0.6);
 }
 
 .Search__Elements {
@@ -35,14 +39,14 @@
 }
 
 .Search-Categories {
-    /* display: flex;
-    flex-direction: row; */
     z-index: 50;
     background-color: var(--bg-color);
-    margin-top: 17vh;
     overflow-x: auto;
     white-space: nowrap;
-    border-bottom: 1px solid var(--tertiary-color);
+}
+
+.Search__List {
+    margin-top: 28vh;
 }
 
 .Search-Categories>ul.MuiList-root.MuiList-padding:first-child {
@@ -69,6 +73,15 @@
 
 .Search-Categories .MuiTypography-body1 {
     font-size: .8rem;
+}
+
+.Search-Categories .MuiList-padding {
+    padding-bottom: 0;
+}
+
+.Search__Footer.disabled-btn button.mate-btn.mate-btn-secondary.mate-btn-cta {
+    color: var(--tertiary-color);
+    border-color: var(--tertiary-color);
 }
 
 /* Hides side scroll scrollbar */
