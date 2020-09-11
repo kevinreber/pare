@@ -6,12 +6,12 @@ import CourseAssignmentList from './CourseAssignments/CourseAssignmentList';
  */
 function CourseInfoHeader({ assignments = [] }) {
 	return (
-		<div className='Course-Info-Body'>
+		<>
 			<div className='Courses-Header pt-2 pb-1'></div>
 			<div className='Course-Info-Body-List'>
 				<CourseAssignmentList assignments={assignments} />
 			</div>
-		</div>
+		</>
 	);
 }
 

@@ -1,15 +1,40 @@
-.CourseInfoHeader {
-    margin-left: 2.5rem;
+.CourseInfo {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+}
+
+.CourseInfo .CourseInfo__BackBtn {
+    position: relative;
+}
+
+.CourseInfo .CourseInfo__BackBtn .BackButton {
+    top: 5.25rem;
+    z-index: 100;
+}
+
+.CourseInfo__Header {
+    display: flex;
+    position: fixed;
+    justify-content: center;
+    align-items: baseline;
     padding-top: 1.2rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 2px solid var(--tertiary-color);
+    cursor: pointer;
+    height: 8vh;
+    background-color: var(--bg-color);
+    margin-top: 10vh;
+    width: 100%;
+    z-index: 25;
+    box-shadow: 0 20px 20px -20px rgba(0, 0, 0, 0.6);
 }
 
-.CourseInfoHeaderTitle h5 {
+.CourseInfo__Header h5 {
     font-size: 18px;
+    margin-right: 1rem;
 }
 
-.CourseInfoHeaderTitle p {
+.CourseInfo__Header p {
     font-size: 14px;
 }
 
@@ -53,7 +78,14 @@
     font-weight: 400;
 }
 
-.Course-Info-Body .Course-Info-Title {
+.CourseInfo__Body {
+    flex: 1;
+    overflow: scroll;
+    margin-top: 16vh;
+    margin-bottom: 7rem;
+}
+
+.CourseInfo__Body .Course-Info-Title {
     font-size: 14px;
 }
 

@@ -9,6 +9,8 @@ import { useSelector } from 'react-redux';
 import db from '../config/fbConfig';
 import './styles/CourseInfo.css';
 
+import BackButton from '../components/general/BackButton';
+
 /** Displays Course Information such as assignments and discussion boards
  * Courses -> CourseList -> Course -> CourseInfo
  */
@@ -48,20 +50,27 @@ function CourseInfo() {
 
 	console.log(course);
 	const courseInfo = course ? (
-		<>
-			<CourseInfoHeader
-				course={course}
-				semester={course.semester}
-				sections={course.sections}
-				title={`${course.course.abbreviation} ${course.course.course_number}`}
-			/>
-			<CourseInfoBody assignments={assignments} />
+		<div className='CourseInfo'>
+			<div className='CourseInfo__BackBtn'>
+				<BackButton />
+			</div>
+			<div className='CourseInfo__Header'>
+				<CourseInfoHeader
+					course={course}
+					semester={course.semester}
+					sections={course.sections}
+					title={`${course.course.abbreviation} ${course.course.course_number}`}
+				/>
+			</div>
+			<div className='CourseInfo__Body'>
+				<CourseInfoBody assignments={assignments} />
+			</div>
 			<div className='AssignmentForm p-3'>
 				<p onClick={toggleForm} className='font-italic'>
 					<CTAButton text='Add Assignment' />
 				</p>
 			</div>
-		</>
+		</div>
 	) : (
 		<p>Loading...</p>
 	);
