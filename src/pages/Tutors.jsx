@@ -48,7 +48,7 @@ function Tutor() {
 	const toggleSearch = () => setShowSearch((show) => !show);
 
 	const updateUser = (data) => {
-		console.log('updating...');
+		console.log('updating...', data);
 		dispatch(updateAvailability(data));
 	};
 
@@ -58,7 +58,7 @@ function Tutor() {
 		) : (
 			<BeTutorForm
 				user={currentUser}
-				save={updateUser}
+				update={updateUser}
 				availability={userAvailability}
 			/>
 		);

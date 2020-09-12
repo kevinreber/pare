@@ -2,7 +2,7 @@
 import moment from 'moment';
 import { original, produce } from 'immer';
 
-/** Components & Helpers */
+/** Action Types */
 import { UPDATE_AVAILABILITY } from '../actions/types';
 
 const INITIAL_AVAIL = {
@@ -22,7 +22,7 @@ const userAvailabilityReducer = (state = INITIAL_AVAIL, action) => {
 		case UPDATE_AVAILABILITY:
 			console.log(action);
 			return produce(state, (draft) => {
-				console.log(draft);
+				console.log(original(draft));
 			});
 		default:
 			return state;

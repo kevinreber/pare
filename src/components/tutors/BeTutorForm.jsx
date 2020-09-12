@@ -27,13 +27,13 @@ const DAYS = [
 	'sunday',
 ];
 
-function BeTutorForm({ user, update }) {
+function BeTutorForm({ user, update, availability }) {
 	// Form Data
 	const INITIAL_STATE = {
 		keywords: '',
 		portfolio: '',
 	};
-	// console.log(availability);
+	console.log(availability);
 	// const INITIAL_AVAIL = {
 	// 	monday: [
 	// 		{ start: moment(new Date()).format(), end: moment(new Date()).format() },
@@ -59,28 +59,11 @@ function BeTutorForm({ user, update }) {
 	// 	sunday: { start: new Date().getTime(), end: new Date().getTime() },
 	// };
 
-	const INITIAL_AVAIL = {
-		mondayStart: moment(new Date()).format(),
-		mondayEnd: moment(new Date()).format(),
-		tuesdayStart: new Date().getTime(),
-		tuesdayEnd: new Date().getTime(),
-		wednesdayStart: new Date().getTime(),
-		wednesdayEnd: new Date().getTime(),
-		thursdayStart: new Date().getTime(),
-		thursdayEnd: new Date().getTime(),
-		fridayStart: new Date().getTime(),
-		fridayEnd: new Date().getTime(),
-		saturdayStart: new Date().getTime(),
-		saturdayEnd: new Date().getTime(),
-		sundayStart: new Date().getTime(),
-		sundayEnd: new Date().getTime(),
-	};
-
 	// const [formData, handleChange, resetFormData] = useFields(INITIAL_STATE);
 
 	const [formData, setFormData] = useState(INITIAL_STATE);
 
-	const [availability, setAvailability] = useState(INITIAL_AVAIL);
+	const [initialAvailability, setAvailability] = useState(availability);
 
 	const [changeMade, setChangeMade] = useState(false);
 	// const availability = {
@@ -155,12 +138,9 @@ function BeTutorForm({ user, update }) {
 	// 	console.log(availability[day][type]);
 	// };
 
-	const convert = (name, value) => ({
-		target: {
-			name,
-			value,
-		},
-	});
+	const updateDate = (e) => {
+		update(initialAvailability);
+	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -179,16 +159,18 @@ function BeTutorForm({ user, update }) {
 				minutesStep={5}
 				label={day.charAt(0).toUpperCase() + day.slice(1)}
 				// name={day['start']}
-				value={availability[`${day}Start`]}
+				value={initialAvailability[day].start}
 				// value={availability[day].start}
-				onChange={(e) => handleDate(e, day, 'Start', index)}
+				// onChange={(e) => handleDate(e, day, 'Start', index)}
+				// onChange={(e) => updateDate(e, day, 'start', index)}
+				onChange={updateDate}
 			/>
 			<TimePicker
 				clearable
 				variant='inline'
 				minutesStep={5}
 				// name={day['end']}
-				value={availability[`${day}End`]}
+				value={initialAvailability[`${day}End`]}
 				// value={availability[day].end}
 				onChange={(e) => handleDate(e, day, 'End', index)}
 			/>
