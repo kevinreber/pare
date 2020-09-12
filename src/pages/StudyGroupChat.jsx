@@ -1,12 +1,21 @@
+/** Dependencies */
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
+
+/** Components & Helpers */
 import NoData from '../components/general/NoData';
-import StudyGroupChatHeader from '../components/StudyGroupChat/StudyGroupChatHeader';
+import StudyGroupChatAdmin from '../components/StudyGroupChat/StudyGroupChatAdmin';
+import Modal from '../components/general/Modal';
+import BackButton from '../components/general/BackButton';
 import StudyGroupChatFooter from '../components/StudyGroupChat/StudyGroupChatFooter';
 import db from '../config/fbConfig';
 import './styles/StudyGroupChat.css';
+
+/** MUI */
+import IconButton from '@material-ui/core/IconButton';
+import MoreHorizOutlinedIcon from '@material-ui/icons/MoreHorizOutlined';
 
 /** Displays Study Group's Chat
  * StudyGroups -> StudyGroupsList -> StudyGroupCard -> StudyGroupChat
@@ -17,6 +26,9 @@ function StudyGroupChat() {
 
 	const [studyGroup, setStudyGroup] = useState({});
 	const [messages, setMessages] = useState([]);
+
+	const [showAdmin, setShowAdmin] = useState(false);
+	const toggleAdmin = () => setShowAdmin((show) => !show);
 
 	/** Scroll to Bottom of Chat */
 	const setRef = useCallback((node) => {
@@ -52,6 +64,15 @@ function StudyGroupChat() {
 
 	if (!studyGroup) {
 		return <p>Loading...</p>;
+	}
+
+	if (showAdmin) {
+		return (
+			<Modal
+				content={<StudyGroupChatAdmin title={studyGroup.title} />}
+				closeModal={toggleAdmin}
+			/>
+		);
 	}
 
 	const sendMessage = (message) => {
@@ -100,7 +121,11 @@ function StudyGroupChat() {
 	return (
 		<div className='StudyGroupChat'>
 			<div className='StudyGroupChat__Header Body-Header bottom-border-header'>
-				<StudyGroupChatHeader title={studyGroup.title} />
+				<BackButton />
+				<h5 className='StudyGroupChat__Title'>{studyGroup.title}</h5>
+				<IconButton onClick={toggleAdmin}>
+					<MoreHorizOutlinedIcon fontSize='small' />
+				</IconButton>
 			</div>
 			<div
 				id='StudyGroupChat__Body'

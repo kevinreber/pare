@@ -28,18 +28,16 @@ function Connect() {
 	let List;
 
 	if (filter !== '' && studyGroups && studyGroups.length !== 0) {
+		// filter study groups to display
 		const filteredGroups = studyGroups.filter(
 			(studyGroup) =>
 				studyGroup.data.title.toLowerCase().indexOf(filter.toLowerCase()) > -1
 		);
 
+		// if no filtered matches, display 'NoData' component
 		List =
 			filteredGroups.length > 0 ? (
-				<StudyGroupList
-					studyGroups={
-						filteredGroups // filter study groups to display
-					}
-				/>
+				<StudyGroupList studyGroups={filteredGroups} />
 			) : (
 				<NoData text={'matches'} added={false} />
 			);
@@ -48,24 +46,10 @@ function Connect() {
 	} else {
 		List = <NoData text={'study groups'} />;
 	}
-	// let List =
-	// 	filter !== '' && studyGroups && studyGroups.length !== 0 ? (
-	// 		// filter study groups to display
-	// 		<StudyGroupList
-	// 			studyGroups={studyGroups.filter(
-	// 				(studyGroup) =>
-	// 					studyGroup.data.title.toLowerCase().indexOf(filter.toLowerCase()) > -1
-	// 			)}
-	// 		/>
-	// 	) : studyGroups && studyGroups.length !== 0 ? (
-	// 		<StudyGroupList studyGroups={studyGroups} />
-	// 	) : (
-	// 		<NoData text={'study groups'} />
-	// 	);
 
 	return (
 		<div className='StudyGroups'>
-			<div className='Body-Header StudyGroups__Header'>
+			<div className='StudyGroups__Header'>
 				<h5>My Study Groups</h5>
 				<Searchbar value={filter} setValue={setFilter} />
 			</div>

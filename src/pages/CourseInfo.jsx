@@ -1,3 +1,4 @@
+/** Dependencies */
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import CourseInfoHeader from '../components/CourseInfo/CourseInfoHeader';
@@ -9,6 +10,7 @@ import { useSelector } from 'react-redux';
 import db from '../config/fbConfig';
 import './styles/CourseInfo.css';
 
+/** Components & Helpers */
 import BackButton from '../components/general/BackButton';
 
 /** Displays Course Information such as assignments and discussion boards
