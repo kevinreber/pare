@@ -2,9 +2,9 @@ import { UPDATE_AVAILABILITY } from './types';
 
 import { auth, provider, db } from '../../config/fbConfig';
 
-export function updateAvailability(userAvailability) {
+export function updateAvailability(availability) {
 	return (dispatch) => {
-		dispatch(setAvailability(userAvailability));
+		dispatch(setAvailability(availability));
 	};
 }
 

@@ -138,8 +138,9 @@ function BeTutorForm({ user, update, availability }) {
 	// 	console.log(availability[day][type]);
 	// };
 
-	const updateDate = (e) => {
-		update(initialAvailability);
+	const updateDate = (time, day, type, index) => {
+		const availability = { time, day, type, index };
+		update(availability);
 	};
 
 	const handleSubmit = (e) => {
@@ -162,8 +163,7 @@ function BeTutorForm({ user, update, availability }) {
 				value={initialAvailability[day].start}
 				// value={availability[day].start}
 				// onChange={(e) => handleDate(e, day, 'Start', index)}
-				// onChange={(e) => updateDate(e, day, 'start', index)}
-				onChange={updateDate}
+				onChange={(e) => updateDate(e, day, 'start', index)}
 			/>
 			<TimePicker
 				clearable
@@ -172,7 +172,8 @@ function BeTutorForm({ user, update, availability }) {
 				// name={day['end']}
 				value={initialAvailability[`${day}End`]}
 				// value={availability[day].end}
-				onChange={(e) => handleDate(e, day, 'End', index)}
+				// onChange={(e) => handleDate(e, day, 'End', index)}
+				onChange={(e) => updateDate(e, day, 'end', index)}
 			/>
 
 			{/* Default HTML Input fields */}
