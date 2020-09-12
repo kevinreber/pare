@@ -4,6 +4,7 @@ import assignmentReducer from './assignmentReducer';
 import user from './userReducer';
 import postsReducer from './postsReducer';
 import courseCatalogReducer from './courseCatalogReducer';
+import availabilityReducer from './availabilityReducer';
 import { combineReducers } from 'redux';
 
 /** Sync to data in Firebase/Firestore */
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
 	posts: postsReducer,
 	courses: courseReducer,
 	assignments: assignmentReducer,
+	availability: availabilityReducer,
 	courseCatalog: courseCatalogReducer,
 });
 

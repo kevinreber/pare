@@ -1,9 +1,11 @@
 /** Dependencies */
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 /** Components & Helpers */
 import TutorList from '../components/Tutors/TutorList';
 import BeTutorForm from '../components/Tutors/BeTutorForm';
+import { updateAvailability } from '../store/actions/availability';
 import './styles/Tutors.css';
 
 const tutorsDemo = [
@@ -31,6 +33,10 @@ const tutorsDemo = [
 ];
 
 function Tutor() {
+	const dispatch = useDispatch();
+	const currentUser = useSelector((state) => state.auth.user);
+	const userAvailability = useSelector((state) => state.availability);
+
 	// State will determine what courses to show in CourseList
 	const [active, setActive] = useState('findTutor');
 	const toggleTutor = (e) => {
@@ -41,11 +47,20 @@ function Tutor() {
 	const [showSearch, setShowSearch] = useState(false);
 	const toggleSearch = () => setShowSearch((show) => !show);
 
+	const updateUser = (data) => {
+		console.log('updating...');
+		dispatch(updateAvailability(data));
+	};
+
 	const TutorsBody =
 		active === 'findTutor' ? (
 			<TutorList tutors={tutorsDemo} />
 		) : (
-			<BeTutorForm />
+			<BeTutorForm
+				user={currentUser}
+				save={updateUser}
+				availability={userAvailability}
+			/>
 		);
 
 	return (
