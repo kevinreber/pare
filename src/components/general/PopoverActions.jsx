@@ -8,7 +8,16 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 
 /** Popover with basic CRUD actions */
-function PopoverActions({ remove, edit, id, open, anchorEl, close }) {
+function PopoverActions({
+	remove,
+	edit,
+	id,
+	open,
+	anchorEl,
+	close,
+	deleteBtn = true,
+	editBtn = true,
+}) {
 	return (
 		<>
 			<Popover
@@ -24,12 +33,20 @@ function PopoverActions({ remove, edit, id, open, anchorEl, close }) {
 					vertical: 'top',
 					horizontal: 'center',
 				}}>
-				<IconButton className='Delete__Btn' onClick={() => remove()}>
-					<DeleteIcon />
-				</IconButton>
-				<IconButton className='Edit__Btn' onClick={() => edit()}>
-					<EditIcon />
-				</IconButton>
+				{deleteBtn ? (
+					<IconButton className='Delete__Btn' onClick={() => remove()}>
+						<DeleteIcon />
+					</IconButton>
+				) : (
+					''
+				)}
+				{editBtn ? (
+					<IconButton className='Edit__Btn' onClick={() => edit()}>
+						<EditIcon />
+					</IconButton>
+				) : (
+					''
+				)}
 			</Popover>
 		</>
 	);

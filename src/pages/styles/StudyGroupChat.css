@@ -108,16 +108,20 @@
     margin-top: 6rem;
 }
 
+.StudyGroupChatAdmin>.Admin__Header>h5 {
+    font-size: 1.5rem;
+}
+
 .StudyGroupChatAdmin>.Admin__Header {
-    border-bottom: 1px solid var(--tertiary-color);
+    /* border-bottom: 1px solid var(--tertiary-color); */
     padding: 1rem 2rem;
     position: relative;
 }
 
 .StudyGroupChatAdmin>.Admin__Header>.MuiButtonBase-root.MuiIconButton-root {
     position: absolute;
-    right: 2rem;
-    top: 5px;
+    right: 1.6rem;
+    top: 7px;
 }
 
 .StudyGroupChatAdmin>.Admin__Body>.Admin-Members__Header {

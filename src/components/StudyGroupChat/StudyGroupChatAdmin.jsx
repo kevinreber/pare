@@ -1,13 +1,13 @@
 /** Dependencies */
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 /** Components & Helpers */
 import CTAButton from '../general/CTAButton';
+import PopoverActions from '../general/PopoverActions';
 
 /** MUI */
 import IconButton from '@material-ui/core/IconButton';
-import Popover from '@material-ui/core/Popover';
 import EditIcon from '@material-ui/icons/Edit';
 import Avatar from '@material-ui/core/Avatar';
 import MoreHorizOutlinedIcon from '@material-ui/icons/MoreHorizOutlined';
@@ -23,6 +23,28 @@ import LinkRoundedIcon from '@material-ui/icons/LinkRounded';
  *  StudyGroup -> StudyGroupChat -> StudyGroupChatAdmin
  */
 function StudyGroupChatAdmin({ title, members }) {
+	/** PopoverActions Props ***************/
+	const [anchorEl, setAnchorEl] = useState(null);
+	const togglePopover = (e) => {
+		setAnchorEl(e.currentTarget);
+	};
+	const handleClose = () => setAnchorEl(null);
+	const open = Boolean(anchorEl);
+	const popoverId = open ? 'simple-popover' : undefined;
+	/************************************* */
+
+	const deletePost = () => {
+		console.log('deleting...');
+	};
+
+	const editPost = () => {
+		console.log('editing..');
+	};
+
+	const leaveGroup = () => {
+		console.log('leaving group...');
+	};
+
 	const MembersList = members.map((member) => (
 		<div className='Member__Card'>
 			<div className='Member__Info'>
@@ -32,9 +54,17 @@ function StudyGroupChatAdmin({ title, members }) {
 				</Link>
 			</div>
 			<div className='Member__Admin-Settings'>
-				<IconButton>
+				<IconButton onClick={togglePopover}>
 					<MoreHorizOutlinedIcon />
 				</IconButton>
+				<PopoverActions
+					remove={deletePost}
+					edit={editPost}
+					id={popoverId}
+					open={open}
+					anchorEl={anchorEl}
+					close={handleClose}
+				/>
 			</div>
 		</div>
 	));
@@ -68,7 +98,9 @@ function StudyGroupChatAdmin({ title, members }) {
 				</div>
 				<div className='Admin-Members__List'>{MembersList}</div>
 				<div className='Admin-Members__Footer'>
-					<CTAButton text='Leave Group' danger={true} />
+					<p onClick={leaveGroup}>
+						<CTAButton text='Leave Group' danger={true} />
+					</p>
 				</div>
 			</div>
 		</div>
