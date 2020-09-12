@@ -162,6 +162,12 @@ input,
   height: 45px;
 }
 
+.mate-btn-danger {
+  background-color: var(--bg-color);
+  color: var(--danger-color);
+  border: 1px solid var(--danger-color);
+}
+
 label,
 input,
 .mate-form-input {

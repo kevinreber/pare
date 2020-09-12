@@ -30,6 +30,8 @@ function StudyGroupChat() {
 	const [showAdmin, setShowAdmin] = useState(false);
 	const toggleAdmin = () => setShowAdmin((show) => !show);
 
+	const users = useSelector((state) => state.users);
+
 	/** Scroll to Bottom of Chat */
 	const setRef = useCallback((node) => {
 		if (node) {
@@ -69,8 +71,11 @@ function StudyGroupChat() {
 	if (showAdmin) {
 		return (
 			<Modal
-				content={<StudyGroupChatAdmin title={studyGroup.title} />}
+				content={
+					<StudyGroupChatAdmin title={studyGroup.title} members={users} />
+				}
 				closeModal={toggleAdmin}
+				full={true}
 			/>
 		);
 	}

@@ -102,3 +102,71 @@
 .message__attachments>i:hover {
     color: var(--primary-color);
 }
+
+/** StudyGroupChatAdmin  ***********/
+.StudyGroupChatAdmin {
+    margin-top: 6rem;
+}
+
+.StudyGroupChatAdmin>.Admin__Header {
+    border-bottom: 1px solid var(--tertiary-color);
+    padding: 1rem 2rem;
+    position: relative;
+}
+
+.StudyGroupChatAdmin>.Admin__Header>.MuiButtonBase-root.MuiIconButton-root {
+    position: absolute;
+    right: 2rem;
+    top: 5px;
+}
+
+.StudyGroupChatAdmin>.Admin__Body>.Admin-Members__Header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 2rem 0 2rem;
+}
+
+.Admin-Members__List {
+    padding: 1rem 2rem;
+}
+
+.Admin__Body>.Admin-Members__Add {
+    display: flex;
+    flex-direction: column;
+    padding: 0 1.5rem;
+}
+
+.Admin__Body>.Admin-Members__Add>.Add__Btn {
+    display: flex;
+}
+
+.Admin__Body>.Admin-Members__Add>.Add__Btn>p {
+    margin: auto 0;
+    color: var(--tertiary-color);
+}
+
+.Member__Info>a {
+    display: flex;
+}
+
+.Member__Info>a>p {
+    color: var(--primary-color);
+    margin: auto 1rem;
+}
+
+.member-number {
+    font-style: italic;
+    color: var(--tertiary-color);
+    font-size: smaller;
+    margin: auto 0;
+}
+
+.Admin-Members__List>.Member__Card {
+    display: flex;
+    justify-content: space-between;
+    padding: .5rem 0;
+}
+
+.Admin-Members__Add .MuiSvgIcon-root {
+    font-size: 2rem;
+}
