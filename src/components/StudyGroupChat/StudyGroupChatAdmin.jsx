@@ -33,11 +33,11 @@ function StudyGroupChatAdmin({ title, members }) {
 	const popoverId = open ? 'simple-popover' : undefined;
 	/************************************* */
 
-	const deletePost = () => {
+	const removeUser = () => {
 		console.log('deleting...');
 	};
 
-	const editPost = () => {
+	const editUser = () => {
 		console.log('editing..');
 	};
 
@@ -58,8 +58,8 @@ function StudyGroupChatAdmin({ title, members }) {
 					<MoreHorizOutlinedIcon />
 				</IconButton>
 				<PopoverActions
-					remove={deletePost}
-					edit={editPost}
+					remove={removeUser}
+					edit={editUser}
 					id={popoverId}
 					open={open}
 					anchorEl={anchorEl}
