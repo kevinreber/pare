@@ -200,7 +200,7 @@ input,
 }
 
 .mate-btn-cta {
-  position: absolute;
+  position: fixed;
   width: 350px;
   bottom: 7.5rem;
   left: 50%;

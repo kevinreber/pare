@@ -22,12 +22,12 @@ const newTime = {
 /** Each week has an array of objects for their available 'start' and 'end' time(s) of the day */
 const INITIAL_AVAIL = {
 	monday: [mTime],
-	tuesday: [newTime],
-	wednesday: [newTime],
-	thursday: [newTime],
-	friday: [newTime],
-	saturday: [newTime],
-	sunday: [newTime],
+	tuesday: [mTime],
+	wednesday: [mTime],
+	thursday: [mTime],
+	friday: [mTime],
+	saturday: [mTime],
+	sunday: [mTime],
 };
 
 const userAvailabilityReducer = (state = INITIAL_AVAIL, action) => {

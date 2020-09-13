@@ -48,7 +48,7 @@
     font-weight: 300;
     font-size: 14px;
     margin-top: 0.2rem;
-    width: 80px;
+    width: 88px;
 }
 
 .BeTutorForm input.MuiInputBase-input.MuiInput-input:active,
@@ -63,8 +63,17 @@
 }
 
 .BeTutorForm .Availability__Day .Availability__TimePicker {
+    position: relative;
     display: flex;
     align-items: baseline;
+}
+
+.BeTutorForm .Availability__Day .Availability__TimePicker .TimePicker__Seperator {
+    position: absolute;
+    left: 4.3rem;
+    bottom: 0rem;
+    font-weight: 300;
+    font-size: 14px;
 }
 
 .BeTutorForm .Availability__Day>.Availability__Add,

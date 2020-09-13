@@ -89,6 +89,7 @@ function BeTutorForm({ user, update, availability }) {
 				value={availability[day][0].start}
 				onChange={(e) => handleDate(e, day, 'start', index)}
 			/>
+			<p className='TimePicker__Seperator'>—</p>
 			<TimePicker
 				clearable
 				variant='inline'
