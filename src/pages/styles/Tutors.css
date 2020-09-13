@@ -1,79 +1,78 @@
 .Tutors {
-	display: flex;
-	flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .Tutors__Body {
-	flex: 1;
-	overflow: scroll;
-	margin-top: 20vh;
-	margin-bottom: 7rem;
+    flex: 1;
+    overflow: scroll;
+    margin-top: 20vh;
+    margin-bottom: 9rem;
 }
 
 .Tutor.Tutor-Card {
-	display: flex;
-	padding: 1rem;
-	font-size: 14px;
+    display: flex;
+    padding: 1rem;
+    font-size: 14px;
 }
 
 .Tutor.Tutor-Card .Tutor-Card-Term {
-	font-size: 12px;
+    font-size: 12px;
 }
 
 .Tutor.Tutor-Card .Tutor-Name,
 .Tutor.Tutor-Card .Tutor-Title {
-	padding-top: 0.5rem;
-	padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
 }
 
 .mate-table {
-	width: 100%;
-	border-bottom: 1px solid var(--tertiary-color);
+    width: 100%;
+    border-bottom: 1px solid var(--tertiary-color);
 }
 
 /** Be Tutor Form  */
 .BeTutorForm .Be-Tutor__Availability,
 .BeTutorForm .BeTutor__Portfolio {
-	display: flex;
-	flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
-.BeTutorForm
-	label.MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated.MuiInputLabel-shrink.MuiFormLabel-filled {
-	color: var(--primary-color);
-	font-size: 1.25rem;
-	font-weight: 500;
+.BeTutorForm label.MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated.MuiInputLabel-shrink.MuiFormLabel-filled {
+    color: var(--primary-color);
+    font-size: 1.25rem;
+    font-weight: 500;
 }
 
 .BeTutorForm input.MuiInputBase-input.MuiInput-input {
-	font-weight: 300;
-	font-size: 14px;
-	margin-top: 0.2rem;
-	width: 80px;
+    font-weight: 300;
+    font-size: 14px;
+    margin-top: 0.2rem;
+    width: 80px;
 }
 
 .BeTutorForm input.MuiInputBase-input.MuiInput-input:active,
 .BeTutorForm input.MuiInputBase-input.MuiInput-input:focus {
-	background-color: var(--bg-color);
+    background-color: var(--bg-color);
 }
 
 .BeTutorForm .Availability__Day {
-	display: flex;
-	flex-direction: column;
-	margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
 }
 
 .BeTutorForm .Availability__Day .Availability__TimePicker {
-	display: flex;
-	align-items: baseline;
+    display: flex;
+    align-items: baseline;
 }
 
-.BeTutorForm .Availability__Day > .Availability__Add,
+.BeTutorForm .Availability__Day>.Availability__Add,
 .BeTutorForm .Portfolio__Add,
 .BeTutorForm .BeTutor__Portfolio label {
-	align-self: flex-start;
+    align-self: flex-start;
 }
 
-.BeTutorForm .Availability__Day > .Availability__Add > button {
-	padding: 0;
+.BeTutorForm .Availability__Day>.Availability__Add>button {
+    padding: 0;
 }

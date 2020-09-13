@@ -6,7 +6,6 @@ import { original, produce } from 'immer';
 /** Components & Helpers */
 import DatePicker from 'react-datepicker';
 import CTAButton from '../general/CTAButton';
-import SubmitButton from '../general/SubmitButton';
 import useFields from '../../hooks/useFields';
 
 /** MUI */
@@ -15,7 +14,6 @@ import AddCircleOutlineRoundedIcon from '@material-ui/icons/AddCircleOutlineRoun
 import RemoveCircleOutlineSharpIcon from '@material-ui/icons/RemoveCircleOutlineSharp';
 import DateFnsUtils from '@date-io/date-fns';
 import { TimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
-import MomentUtils from '@date-io/moment';
 
 const DAYS = [
 	'monday',
@@ -31,39 +29,11 @@ function BeTutorForm({ user, update, availability }) {
 	// Form Data
 	const INITIAL_STATE = {
 		keywords: '',
-		portfolio: '',
+		portfolio: [],
 	};
 	console.log(availability);
-	// const INITIAL_AVAIL = {
-	// 	monday: [
-	// 		{ start: moment(new Date()).format(), end: moment(new Date()).format() },
-	// 	],
-	// 	tuesday: [{ start: new Date().getTime(), end: new Date().getTime() }],
-	// 	wednesday: [{ start: new Date().getTime(), end: new Date().getTime() }],
-	// 	thursday: [{ start: new Date().getTime(), end: new Date().getTime() }],
-	// 	friday: [{ start: new Date().getTime(), end: new Date().getTime() }],
-	// 	saturday: [{ start: new Date().getTime(), end: new Date().getTime() }],
-	// 	sunday: [{ start: new Date().getTime(), end: new Date().getTime() }],
-	// };
-
-	// const INITIAL_AVAIL = {
-	// 	monday: {
-	// 		start: moment(new Date()).format(),
-	// 		end: moment(new Date()).format(),
-	// 	},
-	// 	tuesday: { start: new Date().getTime(), end: new Date().getTime() },
-	// 	wednesday: { start: new Date().getTime(), end: new Date().getTime() },
-	// 	thursday: { start: new Date().getTime(), end: new Date().getTime() },
-	// 	friday: { start: new Date().getTime(), end: new Date().getTime() },
-	// 	saturday: { start: new Date().getTime(), end: new Date().getTime() },
-	// 	sunday: { start: new Date().getTime(), end: new Date().getTime() },
-	// };
-
-	// const [formData, handleChange, resetFormData] = useFields(INITIAL_STATE);
 
 	const [formData, setFormData] = useState(INITIAL_STATE);
-
-	const [initialAvailability, setAvailability] = useState(availability);
 
 	const [changeMade, setChangeMade] = useState(false);
 	// const availability = {
@@ -93,52 +63,8 @@ function BeTutorForm({ user, update, availability }) {
 		setChangeMade(false);
 	}
 
-	const handleDate = (e, day, type, index) => {
-		// const val = e.target.value;
-		// const time = moment(val, 'HH:mm');
-		// const t = time._i;
-		// console.log(val);
-		// console.log(t);
-
-		// const time = moment(e, 'dddd, HH:mm');
-		// const val = time._i;
-
-		const time = moment(e).format();
-		console.log(time);
-		setAvailability((fData) => ({
-			...fData,
-			// [`${day}${type}`]: moment(e).format(),
-			[`${day}${type}`]: moment(time),
-		}));
-		/**
-		 return produce(availability, (draft) => {
-			 let copy = original(draft);
-			 // const date = moment(new Date(e)).format();
-			 // console.log(e);
-			 // return (copy[day][type] = e);
-			 return (copy[`${day}${type}`] = e);
-			});
-			*/
-	};
-
-	// const handleDate = (e, day, type, index) => {
-	// 	console.log(e, day, type, index);
-	// 	console.log(moment(e).format());
-	// 	// const date = new Date(e);
-	// 	// const time = date.getTime();
-	// 	// console.log(date, date.getTime());
-	// 	// if (type === 'start') {
-	// setAvailability((fData) => ({
-	// 	...fData,
-	// 	[day.start]: moment(e).format(),
-	// }));
-	// 	// } else if (type === 'end') {
-	// 	// 	setFormData((fData) => ({ ...fData, [day[0]['end']]: e }));
-	// 	// }
-	// 	console.log(availability[day][type]);
-	// };
-
-	const updateDate = (time, day, type, index) => {
+	const handleDate = (time, day, type, index) => {
+		setChangeMade(true);
 		const availability = { time, day, type, index };
 		update(availability);
 	};
@@ -149,31 +75,26 @@ function BeTutorForm({ user, update, availability }) {
 
 		// Clear state of form
 		setFormData(INITIAL_STATE);
+		setChangeMade(false);
 	};
 
 	// 'Start' and 'End' Time Pickers
-	const timePickers = (day, index) => (
+	const timePickers = (day, index = 0) => (
 		<>
 			<TimePicker
 				clearable
 				variant='inline'
 				minutesStep={5}
 				label={day.charAt(0).toUpperCase() + day.slice(1)}
-				// name={day['start']}
-				value={initialAvailability[day].start}
-				// value={availability[day].start}
-				// onChange={(e) => handleDate(e, day, 'Start', index)}
-				onChange={(e) => updateDate(e, day, 'start', index)}
+				value={availability[day][0].start}
+				onChange={(e) => handleDate(e, day, 'start', index)}
 			/>
 			<TimePicker
 				clearable
 				variant='inline'
 				minutesStep={5}
-				// name={day['end']}
-				value={initialAvailability[`${day}End`]}
-				// value={availability[day].end}
-				// onChange={(e) => handleDate(e, day, 'End', index)}
-				onChange={(e) => updateDate(e, day, 'end', index)}
+				value={availability[day][0].end}
+				onChange={(e) => handleDate(e, day, 'end', index)}
 			/>
 
 			{/* Default HTML Input fields */}
@@ -209,21 +130,11 @@ function BeTutorForm({ user, update, availability }) {
 	// Build Fields for Availability
 	const dayFields = DAYS.map((day, index) => (
 		<div className='Availability__Day'>
-			<div className='Availability__TimePicker'>{timePickers(day, index)}</div>
+			<div className='Availability__TimePicker'>{timePickers(day)}</div>
 			<div className='Availability__Add'>
 				<IconButton>
 					<AddCircleOutlineRoundedIcon />
 				</IconButton>
-				{/* <KeyboardTimePicker
-				margin='normal'
-				id='time-picker'
-				label='Time picker'
-				value={formData[day]}
-				onChange={handleChange}
-				KeyboardButtonProps={{
-					'aria-label': 'change time',
-				}}
-			/> */}
 			</div>
 		</div>
 	));
