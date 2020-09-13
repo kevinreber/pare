@@ -110,7 +110,11 @@ function PostInfo() {
 			/>
 			<div className='PostInfo__Header bottom-border-header Body-Header'>
 				<BackButton />
-				<h5 className='text-center'>{post.type ? post.type : 'Post'}</h5>
+				<h5 className='text-center'>
+					{post.type
+						? post.type.charAt(0).toUpperCase() + post.type.slice(1)
+						: 'Post'}
+				</h5>
 			</div>
 			<div className='PostInfo__Body'>
 				<div className='PostInfo__Post'>
