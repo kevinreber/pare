@@ -9,7 +9,12 @@ import PostCard from '../components/Feed/PostCard';
 import ChatFooter from '../components/general/ChatFooter';
 import NoData from '../components/general/NoData';
 import CommentsList from '../components/PostInfo/CommentsList';
-import { addCommentToPost } from '../store/actions/posts';
+import {
+	addCommentToPost,
+	deleteCommentFromPost,
+} from '../store/actions/posts';
+import Notification from '../components/general/Notification';
+import ConfirmDialog from '../components/general/ConfirmDialog';
 import db from '../config/fbConfig';
 import './styles/PostInfo.css';
 
@@ -23,6 +28,17 @@ function PostInfo() {
 
 	const [post, setPost] = useState(null);
 	const [comments, setComments] = useState([]);
+
+	const [notify, setNotify] = useState({
+		isOpen: false,
+		message: '',
+		type: '',
+	});
+	const [confirmDialog, setConfirmDialog] = useState({
+		isOpen: false,
+		title: '',
+		subtitle: '',
+	});
 
 	useEffect(() => {
 		/** Get Post Info */
@@ -59,8 +75,39 @@ function PostInfo() {
 		}
 	};
 
+	/** Prompts Confirmation Dialog to Delete Comment */
+	const deleteCommentPrompt = (id) => {
+		setConfirmDialog({
+			isOpen: true,
+			title: 'Are you sure you want to remove this comment?',
+			subtitle: "You can't undo this operation",
+			onConfirm: () => {
+				deleteComment(id);
+			},
+		});
+	};
+
+	/** Delete Comment */
+	const deleteComment = (id) => {
+		setConfirmDialog({
+			...confirmDialog,
+			isOpen: false,
+		});
+		dispatch(deleteCommentFromPost(postId, id));
+		setNotify({ isOpen: true, message: 'Removed Comment', type: 'error' });
+	};
+
+	const editComment = (id) => {
+		console.log('editing...', postId, id);
+	};
+
 	return (
 		<div className='PostInfo'>
+			<Notification notify={notify} setNotify={setNotify} />
+			<ConfirmDialog
+				confirmDialog={confirmDialog}
+				setConfirmDialog={setConfirmDialog}
+			/>
 			<div className='PostInfo__Header bottom-border-header Body-Header'>
 				<BackButton />
 				<h5 className='text-center'>{post.type ? post.type : 'Post'}</h5>
@@ -88,7 +135,12 @@ function PostInfo() {
 				</div>
 				<div id='PostInfo__CommentList' className='PostInfo__CommentList'>
 					{comments ? (
-						<CommentsList postId={postId} comments={comments} />
+						<CommentsList
+							postId={postId}
+							comments={comments}
+							remove={deleteCommentPrompt}
+							edit={editComment}
+						/>
 					) : (
 						<NoData text='comments' />
 					)}

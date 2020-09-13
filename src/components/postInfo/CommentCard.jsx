@@ -1,12 +1,11 @@
 /** Dependencies */
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import moment from 'moment';
 
 /** Components & Helpers */
 import PopoverActions from '../general/PopoverActions';
-import { deleteCommentFromPost } from '../../store/actions/posts';
 
 /** MUI */
 import Avatar from '@material-ui/core/Avatar';
@@ -22,12 +21,13 @@ function CommentCard({
 	username,
 	avatar,
 	timestamp,
+	remove,
+	edit,
 }) {
-	const dispatch = useDispatch();
 	const currentUser = useSelector((state) => state.auth.user);
 
-	const deleteComment = () => dispatch(deleteCommentFromPost(postId, id));
-	const editComment = () => console.log('editing comment...');
+	const deleteComment = () => remove(id);
+	const editComment = () => edit(id);
 
 	/** PopoverActions Props ***************/
 	const [anchorEl, setAnchorEl] = useState(null);
