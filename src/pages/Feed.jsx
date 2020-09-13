@@ -7,7 +7,8 @@ import FeedList from '../components/Feed/FeedList';
 import PostForm from '../components/Feed/PostForm';
 import NoData from '../components/general/NoData';
 import Modal from '../components/general/Modal';
-import { addPostToFB } from '../store/actions/posts';
+import { addPostToFB, deletePostFromFB } from '../store/actions/posts';
+import Notification from '../components/general/Notification';
 import db from '../config/fbConfig';
 import './styles/Feed.css';
 
@@ -21,6 +22,12 @@ import AddIcon from '@material-ui/icons/Add';
 function Feed() {
 	const dispatch = useDispatch();
 	const [posts, setPosts] = useState([]);
+
+	const [notify, setNotify] = useState({
+		isOpen: false,
+		message: '',
+		type: '',
+	});
 
 	useEffect(() => {
 		db.collection('feeds')
@@ -42,6 +49,16 @@ function Feed() {
 	const addPost = (postData) => {
 		dispatch(addPostToFB(postData));
 		setShowForm(false);
+		setNotify({ isOpen: true, message: 'Post Successful!', type: 'success' });
+	};
+
+	const deletePost = (id) => {
+		dispatch(deletePostFromFB(id));
+		setNotify({ isOpen: true, message: 'Removed Post', type: 'success' });
+	};
+
+	const editPost = (id) => {
+		console.log('editing..', id);
 	};
 
 	if (showForm) {
@@ -56,8 +73,13 @@ function Feed() {
 
 	return (
 		<div className='Feed'>
+			<Notification notify={notify} setNotify={setNotify} />
 			<div className='Feed__List'>
-				{posts ? <FeedList posts={posts} /> : <NoData text='posts' />}
+				{posts ? (
+					<FeedList posts={posts} remove={deletePost} edit={editPost} />
+				) : (
+					<NoData text='posts' />
+				)}
 			</div>
 			<Fab id='Feed-Add-Post-Btn' aria-label='add'>
 				<AddIcon onClick={toggleForm} />

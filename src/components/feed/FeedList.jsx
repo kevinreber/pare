@@ -4,7 +4,7 @@ import React from 'react';
 /** Components & Helpers */
 import PostCard from './PostCard';
 
-function feedList({ posts }) {
+function feedList({ posts, remove, edit }) {
 	const List = posts.map((post) => (
 		<PostCard
 			id={post.id}
@@ -23,6 +23,8 @@ function feedList({ posts }) {
 			timestamp={post.data.timestamp}
 			comments={[]}
 			isBookmarked={false}
+			remove={remove}
+			edit={edit}
 		/>
 	));
 

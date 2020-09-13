@@ -26,7 +26,6 @@ import Avatar from '@material-ui/core/Avatar';
  */
 function PostCard({
 	id,
-	key,
 	title,
 	username,
 	userId,
@@ -41,6 +40,8 @@ function PostCard({
 	timestamp,
 	comments = null,
 	isBookmarked = false,
+	remove,
+	edit,
 }) {
 	const dispatch = useDispatch();
 	const currentUser = useSelector((state) => state.auth.user);
@@ -81,11 +82,13 @@ function PostCard({
 	);
 
 	const deletePost = () => {
-		dispatch(deletePostFromFB(id));
+		// dispatch(deletePostFromFB(id));
+		remove(id);
 	};
 
 	const editPost = () => {
-		console.log('editing..');
+		// console.log('editing..');
+		edit(id);
 	};
 
 	/** PopoverActions Props ***************/
@@ -99,7 +102,7 @@ function PostCard({
 	/************************************* */
 
 	return (
-		<div id={key} className='Post-Card'>
+		<div id={id} className='Post-Card'>
 			<div className='Post-Card__Main'>
 				<div className='Post-Card__Left'>
 					<Link to={`/users/${userId}`} className='mate-text-secondary'>

@@ -21,6 +21,7 @@ import NotificationsNoneOutlinedIcon from '@material-ui/icons/NotificationsNoneO
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import PersonIcon from '@material-ui/icons/Person';
 import BookmarkIcon from '@material-ui/icons/Bookmark';
+import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -100,7 +101,7 @@ function Header() {
 			<List>
 				<ListItem>
 					<ListItemIcon>
-						<SettingsIcon />
+						<ExitToAppOutlinedIcon />
 					</ListItemIcon>
 					<ListItemText onClick={logOutUser} primary={'Logout'} />
 				</ListItem>
