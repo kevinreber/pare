@@ -1,11 +1,10 @@
 /** Dependencies */
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import moment from 'moment';
 
 /** Components & Helpers */
-import { deletePostFromFB } from '../../store/actions/posts';
 import PopoverActions from '../general/PopoverActions';
 
 /** MUI */
@@ -43,7 +42,6 @@ function PostCard({
 	remove,
 	edit,
 }) {
-	const dispatch = useDispatch();
 	const currentUser = useSelector((state) => state.auth.user);
 
 	const BookmarkStatus = !isBookmarked ? (
@@ -82,12 +80,9 @@ function PostCard({
 	);
 
 	const deletePost = () => {
-		// dispatch(deletePostFromFB(id));
 		remove(id);
 	};
-
 	const editPost = () => {
-		// console.log('editing..');
 		edit(id);
 	};
 
