@@ -3,7 +3,7 @@ import Logo from '../../images/logo/mate-logo.png';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logOut } from '../../store/actions/auth';
-import { ReactComponent as NotifyIcon } from './icons/notification-icon.svg';
+
 /** Material UI */
 import {
 	Drawer,
