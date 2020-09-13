@@ -9,6 +9,7 @@ import NoData from '../components/general/NoData';
 import Modal from '../components/general/Modal';
 import { addPostToFB, deletePostFromFB } from '../store/actions/posts';
 import Notification from '../components/general/Notification';
+import ConfirmDialog from '../components/general/ConfirmDialog';
 import db from '../config/fbConfig';
 import './styles/Feed.css';
 
@@ -27,6 +28,11 @@ function Feed() {
 		isOpen: false,
 		message: '',
 		type: '',
+	});
+	const [confirmDialog, setConfirmDialog] = useState({
+		isOpen: false,
+		title: '',
+		subtitle: '',
 	});
 
 	useEffect(() => {
@@ -52,11 +58,29 @@ function Feed() {
 		setNotify({ isOpen: true, message: 'Post Successful!', type: 'success' });
 	};
 
-	const deletePost = (id) => {
-		dispatch(deletePostFromFB(id));
-		setNotify({ isOpen: true, message: 'Removed Post', type: 'success' });
+	/** Prompts Confirmation Dialog to Delete Post*/
+	const deletePostPrompt = (id) => {
+		setConfirmDialog({
+			isOpen: true,
+			title: 'Are you sure you want to remove this post?',
+			subtitle: "You can't undo this operation",
+			onConfirm: () => {
+				deletePost(id);
+			},
+		});
 	};
 
+	/** Delete Post */
+	const deletePost = (id) => {
+		setConfirmDialog({
+			...confirmDialog,
+			isOpen: false,
+		});
+		dispatch(deletePostFromFB(id));
+		setNotify({ isOpen: true, message: 'Removed Post', type: 'error' });
+	};
+
+	/** Prompts Modal to edit Post information */
 	const editPost = (id) => {
 		console.log('editing..', id);
 	};
@@ -74,9 +98,13 @@ function Feed() {
 	return (
 		<div className='Feed'>
 			<Notification notify={notify} setNotify={setNotify} />
+			<ConfirmDialog
+				confirmDialog={confirmDialog}
+				setConfirmDialog={setConfirmDialog}
+			/>
 			<div className='Feed__List'>
 				{posts ? (
-					<FeedList posts={posts} remove={deletePost} edit={editPost} />
+					<FeedList posts={posts} remove={deletePostPrompt} edit={editPost} />
 				) : (
 					<NoData text='posts' />
 				)}

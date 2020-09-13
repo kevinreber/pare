@@ -1,4 +1,10 @@
+/** Dependencies */
 import React from 'react';
+
+/** Components & Helpers */
+import './styles/Notification.css';
+
+/** MUI */
 import { Snackbar, makeStyles } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 

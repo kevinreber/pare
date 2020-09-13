@@ -1,0 +1,19 @@
+.MuiPaper-root.MuiDialog-paper.makeStyles-dialog-3.MuiDialog-paperScrollPaper.MuiDialog-paperWidthSm.MuiPaper-elevation24.MuiPaper-rounded {
+    text-align: center;
+}
+
+.MuiDialogTitle-root.makeStyles-dialogTitle-4 button.MuiButtonBase-root.MuiIconButton-root.makeStyles-titleIcon-7 {
+    background-color: var(--danger-color);
+}
+
+button.MuiButtonBase-root.MuiButton-root.makeStyles-root-9.MuiButton-contained.MuiButton-containedSizeLarge.MuiButton-sizeLarge:first-of-type {
+    border: 1px solid var(--primary-color);
+    background-color: var(--bg-color);
+    color: var(--primary-color);
+}
+
+button.MuiButtonBase-root.MuiButton-root.makeStyles-root-9.MuiButton-contained.MuiButton-containedSizeLarge.MuiButton-sizeLarge:last-of-type {
+    border: 1px solid var(--danger-color);
+    background-color: var(--danger-color);
+    color: var(--bg-color);
+}
