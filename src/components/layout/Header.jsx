@@ -1,7 +1,8 @@
+/** Dependencies */
 import React, { useState } from 'react';
 import Logo from '../../images/logo/mate-logo.png';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from '../../store/actions/auth';
 
 /** Material UI */
@@ -46,6 +47,8 @@ function Header() {
 		dispatch(logOut());
 	};
 
+	const currentUser = useSelector((state) => state.auth.user);
+
 	/** Initialize useStyles */
 	const classes = useStyles();
 	const [drawer, setDrawer] = useState(false);
@@ -80,22 +83,28 @@ function Header() {
 			</List>
 			<List>
 				<ListItem>
-					<ListItemIcon>
-						<GroupAddIcon />
-					</ListItemIcon>
-					<ListItemText primary='Following' />
+					<Link to='/following'>
+						<ListItemIcon>
+							<GroupAddIcon />
+						</ListItemIcon>
+						<ListItemText primary='Following' />
+					</Link>
 				</ListItem>
 				<ListItem>
-					<ListItemIcon>
-						<PersonIcon />
-					</ListItemIcon>
-					<ListItemText primary='Profile' />
+					<Link to={`/users/${currentUser.uid}`}>
+						<ListItemIcon>
+							<PersonIcon />
+						</ListItemIcon>
+						<ListItemText primary='Profile' />
+					</Link>
 				</ListItem>
 				<ListItem>
-					<ListItemIcon>
-						<BookmarkIcon />
-					</ListItemIcon>
-					<ListItemText primary='Bookmarks' />
+					<Link to='#'>
+						<ListItemIcon>
+							<BookmarkIcon />
+						</ListItemIcon>
+						<ListItemText primary='Bookmarks' />
+					</Link>
 				</ListItem>
 			</List>
 			<List>

@@ -41,8 +41,19 @@
     text-align: left;
 }
 
+.MuiBadge-root .MuiSvgIcon-root {
+    fill: var(--primary-color);
+}
+
+/** Sidebar *******************/
 .MuiPaper-root.MuiDrawer-paper.MuiDrawer-paperAnchorLeft.MuiPaper-elevation16 {
     background-color: var(--bg-color);
+    color: var(--secondary-color);
+    padding-left: .75rem;
+}
+
+.MuiPaper-root.MuiDrawer-paper.MuiDrawer-paperAnchorLeft.MuiPaper-elevation16 a {
+    display: flex;
     color: var(--secondary-color);
 }
 
@@ -66,10 +77,6 @@
 
 .MuiPaper-root.MuiAppBar-root.MuiAppBar-positionStatic.MuiAppBar-colorPrimary.Header-Content.MuiPaper-elevation4 {
     background-color: var(--bg-color);
-}
-
-.MuiBadge-root .MuiSvgIcon-root {
-    fill: var(--primary-color);
 }
 
 .MuiBadge-badge.MuiBadge-anchorOriginTopRightRectangle {
