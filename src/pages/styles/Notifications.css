@@ -1,0 +1,25 @@
+.Notifications__Body {
+    display: flex;
+    flex-direction: column;
+}
+
+.MessageList {
+    margin-top: 18vh;
+}
+
+.MessageCard {
+    border-bottom: 1px solid var(--tertiary-color);
+}
+
+.MessageCard>.Container {
+    display: flex;
+    padding: 1rem .5rem;
+}
+
+.MessageCard>.Container.MessageCard__Center>h5 {
+    font-size: 14px;
+}
+
+.MessageCard p {
+    font-size: 12px;
+}

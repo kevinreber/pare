@@ -1,24 +1,53 @@
 /** Dependencies */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 /** Components & Helpers */
 import NotificationsList from '../components/Notifications/NotificationsList';
 import MessagesList from '../components/Notifications/MessagesList';
+import db from '../config/fbConfig';
+import './styles/Notifications.css';
 
 /** User can see notifications and messages */
 function Notifications() {
+	const currentUser = useSelector((state) => state.auth.user);
+
 	// State will determine what courses to show in CourseList
 	const [active, setActive] = useState('notifications');
 	const toggleActive = (e) => {
 		setActive(e.target.id);
 	};
 
+	const [messages, setMessages] = useState([]);
+
+	useEffect(() => {
+		console.log('fetching...');
+		db.collection('messages')
+			.where('users', 'array-contains', currentUser.uid)
+			// .orderBy('lastUpdatedAt')
+			.get()
+			.then((snapshot) => {
+				setMessages(
+					snapshot.docs.map((doc) => {
+						return {
+							id: doc.id,
+							data: doc.data(),
+						};
+					})
+				);
+			});
+	}, [currentUser]);
+
 	const PageBody =
-		active === 'notifications' ? <NotificationsList /> : <MessagesList />;
+		active === 'notifications' ? (
+			<NotificationsList />
+		) : (
+			<MessagesList messages={messages} />
+		);
 
 	return (
-		<>
-			<div className='Notifications-Header Body-Header'>
+		<div className='Notifications-Page'>
+			<div className='Notifications__Header Body-Header'>
 				<div className='Notifications'>
 					<h5
 						id='notifications'
@@ -42,8 +71,8 @@ function Notifications() {
 					</h5>
 				</div>
 			</div>
-			{PageBody}
-		</>
+			<div className='Notifications__Body'>{PageBody}</div>
+		</div>
 	);
 }
 
