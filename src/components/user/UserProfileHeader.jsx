@@ -33,7 +33,8 @@ function UserProfileHeader({
 				className='User-Profile User-Profile-Header Image-Overlay pt-3 pb-3'>
 				<BackButton />
 				<h5 className='User-Profile-Username mb-3'>
-					{name.first} {name.last}
+					{name.displayName}
+					{/* {name.first} {name.last} */}
 				</h5>
 				<img
 					className='Avatar User-Profile-Avatar mb-3'

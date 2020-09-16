@@ -38,7 +38,7 @@ function Routes() {
 					component={StudyGroupChat}
 				/>
 				<PrivateRoute exact path='/tutors' component={Tutors} />
-				<PrivateRoute exact path='/users/:id' component={UserProfile} />
+				<PrivateRoute exact path='/users/:userId' component={UserProfile} />
 				<PrivateRoute exact path='/following' component={Following} />
 				<PrivateRoute exact path='/followers' component={Followers} />
 				<Route exact path='/login' component={Login} />

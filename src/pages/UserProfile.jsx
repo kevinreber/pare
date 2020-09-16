@@ -1,6 +1,6 @@
 /** Dependencies */
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 /** Components & Helpers */
@@ -12,22 +12,34 @@ import db from '../config/fbConfig';
 
 /** User Profile component */
 function UserProfile() {
-	const { id } = useParams();
+	const { userId } = useParams();
 	/**
 	 * ! Fix to map through array or object
 	 */
-	const user = useSelector((state) => state.user[id]);
+	// const user = useSelector((state) => state.user[id]);
+
+	const history = useHistory();
+
+	const [user, setUser] = useState(null);
 
 	/*
     ! need to try syncing to database
     */
 	useEffect(() => {
-		async function getUserData() {
-			// const await = db.collection('users').doc('yuJSHIcQUguN9HY0FSq7')
+		if (userId) {
+			db.collection('users')
+				.doc(userId)
+				.onSnapshot((snapshot) => setUser(snapshot.data()));
 		}
+	}, [userId]);
 
-		getUserData();
-	}, []);
+	/** if user doesn't exist, redirect user to '/feed' */
+	if (!user) {
+		history.push('/feed');
+		/*
+		 ! show 'Error' message
+		 */
+	}
 
 	/** if User is viewing their own profile, show edit button instead of message button */
 	const DisplayButton = user ? (
@@ -40,6 +52,7 @@ function UserProfile() {
 		<>
 			<UserProfileHeader
 				id={user.id}
+				displayName={user.displayName}
 				name={user.name}
 				school={user.school}
 				avatar={user.image}
