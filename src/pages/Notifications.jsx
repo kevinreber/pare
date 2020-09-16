@@ -42,7 +42,7 @@ function Notifications() {
 		active === 'notifications' ? (
 			<NotificationsList />
 		) : (
-			<MessagesList messages={messages} />
+			<MessagesList messages={messages} userId={currentUser.uid} />
 		);
 
 	return (
