@@ -7,9 +7,11 @@ import BackButton from '../general/BackButton';
 /** Header for User Profile */
 function UserProfileHeader({
 	id,
+	displayName,
 	name,
 	school,
-	avatar = 'https://academist-app-production.s3.amazonaws.com/uploads/user/profile_image/11332/default_user_icon.png',
+	avatar,
+	// avatar = 'https://academist-app-production.s3.amazonaws.com/uploads/user/profile_image/11332/default_user_icon.png',
 	// background = 'https://www.berkeleyside.com/wp-content/uploads/2020/04/1920px-UCBerkeleyCampus-720x468.jpg',
 	isTutor = false,
 }) {
@@ -30,10 +32,10 @@ function UserProfileHeader({
 		<>
 			<div
 				style={headerStyle}
-				className='User-Profile User-Profile-Header Image-Overlay pt-3 pb-3'>
+				className='User-Profile User-Profile-Header-BG Image-Overlay pt-3 pb-3'>
 				<BackButton />
 				<h5 className='User-Profile-Username mb-3'>
-					{name.displayName}
+					{displayName}
 					{/* {name.first} {name.last} */}
 				</h5>
 				<img
@@ -41,10 +43,6 @@ function UserProfileHeader({
 					src={avatar}
 					alt={name}
 				/>
-				{/* <p className='User-Profile-School'>
-					<i className='fas fa-map-marker-alt mr-2'></i>
-					{school}
-				</p> */}
 				<div className='User-Profile-Header-Footer d-flex justify-content-end'>
 					<p className='User-Profile-School ml-auto mr-1'>
 						<i className='fas fa-map-marker-alt mr-2'></i>

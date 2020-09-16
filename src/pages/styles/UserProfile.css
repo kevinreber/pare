@@ -21,7 +21,7 @@
 	width: 72px;
 }
 
-.User-Profile.User-Profile-Header {
+.User-Profile.User-Profile-Header-BG {
 	background-size: cover;
 	height: 180px;
 }
@@ -49,8 +49,28 @@
 	padding-top: 1rem;
 }
 
-.User-Profile.User-Profile-Body
-	.User-Profile-Body-Field
-	.User-Profile-Body-Input {
+.User-Profile.User-Profile-Body .User-Profile-Body-Field .User-Profile-Body-Input {
 	margin-left: 0.5rem;
+}
+
+/**************************************/
+/** User Profile                      */
+/**************************************/
+
+.UserProfile {
+	display: flex;
+	flex-direction: column;
+}
+
+.UserProfile__Header {
+	margin-top: 10vh;
+}
+
+.UserProfile .UserProfile__BackBtn {
+	position: relative;
+}
+
+.UserProfile .UserProfile__BackBtn .BackButton {
+	top: 5.25rem;
+	z-index: 100;
 }
