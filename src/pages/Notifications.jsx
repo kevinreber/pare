@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux';
 /** Components & Helpers */
 import NotificationsList from '../components/Notifications/NotificationsList';
 import MessagesList from '../components/Notifications/MessagesList';
+import NewMessageForm from '../components/Notifications/NewMessageForm';
+import Modal from '../components/general/Modal';
 import db from '../config/fbConfig';
 import './styles/Notifications.css';
 
@@ -17,6 +19,10 @@ function Notifications() {
 	const toggleActive = (e) => {
 		setActive(e.target.id);
 	};
+
+	/** New Message Form */
+	const [showForm, setShowForm] = useState(false);
+	const toggleForm = () => setShowForm((show) => !show);
 
 	const [messages, setMessages] = useState([]);
 
@@ -42,8 +48,26 @@ function Notifications() {
 		active === 'notifications' ? (
 			<NotificationsList />
 		) : (
-			<MessagesList messages={messages} userId={currentUser.uid} />
+			<MessagesList
+				messages={messages}
+				userId={currentUser.uid}
+				toggleForm={toggleForm}
+			/>
 		);
+
+	const sendMessage = (data) => {
+		console.log(data);
+	};
+
+	if (showForm) {
+		return (
+			<Modal
+				content={<NewMessageForm send={sendMessage} />}
+				closeModal={toggleForm}
+				full={true}
+			/>
+		);
+	}
 
 	return (
 		<div className='Notifications-Page'>
