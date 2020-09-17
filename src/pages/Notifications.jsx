@@ -57,6 +57,16 @@ function Notifications() {
 
 	const sendMessage = (data) => {
 		console.log(data);
+		// const sendMessage = (message) => {
+		// 	try {
+		// 		db.collection('study-group')
+		// 			.doc(studyGroupId)
+		// 			.collection('messages')
+		// 			.add(message);
+		// 	} catch (err) {
+		// 		console.log(err);
+		// 	}
+		// };
 	};
 
 	if (showForm) {
@@ -64,7 +74,7 @@ function Notifications() {
 			<Modal
 				content={<NewMessageForm send={sendMessage} />}
 				closeModal={toggleForm}
-				full={true}
+				// full={true}
 			/>
 		);
 	}

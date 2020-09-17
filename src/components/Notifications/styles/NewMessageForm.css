@@ -1,0 +1,3 @@
+.NewMessage__Form .MuiInputBase-input {
+    border: 1px solid var(--tertiary-color);
+}
