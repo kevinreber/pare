@@ -3,6 +3,10 @@
     flex-direction: column;
 }
 
+/*************************************************/
+/** Messages                                    */
+/*************************************************/
+
 .MessageList {
     margin-top: 18vh;
 }
@@ -13,13 +17,29 @@
 
 .MessageCard>.Container {
     display: flex;
-    padding: 1rem .5rem;
+    justify-content: space-between;
+    padding: 1rem;
 }
 
-.MessageCard>.Container.MessageCard__Center>h5 {
+.MessageCard>.Container p,
+.MessageCard>.Container h5 {
+    margin: 0;
+}
+
+.MessageCard>.Container>.MessageCard__Left {
+    margin-right: 1rem;
+}
+
+.MessageCard>.Container>.MessageCard__Center {
+    flex: 1;
+    text-align: left;
+}
+
+.MessageCard>.Container>.MessageCard__Center>h5 {
     font-size: 14px;
 }
 
 .MessageCard p {
+    color: var(--secondary-color);
     font-size: 12px;
 }
