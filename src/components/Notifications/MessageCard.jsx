@@ -45,8 +45,10 @@ function MessageCard({ message, userId }) {
 					</Link>
 				</div>
 				<div className='MessageCard__Center'>
-					<h5>{receiver.displayName}</h5>
-					<p>{message.data.chats[0].content}</p>
+					<Link to={`/messages/${message.id}`}>
+						<h5>{receiver.displayName}</h5>
+						<p>{message.data.chats[0].content}</p>
+					</Link>
 				</div>
 				<div className='MessageCard__Right'>
 					<p>

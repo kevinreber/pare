@@ -6,6 +6,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import Login from '../pages/auth/Login';
 import Signup from '../pages/auth/Signup';
 import Notifications from '../pages/Notifications';
+import Messages from '../pages/Messages';
 import Feed from '../pages/Feed';
 import PostInfo from '../pages/PostInfo';
 import Search from '../pages/Search';
@@ -26,6 +27,7 @@ function Routes() {
 		<>
 			<Switch>
 				<PrivateRoute exact path='/notifications' component={Notifications} />
+				<PrivateRoute exact path='/messages/:messageId' component={Messages} />
 				<PrivateRoute exact path='/feed' component={Feed} />
 				<PrivateRoute exact path='/post/:postId' component={PostInfo} />
 				<PrivateRoute exact path='/search' component={Search} />
