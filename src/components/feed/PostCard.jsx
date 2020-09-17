@@ -100,7 +100,7 @@ function PostCard({
 		<div id={id} className='Post-Card'>
 			<div className='Post-Card__Main'>
 				<div className='Post-Card__Left'>
-					<Link to={`/users/${userId}`} className='mate-text-secondary'>
+					<Link to={`/users/${userId}`}>
 						<Avatar alt={username} src={avatar} />
 					</Link>
 				</div>

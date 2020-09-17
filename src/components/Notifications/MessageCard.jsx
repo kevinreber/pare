@@ -4,8 +4,10 @@ import { Link } from 'react-router-dom';
 import moment from 'moment';
 
 /** Components & Helpers */
-import UserAvatar from '../general/UserAvatar';
 import db from '../../config/fbConfig';
+
+/** MUI */
+import Avatar from '@material-ui/core/Avatar';
 
 /** Message card for Message List
  * Notifications -> MessagesList -> MessageCard
@@ -38,14 +40,9 @@ function MessageCard({ message, userId }) {
 		<div className='MessageCard'>
 			<div className='Container'>
 				<div className='MessageCard__Left'>
-					{/* <Link to={`/users/${receiverId}`}>
+					<Link to={`/users/${receiverId}`}>
 						<Avatar src={receiver.photoUrl} alt={receiver.displayName} />
-					</Link> */}
-					<UserAvatar
-						uid={receiverId}
-						src={receiver.photoURL}
-						alt={receiver.displayName}
-					/>
+					</Link>
 				</div>
 				<div className='MessageCard__Center'>
 					<Link to={`/messages/${message.id}`}>

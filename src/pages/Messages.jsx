@@ -1,6 +1,6 @@
 /** Dependencies */
 import React, { useState, useEffect, useCallback } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 
@@ -10,13 +10,13 @@ import NoData from '../components/general/NoData';
 import Modal from '../components/general/Modal';
 import BackButton from '../components/general/BackButton';
 import MessageFooter from '../components/Messages/MessageFooter';
-import UserAvatar from '../components/general/UserAvatar';
 import db from '../config/fbConfig';
 import './styles/Messages.css';
 
 /** MUI */
 import IconButton from '@material-ui/core/IconButton';
 import MoreHorizOutlinedIcon from '@material-ui/icons/MoreHorizOutlined';
+import Avatar from '@material-ui/core/Avatar';
 
 /** Displays Chat History of Message
  * Messages
@@ -144,11 +144,10 @@ function MessageChat() {
 					<div className='MessageChat__Header bottom-border-header'>
 						<BackButton />
 						<div className='MessageChat__Title'>
-							<UserAvatar
-								uid={receiverId}
-								src={receiver.photoURL}
-								alt={receiver.displayName}
-							/>
+							<Link to={`/users/${receiverId}`}>
+								<Avatar src={receiver.photoUrl} alt={receiver.displayName} />
+							</Link>
+
 							<h5>{receiver.displayName}</h5>
 						</div>
 						<IconButton onClick={toggleAdmin}>
