@@ -2,7 +2,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import moment from 'moment';
 
 /** Components & Helpers */
@@ -11,13 +10,13 @@ import NoData from '../components/general/NoData';
 import Modal from '../components/general/Modal';
 import BackButton from '../components/general/BackButton';
 import MessageFooter from '../components/Messages/MessageFooter';
+import UserAvatar from '../components/general/UserAvatar';
 import db from '../config/fbConfig';
 import './styles/Messages.css';
 
 /** MUI */
 import IconButton from '@material-ui/core/IconButton';
 import MoreHorizOutlinedIcon from '@material-ui/icons/MoreHorizOutlined';
-import Avatar from '@material-ui/core/Avatar';
 
 /** Displays Chat History of Message
  * Messages
@@ -136,26 +135,36 @@ function MessageChat() {
 			<NoData text='messages' />
 		);
 
+	console.log(receiver);
+
 	return (
 		<div className='MessageChat'>
-			<div className='MessageChat__Header bottom-border-header'>
-				<BackButton />
-				<div className='MessageChat__Title'>
-					<Link to={`/users/${receiverId}`}>
-						<Avatar alt={receiver.photoUrl} src={receiver.displayName} />
-					</Link>
-					<h5>{receiver.displayName}</h5>
-				</div>
-				<IconButton onClick={toggleAdmin}>
-					<MoreHorizOutlinedIcon fontSize='small' />
-				</IconButton>
-			</div>
-			<div id='MessageChat__Body' className='MessageChat__Body Page__Body'>
-				{ChatBody}
-			</div>
-			<div className='MessageChat__Footer'>
-				<MessageFooter send={sendMessage} username={currentUser.uid} />
-			</div>
+			{receiver ? (
+				<>
+					<div className='MessageChat__Header bottom-border-header'>
+						<BackButton />
+						<div className='MessageChat__Title'>
+							<UserAvatar
+								uid={receiverId}
+								src={receiver.photoURL}
+								alt={receiver.displayName}
+							/>
+							<h5>{receiver.displayName}</h5>
+						</div>
+						<IconButton onClick={toggleAdmin}>
+							<MoreHorizOutlinedIcon fontSize='small' />
+						</IconButton>
+					</div>
+					<div id='MessageChat__Body' className='MessageChat__Body Page__Body'>
+						{ChatBody}
+					</div>
+					<div className='MessageChat__Footer'>
+						<MessageFooter send={sendMessage} username={currentUser.uid} />
+					</div>
+				</>
+			) : (
+				''
+			)}
 		</div>
 	);
 }
