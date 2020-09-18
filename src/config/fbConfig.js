@@ -17,10 +17,12 @@ const firebaseConfig = {
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const db = firebaseApp.firestore();
+const increment = firebase.firestore.FieldValue.increment(1);
+const decrement = firebase.firestore.FieldValue.increment(-1);
 const auth = firebase.auth();
 const provider = new firebase.auth.GoogleAuthProvider();
 
-export { auth, provider };
+export { auth, provider, increment, decrement };
 export default db;
 
 /** 
