@@ -53,6 +53,9 @@ function NewMessageForm({ send, receiverId = null }) {
 		return true;
 	};
 
+	/**
+	 * ! NEED TO MAKE SURE EXISTING MESSAGE BETWEEN BOTH USERS DOES NOT ALREADY EXIST
+	 */
 	/** Make sure user is sending message to another user and chat is not empty */
 	const validateFormData = () => {
 		/** Clear any existing errors */
@@ -61,10 +64,10 @@ function NewMessageForm({ send, receiverId = null }) {
 			setErrors('User does not exist');
 			return false;
 		}
-		if (formData.chats.length === 0) {
-			setErrors('Message can not be empty');
-			return false;
-		}
+		// if (formData.chats.length === 0) {
+		// 	setErrors('Message can not be empty');
+		// 	return false;
+		// }
 		return true;
 	};
 
@@ -72,6 +75,7 @@ function NewMessageForm({ send, receiverId = null }) {
 	const resetFormData = () => {
 		setChatData(CHAT_INITIAL_STATE);
 		setFormData(FORM_INITIAL_STATE);
+		setReceiverUser(RECEIVER_INITIAL_STATE);
 	};
 
 	const handleSubmit = (e) => {
@@ -85,12 +89,12 @@ function NewMessageForm({ send, receiverId = null }) {
 		// if receiverUser and chat message are not empty, push chat into formData
 		if (receiverUser.uid !== '' && validateChat()) {
 			// append data to formData to create new chat
-			formData.chats.push(chatData);
+			// formData.chats.push(chatData);
 			formData.count += 1;
 			formData.users.push(receiverUser.uid);
 
 			if (validateFormData()) {
-				send(formData);
+				send(formData, chatData);
 				resetFormData();
 			}
 		}

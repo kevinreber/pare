@@ -14,6 +14,8 @@ import Avatar from '@material-ui/core/Avatar';
  */
 function MessageCard({ message, userId }) {
 	const [receiverId, setReceiverId] = useState(null);
+	const [chats, setChats] = useState([]);
+
 	useEffect(() => {
 		// get Receiver's ID
 		function getReceiver() {
@@ -21,8 +23,21 @@ function MessageCard({ message, userId }) {
 			setReceiverId(id);
 		}
 
+		/** Get Chat Messages */
+		function getChat() {
+			db.collection('messages')
+				.doc(message.id)
+				.collection('chats')
+				.orderBy('createdAt', 'desc')
+				.limit(1)
+				.onSnapshot((snapshot) => {
+					setChats(snapshot.docs.map((doc) => doc.data()));
+				});
+		}
+
 		if (message) {
 			getReceiver();
+			getChat();
 		}
 	}, [message, userId]);
 
@@ -47,14 +62,13 @@ function MessageCard({ message, userId }) {
 				<div className='MessageCard__Center'>
 					<Link to={`/messages/${message.id}`}>
 						<h5>{receiver.displayName}</h5>
-						<p>{message.data.chats[0].content}</p>
+						{chats.length > 0 ? <p>{chats[0].content}</p> : <p>Loading...</p>}
 					</Link>
 				</div>
 				<div className='MessageCard__Right'>
 					<p>
 						{moment(message.data.createdAt.toDate()).startOf('day').fromNow()}
 					</p>
-					{/* <p>{message.data.createdAt}</p> */}
 				</div>
 			</div>
 		</div>

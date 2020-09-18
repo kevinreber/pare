@@ -4,6 +4,9 @@ export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT_USER = 'LOGOUT_USER';
 export const LOGOUT_FAIL = 'LOGOUT_FAIL';
 
+/** Messages */
+export const ADD_NEW_MESSAGE = 'ADD_NEW_MESSAGE';
+
 /** Feed */
 export const ADD_POST = 'ADD_POST';
 export const ADD_POST_FAIL = 'ADD_POST_FAIL';

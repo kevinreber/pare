@@ -25,7 +25,9 @@ function MessageChat() {
 	const { messageId } = useParams();
 	const currentUser = useSelector((state) => state.auth.user);
 
-	const [messages, setMessages] = useState(null);
+	const [messageData, setMessageData] = useState(null);
+	const [chats, setChats] = useState([]);
+
 	const [receiverId, setReceiverId] = useState(null);
 	const [receiver, setReceiver] = useState({});
 
@@ -44,38 +46,38 @@ function MessageChat() {
 			/** Get Message Info */
 			db.collection('messages')
 				.doc(messageId)
-				.onSnapshot((snapshot) => setMessages(snapshot.data()));
+				.onSnapshot((snapshot) => setMessageData(snapshot.data()));
 
-			/** Get Messages */
-			// db.collection('messages')
-			// 	.doc(messageId)
-			// 	.collection('chat')
-			// 	.orderBy('createdAt', 'asc')
-			// 	.onSnapshot((snapshot) =>
-			// 		setChat(
-			// 			snapshot.docs.map((doc) => {
-			// 				return {
-			// 					id: doc.id,
-			// 					data: doc.data(),
-			// 				};
-			// 			})
-			// 		)
-			// 	);
+			/** Get Chat Messages */
+			db.collection('messages')
+				.doc(messageId)
+				.collection('chats')
+				.orderBy('createdAt', 'asc')
+				.onSnapshot((snapshot) =>
+					setChats(
+						snapshot.docs.map((doc) => {
+							return {
+								id: doc.id,
+								data: doc.data(),
+							};
+						})
+					)
+				);
 		}
 	}, [messageId]);
 
 	// get Receiver's ID
 	useEffect(() => {
 		function getReceiver() {
-			console.log(messages);
-			const id = messages.users.filter((uid) => uid !== currentUser.uid);
+			console.log(messageData);
+			const id = messageData.users.filter((uid) => uid !== currentUser.uid);
 			setReceiverId(id);
 		}
 
-		if (messages) {
+		if (messageData) {
 			getReceiver();
 		}
-	}, [messages, currentUser]);
+	}, [messageData, currentUser]);
 
 	// get Receiver's data
 	useEffect(() => {
@@ -86,7 +88,7 @@ function MessageChat() {
 		}
 	}, [receiverId]);
 
-	if (!messages) {
+	if (!messageData) {
 		return <p>Loading...</p>;
 	}
 
@@ -112,19 +114,19 @@ function MessageChat() {
 
 	/** Display receiver and user's chat */
 	const ChatBody =
-		messages.chats && messages.chats.length !== 0 ? (
-			messages.chats.map((message, index) => {
-				const lastMessage = messages.chats.length - 1 === index;
+		chats && chats.length !== 0 ? (
+			chats.map((message, index) => {
+				const lastMessage = chats.length - 1 === index;
 				return (
 					<div id={message.index} ref={lastMessage ? setRef : null}>
 						<p
 							className={`MessageChatBody__message chat__message ${
-								currentUser.uid === message.uid ? 'chat__receiver' : ''
+								currentUser.uid === message.data.uid ? 'chat__receiver' : ''
 							}`}>
-							{message.content}
+							{message.data.content}
 							<span className='chat__timestamp'>
-								{message.createdAt
-									? moment(message.createdAt.toDate()).calendar()
+								{message.data.createdAt
+									? moment(message.data.createdAt.toDate()).calendar()
 									: ''}
 							</span>
 						</p>
