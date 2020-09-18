@@ -17,10 +17,11 @@ function AutocompleteUsers({
 	options,
 	placeholder,
 	setId,
+	showOptions,
+	toggleOptions,
 }) {
 	const [usersList, setUsersList] = useState([]);
 	const [filteredOptions, setFilteredOptions] = useState([]);
-	const [showOptions, setShowOptions] = useState(false);
 
 	/** Get Users */
 	useEffect(() => {
@@ -37,7 +38,7 @@ function AutocompleteUsers({
 	/** Commit onChange changes and filter through options */
 	function onSearch(e) {
 		onChange(e);
-		setShowOptions(true);
+		toggleOptions(true);
 		let opts = usersList.filter(
 			(user) =>
 				user.data.displayName.toLowerCase().indexOf(value.toLowerCase()) > -1
@@ -48,7 +49,7 @@ function AutocompleteUsers({
 
 	function onClick(e) {
 		setFilteredOptions([]);
-		setShowOptions(false);
+		toggleOptions(false);
 		onChange(e);
 		setId(e);
 	}
@@ -67,7 +68,7 @@ function AutocompleteUsers({
 							data-value={option.data.displayName}
 							onClick={onClick}>
 							<Avatar
-								src={option.data.photoUrl}
+								src={option.data.photoURL}
 								alt={option.data.displayName}
 							/>
 							{option.data.displayName}
@@ -92,7 +93,6 @@ function AutocompleteUsers({
 				className='form-control mate-form-input'
 				type='text'
 				onChange={onSearch}
-				onBlur={() => setShowOptions(false)}
 				name={name}
 				value={value}
 				autoComplete='off'

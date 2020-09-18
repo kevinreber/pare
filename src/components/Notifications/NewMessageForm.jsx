@@ -37,6 +37,7 @@ function NewMessageForm({ send, receiverId = null }) {
 	const [receiverUser, setReceiverUser] = useState(RECEIVER_INITIAL_STATE);
 	const [formData, setFormData] = useState(FORM_INITIAL_STATE);
 	const [chatData, setChatData] = useState(CHAT_INITIAL_STATE);
+	const [showOptions, setShowOptions] = useState(false);
 	const [errors, setErrors] = useState('');
 
 	/** validates chat data */
@@ -62,6 +63,23 @@ function NewMessageForm({ send, receiverId = null }) {
 		return true;
 	};
 
+	/** if user clicks outside of options, showOptions will be set to false */
+	function toggleShowOptions(e) {
+		if (
+			e.target.tagName !== 'LI' ||
+			e.target.tagName !== 'UL' ||
+			e.target.tagName !== 'INPUT'
+		) {
+			setShowOptions(false);
+		}
+	}
+
+	/** Toggles options display */
+	function toggleOptions(status) {
+		setShowOptions(status);
+	}
+
+	/** Clears any errors */
 	const resetErrors = () => setErrors('');
 
 	/** Clears both chat and form data */
@@ -118,7 +136,7 @@ function NewMessageForm({ send, receiverId = null }) {
 	};
 
 	return (
-		<div className='NewMessage__Form'>
+		<div className='NewMessage__Form' onClick={toggleShowOptions}>
 			<h4>New Message</h4>
 			<form onSubmit={handleSubmit}>
 				<AutocompleteUsers
@@ -129,6 +147,8 @@ function NewMessageForm({ send, receiverId = null }) {
 					// options={usersList}
 					setId={setId}
 					placeholder={'Search User...'}
+					showOptions={showOptions}
+					toggleOptions={toggleOptions}
 				/>
 				<div className='form-group'>
 					<textarea
