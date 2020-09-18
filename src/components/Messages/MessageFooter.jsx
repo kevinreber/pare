@@ -25,7 +25,7 @@ function MessageFooter({ send, uid }) {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		// Check if field is empty or white space
-		if (formData.message && formData.message.trim() !== '') {
+		if (formData.content && formData.content.trim() !== '') {
 			send(formData);
 			resetFormData();
 		} else {
@@ -37,9 +37,9 @@ function MessageFooter({ send, uid }) {
 		<>
 			<form onSubmit={handleSubmit}>
 				<input
-					name='message'
+					name='content'
 					onChange={handleChange}
-					value={formData.message}
+					value={formData.content}
 					type='text'
 					placeholder='Type message here...'
 				/>
@@ -50,7 +50,7 @@ function MessageFooter({ send, uid }) {
 				</div>
 				<IconButton
 					type='submit'
-					disabled={!formData.message}
+					disabled={!formData.content}
 					variant='contained'>
 					<SendIcon />
 				</IconButton>

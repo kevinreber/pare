@@ -10,6 +10,7 @@ import NoData from '../components/general/NoData';
 import Modal from '../components/general/Modal';
 import BackButton from '../components/general/BackButton';
 import MessageFooter from '../components/Messages/MessageFooter';
+import { increment, decrement } from '../config/fbConfig';
 import db from '../config/fbConfig';
 import './styles/Messages.css';
 
@@ -106,7 +107,10 @@ function MessageChat() {
 
 	const sendMessage = (message) => {
 		try {
-			db.collection('messages').doc(messageId).collection('chat').add(message);
+			db.collection('messages').doc(messageId).collection('chats').add(message);
+			db.collection('messages').doc(messageId).update({
+				count: increment,
+			});
 		} catch (err) {
 			console.log(err);
 		}
@@ -137,8 +141,6 @@ function MessageChat() {
 			<NoData text='messages' />
 		);
 
-	console.log(receiver);
-
 	return (
 		<div className='MessageChat'>
 			{receiver ? (
@@ -160,7 +162,7 @@ function MessageChat() {
 						{ChatBody}
 					</div>
 					<div className='MessageChat__Footer'>
-						<MessageFooter send={sendMessage} username={currentUser.uid} />
+						<MessageFooter send={sendMessage} uid={currentUser.uid} />
 					</div>
 				</>
 			) : (
