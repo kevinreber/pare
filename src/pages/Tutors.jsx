@@ -1,11 +1,12 @@
 /** Dependencies */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 /** Components & Helpers */
 import TutorList from '../components/Tutors/TutorList';
 import BeTutorForm from '../components/Tutors/BeTutorForm';
 import { updateAvailability } from '../store/actions/availability';
+import db from '../config/fbConfig';
 import './styles/Tutors.css';
 
 const tutorsDemo = [
@@ -37,6 +38,27 @@ function Tutor() {
 	const currentUser = useSelector((state) => state.auth.user);
 	const userAvailability = useSelector((state) => state.availability);
 
+	const [tutors, setTutors] = useState([]);
+
+	useEffect(() => {
+		async function getTutors() {
+			const tutors = await db
+				.collection('users')
+				.where('isTutor', '==', true)
+				.onSnapshot((snapshot) => {
+					setTutors(
+						snapshot.docs.map((doc) => ({
+							id: doc.id,
+							data: doc.data(),
+						}))
+					);
+				});
+			// .get();
+			console.log(tutors);
+		}
+		getTutors();
+	}, []);
+
 	// State will determine what courses to show in CourseList
 	const [active, setActive] = useState('findTutor');
 	const toggleTutor = (e) => {
@@ -54,7 +76,7 @@ function Tutor() {
 
 	const TutorsBody =
 		active === 'findTutor' ? (
-			<TutorList tutors={tutorsDemo} />
+			<TutorList tutors={tutors} />
 		) : (
 			<BeTutorForm
 				user={currentUser}
