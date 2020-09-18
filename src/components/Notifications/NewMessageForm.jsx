@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 /** Components & Helpers */
 import SubmitButton from '../general/SubmitButton';
 import createFbTimestamp from '../../utils/createFbTimestamp';
+import AutocompleteUsers from '../general/AutocompleteUsers';
 import db from '../../config/fbConfig';
 import './styles/NewMessageForm.css';
 
@@ -33,25 +34,15 @@ function NewMessageForm({ send, receiverId = null }) {
 		createdAt: createFbTimestamp(),
 	};
 
-	const [users, setUsers] = useState([]);
-	const [receiverUser, setReceiverUser] = useState(receiverId);
+	const RECEIVER_INITIAL_STATE = {
+		uid: '',
+		displayName: '',
+	};
+
+	const [receiverUser, setReceiverUser] = useState(RECEIVER_INITIAL_STATE);
 	const [formData, setFormData] = useState(FORM_INITIAL_STATE);
 	const [chatData, setChatData] = useState(CHAT_INITIAL_STATE);
 	const [errors, setErrors] = useState('');
-
-	/** Get Users */
-	useEffect(() => {
-		db.collection('users')
-			// .orderBy('', 'desc')
-			.onSnapshot((snapshot) =>
-				setUsers(
-					snapshot.docs.map((doc) => ({
-						id: doc.id,
-						data: doc.data(),
-					}))
-				)
-			);
-	}, []);
 
 	/** validates chat data */
 	const validateChat = () => {
@@ -77,20 +68,6 @@ function NewMessageForm({ send, receiverId = null }) {
 		return true;
 	};
 
-	/** Stores userId in state */
-	// const setId = (e) => {
-	// 	let { id } = e.target;
-
-	// 	setFormData((fData) => ({
-	// 		...fData,
-	// 		courseId: id,
-	// 	}));
-	// };
-
-	const addReceiver = (e) => {
-		console.log(e);
-	};
-
 	/** Clears both chat and form data */
 	const resetFormData = () => {
 		setChatData(CHAT_INITIAL_STATE);
@@ -99,18 +76,45 @@ function NewMessageForm({ send, receiverId = null }) {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(e.target);
+		setErrors('');
+
+		if (receiverUser.uid === '') {
+			setErrors('User does not exist');
+		}
 
 		// if receiverUser and chat message are not empty, push chat into formData
-		// if (receiverUser && validateChat()) {
-		// 	formData.chats.push(chatData);
-		// 	if (validateFormData()) {
-		// 		send(formData);
-		// 		resetFormData();
-		// 	}
-		// }
+		if (receiverUser.uid !== '' && validateChat()) {
+			// append data to formData to create new chat
+			formData.chats.push(chatData);
+			formData.count += 1;
+			formData.users.push(receiverUser.uid);
+
+			if (validateFormData()) {
+				send(formData);
+				resetFormData();
+			}
+		}
 	};
 
+	/** Stores receiving user's Id in state */
+	const setId = (e) => {
+		let { id } = e.target;
+		setReceiverUser((fData) => ({
+			...fData,
+			uid: id,
+		}));
+	};
+
+	/** Stores receiving user's displayName in state */
+	const handleReceiver = (e) => {
+		let { name, value } = !e.target.dataset.name ? e.target : e.target.dataset;
+		setReceiverUser((fData) => ({
+			...fData,
+			[name]: value,
+		}));
+	};
+
+	/** Stores state of Chat */
 	const handleChatChange = (e) => {
 		const { name, value } = e.target;
 		setChatData((fData) => ({ ...fData, [name]: value }));
@@ -120,23 +124,16 @@ function NewMessageForm({ send, receiverId = null }) {
 		<div className='NewMessage__Form'>
 			<h4>New Message</h4>
 			<form onSubmit={handleSubmit}>
-				<Autocomplete
-					id='receiver'
-					// receiver
-					options={users.map((option) => option.data.displayName)}
-					renderInput={(params) => (
-						<TextField
-							{...params}
-							// label='receiver'
-							// margin='normal'
-							variant='outlined'
-						/>
-					)}
+				<AutocompleteUsers
+					id={'receiverUser'}
+					name='displayName'
+					onChange={handleReceiver}
+					value={receiverUser.displayName}
+					// options={usersList}
+					setId={setId}
+					placeholder={'Search User...'}
 				/>
 				<div className='form-group'>
-					{/* <label htmlFor='description' className='float-left'>
-						Message
-					</label> */}
 					<textarea
 						rows='3'
 						id='content'

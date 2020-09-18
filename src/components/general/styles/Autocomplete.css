@@ -14,3 +14,7 @@
     padding: .5rem;
     border-bottom: 1px solid var(--tertiary-color);
 }
+
+.Autocomplete input {
+    padding-left: 2.5rem;
+}
