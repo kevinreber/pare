@@ -32,7 +32,6 @@ function Search() {
 	const [posts, setPosts] = useState([]);
 
 	useEffect(() => {
-		console.log(quickSearch);
 		db.collection('feeds')
 			.where('type', '==', quickSearch)
 			.onSnapshot((snapshot) =>

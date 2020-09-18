@@ -9,30 +9,6 @@ import { updateAvailability } from '../store/actions/availability';
 import db from '../config/fbConfig';
 import './styles/Tutors.css';
 
-const tutorsDemo = [
-	{
-		id: 1,
-		name: 'John',
-		avatar: 'https://randomuser.me/api/portraits/thumb/men/75.jpg',
-		tutorSubjects: 'Computer Science',
-		classes: 'Math1A, CS61A, CS61B',
-	},
-	{
-		id: 2,
-		name: 'Angela',
-		avatar: 'https://randomuser.me/api/portraits/thumb/men/75.jpg',
-		tutorSubjects: 'Computer Science',
-		classes: 'Math1A, CS61A, CS61B',
-	},
-	{
-		id: 3,
-		name: 'Tony',
-		avatar: 'https://randomuser.me/api/portraits/thumb/men/75.jpg',
-		tutorSubjects: 'Math',
-		classes: 'Math1A, CS61A, CS61B',
-	},
-];
-
 function Tutor() {
 	const dispatch = useDispatch();
 	const currentUser = useSelector((state) => state.auth.user);
@@ -41,9 +17,8 @@ function Tutor() {
 	const [tutors, setTutors] = useState([]);
 
 	useEffect(() => {
-		async function getTutors() {
-			const tutors = await db
-				.collection('users')
+		function getTutors() {
+			db.collection('users')
 				.where('isTutor', '==', true)
 				.onSnapshot((snapshot) => {
 					setTutors(
@@ -53,8 +28,6 @@ function Tutor() {
 						}))
 					);
 				});
-			// .get();
-			console.log(tutors);
 		}
 		getTutors();
 	}, []);
