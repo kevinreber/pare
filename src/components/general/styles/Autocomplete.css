@@ -18,3 +18,20 @@
 .Autocomplete input {
     padding-left: 2.5rem;
 }
+
+/*********************************************/
+/** AUTOCOMPLETE USER                        */
+/*********************************************/
+.Autocomplete .options .option.User-option {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: .5rem 4rem;
+}
+
+
+.Autocomplete .options .option.User-option .MuiAvatar-root.MuiAvatar-circle.MuiAvatar-colorDefault {
+    max-width: 32px;
+    max-height: 32px;
+    margin-right: 1.25rem;
+}

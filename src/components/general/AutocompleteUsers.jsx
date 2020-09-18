@@ -7,6 +7,7 @@ import './styles/Autocomplete.css';
 
 /** MUI */
 import SearchIcon from '@material-ui/icons/Search';
+import Avatar from '@material-ui/core/Avatar';
 
 function AutocompleteUsers({
 	id,
@@ -61,10 +62,14 @@ function AutocompleteUsers({
 					return (
 						<li
 							id={option.id}
-							className='option'
+							className='option User-option'
 							data-name={name}
 							data-value={option.data.displayName}
 							onClick={onClick}>
+							<Avatar
+								src={option.data.photoUrl}
+								alt={option.data.displayName}
+							/>
 							{option.data.displayName}
 						</li>
 					);
@@ -87,6 +92,7 @@ function AutocompleteUsers({
 				className='form-control mate-form-input'
 				type='text'
 				onChange={onSearch}
+				onBlur={() => setShowOptions(false)}
 				name={name}
 				value={value}
 				autoComplete='off'
