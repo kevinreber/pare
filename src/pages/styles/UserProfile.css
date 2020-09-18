@@ -16,42 +16,10 @@
 	border: 2px solid var(--primary-color);
 }
 
-.Avatar.User-Profile-Avatar {
-	height: 72px;
-	width: 72px;
-}
-
-.User-Profile.User-Profile-Header-BG {
-	background-size: cover;
-	height: 180px;
-}
-
-.Image-Overlay {
-	box-shadow: inset 2000px 0 0 0 rgba(34, 40, 49, 0.9);
-}
-
-.User-Profile.User-Profile-Header .User-Profile-Username {
+/* .UserProfile.User-Profile-Header .User-Profile-Username {
 	text-align: left;
 	margin-left: 2.5rem;
-}
-
-.User-Profile.User-Profile-Body {
-	text-align: left;
-	padding-left: 2.5rem;
-	padding-right: 2.5rem;
-}
-
-.User-Profile.User-Profile-Body p {
-	margin: 0;
-}
-
-.User-Profile.User-Profile-Body .User-Profile-Body-Field {
-	padding-top: 1rem;
-}
-
-.User-Profile.User-Profile-Body .User-Profile-Body-Field .User-Profile-Body-Input {
-	margin-left: 0.5rem;
-}
+} */
 
 /**************************************/
 /** User Profile                      */
@@ -64,13 +32,55 @@
 
 .UserProfile__Header {
 	margin-top: 10vh;
+	position: fixed;
+	width: 100%;
+	box-shadow: 0 20px 20px -20px rgba(0, 0, 0, 0.6);
+}
+
+.Avatar.UserProfile__Avatar {
+	height: 72px;
+	width: 72px;
+	margin: auto;
+}
+
+.UserProfile .UserProfile__Header-BG {
+	background-size: cover;
+	height: 180px;
+}
+
+.Image-Overlay {
+	box-shadow: inset 2000px 0 0 0 rgba(34, 40, 49, 0.9);
 }
 
 .UserProfile .UserProfile__BackBtn {
-	position: relative;
+	position: fixed;
+	z-index: 100;
 }
 
 .UserProfile .UserProfile__BackBtn .BackButton {
 	top: 5.25rem;
 	z-index: 100;
+}
+
+.UserProfile>.UserProfile__Body {
+	text-align: left;
+	padding-left: 2.5rem;
+	padding-right: 2.5rem;
+	display: flex;
+	flex-direction: column;
+	overflow: scroll;
+	margin-top: 36vh;
+	margin-bottom: 10rem;
+}
+
+.UserProfile>.UserProfile__Body p {
+	margin: 0;
+}
+
+.UserProfile .UserProfile__Body .UserProfile__Body-Field {
+	margin-bottom: 1rem;
+}
+
+.UserProfile .UserProfile__Body .UserProfile__Body-Field .UserProfile__Body-Input {
+	margin-left: 0.5rem;
 }

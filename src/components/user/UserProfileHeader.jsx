@@ -32,26 +32,27 @@ function UserProfileHeader({
 		<>
 			<div
 				style={headerStyle}
-				className='User-Profile User-Profile-Header-BG Image-Overlay pt-3 pb-3'>
-				<BackButton />
-				<h5 className='User-Profile-Username mb-3'>
-					{displayName}
-					{/* {name.first} {name.last} */}
-				</h5>
-				<img
-					className='Avatar User-Profile-Avatar mb-3'
-					src={avatar}
-					alt={name}
-				/>
-				<div className='User-Profile-Header-Footer d-flex justify-content-end'>
-					<p className='User-Profile-School ml-auto mr-1'>
-						<i className='fas fa-map-marker-alt mr-2'></i>
-						{school}
-					</p>
-					<div className='User-Profile-Actions ml-5 mr-3'>
-						<i className={bookmarkStatus}></i>
-						<i className={followStatus}></i>
-						<i className='fas fa-share-alt'></i>
+				className='UserProfile__Header-BG Image-Overlay pt-3 pb-3'>
+				<div className='UserProfile__Header-Container'>
+					<h5 className='User-Profile-Username'>
+						{displayName}
+						{/* {name.first} {name.last} */}
+					</h5>
+					<img
+						className='Avatar UserProfile__Avatar mb-3'
+						src={avatar}
+						alt={name}
+					/>
+					<div className='User-Profile-Header-Footer d-flex justify-content-end'>
+						<p className='User-Profile-School ml-auto mr-1'>
+							<i className='fas fa-map-marker-alt mr-2'></i>
+							{school}
+						</p>
+						<div className='User-Profile-Actions ml-5 mr-3'>
+							<i className={bookmarkStatus}></i>
+							<i className={followStatus}></i>
+							<i className='fas fa-share-alt'></i>
+						</div>
 					</div>
 				</div>
 			</div>

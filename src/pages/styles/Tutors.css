@@ -6,7 +6,7 @@
 .Tutors__Body {
     flex: 1;
     overflow: scroll;
-    margin-top: 20vh;
+    margin-top: 18vh;
     margin-bottom: 9rem;
 }
 
@@ -32,6 +32,11 @@
 }
 
 /** Be Tutor Form  */
+
+.BeTutorForm {
+    margin-top: 1rem;
+}
+
 .BeTutorForm .Be-Tutor__Availability,
 .BeTutorForm .BeTutor__Portfolio {
     display: flex;

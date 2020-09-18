@@ -64,9 +64,9 @@ function UserFields({ label, content = '-' }) {
 	}
 
 	return (
-		<div className='User-Profile-Body-Field'>
-			<p className='User-Profile-Body-Label mate-text-primary'>{label}</p>
-			<p className='User-Profile-Body-Input'>{inputField}</p>
+		<div className='UserProfile__Body-Field'>
+			<p className='UserProfile__Body-Label mate-text-primary'>{label}</p>
+			<p className='UserProfile__Body-Input'>{inputField}</p>
 		</div>
 	);
 }

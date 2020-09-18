@@ -1,5 +1,4 @@
 .Header {
-    border-bottom: 2px solid var(--tertiary-color);
     position: fixed;
     width: 100%;
     height: 10vh;
@@ -8,14 +7,18 @@
 
 .Header .MuiPaper-root.MuiAppBar-root.MuiAppBar-positionStatic.MuiAppBar-colorPrimary.Header-Content.MuiPaper-elevation4 {
     /* padding: 1rem; */
+    border-bottom: 2px solid var(--tertiary-color);
     height: 10vh;
 }
 
+/* .MuiPaper-root.MuiAppBar-root.MuiAppBar-positionStatic.MuiAppBar-colorPrimary.Header-Content.MuiPaper-elevation4 */
 .MuiToolbar-root.MuiToolbar-regular.MuiToolbar-gutters {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 100%;
+    padding-right: 10px;
+    padding-left: 10px;
 }
 
 .Header-Logo img {
@@ -45,7 +48,10 @@
     fill: var(--primary-color);
 }
 
-/** Sidebar *******************/
+/*****************************************************/
+/** Sidebar                                          */
+/*****************************************************/
+
 .MuiPaper-root.MuiDrawer-paper.MuiDrawer-paperAnchorLeft.MuiPaper-elevation16 {
     background-color: var(--bg-color);
     color: var(--secondary-color);

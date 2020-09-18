@@ -29,10 +29,6 @@ import { makeStyles } from '@material-ui/core/styles';
 /** Stylesheets */
 import './styles/Header.css';
 
-/** Temp Dummy Code */
-import DummyAvatar from '../../images/temp/avatar.jpg';
-/************************************************** */
-
 /** Styles for SideBar Drawer */
 const useStyles = makeStyles({
 	list: {
@@ -48,7 +44,7 @@ function Header() {
 	};
 
 	const currentUser = useSelector((state) => state.auth.user);
-
+	console.log(currentUser);
 	/** Initialize useStyles */
 	const classes = useStyles();
 	const [drawer, setDrawer] = useState(false);
@@ -76,7 +72,7 @@ function Header() {
 			<List>
 				<ListItem>
 					<ListItemIcon>
-						<Avatar alt='Tony' src={DummyAvatar} />
+						<Avatar alt={currentUser.displayName} src={currentUser.photoURL} />
 					</ListItemIcon>
 					<ListItemText primary='Tony Stark' />
 				</ListItem>
@@ -123,7 +119,7 @@ function Header() {
 			<AppBar position='static' className='Header-Content'>
 				<Toolbar>
 					<IconButton onClick={toggleDrawer}>
-						<Avatar alt='Tony' src={DummyAvatar} />
+						<Avatar alt={currentUser.displayName} src={currentUser.photoURL} />
 					</IconButton>
 					<Drawer anchor={'left'} open={drawer} onClose={toggleDrawer}>
 						{SideBar('left')}

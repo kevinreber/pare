@@ -37,7 +37,7 @@ function UserProfileBody({
 	);
 
 	return (
-		<div className='User-Profile User-Profile-Body'>
+		<div className='UserProfile__Body'>
 			<UserFields label={'About'} content={bio} />
 			<UserFields label={'Organizations'} content={organizations} />
 			<UserFields label={'Classes Taken'} content={classes} />
