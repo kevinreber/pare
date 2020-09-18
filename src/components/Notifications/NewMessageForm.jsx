@@ -1,20 +1,15 @@
 /** Dependencies */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 /** Components & Helpers */
 import SubmitButton from '../general/SubmitButton';
 import createFbTimestamp from '../../utils/createFbTimestamp';
 import AutocompleteUsers from '../general/AutocompleteUsers';
-import db from '../../config/fbConfig';
 import './styles/NewMessageForm.css';
 
-/** MUI */
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-
 /** Form for user to create New Message
- *  NewMessageForm
+ *  Notifications[Messages] -> NewMessageForm
  */
 function NewMessageForm({ send, receiverId = null }) {
 	const userId = useSelector((state) => state.auth.user.uid);
@@ -64,10 +59,6 @@ function NewMessageForm({ send, receiverId = null }) {
 			setErrors('User does not exist');
 			return false;
 		}
-		// if (formData.chats.length === 0) {
-		// 	setErrors('Message can not be empty');
-		// 	return false;
-		// }
 		return true;
 	};
 
@@ -88,8 +79,6 @@ function NewMessageForm({ send, receiverId = null }) {
 
 		// if receiverUser and chat message are not empty, push chat into formData
 		if (receiverUser.uid !== '' && validateChat()) {
-			// append data to formData to create new chat
-			// formData.chats.push(chatData);
 			formData.count += 1;
 			formData.users.push(receiverUser.uid);
 
