@@ -1,7 +1,9 @@
 /** Dependencies */
-import React from 'react';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 /** Components & Helpers */
+import { addFlashMessage } from '../../store/actions/flashMessages';
 import './styles/Notification.css';
 
 /** MUI */
@@ -15,11 +17,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 /** Notification that pops up after every user CRUD action */
-function Notification({ notify, setNotify }) {
+function Notification() {
 	const classes = useStyles();
+	const dispatch = useDispatch();
 
+	/** get status of flashMessages  in store*/
+	let notify = useSelector((state) => state.flashMessages);
+	console.log(notify);
+
+	/** Close Notification */
 	const handleClose = (e, reason) => {
-		setNotify({ ...notify, isOpen: false });
+		dispatch(
+			addFlashMessage({
+				isOpen: !notify.isOpen,
+			})
+		);
 	};
 
 	return (

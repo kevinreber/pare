@@ -1,11 +1,14 @@
+/** Dependencies */
 import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+/** Components & Helpers */
 import Header from './components/layout/Header';
 import NavBar from './components/layout/NavBar';
+import Notification from './components/general/Notification';
 import Routes from './routes/Routes';
-import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentUser } from './store/actions/auth';
 import { auth } from './config/fbConfig';
-
 import './App.css';
 
 function App() {
@@ -33,6 +36,7 @@ function App() {
 			{currentUser ? (
 				<>
 					<Header />
+					<Notification />
 					<Routes />
 					<NavBar />
 				</>

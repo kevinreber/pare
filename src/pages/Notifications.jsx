@@ -1,7 +1,7 @@
 /** Dependencies */
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 /** Components & Helpers */
 import NotificationsList from '../components/Notifications/NotificationsList';
@@ -11,10 +11,13 @@ import Modal from '../components/general/Modal';
 import db from '../config/fbConfig';
 import './styles/Notifications.css';
 
+import { addFlashMessage } from '../store/actions/flashMessages';
+
 /** User can see notifications and messages */
 function Notifications() {
 	const history = useHistory();
 	const currentUser = useSelector((state) => state.auth.user);
+	const dispatch = useDispatch();
 
 	// State will determine what courses to show in CourseList
 	const [active, setActive] = useState('notifications');
@@ -69,6 +72,13 @@ function Notifications() {
 
 		// push user to message
 		history.push(`/messages/${newMessage.id}`);
+		dispatch(
+			addFlashMessage({
+				isOpen: true,
+				message: 'Message Sent!',
+				type: 'success',
+			})
+		);
 	};
 
 	if (showForm) {
