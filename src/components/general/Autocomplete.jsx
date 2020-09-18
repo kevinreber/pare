@@ -1,5 +1,11 @@
+/** Dependencies */
 import React, { useState } from 'react';
+
+/** Components & Helpers */
 import './styles/Autocomplete.css';
+
+/** MUI */
+import SearchIcon from '@material-ui/icons/Search';
 
 function Autocomplete({
 	id,
@@ -67,9 +73,12 @@ function Autocomplete({
 
 	return (
 		<div className='Autocomplete form-group'>
-			<label htmlFor={id} className='float-left'>
+			{/* <label htmlFor={id} className='float-left'>
 				{label}
-			</label>
+			</label> */}
+			<div className='Search__Icon'>
+				<SearchIcon />
+			</div>
 			<input
 				id={id}
 				className='form-control mate-form-input'
