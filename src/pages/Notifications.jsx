@@ -55,9 +55,16 @@ function Notifications() {
 			/>
 		);
 
-	const sendMessage = (data) => {
-		console.log(data);
-		// const sendMessage = (message) => {
+	const sendMessage = async (messageData, chatData) => {
+		// Make new document
+		const newMessage = await db.collection('messages').add(messageData);
+
+		// Add chat message to 'chats' collection
+		db.collection('messages')
+			.doc(newMessage.id)
+			.collection('chats')
+			.add(chatData);
+		// console.log(res.id);
 		// 	try {
 		// 		db.collection('study-group')
 		// 			.doc(studyGroupId)
@@ -66,7 +73,6 @@ function Notifications() {
 		// 	} catch (err) {
 		// 		console.log(err);
 		// 	}
-		// };
 	};
 
 	if (showForm) {
