@@ -1,5 +1,6 @@
 /** Dependencies */
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 /** Components & Helpers */
@@ -12,6 +13,7 @@ import './styles/Notifications.css';
 
 /** User can see notifications and messages */
 function Notifications() {
+	const history = useHistory();
 	const currentUser = useSelector((state) => state.auth.user);
 
 	// State will determine what courses to show in CourseList
@@ -64,15 +66,9 @@ function Notifications() {
 			.doc(newMessage.id)
 			.collection('chats')
 			.add(chatData);
-		// console.log(res.id);
-		// 	try {
-		// 		db.collection('study-group')
-		// 			.doc(studyGroupId)
-		// 			.collection('messages')
-		// 			.add(message);
-		// 	} catch (err) {
-		// 		console.log(err);
-		// 	}
+
+		// push user to message
+		history.push(`/messages/${newMessage.id}`);
 	};
 
 	if (showForm) {
