@@ -18,7 +18,7 @@
 .MessageCard>.Container {
     display: flex;
     justify-content: space-between;
-    padding: 1rem;
+    padding: 1.25rem;
 }
 
 .MessageCard>.Container p,
@@ -35,8 +35,8 @@
     text-align: left;
 }
 
-.MessageCard>.Container>.MessageCard__Center>h5 {
-    font-size: 14px;
+.MessageCard>.Container>.MessageCard__Center h5 {
+    font-size: 16px;
 }
 
 .MessageCard p {
