@@ -1,3 +1,12 @@
+.NewMessage__Form {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
 .NewMessage__Form .MuiInputBase-input {
     border: 1px solid var(--tertiary-color);
+}
+
+.NewMessage__Form>form>.form-group>textarea {
+    height: 200px;
 }

@@ -62,6 +62,8 @@ function NewMessageForm({ send, receiverId = null }) {
 		return true;
 	};
 
+	const resetErrors = () => setErrors('');
+
 	/** Clears both chat and form data */
 	const resetFormData = () => {
 		setChatData(CHAT_INITIAL_STATE);
@@ -71,7 +73,7 @@ function NewMessageForm({ send, receiverId = null }) {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		setErrors('');
+		resetErrors();
 
 		if (receiverUser.uid === '') {
 			setErrors('User does not exist');
@@ -100,6 +102,7 @@ function NewMessageForm({ send, receiverId = null }) {
 
 	/** Stores receiving user's displayName in state */
 	const handleReceiver = (e) => {
+		resetErrors();
 		let { name, value } = !e.target.dataset.name ? e.target : e.target.dataset;
 		setReceiverUser((fData) => ({
 			...fData,
@@ -109,6 +112,7 @@ function NewMessageForm({ send, receiverId = null }) {
 
 	/** Stores state of Chat */
 	const handleChatChange = (e) => {
+		resetErrors();
 		const { name, value } = e.target;
 		setChatData((fData) => ({ ...fData, [name]: value }));
 	};
