@@ -56,7 +56,7 @@ function MessageCard({ message, userId }) {
 			<div className='Container'>
 				<div className='MessageCard__Left'>
 					<Link to={`/users/${receiverId}`}>
-						<Avatar src={receiver.photoUrl} alt={receiver.displayName} />
+						<Avatar src={receiver.photoURL} alt={receiver.displayName} />
 					</Link>
 				</div>
 				<div className='MessageCard__Center'>

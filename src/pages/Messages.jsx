@@ -149,7 +149,7 @@ function MessageChat() {
 						<BackButton />
 						<div className='MessageChat__Title'>
 							<Link to={`/users/${receiverId}`}>
-								<Avatar src={receiver.photoUrl} alt={receiver.displayName} />
+								<Avatar src={receiver.photoURL} alt={receiver.displayName} />
 							</Link>
 
 							<h5>{receiver.displayName}</h5>
