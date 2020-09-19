@@ -88,4 +88,7 @@
 .MuiBadge-badge.MuiBadge-anchorOriginTopRightRectangle {
     background-color: var(--primary-color);
     color: var(--bg-color);
+    border: 1px solid var(--bg-color);
+    top: 8px;
+    right: 6px;
 }
