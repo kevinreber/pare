@@ -12,6 +12,7 @@ import db from '../config/fbConfig';
 import './styles/Notifications.css';
 
 import { addFlashMessage } from '../store/actions/flashMessages';
+import createNewMessage from '../utils/createNewMessage';
 
 /** User can see notifications and messages */
 function Notifications() {
@@ -61,17 +62,11 @@ function Notifications() {
 		);
 
 	const sendMessage = async (messageData, chatData) => {
-		// Make new document
-		const newMessage = await db.collection('messages').add(messageData);
-
-		// Add chat message to 'chats' collection
-		db.collection('messages')
-			.doc(newMessage.id)
-			.collection('chats')
-			.add(chatData);
+		// store messageId given back
+		const messageId = await createNewMessage(messageData, chatData);
 
 		// push user to message
-		history.push(`/messages/${newMessage.id}`);
+		history.push(`/messages/${messageId}`);
 		dispatch(
 			addFlashMessage({
 				isOpen: true,
