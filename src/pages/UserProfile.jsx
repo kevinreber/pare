@@ -1,59 +1,99 @@
 /** Dependencies */
 import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
 /** Components & Helpers */
 import UserProfileHeader from '../components/User/UserProfileHeader';
 import UserProfileBody from '../components/User/UserProfileBody';
 import CTAButton from '../components/general/CTAButton';
 import BackButton from '../components/general/BackButton';
+import createFbTimestamp from '../utils/createFbTimestamp';
+import { addFlashMessage } from '../store/actions/flashMessages';
+import createNewMessage from '../utils/createNewMessage';
 import './styles/UserProfile.css';
 import db from '../config/fbConfig';
 
 /** User Profile component */
 function UserProfile() {
 	const { userId } = useParams();
-
 	const history = useHistory();
+	const dispatch = useDispatch();
+	const currentUser = useSelector((state) => state.auth.user);
 
 	const [user, setUser] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
 
-	console.log(userId);
-
 	useEffect(() => {
-		if (userId) {
-			db.collection('users')
+		async function getUserData() {
+			const doc = await db.collection('users').doc(userId).get();
+
+			/** if user doesn't exist, redirect user to '/feed' */
+			if (!doc.exists) {
+				history.push('/feed');
+				dispatch(
+					addFlashMessage({
+						isOpen: true,
+						message: 'User does not exist',
+						type: 'error',
+					})
+				);
+			}
+
+			await db
+				.collection('users')
 				.doc(userId)
 				.onSnapshot((snapshot) => setUser(snapshot.data()));
-		}
-		if (user) {
+
+			// Loading finished
 			setIsLoading(false);
 		}
-	}, [user, userId]);
+		if (userId) {
+			getUserData();
+		}
+	}, [userId, dispatch, history]);
 
-	// if (isLoading) {
-	// 	return <p>Loading...</p>;
-	// }
+	/** Send New Message to User ****************************************/
+	const messageData = {
+		uid: currentUser.uid,
+		users: [currentUser.uid, userId],
+		count: 0,
+		createdAt: createFbTimestamp(),
+		lastUpdatedAt: createFbTimestamp(),
+		chats: [],
+	};
 
-	/** if user doesn't exist, redirect user to '/feed' */
-	// if (!user) {
-	// 	history.push('/feed');
-	/*
-		 ! show 'Error' message
-		 */
-	// }
+	const sendMessage = async () => {
+		// store messageId given back
+		const messageId = await createNewMessage(messageData);
+
+		// push user to message
+		history.push(`/messages/${messageId}`);
+		dispatch(
+			addFlashMessage({
+				isOpen: true,
+				message: 'Message Sent!',
+				type: 'success',
+			})
+		);
+	};
+	/******************************************************************* */
 
 	/** if User is viewing their own profile, show edit button instead of message button */
-	const DisplayButton = user ? (
-		<CTAButton text='Send Message' />
-	) : (
-		<CTAButton text='Edit' />
-	);
+	const DisplayButton =
+		userId !== currentUser.uid ? (
+			<p onClick={sendMessage} className='font-italic'>
+				<CTAButton text='Send Message' onClick={sendMessage} />
+			</p>
+		) : (
+			<p className='font-italic'>
+				<CTAButton text='Edit' />
+			</p>
+		);
 
 	return (
 		<div className='UserProfile'>
-			{isLoading && !user ? (
+			{isLoading ? (
 				<>
 					<p>Loading...</p>
 				</>
@@ -84,7 +124,7 @@ function UserProfile() {
 						keywords={user.keywords}
 						availability={user.availability}
 					/>
-					{DisplayButton}
+					<div className='UserProfile__Footer'>{DisplayButton}</div>
 				</>
 			)}
 		</div>
