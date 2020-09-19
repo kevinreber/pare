@@ -11,6 +11,7 @@ import BackButton from '../components/general/BackButton';
 import ConfirmDialog from '../components/general/ConfirmDialog';
 import MessageFooter from '../components/Messages/MessageFooter';
 import { increment } from '../config/fbConfig';
+import { deleteMessageFromFB } from '../store/actions/messages';
 import { addFlashMessage } from '../store/actions/flashMessages';
 import db from '../config/fbConfig';
 import './styles/Messages.css';
@@ -115,9 +116,10 @@ function MessageChat() {
 			isOpen: false,
 		});
 
-		db.collection('messages').doc(messageId).delete();
+		dispatch(deleteMessageFromFB(messageId));
+		// db.collection('messages').doc(messageId).delete();
 
-		// push user to messages and flash message
+		// redirect user to feed and flash message
 		history.push('/feed');
 		dispatch(
 			addFlashMessage({
@@ -143,7 +145,7 @@ function MessageChat() {
 	const deleteMessagePrompt = (id) => {
 		setConfirmDialog({
 			isOpen: true,
-			title: 'Are you sure you want to remove this post?',
+			title: 'Are you sure you want to remove this message?',
 			subtitle: "You can't undo this operation",
 			onConfirm: () => {
 				deleteMessage();

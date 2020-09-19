@@ -1,4 +1,9 @@
-import { ADD_NEW_MESSAGE } from './types';
+import {
+	ADD_NEW_MESSAGE,
+	ADD_NEW_MESSAGE_ERROR,
+	DELETE_MESSAGE,
+	DELETE_MESSAGE_FAIL,
+} from './types';
 import db from '../../config/fbConfig';
 
 export function addNewMessageToFB(data) {
@@ -12,11 +17,19 @@ export function addNewMessageToFB(data) {
 					dispatch(addNewMessage(data));
 				})
 				.catch((err) => {
-					dispatch(dispatchError('ADD_NEW_CHAT_ERROR', err));
+					dispatch(dispatchError(ADD_NEW_MESSAGE_ERROR, err));
 				});
 		} catch (err) {
 			console.log(err);
 		}
+	};
+}
+
+/** Formats action data to input to dispatch */
+function addNewMessage(message) {
+	return {
+		type: ADD_NEW_MESSAGE,
+		message,
 	};
 }
 
@@ -27,10 +40,22 @@ function dispatchError(type, error) {
 	};
 }
 
-/** Formats action data to input to dispatch */
-function addNewMessage(message) {
+export function deleteMessageFromFB(messageId) {
+	return (dispatch) => {
+		db.collection('messages')
+			.doc(messageId)
+			.delete()
+			.then(() => {
+				console.log('Message Deleted');
+				dispatch(deleteMessage(messageId));
+			})
+			.catch((err) => dispatch(dispatchError(DELETE_MESSAGE_FAIL, err)));
+	};
+}
+
+function deleteMessage(messageId) {
 	return {
-		type: ADD_NEW_MESSAGE,
-		message,
+		type: DELETE_MESSAGE,
+		messageId,
 	};
 }

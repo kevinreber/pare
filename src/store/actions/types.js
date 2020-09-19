@@ -6,6 +6,9 @@ export const LOGOUT_FAIL = 'LOGOUT_FAIL';
 
 /** Messages */
 export const ADD_NEW_MESSAGE = 'ADD_NEW_MESSAGE';
+export const ADD_NEW_MESSAGE_ERROR = 'ADD_NEW_MESSAGE_ERROR';
+export const DELETE_MESSAGE = 'DELETE_MESSAGE';
+export const DELETE_MESSAGE_FAIL = 'DELETE_MESSAGE_FAIL';
 
 /** Feed */
 export const ADD_POST = 'ADD_POST';
