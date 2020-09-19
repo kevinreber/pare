@@ -123,7 +123,7 @@ function MessageChat() {
 			addFlashMessage({
 				isOpen: true,
 				message: 'Message Removed',
-				type: 'danger',
+				type: 'error',
 			})
 		);
 	};
