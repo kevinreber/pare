@@ -1,18 +1,26 @@
 /** Dependencies */
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 /** Components & Helpers */
 import CTAButton from '../components/general/CTAButton';
 import Searchbar from '../components/general/Searchbar';
+import Modal from '../components/general/Modal';
 import NoData from '../components/general/NoData';
 import StudyGroupList from '../components/StudyGroups/StudyGroupList';
+import StudyGroupForm from '../components/StudyGroups/StudyGroupForm';
 import db from '../config/fbConfig';
 import './styles/StudyGroups.css';
 
 /** Page that displays a list of user's Study Groups */
 function Connect() {
+	const userId = useSelector((state) => state.auth.user.uid);
+
 	const [studyGroups, setStudyGroups] = useState([]);
 	const [filter, setFilter] = useState('');
+
+	const [showForm, setShowForm] = useState(false);
+	const toggleForm = () => setShowForm((show) => !show);
 
 	useEffect(() => {
 		db.collection('study-group').onSnapshot((snapshot) =>
@@ -47,6 +55,26 @@ function Connect() {
 		List = <NoData text={'study groups'} />;
 	}
 
+	const addStudyGroup = (data) => {
+		console.log(data);
+		// db.collection('study-group').add(data);
+	};
+
+	if (showForm) {
+		return (
+			<Modal
+				content={
+					<StudyGroupForm
+						save={addStudyGroup}
+						studyGroups={studyGroups}
+						userId={userId}
+					/>
+				}
+				closeModal={toggleForm}
+			/>
+		);
+	}
+
 	return (
 		<div className='StudyGroups'>
 			<div className='StudyGroups__Header'>
@@ -55,9 +83,9 @@ function Connect() {
 			</div>
 			<div className='StudyGroups__Body'>{List}</div>
 			<div className='CourseForm p-3'>
-				{/* <p onClick={toggleForm} className='font-italic'> */}
-				<CTAButton text='Add Study Group' />
-				{/* </p> */}
+				<p onClick={toggleForm} className='font-italic'>
+					<CTAButton text='Add Study Group' />
+				</p>
 			</div>
 		</div>
 	);
