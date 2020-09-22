@@ -1,9 +1,12 @@
 /** Dependencies */
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import firebase from 'firebase';
 
 /** Components & Helpers */
 import useFields from '../../hooks/useFields';
+import createFbTimestamp from '../../utils/createFbTimestamp';
+import { addFlashMessage } from '../../store/actions/flashMessages';
 
 /** MUI */
 import IconButton from '@material-ui/core/IconButton';
@@ -15,11 +18,14 @@ import PanoramaOutlinedIcon from '@material-ui/icons/PanoramaOutlined';
 /** Displays Study Group's Chat Footer that allows the user to enter a message
  * StudyGroups -> StudyGroupsList -> StudyGroupCard -> StudyGroupChat -> StudyGroupChatFooter
  */
-function StudyGroupChatFooter({ send, username }) {
+function StudyGroupChatFooter({ send, user }) {
+	const dispatch = useDispatch();
+
 	const INITIAL_STATE = {
 		message: '',
-		timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-		name: username,
+		createdAt: createFbTimestamp(),
+		displayName: user.displayName,
+		uid: user.uid,
 	};
 
 	const [formData, handleChange, resetFormData] = useFields(INITIAL_STATE);
@@ -31,7 +37,14 @@ function StudyGroupChatFooter({ send, username }) {
 			send(formData);
 			resetFormData();
 		} else {
-			console.log('error');
+			dispatch(
+				addFlashMessage({
+					isOpen: true,
+					message: 'MESSAGES CAN NOT BE EMPTY',
+					type: 'error',
+				})
+			);
+			resetFormData();
 		}
 	};
 
@@ -39,13 +52,13 @@ function StudyGroupChatFooter({ send, username }) {
 		<>
 			<form onSubmit={handleSubmit}>
 				<input
-					name='message'
+					name="message"
 					onChange={handleChange}
 					value={formData.message}
-					type='text'
-					placeholder='Type message here...'
+					type="text"
+					placeholder="Type message here..."
 				/>
-				<div className='message__attachments'>
+				<div className="message__attachments">
 					{/* <i className='fas fa-camera fa-2x'></i>
 					<i className='fas fa-image fa-2x'></i> */}
 					{/* <IconButton>
@@ -55,13 +68,13 @@ function StudyGroupChatFooter({ send, username }) {
 						<PanoramaOutlinedIcon fontSize='large' />
 					</IconButton> */}
 					<IconButton>
-						<ImageIcon fontSize='large' />
+						<ImageIcon fontSize="large" />
 					</IconButton>
 				</div>
 				<IconButton
-					type='submit'
+					type="submit"
 					disabled={!formData.message}
-					variant='contained'>
+					variant="contained">
 					<SendIcon />
 				</IconButton>
 			</form>

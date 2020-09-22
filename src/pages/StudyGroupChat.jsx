@@ -50,7 +50,7 @@ function StudyGroupChat() {
 			db.collection('study-group')
 				.doc(studyGroupId)
 				.collection('messages')
-				.orderBy('timestamp', 'asc')
+				.orderBy('createdAt', 'asc')
 				.onSnapshot((snapshot) =>
 					setMessages(
 						snapshot.docs.map((doc) => {
@@ -100,19 +100,17 @@ function StudyGroupChat() {
 					<div id={message.id} ref={lastMessage ? setRef : null}>
 						<p
 							className={`StudyGroupChatBody__message chat__message ${
-								currentUser.displayName === message.data.name
-									? 'chat__receiver'
-									: ''
+								currentUser.uid === message.data.uid ? 'chat__receiver' : ''
 							}`}>
-							{currentUser.displayName !== message.data.name ? (
-								<span className='chat__name'>{message.data.name}</span>
+							{currentUser.uid !== message.data.uid ? (
+								<span className="chat__name">{message.data.displayName}</span>
 							) : (
 								''
 							)}
 							{message.data.message}
-							<span className='chat__timestamp'>
-								{message.data.timestamp
-									? moment(message.data.timestamp.toDate()).calendar()
+							<span className="chat__timestamp">
+								{message.data.createdAt
+									? moment(message.data.createdAt.toDate()).calendar()
 									: ''}
 							</span>
 						</p>
@@ -120,28 +118,25 @@ function StudyGroupChat() {
 				);
 			})
 		) : (
-			<NoData text='messages' />
+			<NoData text="messages" />
 		);
 
 	return (
-		<div className='StudyGroupChat'>
-			<div className='StudyGroupChat__Header Body-Header bottom-border-header'>
+		<div className="StudyGroupChat">
+			<div className="StudyGroupChat__Header Body-Header bottom-border-header">
 				<BackButton />
-				<h5 className='StudyGroupChat__Title'>{studyGroup.title}</h5>
+				<h5 className="StudyGroupChat__Title">{studyGroup.title}</h5>
 				<IconButton onClick={toggleAdmin}>
-					<MoreHorizOutlinedIcon fontSize='small' />
+					<MoreHorizOutlinedIcon fontSize="small" />
 				</IconButton>
 			</div>
 			<div
-				id='StudyGroupChat__Body'
-				className='StudyGroupChat__Body Page__Body'>
+				id="StudyGroupChat__Body"
+				className="StudyGroupChat__Body Page__Body">
 				{StudyGroupChatBody}
 			</div>
-			<div className='StudyGroupChat__Footer'>
-				<StudyGroupChatFooter
-					send={sendMessage}
-					username={currentUser.displayName}
-				/>
+			<div className="StudyGroupChat__Footer">
+				<StudyGroupChatFooter send={sendMessage} user={currentUser} />
 			</div>
 		</div>
 	);

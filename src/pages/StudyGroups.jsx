@@ -14,7 +14,7 @@ import './styles/StudyGroups.css';
 
 /** Page that displays a list of user's Study Groups */
 function Connect() {
-	const userId = useSelector((state) => state.auth.user.uid);
+	const currentUser = useSelector((state) => state.auth.user);
 
 	const [studyGroups, setStudyGroups] = useState([]);
 	const [filter, setFilter] = useState('');
@@ -67,7 +67,7 @@ function Connect() {
 					<StudyGroupForm
 						save={addStudyGroup}
 						studyGroups={studyGroups}
-						userId={userId}
+						user={currentUser}
 					/>
 				}
 				closeModal={toggleForm}
@@ -76,15 +76,15 @@ function Connect() {
 	}
 
 	return (
-		<div className='StudyGroups'>
-			<div className='StudyGroups__Header'>
+		<div className="StudyGroups">
+			<div className="StudyGroups__Header">
 				<h5>My Study Groups</h5>
 				<Searchbar value={filter} setValue={setFilter} />
 			</div>
-			<div className='StudyGroups__Body'>{List}</div>
-			<div className='CourseForm p-3'>
-				<p onClick={toggleForm} className='font-italic'>
-					<CTAButton text='Add Study Group' />
+			<div className="StudyGroups__Body">{List}</div>
+			<div className="CourseForm p-3">
+				<p onClick={toggleForm} className="font-italic">
+					<CTAButton text="Add Study Group" />
 				</p>
 			</div>
 		</div>

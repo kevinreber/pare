@@ -5,19 +5,28 @@ import { useSelector } from 'react-redux';
 /** Components & Helpers */
 import SubmitButton from '../general/SubmitButton';
 import Autocomplete from '../general/Autocomplete';
+import createFbTimestamp from '../../utils/createFbTimestamp';
 
 /** Form to add a course.
  * StudyGroups -> 'Join Study Group' Button -> Modal -> StudyGroupForm
  */
-function StudyGroupForm({ save, studyGroups, userId }) {
+function StudyGroupForm({ save, studyGroups, user }) {
+	const { uid, displayName, photoURL } = user;
+
 	// Form Data
 	const INITIAL_STATE = {
-		studyGroupSearch: '',
+		active: true,
+		private: false,
+		admin: [uid],
+		users: [{ uid, displayName, photoURL }],
 		title: '',
-		description: null,
-		students: [],
+		createdAt: createFbTimestamp(),
+		lastUpdatedAt: createFbTimestamp(),
 	};
 
+	const SEARCH_INITIAL_STATE = {
+		studyGroupSearch: '',
+	};
 	const [errors, setErrors] = useState('');
 
 	const [formData, setFormData] = useState(INITIAL_STATE);
@@ -65,17 +74,17 @@ function StudyGroupForm({ save, studyGroups, userId }) {
 	};
 
 	return (
-		<div className='CourseForm p-3'>
+		<div className="CourseForm p-3">
 			<h4>Join Study Group</h4>
-			<form className='container mb-3' onSubmit={handleSubmit}>
+			<form className="container mb-3" onSubmit={handleSubmit}>
 				<input
-					id='title'
-					className='form-control mate-form-input'
-					type='text'
+					id="title"
+					className="form-control mate-form-input"
+					type="text"
 					onChange={handleChange}
-					name='title'
+					name="title"
 					value={formData.title}
-					maxLength='30'
+					maxLength="30"
 					required
 				/>
 				{/* <Autocomplete
@@ -89,38 +98,8 @@ function StudyGroupForm({ save, studyGroups, userId }) {
 					setId={setId}
 					placeholder={'Search for Study Groups...'}
 				/> */}
-				{/* <div className='form-group CourseFormSemesterFields'>
-					<select
-						id='courseSemester'
-						className='form-control mate-form-input mr-2'
-						onChange={handleChange}
-						name='courseSemester'
-						value={formData.courseSemester}>
-						<option className='option-disabled' value='' disabled selected>
-							Semester
-						</option>
-						<option>Fall</option>
-						<option>Spring</option>
-						<option>Summer</option>
-					</select>
-					<select
-						id='courseYear'
-						className='form-control mate-form-input ml-2'
-						onChange={handleChange}
-						name='courseYear'
-						value={formData.courseYear}>
-						<option className='option-disabled' value='' disabled selected>
-							Year
-						</option>
-						<option>2020</option>
-						<option>2019</option>
-						<option>2018</option>
-						<option>2017</option>
-						<option>2016</option>
-					</select>
-				</div> */}
-				<div className='alert errors'>{errors}</div>
-				<SubmitButton text='Join' />
+				<div className="alert errors">{errors}</div>
+				<SubmitButton text="Join" />
 			</form>
 		</div>
 	);
