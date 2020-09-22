@@ -7,15 +7,20 @@ import db from '../config/fbConfig';
  * @param {object} messageData
  * @param {object} chatData
  */
-async function createNewMessage(messageData, chatData = null) {
+async function createNewMessage(
+	collection,
+	messageData,
+	subCollection = null,
+	chatData = null
+) {
 	// Make new document
-	const newMessage = await db.collection('messages').add(messageData);
+	const newMessage = await db.collection(collection).add(messageData);
 
 	// Add chat message to 'chats' collection
 	if (chatData) {
-		db.collection('messages')
+		db.collection(collection)
 			.doc(newMessage.id)
-			.collection('chats')
+			.collection(subCollection)
 			.add(chatData);
 	}
 

@@ -63,7 +63,12 @@ function Notifications() {
 
 	const sendMessage = async (messageData, chatData) => {
 		// store messageId given back
-		const messageId = await createNewMessage(messageData, chatData);
+		const messageId = await createNewMessage(
+			'messages',
+			messageData,
+			'chat',
+			chatData
+		);
 
 		// push user to message
 		history.push(`/messages/${messageId}`);
@@ -87,11 +92,11 @@ function Notifications() {
 	}
 
 	return (
-		<div className='Notifications-Page'>
-			<div className='Notifications__Header Body-Header'>
-				<div className='Notifications'>
+		<div className="Notifications-Page">
+			<div className="Notifications__Header Body-Header">
+				<div className="Notifications">
 					<h5
-						id='notifications'
+						id="notifications"
 						className={
 							active === 'notifications'
 								? 'mate-text-primary'
@@ -101,9 +106,9 @@ function Notifications() {
 						Notifications
 					</h5>
 				</div>
-				<div className='Messages'>
+				<div className="Messages">
 					<h5
-						id='messages'
+						id="messages"
 						className={
 							active === 'messages' ? 'mate-text-primary' : 'mate-text-active'
 						}
@@ -112,7 +117,7 @@ function Notifications() {
 					</h5>
 				</div>
 			</div>
-			<div className='Notifications__Body'>{PageBody}</div>
+			<div className="Notifications__Body">{PageBody}</div>
 		</div>
 	);
 }
