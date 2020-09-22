@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 /** Components & Helpers */
 import SubmitButton from '../general/SubmitButton';
 import Autocomplete from '../general/Autocomplete';
+import AutocompleteStudyGroups from '../general/AutocompleteStudyGroups';
 import createFbTimestamp from '../../utils/createFbTimestamp';
 import './styles/StudyGroupForm.css';
 
@@ -42,12 +43,17 @@ function StudyGroupForm({ save, studyGroups, user }) {
 	};
 
 	const SEARCH_INITIAL_STATE = {
-		studyGroupSearch: '',
+		search: '',
 	};
 
+	const [showOptions, setShowOptions] = useState(false);
 	const [errors, setErrors] = useState('');
-
 	const [formData, setFormData] = useState(INITIAL_STATE);
+	const [searchForm, setSearchForm] = useState(SEARCH_INITIAL_STATE);
+
+	const handleSearch = (e) => {
+		setSearchForm({ search: e.target.value });
+	};
 
 	/** Update state in formData */
 	const handleChange = (e) => {
@@ -79,6 +85,22 @@ function StudyGroupForm({ save, studyGroups, user }) {
 			courseId: id,
 		}));
 	};
+
+	/** if user clicks outside of options, showOptions will be set to false */
+	function toggleShowOptions(e) {
+		if (
+			e.target.tagName !== 'LI' ||
+			e.target.tagName !== 'UL' ||
+			e.target.tagName !== 'INPUT'
+		) {
+			setShowOptions(false);
+		}
+	}
+
+	/** Toggles options display */
+	function toggleOptions(status) {
+		setShowOptions(status);
+	}
 
 	const resetFormData = () => setFormData(INITIAL_STATE);
 
@@ -125,19 +147,21 @@ function StudyGroupForm({ save, studyGroups, user }) {
 
 	return (
 		<div className="StudyGroupForm p-3">
-			<h4>Join Study Group</h4>
-			<form className="container mb-3" onSubmit={handleSubmit}>
-				{/* <Autocomplete
-					id={'courseName'}
-					name='courseName'
-					onChange={handleChange}
-					value={formData.studyGroupSearch}
-					label={'Search'}
+			<form className="container mb-3">
+				<AutocompleteStudyGroups
+					id={'studyGroup'}
+					name="studyGroup"
+					onChange={handleSearch}
+					value={searchForm.search}
 					options={studyGroups}
-					type={'courses'}
 					setId={setId}
-					placeholder={'Search for Study Groups...'}
-				/> */}
+					placeholder={'find study group...'}
+					showOptions={showOptions}
+					toggleOptions={toggleOptions}
+				/>
+			</form>
+			<h4>Create Study Group</h4>
+			<form className="container mb-3" onSubmit={handleSubmit}>
 				<label htmlFor="title" className="float-left">
 					Title*
 				</label>
@@ -190,7 +214,7 @@ function StudyGroupForm({ save, studyGroups, user }) {
 				</div>
 
 				<div className="alert errors">{errors}</div>
-				<SubmitButton text="Join" />
+				<SubmitButton text="Create Group" />
 			</form>
 		</div>
 	);

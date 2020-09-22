@@ -89,6 +89,7 @@ function Connect() {
 					/>
 				}
 				closeModal={toggleForm}
+				full={true}
 			/>
 		);
 	}

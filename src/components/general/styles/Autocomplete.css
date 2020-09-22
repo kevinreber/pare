@@ -35,3 +35,14 @@
     max-height: 32px;
     margin-right: 1.25rem;
 }
+
+/*********************************************/
+/** AUTOCOMPLETE STUDY GROUPS                */
+/*********************************************/
+.StudyGroupForm {
+    margin-top: 5rem;
+}
+
+.StudyGroupForm .Autocomplete {
+    margin-bottom: 6rem;
+}
