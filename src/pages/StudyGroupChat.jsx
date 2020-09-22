@@ -10,6 +10,8 @@ import StudyGroupChatAdmin from '../components/StudyGroupChat/StudyGroupChatAdmi
 import Modal from '../components/general/Modal';
 import BackButton from '../components/general/BackButton';
 import StudyGroupChatFooter from '../components/StudyGroupChat/StudyGroupChatFooter';
+import createFbTimestamp from '../utils/createFbTimestamp';
+import { increment } from '../config/fbConfig';
 import db from '../config/fbConfig';
 import './styles/StudyGroupChat.css';
 
@@ -86,6 +88,10 @@ function StudyGroupChat() {
 				.doc(studyGroupId)
 				.collection('messages')
 				.add(message);
+			db.collection('study-group').doc(studyGroupId).update({
+				count: increment,
+				lastUpdatedAt: createFbTimestamp(),
+			});
 		} catch (err) {
 			console.log(err);
 		}

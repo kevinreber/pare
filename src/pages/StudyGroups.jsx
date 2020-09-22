@@ -1,19 +1,27 @@
 /** Dependencies */
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
-/** Components & Helpers */
+/** Components */
 import CTAButton from '../components/general/CTAButton';
 import Searchbar from '../components/general/Searchbar';
 import Modal from '../components/general/Modal';
 import NoData from '../components/general/NoData';
 import StudyGroupList from '../components/StudyGroups/StudyGroupList';
 import StudyGroupForm from '../components/StudyGroups/StudyGroupForm';
+
+/** Helpers */
+import { addFlashMessage } from '../store/actions/flashMessages';
+import createNewMessage from '../utils/createNewMessage';
 import db from '../config/fbConfig';
 import './styles/StudyGroups.css';
 
 /** Page that displays a list of user's Study Groups */
 function Connect() {
+	const history = useHistory();
+	const dispatch = useDispatch();
+
 	const currentUser = useSelector((state) => state.auth.user);
 
 	const [studyGroups, setStudyGroups] = useState([]);
@@ -55,9 +63,19 @@ function Connect() {
 		List = <NoData text={'study groups'} />;
 	}
 
-	const addStudyGroup = (data) => {
-		console.log(data);
-		// db.collection('study-group').add(data);
+	const addStudyGroup = async (data) => {
+		// store studyGroupId given back
+		const newStudyGroupId = await createNewMessage('study-group', data);
+
+		// push user to message
+		history.push(`/study-groups/${newStudyGroupId}`);
+		dispatch(
+			addFlashMessage({
+				isOpen: true,
+				message: 'Study Group Created!',
+				type: 'success',
+			})
+		);
 	};
 
 	if (showForm) {

@@ -117,7 +117,6 @@ function StudyGroupForm({ save, studyGroups, user }) {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (validateFormData()) {
-			formData.count++;
 			save(formData);
 			// Clear state of form
 			resetFormData();
