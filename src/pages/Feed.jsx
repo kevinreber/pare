@@ -7,9 +7,10 @@ import FeedList from '../components/Feed/FeedList';
 import PostForm from '../components/Feed/PostForm';
 import NoData from '../components/general/NoData';
 import Modal from '../components/general/Modal';
-import { addPostToFB, deletePostFromFB } from '../store/actions/posts';
 import Notification from '../components/general/Notification';
 import ConfirmDialog from '../components/general/ConfirmDialog';
+import { addPostToFB, deletePostFromFB } from '../store/actions/posts';
+import { addFlashMessage } from '../store/actions/flashMessages';
 import db from '../config/fbConfig';
 import './styles/Feed.css';
 
@@ -24,11 +25,6 @@ function Feed() {
 	const dispatch = useDispatch();
 	const [posts, setPosts] = useState([]);
 
-	const [notify, setNotify] = useState({
-		isOpen: false,
-		message: '',
-		type: '',
-	});
 	const [confirmDialog, setConfirmDialog] = useState({
 		isOpen: false,
 		title: '',
@@ -55,7 +51,13 @@ function Feed() {
 	const addPost = (postData) => {
 		dispatch(addPostToFB(postData));
 		setShowForm(false);
-		setNotify({ isOpen: true, message: 'Post Successful!', type: 'success' });
+		dispatch(
+			addFlashMessage({
+				isOpen: true,
+				message: 'Post Successful!',
+				type: 'success',
+			})
+		);
 	};
 
 	/** Prompts Confirmation Dialog to Delete Post*/
@@ -77,7 +79,13 @@ function Feed() {
 			isOpen: false,
 		});
 		dispatch(deletePostFromFB(id));
-		setNotify({ isOpen: true, message: 'Removed Post', type: 'error' });
+		dispatch(
+			addFlashMessage({
+				isOpen: true,
+				message: 'Removed Post',
+				type: 'error',
+			})
+		);
 	};
 
 	/** Prompts Modal to edit Post information */
@@ -96,20 +104,19 @@ function Feed() {
 	}
 
 	return (
-		<div className='Feed'>
-			<Notification notify={notify} setNotify={setNotify} />
+		<div className="Feed">
 			<ConfirmDialog
 				confirmDialog={confirmDialog}
 				setConfirmDialog={setConfirmDialog}
 			/>
-			<div className='Feed__List'>
+			<div className="Feed__List">
 				{posts ? (
 					<FeedList posts={posts} remove={deletePostPrompt} edit={editPost} />
 				) : (
-					<NoData text='posts' />
+					<NoData text="posts" />
 				)}
 			</div>
-			<Fab id='Feed-Add-Post-Btn' aria-label='add'>
+			<Fab id="Feed-Add-Post-Btn" aria-label="add">
 				<AddIcon onClick={toggleForm} />
 			</Fab>
 		</div>
