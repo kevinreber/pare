@@ -1,0 +1,25 @@
+.StudyGroupForm__Bottom {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.StudyGroupForm__Bottom>.form-group.max-users {
+    max-width: 100px;
+}
+
+/*****************************************  */
+/** Checkbox                                */
+/*****************************************  */
+
+#private {
+    height: 1rem;
+}
+
+#private:checked {
+    background-color: var(--primary-color);
+}
+
+#private:checked~#private::after {
+    color: var(--bg-color);
+}
