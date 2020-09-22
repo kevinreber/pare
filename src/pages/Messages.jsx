@@ -125,7 +125,7 @@ function MessageChat() {
 		dispatch(
 			addFlashMessage({
 				isOpen: true,
-				message: 'Message Removed',
+				message: 'Message Deleted',
 				type: 'error',
 			})
 		);
