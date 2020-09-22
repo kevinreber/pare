@@ -1,3 +1,23 @@
 .Feed .MuiSnackbar-root.MuiSnackbar-anchorOriginTopCenter.makeStyles-root-2 .MuiPaper-root.MuiAlert-root.MuiAlert-standardSuccess.MuiPaper-elevation0 {
     width: 90%;
 }
+
+.MuiSnackbar-root.MuiSnackbar-anchorOriginTopCenter.makeStyles-root-2 .MuiAlert-standardError {
+    color: var(--danger-color);
+    background-color: var(--tertiary-color);
+}
+
+.MuiSnackbar-root.MuiSnackbar-anchorOriginTopCenter.makeStyles-root-2>.MuiPaper-root.MuiAlert-root.MuiAlert-standardError.MuiPaper-elevation0,
+.MuiSnackbar-root.MuiSnackbar-anchorOriginTopCenter.makeStyles-root-2>.MuiPaper-root.MuiAlert-root.MuiAlert-standardError.MuiPaper-elevation0>.MuiAlert-action>.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-colorInherit.MuiIconButton-sizeSmall {
+    color: var(--danger-color);
+}
+
+.MuiSnackbar-root.MuiSnackbar-anchorOriginTopCenter.makeStyles-root-2>.MuiPaper-root.MuiAlert-root.MuiAlert-standardSuccess.MuiPaper-elevation0 {
+    background-color: var(--tertiary-color);
+}
+
+.MuiSnackbar-root.MuiSnackbar-anchorOriginTopCenter.makeStyles-root-2>.MuiPaper-root.MuiAlert-root.MuiAlert-standardSuccess.MuiPaper-elevation0>.MuiAlert-icon,
+.MuiSnackbar-root.MuiSnackbar-anchorOriginTopCenter.makeStyles-root-2>.MuiPaper-root.MuiAlert-root.MuiAlert-standardSuccess.MuiPaper-elevation0>.MuiAlert-message,
+.MuiSnackbar-root.MuiSnackbar-anchorOriginTopCenter.makeStyles-root-2>.MuiPaper-root.MuiAlert-root.MuiAlert-standardSuccess.MuiPaper-elevation0>.MuiAlert-action>.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-colorInherit.MuiIconButton-sizeSmall {
+    color: var(--primary-color);
+}
