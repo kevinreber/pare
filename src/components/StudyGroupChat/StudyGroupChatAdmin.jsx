@@ -1,10 +1,13 @@
 /** Dependencies */
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 /** Components & Helpers */
 import CTAButton from '../general/CTAButton';
 import PopoverActions from '../general/PopoverActions';
+import ConfirmDialog from '../general/ConfirmDialog';
+import { addFlashMessage } from '../../store/actions/flashMessages';
 
 /** MUI */
 import IconButton from '@material-ui/core/IconButton';
@@ -19,10 +22,14 @@ import LinkRoundedIcon from '@material-ui/icons/LinkRounded';
  *
  *  @param {string} title
  *  @param {Array} members
+ *  @param {Object} currentUser
  *
  *  StudyGroup -> StudyGroupChat -> StudyGroupChatAdmin
  */
-function StudyGroupChatAdmin({ title, members }) {
+function StudyGroupChatAdmin({ title, members, currentUser }) {
+	const history = useHistory();
+	const dispatch = useDispatch();
+
 	/** PopoverActions Props ***************/
 	const [anchorEl, setAnchorEl] = useState(null);
 	const togglePopover = (e) => {
@@ -33,73 +40,120 @@ function StudyGroupChatAdmin({ title, members }) {
 	const popoverId = open ? 'simple-popover' : undefined;
 	/************************************* */
 
+	const [confirmDialog, setConfirmDialog] = useState({
+		isOpen: false,
+		title: '',
+		subtitle: '',
+	});
+
+	// if user is admin, they will see admin settings
+	const userAdminStatus = members.filter(
+		(member) => member.uid === currentUser.uid
+	);
+
 	const removeUser = () => {
 		console.log('deleting...');
 	};
 
-	const editUser = () => {
-		console.log('editing..');
+	const leaveGroupPrompt = () => {
+		setConfirmDialog({
+			isOpen: true,
+			title: 'Are you sure you want to leave the Study Group?',
+			subtitle: "You can't undo this operation",
+			onConfirm: () => {
+				leaveGroup();
+			},
+		});
 	};
 
 	const leaveGroup = () => {
 		console.log('leaving group...');
+
+		// push user to message
+		history.push(`/study-groups/`);
+		dispatch(
+			addFlashMessage({
+				isOpen: true,
+				message: 'Left Study Group',
+				type: 'error',
+			})
+		);
 	};
 
 	const MembersList = members.map((member) => (
-		<div className='Member__Card'>
-			<div className='Member__Info'>
-				<Link to={`/users/${member.id}`} className='mate-text-secondary'>
-					<Avatar alt={member.name.first} src={member.image} />
-					<p>{member.name.first}</p>
+		<div className="Member__Card">
+			<div className="Member__Info">
+				<Link to={`/users/${member.uid}`} className="mate-text-secondary">
+					<Avatar alt={member.displayName} src={member.photoURL} />
+					<p>{member.displayName}</p>
 				</Link>
 			</div>
-			<div className='Member__Admin-Settings'>
-				<IconButton onClick={togglePopover}>
-					<MoreHorizOutlinedIcon />
-				</IconButton>
-				<PopoverActions
-					remove={removeUser}
-					edit={editUser}
-					id={popoverId}
-					open={open}
-					anchorEl={anchorEl}
-					close={handleClose}
-				/>
-			</div>
+			{userAdminStatus[0].admin && member.uid !== currentUser.uid ? (
+				<div className="Member__Admin-Settings">
+					<IconButton onClick={togglePopover}>
+						<MoreHorizOutlinedIcon />
+					</IconButton>
+					<PopoverActions
+						remove={removeUser}
+						id={popoverId}
+						open={open}
+						anchorEl={anchorEl}
+						close={handleClose}
+						editBtn={false}
+						block={true}
+					/>
+				</div>
+			) : (
+				''
+			)}
 		</div>
 	));
 
 	return (
-		<div className='StudyGroupChatAdmin'>
-			<div className='Admin__Header'>
+		<div className="StudyGroupChatAdmin">
+			<div className="Admin__Header">
 				<h5>{title}</h5>
-				<IconButton>
-					<EditIcon />
-				</IconButton>
+				{userAdminStatus[0].admin ? (
+					<>
+						<IconButton>
+							<EditIcon />
+						</IconButton>
+					</>
+				) : (
+					''
+				)}
 			</div>
-			<div className='Admin__Body'>
-				<div className='Admin-Members__Header'>
-					<h6 className='mate-text-primary'>Group Members</h6>
-					<p className='member-number'>24 Members</p>
+			<div className="Admin__Body">
+				<div className="Admin-Members__Header">
+					<h6 className="mate-text-primary">Group Members</h6>
+					<p className="member-number">{members.length} Members</p>
 				</div>
-				<div className='Admin-Members__Add'>
-					<div className='Add__Btn'>
-						<IconButton>
-							<AddCircleOutlineRoundedIcon />
-						</IconButton>
-						<p>Add Members</p>
+				{userAdminStatus[0].admin ? (
+					<div className="Admin-Members__Add">
+						<div className="Add__Btn">
+							<IconButton>
+								<AddCircleOutlineRoundedIcon />
+							</IconButton>
+							<p>Add Members</p>
+						</div>
+						<div className="Add__Btn">
+							<IconButton>
+								<LinkRoundedIcon />
+							</IconButton>
+							<p>Share Link</p>
+						</div>
 					</div>
-					<div className='Add__Btn'>
-						<IconButton>
-							<LinkRoundedIcon />
-						</IconButton>
-						<p>Share Link</p>
-					</div>
-				</div>
-				<div className='Admin-Members__List'>{MembersList}</div>
-				<div className='Admin-Members__Footer'>
-					<p onClick={leaveGroup}>
-						<CTAButton text='Leave Group' danger={true} />
+				) : (
+					''
+				)}
+				<div className="Admin-Members__List">{MembersList}</div>
+				<div className="Admin-Members__Footer">
+					<ConfirmDialog
+						confirmDialog={confirmDialog}
+						setConfirmDialog={setConfirmDialog}
+					/>
+					<p onClick={leaveGroupPrompt}>
+						<CTAButton text="Leave Group" danger={true} />
 					</p>
 				</div>
 			</div>

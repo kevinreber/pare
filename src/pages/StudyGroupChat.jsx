@@ -74,7 +74,11 @@ function StudyGroupChat() {
 		return (
 			<Modal
 				content={
-					<StudyGroupChatAdmin title={studyGroup.title} members={users} />
+					<StudyGroupChatAdmin
+						title={studyGroup.title}
+						members={studyGroup.users}
+						currentUser={currentUser}
+					/>
 				}
 				closeModal={toggleAdmin}
 				full={true}
