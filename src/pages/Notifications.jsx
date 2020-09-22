@@ -66,7 +66,7 @@ function Notifications() {
 		const messageId = await createNewMessage(
 			'messages',
 			messageData,
-			'chat',
+			'chats',
 			chatData
 		);
 
