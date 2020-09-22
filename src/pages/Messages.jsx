@@ -10,6 +10,7 @@ import PopoverActions from '../components/general/PopoverActions';
 import BackButton from '../components/general/BackButton';
 import ConfirmDialog from '../components/general/ConfirmDialog';
 import MessageFooter from '../components/Messages/MessageFooter';
+import createFbTimestamp from '../utils/createFbTimestamp';
 import { increment } from '../config/fbConfig';
 import { deleteMessageFromFB } from '../store/actions/messages';
 import { addFlashMessage } from '../store/actions/flashMessages';
@@ -135,6 +136,7 @@ function MessageChat() {
 			db.collection('messages').doc(messageId).collection('chats').add(message);
 			db.collection('messages').doc(messageId).update({
 				count: increment,
+				lastUpdatedAt: createFbTimestamp(),
 			});
 		} catch (err) {
 			console.log(err);
@@ -166,7 +168,7 @@ function MessageChat() {
 								currentUser.uid === message.data.uid ? 'chat__receiver' : ''
 							}`}>
 							{message.data.content}
-							<span className='chat__timestamp'>
+							<span className="chat__timestamp">
 								{message.data.createdAt
 									? moment(message.data.createdAt.toDate()).calendar()
 									: ''}
@@ -176,20 +178,20 @@ function MessageChat() {
 				);
 			})
 		) : (
-			<NoData text='messages' />
+			<NoData text="messages" />
 		);
 
 	return (
-		<div className='MessageChat'>
+		<div className="MessageChat">
 			{receiver ? (
 				<>
-					<div className='MessageChat__Header bottom-border-header'>
+					<div className="MessageChat__Header bottom-border-header">
 						<BackButton />
 						<ConfirmDialog
 							confirmDialog={confirmDialog}
 							setConfirmDialog={setConfirmDialog}
 						/>
-						<div className='MessageChat__Title'>
+						<div className="MessageChat__Title">
 							<Link to={`/users/${receiverId}`}>
 								<Avatar src={receiver.photoURL} alt={receiver.displayName} />
 							</Link>
@@ -197,7 +199,7 @@ function MessageChat() {
 							<h5>{receiver.displayName}</h5>
 						</div>
 						<IconButton onClick={togglePopover}>
-							<MoreHorizOutlinedIcon fontSize='small' />
+							<MoreHorizOutlinedIcon fontSize="small" />
 						</IconButton>
 						<PopoverActions
 							remove={deleteMessagePrompt}
@@ -208,10 +210,10 @@ function MessageChat() {
 							editBtn={false}
 						/>
 					</div>
-					<div id='MessageChat__Body' className='MessageChat__Body Page__Body'>
+					<div id="MessageChat__Body" className="MessageChat__Body Page__Body">
 						{ChatBody}
 					</div>
-					<div className='MessageChat__Footer'>
+					<div className="MessageChat__Footer">
 						<MessageFooter send={sendMessage} uid={currentUser.uid} />
 					</div>
 				</>
