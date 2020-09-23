@@ -50,30 +50,40 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 /** Confirmation Dialog to verify user wants to perform action */
-function ConfirmDialog({ color, confirmDialog, setConfirmDialog }) {
+function ConfirmDialog({
+	color,
+	confirmDialog,
+	setConfirmDialog,
+	type = 'success',
+}) {
 	const classes = useStyles();
 	return (
 		<Dialog open={confirmDialog.isOpen} classes={{ paper: classes.dialog }}>
-			<DialogTitle className={classes.dialogTitle}>
+			<DialogTitle
+				className={`${classes.dialogTitle} ${
+					type === 'success' ? 'Dialog-Success' : 'Dialog-Error'
+				}`}>
 				<IconButton disableRipple className={classes.titleIcon}>
 					<NotListedLocationIcon />
 				</IconButton>
 			</DialogTitle>
 			<DialogContent>
-				<Typography variant='h6'>{confirmDialog.title}</Typography>
+				<Typography variant="h6">{confirmDialog.title}</Typography>
 			</DialogContent>
 			<DialogContent>
-				<Typography variant='subtitle2'>{confirmDialog.subtitle}</Typography>
+				<Typography variant="subtitle2">{confirmDialog.subtitle}</Typography>
 			</DialogContent>
 			<DialogActions className={classes.dialogAction}>
 				<DialogButton
 					className={classes.primaryDialogButton}
-					text='No'
+					text="No"
 					onClick={() => setConfirmDialog({ ...confirmDialog, isOpen: false })}
 				/>
 				<DialogButton
-					className={classes.primaryDialogButton}
-					text='Yes'
+					className={`${classes.primaryDialogButton} ${
+						type === 'success' ? 'Dialog-Success' : 'Dialog-Error'
+					}`}
+					text="Yes"
 					onClick={confirmDialog.onConfirm}
 				/>
 			</DialogActions>

@@ -2,8 +2,12 @@
     text-align: center;
 }
 
-.MuiDialogTitle-root.makeStyles-dialogTitle-4 button.MuiButtonBase-root.MuiIconButton-root.makeStyles-titleIcon-7 {
+.MuiDialogTitle-root.makeStyles-dialogTitle-4.Dialog-Error button.MuiButtonBase-root.MuiIconButton-root.makeStyles-titleIcon-7 {
     background-color: var(--danger-color);
+}
+
+.MuiDialogTitle-root.makeStyles-dialogTitle-4.Dialog-Success button.MuiButtonBase-root.MuiIconButton-root.makeStyles-titleIcon-7 {
+    background-color: var(--primary-color);
 }
 
 button.MuiButtonBase-root.MuiButton-root.makeStyles-root-9.MuiButton-contained.MuiButton-containedSizeLarge.MuiButton-sizeLarge:first-of-type {
@@ -12,8 +16,14 @@ button.MuiButtonBase-root.MuiButton-root.makeStyles-root-9.MuiButton-contained.M
     color: var(--primary-color);
 }
 
-button.MuiButtonBase-root.MuiButton-root.makeStyles-root-9.MuiButton-contained.MuiButton-containedSizeLarge.MuiButton-sizeLarge:last-of-type {
+button.MuiButtonBase-root.MuiButton-root.makeStyles-root-9.MuiButton-contained.MuiButton-containedSizeLarge.MuiButton-sizeLarge:last-of-type.Dialog-Error {
     border: 1px solid var(--danger-color);
     background-color: var(--danger-color);
+    color: var(--bg-color);
+}
+
+button.MuiButtonBase-root.MuiButton-root.makeStyles-root-9.MuiButton-contained.MuiButton-containedSizeLarge.MuiButton-sizeLarge:last-of-type.Dialog-Success {
+    border: 1px solid var(--primary-color);
+    background-color: var(--primary-color);
     color: var(--bg-color);
 }

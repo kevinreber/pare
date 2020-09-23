@@ -100,15 +100,15 @@ function StudyGroupForm({ save, studyGroups, user }) {
 			studyGroupId: id,
 			[name]: value,
 		}));
-		addStudyGroupPrompt(id);
+		addStudyGroupPrompt(id, name);
 	};
 
 	/** Prompts Confirmation Dialog to Add User to Study Group */
-	const addStudyGroupPrompt = (id) => {
+	const addStudyGroupPrompt = (id, studyGroupName) => {
 		setConfirmDialog({
 			isOpen: true,
-			title: 'Are you sure you want to remove this message?',
-			subtitle: "You can't undo this operation",
+			title: `Join ${studyGroupName}?`,
+			subtitle: '',
 			onConfirm: () => {
 				const userData = {
 					uid,
@@ -191,7 +191,7 @@ function StudyGroupForm({ save, studyGroups, user }) {
 	};
 
 	return (
-		<div className="StudyGroupForm p-3">
+		<div className="StudyGroupForm p-3" onClick={toggleShowOptions}>
 			<ConfirmDialog
 				confirmDialog={confirmDialog}
 				setConfirmDialog={setConfirmDialog}
