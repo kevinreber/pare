@@ -23,7 +23,6 @@ function AutocompleteStudyGroups({
 }) {
 	const currentUser = useSelector((state) => state.auth.user);
 
-	const [userStudyGroups, setUserStudyGroups] = useState([]);
 	const [studyGroupChoices, setStudyGroupChoices] = useState([]);
 	const [filteredOptions, setFilteredOptions] = useState([]);
 
@@ -46,36 +45,14 @@ function AutocompleteStudyGroups({
 				studyGroupOptions.push(studyGroup);
 			}
 		}
-		// const studyGroupChoices = publicStudyGroups.filter((studyGroup) =>
-		// 	studyGroup.data.users.includes(currentUser.uid)
-		// );
-		// 	const studyGroupChoices = publicStudyGroups.filter((studyGroup) =>
-		// 	studyGroup.data.users.filter((user) => user.uid !== currentUser.uid)
-		// );
 
 		setStudyGroupChoices(studyGroupOptions);
 	}, [options, currentUser]);
 
-	/** Filter Study Groups to avoid duplicates */
-	// useEffect(() => {
-	// 	if (userStudyGroups) {
-	// 		// Set to avoid any userId repeats
-	// 		const set = new Set();
-
-	// 		for (let userStudyGroup of userStudyGroups) {
-	// 			userStudyGroup.users.map((user) => set.add(user.uid));
-	// 		}
-
-	// 		let options = options.map((studyGroup) =>
-	// 			studyGroup.users.filter((user) => !set.has(user.uid))
-	// 		);
-	// 		setStudyGroupChoices(options);
-	// 	}
-	// }, [userStudyGroups, options]);
-
 	/** Commit onChange changes and filter through options */
 	function onSearch(e) {
 		onChange(e);
+		console.log(e.target, value);
 		toggleOptions(true);
 		let opts = studyGroupChoices.filter(
 			(studyGroup) =>

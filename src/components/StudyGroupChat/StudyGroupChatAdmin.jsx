@@ -50,7 +50,8 @@ function StudyGroupChatAdmin({ title, members, currentUser }) {
 	const userAdminStatus = members.filter(
 		(member) => member.uid === currentUser.uid
 	);
-
+	console.log(userAdminStatus);
+	console.log(members, currentUser.uid);
 	const removeUser = () => {
 		console.log('deleting...');
 	};

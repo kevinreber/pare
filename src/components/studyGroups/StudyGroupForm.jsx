@@ -1,12 +1,17 @@
 /** Dependencies */
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 /** Components & Helpers */
 import SubmitButton from '../general/SubmitButton';
 import Autocomplete from '../general/Autocomplete';
 import AutocompleteStudyGroups from '../general/AutocompleteStudyGroups';
+import ConfirmDialog from '../general/ConfirmDialog';
 import createFbTimestamp from '../../utils/createFbTimestamp';
+import addUserToCollection from '../../utils/addUserToCollection';
+import { addFlashMessage } from '../../store/actions/flashMessages';
+import db from '../../config/fbConfig';
 import './styles/StudyGroupForm.css';
 
 /** MUI */
@@ -29,6 +34,8 @@ const PrivateCheckbox = withStyles({
  */
 function StudyGroupForm({ save, studyGroups, user }) {
 	const { uid, displayName, photoURL } = user;
+	const history = useHistory();
+	const dispatch = useDispatch();
 
 	// Form Data
 	const INITIAL_STATE = {
@@ -43,7 +50,8 @@ function StudyGroupForm({ save, studyGroups, user }) {
 	};
 
 	const SEARCH_INITIAL_STATE = {
-		search: '',
+		studyGroupId: '',
+		studyGroupTitle: '',
 	};
 
 	const [showOptions, setShowOptions] = useState(false);
@@ -51,8 +59,14 @@ function StudyGroupForm({ save, studyGroups, user }) {
 	const [formData, setFormData] = useState(INITIAL_STATE);
 	const [searchForm, setSearchForm] = useState(SEARCH_INITIAL_STATE);
 
+	const [confirmDialog, setConfirmDialog] = useState({
+		isOpen: false,
+		title: '',
+		subtitle: '',
+	});
+
 	const handleSearch = (e) => {
-		setSearchForm({ search: e.target.value });
+		setSearchForm({ studyGroupTitle: e.target.value });
 	};
 
 	/** Update state in formData */
@@ -76,15 +90,46 @@ function StudyGroupForm({ save, studyGroups, user }) {
 		}
 	};
 
-	/** Stores courseId in state */
+	/** Stores studyGroupId in state */
 	const setId = (e) => {
 		let { id } = e.target;
+		let { name, value } = !e.target.dataset.name ? e.target : e.target.dataset;
 
-		setFormData((fData) => ({
+		setSearchForm((fData) => ({
 			...fData,
-			courseId: id,
+			studyGroupId: id,
+			[name]: value,
 		}));
+		addStudyGroupPrompt(id);
 	};
+
+	/** Prompts Confirmation Dialog to Add User to Study Group */
+	const addStudyGroupPrompt = (id) => {
+		setConfirmDialog({
+			isOpen: true,
+			title: 'Are you sure you want to remove this message?',
+			subtitle: "You can't undo this operation",
+			onConfirm: () => {
+				const userData = {
+					uid,
+					displayName,
+					photoURL,
+					admin: false,
+				};
+				addUserToCollection('study-group', id, 'users', userData);
+
+				history.push(`/study-groups/${id}`);
+				dispatch(
+					addFlashMessage({
+						isOpen: true,
+						message: 'Joined Study Group!',
+						type: 'success',
+					})
+				);
+			},
+		});
+	};
+	/***************************************************** */
 
 	/** if user clicks outside of options, showOptions will be set to false */
 	function toggleShowOptions(e) {
@@ -147,12 +192,16 @@ function StudyGroupForm({ save, studyGroups, user }) {
 
 	return (
 		<div className="StudyGroupForm p-3">
+			<ConfirmDialog
+				confirmDialog={confirmDialog}
+				setConfirmDialog={setConfirmDialog}
+			/>
 			<form className="container mb-3">
 				<AutocompleteStudyGroups
 					id={'studyGroup'}
-					name="studyGroup"
+					name="studyGroupTitle"
 					onChange={handleSearch}
-					value={searchForm.search}
+					value={searchForm.studyGroupTitle}
 					options={studyGroups}
 					setId={setId}
 					placeholder={'find study group...'}
