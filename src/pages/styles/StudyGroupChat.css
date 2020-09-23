@@ -108,6 +108,8 @@
 /*******************************************************/
 .StudyGroupChatAdmin {
     margin-top: 6rem;
+    display: flex;
+    flex-direction: column;
 }
 
 .StudyGroupChatAdmin>.Admin__Header>h5 {
@@ -175,4 +177,12 @@
 
 .Admin-Members__Add .MuiSvgIcon-root {
     font-size: 2rem;
+}
+
+
+/*******************************************************/
+/** StudyGroupChatAdmin - Icons                        */
+/*******************************************************/
+.Block-Icon {
+    color: var(--danger-color);
 }

@@ -1,7 +1,7 @@
 /** Dependencies */
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
 
 /** Components & Helpers */
@@ -11,6 +11,7 @@ import Modal from '../components/general/Modal';
 import BackButton from '../components/general/BackButton';
 import StudyGroupChatFooter from '../components/StudyGroupChat/StudyGroupChatFooter';
 import createFbTimestamp from '../utils/createFbTimestamp';
+import { addFlashMessage } from '../store/actions/flashMessages';
 import { increment } from '../config/fbConfig';
 import db from '../config/fbConfig';
 import './styles/StudyGroupChat.css';
@@ -24,10 +25,18 @@ import MoreHorizOutlinedIcon from '@material-ui/icons/MoreHorizOutlined';
  */
 function StudyGroupChat() {
 	const { studyGroupId } = useParams();
+	const dispatch = useDispatch();
+
 	const currentUser = useSelector((state) => state.auth.user);
 
+	const INITIAL_STATE = {
+		title: '',
+		members: [],
+	};
 	const [studyGroup, setStudyGroup] = useState({});
+	const [studyGroupForm, setStudyGroupForm] = useState(INITIAL_STATE);
 	const [messages, setMessages] = useState([]);
+	const [isLoading, setIsLoading] = useState(true);
 
 	const [showAdmin, setShowAdmin] = useState(false);
 	const toggleAdmin = () => setShowAdmin((show) => !show);
@@ -61,8 +70,43 @@ function StudyGroupChat() {
 						})
 					)
 				);
+
+			// add studyGroup.title value to input in StudyGroupChatAdmin
+			// if user wants to change Study Group's title
+			if (isLoading && studyGroup.title) {
+				setStudyGroupForm({
+					title: studyGroup.title,
+					members: studyGroup.members,
+				});
+				setIsLoading(false);
+			}
 		}
-	}, [studyGroupId]);
+	}, [studyGroupId, studyGroup, isLoading]);
+
+	const handleChange = (e) => {
+		if (e === 'reset') {
+			setStudyGroupForm((fData) => ({ ...fData, title: studyGroup.title }));
+		} else {
+			const { name, value } = e.target;
+			setStudyGroupForm((fData) => ({ ...fData, [name]: value }));
+		}
+	};
+
+	const updateStudyGroupTitle = () => {
+		/** update DB and make change */
+		db.collection('study-group').doc(studyGroupId).update({
+			title: studyGroupForm.title,
+			lastUpdatedAt: createFbTimestamp(),
+		});
+		/** Prompt change made */
+		dispatch(
+			addFlashMessage({
+				isOpen: true,
+				message: 'Changes Saved',
+				type: 'success',
+			})
+		);
+	};
 
 	if (!studyGroup) {
 		return <p>Loading...</p>;
@@ -74,9 +118,11 @@ function StudyGroupChat() {
 				content={
 					<StudyGroupChatAdmin
 						studyGroupId={studyGroupId}
-						title={studyGroup.title}
+						title={studyGroupForm.title}
 						members={studyGroup.users}
 						currentUser={currentUser}
+						handleChange={handleChange}
+						saveChanges={updateStudyGroupTitle}
 					/>
 				}
 				closeModal={toggleAdmin}

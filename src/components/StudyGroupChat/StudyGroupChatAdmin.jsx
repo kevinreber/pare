@@ -16,6 +16,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import Avatar from '@material-ui/core/Avatar';
 import MoreHorizOutlinedIcon from '@material-ui/icons/MoreHorizOutlined';
 import AddCircleOutlineRoundedIcon from '@material-ui/icons/AddCircleOutlineRounded';
+import BlockIcon from '@material-ui/icons/Block';
 import LinkRoundedIcon from '@material-ui/icons/LinkRounded';
 
 /** Modal for Study Group Admin
@@ -27,7 +28,14 @@ import LinkRoundedIcon from '@material-ui/icons/LinkRounded';
  *
  *  StudyGroup -> StudyGroupChat -> StudyGroupChatAdmin
  */
-function StudyGroupChatAdmin({ studyGroupId, title, members, currentUser }) {
+function StudyGroupChatAdmin({
+	studyGroupId,
+	title,
+	members,
+	currentUser,
+	handleChange,
+	saveChanges,
+}) {
 	const history = useHistory();
 	const dispatch = useDispatch();
 
@@ -46,6 +54,18 @@ function StudyGroupChatAdmin({ studyGroupId, title, members, currentUser }) {
 		title: '',
 		subtitle: '',
 	});
+
+	const [errors, setErrors] = useState('');
+	const [showEdit, setShowEdit] = useState(false);
+	const handleEdit = (e) => {
+		setErrors('');
+		setShowEdit((show) => !show);
+		if (showEdit === true) {
+			reset('reset');
+		}
+	};
+	// resets title
+	const reset = (e) => handleChange(e);
 
 	// if user is admin, they will see admin settings
 	const userAdminStatus = members.filter(
@@ -92,6 +112,17 @@ function StudyGroupChatAdmin({ studyGroupId, title, members, currentUser }) {
 		);
 	};
 
+	const saveEdit = () => {
+		setErrors('');
+		if (title === '' && title.trim() === '') {
+			setErrors('*Can not leave title empty!');
+		} else {
+			saveChanges();
+			// setShowEdit to false
+			setShowEdit(false);
+		}
+	};
+
 	const MembersList = members.map((member) => (
 		<div className="Member__Card">
 			<div className="Member__Info">
@@ -131,11 +162,44 @@ function StudyGroupChatAdmin({ studyGroupId, title, members, currentUser }) {
 	return (
 		<div className="StudyGroupChatAdmin">
 			<div className="Admin__Header">
-				<h5>{title}</h5>
+				{showEdit ? (
+					<>
+						<input
+							className={`form-control mate-form-input editable-text editable-title ${
+								showEdit ? 'show-editable' : 'hide-editable'
+							}`}
+							onChange={handleChange}
+							name={'title'}
+							value={title}
+							type="text"
+							maxLength="30"
+							required
+						/>
+						<small
+							className={`char-count ${
+								30 - title.length <= 10 ? 'error-limit' : ''
+							}`}>
+							{30 - title.length} characters remaining
+						</small>
+					</>
+				) : (
+					<>
+						<h5>{title}</h5>
+					</>
+				)}
+
 				{userAdminStatus[0].admin ? (
 					<>
-						<IconButton>
-							<EditIcon />
+						<IconButton onClick={handleEdit}>
+							{showEdit ? (
+								<div className="Block-Icon">
+									<BlockIcon />
+								</div>
+							) : (
+								<div className="Edit-Icon">
+									<EditIcon />
+								</div>
+							)}
 						</IconButton>
 					</>
 				) : (
@@ -172,11 +236,22 @@ function StudyGroupChatAdmin({ studyGroupId, title, members, currentUser }) {
 						setConfirmDialog={setConfirmDialog}
 						type="error"
 					/>
-					<p onClick={leaveGroupPrompt}>
-						<CTAButton text="Leave Group" danger={true} />
-					</p>
+					{showEdit ? (
+						<>
+							<p onClick={saveEdit}>
+								<CTAButton text="Save Changes" danger={false} />
+							</p>
+						</>
+					) : (
+						<>
+							<p onClick={leaveGroupPrompt}>
+								<CTAButton text="Leave Group" danger={true} />
+							</p>
+						</>
+					)}
 				</div>
 			</div>
+			<div className="alert errors">{errors}</div>
 		</div>
 	);
 }
