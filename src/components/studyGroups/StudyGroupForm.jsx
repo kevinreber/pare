@@ -209,47 +209,54 @@ function StudyGroupForm({ save, studyGroups, user }) {
 					toggleOptions={toggleOptions}
 				/>
 			</form>
-			<h4>Create Study Group</h4>
-			<form className="container mb-3" onSubmit={handleSubmit}>
-				<label htmlFor="title" className="float-left">
-					Title*
-				</label>
-				<input
-					id="title"
-					className="form-control mate-form-input"
-					type="text"
-					onChange={handleChange}
-					name="title"
-					value={formData.title}
-					maxLength="20"
-					required
-				/>
-				<div className="StudyGroupForm__Bottom">
-					<div className="form-group max-users">
-						<label htmlFor="max" className="float-left">
-							Max Users
-						</label>
-						<input
-							id="max"
-							className="form-control mate-form-input"
-							type="number"
-							onChange={handleChange}
-							name="maxUsers"
-							// step="1"
-							value={formData.maxUsers}
-						/>
-					</div>
-					<div className="form-group form-check">
-						<label htmlFor="private">Private</label>
-						<input
-							id="private"
-							className="form-control mate-form-input form-check-input"
-							type="checkbox"
-							onChange={handleChange}
-							name="private"
-							value={formData.private}
-						/>
-						{/* <FormControlLabel
+			<div className="StudyGroupForm__Create">
+				<h4>Create Study Group</h4>
+				<form className="container mb-3" onSubmit={handleSubmit}>
+					<label htmlFor="title" className="float-left">
+						Title*
+					</label>
+					<input
+						id="title"
+						className="form-control mate-form-input mb-3"
+						type="text"
+						onChange={handleChange}
+						name="title"
+						value={formData.title}
+						maxLength="30"
+						required
+					/>
+					<small
+						className={`char-count ${
+							30 - formData.title.length <= 10 ? 'error-limit' : ''
+						}`}>
+						{30 - formData.title.length} characters remaining
+					</small>
+					<div className="StudyGroupForm__Bottom">
+						<div className="form-group max-users">
+							<label htmlFor="max" className="float-left">
+								Max Users
+							</label>
+							<input
+								id="max"
+								className="form-control mate-form-input"
+								type="number"
+								onChange={handleChange}
+								name="maxUsers"
+								// step="1"
+								value={formData.maxUsers}
+							/>
+						</div>
+						<div className="form-group form-check">
+							<label htmlFor="private">Private</label>
+							<input
+								id="private"
+								className="form-control mate-form-input form-check-input"
+								type="checkbox"
+								onChange={handleChange}
+								name="private"
+								value={formData.private}
+							/>
+							{/* <FormControlLabel
 							control={
 								<PrivateCheckbox
 									checked={formData.private}
@@ -259,12 +266,13 @@ function StudyGroupForm({ save, studyGroups, user }) {
 							}
 							label="Private"
 						/> */}
+						</div>
 					</div>
-				</div>
 
-				<div className="alert errors">{errors}</div>
-				<SubmitButton text="Create Group" />
-			</form>
+					<div className="alert errors">{errors}</div>
+					<SubmitButton text="Create Group" />
+				</form>
+			</div>
 		</div>
 	);
 }

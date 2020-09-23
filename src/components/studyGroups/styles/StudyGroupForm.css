@@ -1,3 +1,17 @@
+.StudyGroupForm .StudyGroupForm__Create h4 {
+    margin-bottom: 1.5rem;
+}
+
+.StudyGroupForm .StudyGroupForm__Create form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.StudyGroupForm .StudyGroupForm__Create form small.char-count {
+    text-align: right;
+}
+
 .StudyGroupForm__Bottom {
     margin-top: 1rem;
     display: flex;
