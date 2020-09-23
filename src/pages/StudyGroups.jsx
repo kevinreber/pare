@@ -24,7 +24,8 @@ function Connect() {
 
 	const currentUser = useSelector((state) => state.auth.user);
 
-	const [studyGroups, setStudyGroups] = useState([]);
+	const [userStudyGroups, setUserStudyGroups] = useState([]);
+	const [allStudyGroups, setAllStudyGroups] = useState([]);
 	const [filter, setFilter] = useState('');
 
 	const [showForm, setShowForm] = useState(false);
@@ -32,7 +33,7 @@ function Connect() {
 
 	useEffect(() => {
 		db.collection('study-group').onSnapshot((snapshot) =>
-			setStudyGroups(
+			setAllStudyGroups(
 				snapshot.docs.map((doc) => ({
 					id: doc.id,
 					data: doc.data(),
@@ -41,11 +42,32 @@ function Connect() {
 		);
 	}, []);
 
+	useEffect(() => {
+		if (allStudyGroups) {
+			const userStudyGroups = [];
+
+			// Filter which Study Groups user is currently in
+			for (let studyGroup of allStudyGroups) {
+				let opt = false;
+				for (let user of studyGroup.data.users) {
+					if (user.uid === currentUser.uid) {
+						opt = true;
+					}
+				}
+				if (opt) {
+					userStudyGroups.push(studyGroup);
+				}
+			}
+
+			setUserStudyGroups(userStudyGroups);
+		}
+	}, [allStudyGroups, currentUser.uid]);
+
 	let List;
 
-	if (filter !== '' && studyGroups && studyGroups.length !== 0) {
+	if (filter !== '' && userStudyGroups && userStudyGroups.length !== 0) {
 		// filter study groups to display
-		const filteredGroups = studyGroups.filter(
+		const filteredGroups = allStudyGroups.filter(
 			(studyGroup) =>
 				studyGroup.data.title.toLowerCase().indexOf(filter.toLowerCase()) > -1
 		);
@@ -57,8 +79,8 @@ function Connect() {
 			) : (
 				<NoData text={'matches'} added={false} />
 			);
-	} else if (studyGroups && studyGroups.length !== 0) {
-		List = <StudyGroupList studyGroups={studyGroups} />;
+	} else if (userStudyGroups && userStudyGroups.length !== 0) {
+		List = <StudyGroupList studyGroups={userStudyGroups} />;
 	} else {
 		List = <NoData text={'study groups'} />;
 	}
@@ -84,7 +106,7 @@ function Connect() {
 				content={
 					<StudyGroupForm
 						save={addStudyGroup}
-						studyGroups={studyGroups}
+						studyGroups={allStudyGroups}
 						user={currentUser}
 					/>
 				}

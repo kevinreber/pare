@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import CTAButton from '../general/CTAButton';
 import PopoverActions from '../general/PopoverActions';
 import ConfirmDialog from '../general/ConfirmDialog';
+import removeUserFromCollection from '../../utils/removeUserFromCollection';
 import { addFlashMessage } from '../../store/actions/flashMessages';
 
 /** MUI */
@@ -26,7 +27,7 @@ import LinkRoundedIcon from '@material-ui/icons/LinkRounded';
  *
  *  StudyGroup -> StudyGroupChat -> StudyGroupChatAdmin
  */
-function StudyGroupChatAdmin({ title, members, currentUser }) {
+function StudyGroupChatAdmin({ studyGroupId, title, members, currentUser }) {
 	const history = useHistory();
 	const dispatch = useDispatch();
 
@@ -50,8 +51,7 @@ function StudyGroupChatAdmin({ title, members, currentUser }) {
 	const userAdminStatus = members.filter(
 		(member) => member.uid === currentUser.uid
 	);
-	console.log(userAdminStatus);
-	console.log(members, currentUser.uid);
+
 	const removeUser = () => {
 		console.log('deleting...');
 	};
@@ -67,7 +67,18 @@ function StudyGroupChatAdmin({ title, members, currentUser }) {
 		});
 	};
 
+	/**
+	 * ! Update displayName of user's messages
+	 */
 	const leaveGroup = () => {
+		const user = {
+			uid: currentUser.uid,
+			displayName: currentUser.displayName,
+			photoURL: currentUser.photoURL,
+			admin: userAdminStatus[0].admin,
+		};
+
+		removeUserFromCollection('study-group', studyGroupId, user);
 		console.log('leaving group...');
 
 		// push user to message
@@ -152,6 +163,7 @@ function StudyGroupChatAdmin({ title, members, currentUser }) {
 					<ConfirmDialog
 						confirmDialog={confirmDialog}
 						setConfirmDialog={setConfirmDialog}
+						type="error"
 					/>
 					<p onClick={leaveGroupPrompt}>
 						<CTAButton text="Leave Group" danger={true} />
