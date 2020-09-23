@@ -52,8 +52,8 @@ function StudyGroupChatAdmin({ studyGroupId, title, members, currentUser }) {
 		(member) => member.uid === currentUser.uid
 	);
 
-	const removeUser = () => {
-		console.log('deleting...');
+	const removeUser = (user) => {
+		removeUserFromCollection('study-group', studyGroupId, user);
 	};
 
 	const leaveGroupPrompt = () => {
@@ -81,8 +81,8 @@ function StudyGroupChatAdmin({ studyGroupId, title, members, currentUser }) {
 		removeUserFromCollection('study-group', studyGroupId, user);
 		console.log('leaving group...');
 
-		// push user to message
-		history.push(`/study-groups/`);
+		// redirect user to study-groups
+		history.push(`/study-groups`);
 		dispatch(
 			addFlashMessage({
 				isOpen: true,
@@ -106,7 +106,14 @@ function StudyGroupChatAdmin({ studyGroupId, title, members, currentUser }) {
 						<MoreHorizOutlinedIcon />
 					</IconButton>
 					<PopoverActions
-						remove={removeUser}
+						remove={() =>
+							removeUser({
+								uid: member.uid,
+								displayName: member.displayName,
+								photoURL: member.photoURL,
+								admin: member.admin,
+							})
+						}
 						id={popoverId}
 						open={open}
 						anchorEl={anchorEl}
