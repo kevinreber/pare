@@ -35,8 +35,8 @@ function CourseAssignment({
 	const displayGrade = userGrade ? (
 		<>
 			Your Grade: {userGrade}%
-			<div onClick={editToggle} className='Change-Grade'>
-				<i className='fas fa-edit'></i>
+			<div onClick={editToggle} className="Change-Grade">
+				<i className="fas fa-edit"></i>
 			</div>
 		</>
 	) : (
@@ -60,22 +60,24 @@ function CourseAssignment({
 				<table
 					key={key}
 					id={id}
-					className='Assignment Assignment-Card mate-table table-hover'>
+					className="Assignment Assignment-Card mate-table table-hover">
 					<AssignmentStatusIcon color={assignmentStatus} />
 					<tbody>
 						<tr>
-							<td className='mate-text-primary Assignment-Title text-left'>
+							<th
+								colspan="2"
+								className="mate-text-primary Assignment-Title text-left">
 								{title}
-							</td>
-							<td className='mate-text-secondary Assignment-Grade text-right pr-1'>
+							</th>
+							{/* <td className='mate-text-secondary Assignment-Grade text-right pr-1'>
 								Class Grade: {classGrade}%
-							</td>
+							</td> */}
 						</tr>
 						<tr>
-							<td className='mate-text-secondary Assignment-Due font-italic text-left'>
+							<td className="mate-text-secondary Assignment-Due font-italic text-left">
 								Due: {dueDate}
 							</td>
-							<td className='mate-text-secondary Assignment-Grade text-right pr-1'>
+							<td className="mate-text-secondary Assignment-Grade text-right pr-1">
 								{displayGrade}
 							</td>
 						</tr>
