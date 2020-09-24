@@ -62,18 +62,12 @@ function addNewUserToDB(user) {
 		school: 'U.C. Berkeley',
 		keywords: [],
 		availability: {
-			Mon: [{ start: '9am', end: '11am' }],
+			Mon: [],
 			Tue: [],
-			Wed: [
-				{ start: '9am', end: '11:30am' },
-				{ start: '2pm', end: '4pm' },
-			],
+			Wed: [],
 			Thu: [],
 			Fri: [],
-			Sat: [
-				{ start: '9am', end: '11am' },
-				{ start: '2pm', end: '4:30pm' },
-			],
+			Sat: [],
 			Sun: [],
 		},
 		createdAt: createFbTimestamp(),
