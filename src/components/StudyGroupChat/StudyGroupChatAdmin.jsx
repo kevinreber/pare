@@ -9,6 +9,7 @@ import PopoverActions from '../general/PopoverActions';
 import ConfirmDialog from '../general/ConfirmDialog';
 import removeUserFromCollection from '../../utils/removeUserFromCollection';
 import { addFlashMessage } from '../../store/actions/flashMessages';
+import db from '../../config/fbConfig';
 
 /** MUI */
 import IconButton from '@material-ui/core/IconButton';
@@ -77,6 +78,7 @@ function StudyGroupChatAdmin({
 	};
 
 	const leaveGroupPrompt = () => {
+		console.log(members);
 		setConfirmDialog({
 			isOpen: true,
 			title: 'Are you sure you want to leave the Study Group?',
@@ -98,7 +100,7 @@ function StudyGroupChatAdmin({
 			admin: userAdminStatus[0].admin,
 		};
 
-		removeUserFromCollection('study-group', studyGroupId, user);
+		removeUserFromCollection('study-group', studyGroupId, user, members);
 		console.log('leaving group...');
 
 		// redirect user to study-groups
