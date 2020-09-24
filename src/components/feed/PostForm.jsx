@@ -1,7 +1,10 @@
+/** Dependencies */
 import React, { useState } from 'react';
-import SubmitButton from '../general/SubmitButton';
 import { useSelector } from 'react-redux';
 import firebase from 'firebase';
+
+/** Components */
+import SubmitButton from '../general/SubmitButton';
 
 /** MUI */
 import IconButton from '@material-ui/core/IconButton';
@@ -125,21 +128,21 @@ function PostForm({ save }) {
 	};
 
 	return (
-		<div className='PostForm p-3'>
+		<div className="PostForm p-3">
 			<h4>New Event</h4>
-			<form className='container mb-3' onSubmit={handleSubmit}>
-				<div className='form-group'>
-					<label htmlFor='title' className='float-left'>
+			<form className="container mb-3" onSubmit={handleSubmit}>
+				<div className="form-group">
+					<label htmlFor="title" className="float-left">
 						Title*
 					</label>
 					<input
-						id='title'
-						className='form-control mate-form-input'
-						type='text'
+						id="title"
+						className="form-control mate-form-input"
+						type="text"
 						onChange={handleChange}
-						name='title'
+						name="title"
 						value={formData.title}
-						maxLength='30'
+						maxLength="30"
 						required
 					/>
 					<small
@@ -149,19 +152,19 @@ function PostForm({ save }) {
 						{30 - formData.title.length} characters remaining
 					</small>
 				</div>
-				<div className='form-group'>
-					<label htmlFor='description' className='float-left'>
+				<div className="form-group">
+					<label htmlFor="description" className="float-left">
 						Description*
 					</label>
 					<textarea
-						rows='3'
-						id='description'
-						className='form-control mate-form-input'
-						type='text'
+						rows="3"
+						id="description"
+						className="form-control mate-form-input"
+						type="text"
 						onChange={handleChange}
-						name='description'
+						name="description"
 						value={formData.description}
-						maxLength='100'
+						maxLength="100"
 						required
 					/>
 					<small
@@ -171,30 +174,30 @@ function PostForm({ save }) {
 						{100 - formData.description.length} characters remaining
 					</small>
 				</div>
-				<div className='form-group'>
-					<label htmlFor='location' className='float-left'>
+				<div className="form-group">
+					<label htmlFor="location" className="float-left">
 						Location
 					</label>
 					<input
-						id='location'
-						className='form-control mate-form-input'
-						type='text'
+						id="location"
+						className="form-control mate-form-input"
+						type="text"
 						onChange={handleChange}
-						name='location'
+						name="location"
 						value={formData.location}
 					/>
 				</div>
-				<div className='form-group d-flex justify-content-between align-items-baseline'>
-					<label htmlFor='type' className='float-left mr-4'>
+				<div className="form-group d-flex justify-content-between align-items-baseline">
+					<label htmlFor="type" className="float-left mr-4">
 						Type
 					</label>
 					<select
-						id='postType'
-						className='form-control mate-form-input'
+						id="postType"
+						className="form-control mate-form-input"
 						onChange={handleChange}
-						name='type'
+						name="type"
 						value={formData.type}>
-						<option className='option-disabled' value='' disabled selected>
+						<option className="option-disabled" value="" disabled selected>
 							Select Type
 						</option>
 						<option>Networking</option>
@@ -204,72 +207,72 @@ function PostForm({ save }) {
 						<option>Events</option>
 					</select>
 				</div>
-				<div className='form-group date-input-group align-items-baseline'>
-					<label htmlFor='event-start mb-3' className='float-left'>
+				<div className="form-group date-input-group align-items-baseline">
+					<label htmlFor="event-start mb-3" className="float-left">
 						Start
 					</label>
 					<TextField
-						id='event-start'
-						type='datetime-local'
-						className='float-right'
+						id="event-start"
+						type="datetime-local"
+						className="float-right"
 						defaultValue={formData.start}
-						name='start'
+						name="start"
 						onChange={handleChange}
 						InputLabelProps={{
 							shrink: true,
 						}}
 					/>
 				</div>
-				<div className='form-group align-items-baseline'>
-					<label htmlFor='event-end' className='float-left'>
+				<div className="form-group align-items-baseline">
+					<label htmlFor="event-end" className="float-left">
 						End
 					</label>
 					<TextField
-						id='event-end'
-						type='datetime-local'
-						className='float-right'
+						id="event-end"
+						type="datetime-local"
+						className="float-right"
 						defaultValue={formData.end}
-						name='end'
+						name="end"
 						onChange={handleChange}
 						InputLabelProps={{
 							shrink: true,
 						}}
 					/>
 				</div>
-				<div className='PostForm__Footer'>
-					<div className='message__attachments'>
-						<div className='preview__attachment'>
+				<div className="PostForm__Footer">
+					<div className="message__attachments">
+						<div className="preview__attachment">
 							{formData.attachment_preview ? (
 								<>
 									<img
 										src={formData.attachment_preview}
-										alt='preview'
-										className='attachment__preview'
+										alt="preview"
+										className="attachment__preview"
 									/>
 									<IconButton onClick={resetAttachment}>
-										<CancelIcon className='remove__attachment' />
+										<CancelIcon className="remove__attachment" />
 									</IconButton>
 								</>
 							) : (
 								''
 							)}
 						</div>
-						<label htmlFor='attachment' className='attachment__label'>
-							<PanoramaOutlinedIcon fontSize='large' />
+						<label htmlFor="attachment" className="attachment__label">
+							<PanoramaOutlinedIcon fontSize="large" />
 						</label>
 						<input
-							type='file'
-							id='attachment'
+							type="file"
+							id="attachment"
 							style={{ display: 'none' }}
 							onChange={handleChange}
 						/>
 					</div>
 				</div>
-				<SubmitButton text='Post' reset={true} resetForm={resetFormData} />
+				<SubmitButton text="Post" reset={true} resetForm={resetFormData} />
 			</form>
 			{errors ? (
-				<div className='Form__Errors'>
-					<div className='alert errors'>{errors}</div>
+				<div className="Form__Errors">
+					<div className="alert errors">{errors}</div>
 				</div>
 			) : (
 				''

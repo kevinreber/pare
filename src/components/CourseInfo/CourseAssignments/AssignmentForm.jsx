@@ -1,8 +1,15 @@
+/** Dependencies */
 import React, { useState } from 'react';
-import SubmitButton from '../../general/SubmitButton';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import './styles/AssignmentForm.css';
+import DatePicker from 'react-datepicker';
+
+/** Components & Helpers */
+import SubmitButton from '../../general/SubmitButton';
+import createFbTimestamp from '../../../utils/createFbTimestamp';
+import 'react-datepicker/dist/react-datepicker.css';
+
+/** MUI */
+import TextField from '@material-ui/core/TextField';
 
 /** Form to add a assignment. */
 function AssignmentForm({ save }) {
@@ -10,28 +17,50 @@ function AssignmentForm({ save }) {
 	const INITIAL_STATE = {
 		title: '',
 		type: '',
-		dueDate: new Date(),
+		dueDate: createFbTimestamp(),
 	};
 
 	const [formData, setFormData] = useState(INITIAL_STATE);
+	const [errors, setErrors] = useState('');
 
 	/** Handles general fields in form */
 	const handleChange = (e) => {
+		setErrors('');
 		const { name, value } = e.target;
 		setFormData((fData) => ({ ...fData, [name]: value }));
 	};
 
 	/** Handles 'dueDate' field */
-	const handleDate = (date) => {
-		setFormData((fData) => ({ ...fData, dueDate: date }));
+	const handleDate = (e) => {
+		setErrors('');
+		const { name, value } = e.target;
+		const date = new Date(value);
+
+		setFormData((fData) => ({ ...fData, [name]: date }));
+	};
+
+	/** Validates form has no empty fields */
+	const validateData = (data) => {
+		if (
+			data.title === '' ||
+			data.title.trim() === '' ||
+			data.type === '' ||
+			data.type.trim() === ''
+		) {
+			return false;
+		}
+		return true;
 	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		save(formData);
-
-		// Clear state of form
-		setFormData(INITIAL_STATE);
+		if (validateData(formData)) {
+			save(formData);
+			// Clear state of form
+			setFormData(INITIAL_STATE);
+		} else {
+			setErrors('*Can not leave field empty!');
+		}
 	};
 
 	return (
@@ -64,6 +93,7 @@ function AssignmentForm({ save }) {
 						Type
 					</label>
 					<select
+						required
 						onChange={handleChange}
 						name="type"
 						className="Assignment-Form-Type Mate-Form-Select mate-form-input form-control"
@@ -81,16 +111,30 @@ function AssignmentForm({ save }) {
 						Due Date
 					</label>
 				</div>
-				<DatePicker
+				{/* <DatePicker
 					name="dueDate"
 					selected={formData.dueDate}
 					onChange={handleDate}
 					timeInputLabel="Time:"
 					dateFormat="MM/dd/yyyy h:mm aa"
 					showTimeInput
+				/> */}
+
+				<TextField
+					required
+					id="assignmentDueDate"
+					type="datetime-local"
+					className="float-right"
+					defaultValue={formData.dueDate}
+					name="dueDate"
+					onChange={handleDate}
+					InputLabelProps={{
+						shrink: true,
+					}}
 				/>
 				<SubmitButton text="Add" />
 			</form>
+			<div className="alert errors">{errors}</div>
 		</div>
 	);
 }

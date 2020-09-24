@@ -20,15 +20,7 @@ import './styles/CourseInfo.css';
 function CourseInfo() {
 	const { courseId } = useParams();
 
-	const INITIAL_STATE = {
-		title: '',
-		type: '',
-		dueDate: createFbTimestamp(),
-	};
-
 	const [course, setCourse] = useState(null);
-	const [errors, setErrors] = useState('');
-	const [formData, setFormData] = useState(INITIAL_STATE);
 
 	// Toggle form for User to Add Course
 	const [showForm, setShowForm] = useState(false);
@@ -36,6 +28,10 @@ function CourseInfo() {
 
 	const addAssignment = (assignmentData) => {
 		console.log(assignmentData);
+		db.collection('class')
+			.doc(courseId)
+			.collection('assignments')
+			.add(assignmentData);
 		setShowForm(false);
 	};
 
