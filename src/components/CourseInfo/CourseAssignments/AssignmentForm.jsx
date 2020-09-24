@@ -35,32 +35,40 @@ function AssignmentForm({ save }) {
 	};
 
 	return (
-		<div className='AssignmentForm p-3'>
+		<div className="AssignmentForm p-3">
 			<h4>Add Assignment</h4>
-			<form className='container mb-3' onSubmit={handleSubmit}>
-				<div className='form-group'>
-					<label htmlFor='title' className='float-left'>
+			<form className="container mb-3" onSubmit={handleSubmit}>
+				<div className="form-group">
+					<label htmlFor="title" className="float-left">
 						Name
 					</label>
 					<input
-						id='title'
-						className='form-control mate-form-input'
-						type='text'
+						id="title"
+						className="form-control mate-form-input"
+						type="text"
 						onChange={handleChange}
-						name='title'
+						name="title"
 						value={formData.title}
+						maxLength="30"
+						required
 					/>
+					<small
+						className={`char-count ${
+							30 - formData.title.length <= 10 ? 'error-limit' : ''
+						}`}>
+						{30 - formData.title.length} characters remaining
+					</small>
 				</div>
-				<div className='form-group'>
-					<label className='float-left' for='type'>
+				<div className="form-group">
+					<label className="float-left" for="type">
 						Type
 					</label>
 					<select
 						onChange={handleChange}
-						name='type'
-						className='Assignment-Form-Type Mate-Form-Select mate-form-input form-control'
-						id='type'>
-						<option value='' disabled selected className='text-disabled'>
+						name="type"
+						className="Assignment-Form-Type Mate-Form-Select mate-form-input form-control"
+						id="type">
+						<option value="" disabled selected className="text-disabled">
 							Select a type
 						</option>
 						<option>Homework</option>
@@ -68,20 +76,20 @@ function AssignmentForm({ save }) {
 						<option>Lab</option>
 					</select>
 				</div>
-				<div className='form-group'>
-					<label htmlFor='dueDate' className='float-left Assignment-Due-Date'>
+				<div className="form-group">
+					<label htmlFor="dueDate" className="float-left Assignment-Due-Date">
 						Due Date
 					</label>
 				</div>
 				<DatePicker
-					name='dueDate'
+					name="dueDate"
 					selected={formData.dueDate}
 					onChange={handleDate}
-					timeInputLabel='Time:'
-					dateFormat='MM/dd/yyyy h:mm aa'
+					timeInputLabel="Time:"
+					dateFormat="MM/dd/yyyy h:mm aa"
 					showTimeInput
 				/>
-				<SubmitButton text='Add' />
+				<SubmitButton text="Add" />
 			</form>
 		</div>
 	);

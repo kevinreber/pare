@@ -25,7 +25,12 @@ function CourseAssignmentList({ assignments }) {
 			<NoData text={'assignments'} />
 		);
 
-	return <>{AssignmentList}</>;
+	return (
+		<>
+			{/* <div className="Courses-Header pt-2 pb-1"></div> */}
+			<div className="Course-Info-Body-List">{AssignmentList}</div>
+		</>
+	);
 }
 
 export default CourseAssignmentList;
