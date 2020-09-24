@@ -48,13 +48,11 @@ function getCourse(course) {
 	};
 }
 
-// export function addCourseToFB(courseMajor, courseNumber, courseSemester) {
-export function addCourseToFB({
-	courseName,
-	courseSemester,
-	courseYear,
-	courseId,
-}) {
+/** If Course is not yet loaded into Firebase DB */
+export function addCourseToFB(
+	{ courseName, courseSemester, courseYear, courseId },
+	userId
+) {
 	return async (dispatch) => {
 		const BASE_URL = 'https://www.berkeleytime.com';
 
@@ -66,7 +64,8 @@ export function addCourseToFB({
 			// append semester
 			course.semester = `${courseSemester} ${courseYear}`;
 
-			console.log(course);
+			// Add first user into to class
+			course.users = [userId];
 
 			db.collection('class')
 				.add(course)

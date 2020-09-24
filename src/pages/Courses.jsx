@@ -1,6 +1,6 @@
 /** Dependencies */
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 /** Components & Helpers */
 import CourseList from '../components/Courses/CourseList';
@@ -18,6 +18,8 @@ import './styles/Courses.css';
 */
 function Courses() {
 	const dispatch = useDispatch();
+	const currentUser = useSelector((state) => state.auth.user);
+
 	const [courses, setCourses] = useState([]);
 
 	/** Current Semester courses */
@@ -50,7 +52,7 @@ function Courses() {
 	const toggleForm = () => setShowForm((show) => !show);
 
 	const addCourse = (courseData) => {
-		dispatch(addCourseToFB(courseData));
+		dispatch(addCourseToFB(courseData, currentUser.uid));
 		setShowForm(false);
 	};
 
@@ -83,11 +85,11 @@ function Courses() {
 	}
 
 	return (
-		<div className='Courses'>
-			<div className='Courses-Header Body-Header'>
-				<div className='Courses-Current'>
+		<div className="Courses">
+			<div className="Courses-Header Body-Header">
+				<div className="Courses-Current">
 					<h5
-						id='current'
+						id="current"
 						className={
 							active === 'current' ? 'mate-text-primary' : 'mate-text-active'
 						}
@@ -95,9 +97,9 @@ function Courses() {
 						Current Semester
 					</h5>
 				</div>
-				<div className='Courses-Past'>
+				<div className="Courses-Past">
 					<h5
-						id='past'
+						id="past"
 						className={
 							active === 'past' ? 'mate-text-primary' : 'mate-text-active'
 						}
@@ -106,10 +108,10 @@ function Courses() {
 					</h5>
 				</div>
 			</div>
-			<div className='Courses__CourseList'>{courseList}</div>
-			<div className='CourseForm p-3'>
-				<p onClick={toggleForm} className='font-italic'>
-					<CTAButton text='Join Class' />
+			<div className="Courses__CourseList">{courseList}</div>
+			<div className="CourseForm p-3">
+				<p onClick={toggleForm} className="font-italic">
+					<CTAButton text="Join Class" />
 				</p>
 			</div>
 		</div>
