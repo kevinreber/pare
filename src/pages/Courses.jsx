@@ -57,14 +57,16 @@ function Courses() {
 	};
 
 	useEffect(() => {
-		db.collection('class').onSnapshot((snapshot) =>
-			setCourses(
-				snapshot.docs.map((doc) => ({
-					id: doc.id,
-					data: doc.data(),
-				}))
-			)
-		);
+		db.collection('class')
+			.where('users', 'array-contains', currentUser.uid)
+			.onSnapshot((snapshot) =>
+				setCourses(
+					snapshot.docs.map((doc) => ({
+						id: doc.id,
+						data: doc.data(),
+					}))
+				)
+			);
 	}, []);
 
 	useEffect(() => {
