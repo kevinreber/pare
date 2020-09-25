@@ -180,7 +180,7 @@ input,
 
 .mate-btn {
   font-size: 20px;
-  z-index: 9999;
+  z-index: 1000;
 }
 
 .mate-btn-primary {
