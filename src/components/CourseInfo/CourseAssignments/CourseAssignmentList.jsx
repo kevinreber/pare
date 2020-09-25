@@ -1,4 +1,7 @@
+/** Dependencies */
 import React from 'react';
+
+/** Components & Helpers */
 import CourseAssignmentCard from './CourseAssignmentCard';
 import NoData from '../../general/NoData';
 
@@ -15,14 +18,11 @@ function CourseAssignmentList({ assignments }) {
 					id={assignment.id}
 					title={assignment.data.title}
 					dueDate={assignment.data.dueDate}
-					classGrade={assignment.classGrade}
-					userGrade={assignment.userGrade}
-					submitStatus={assignment.submitStatus}
-					classSubmittals={assignment.classSubmittals}
+					grades={assignment.data.grades}
 				/>
 			))
 		) : (
-			<NoData text={'assignments'} />
+			<NoData text={'Assignments'} />
 		);
 
 	return (

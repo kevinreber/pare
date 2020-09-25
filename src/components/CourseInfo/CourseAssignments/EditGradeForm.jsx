@@ -12,8 +12,6 @@ function EditGradeForm({ assignmentName, userGrade = 0, save }) {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		console.log(+formData.userGrade);
-		console.log(formData.userGrade);
 		// Convert userGrade to integer
 		save(+formData.userGrade);
 

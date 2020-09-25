@@ -1,5 +1,6 @@
 /** Dependencies */
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import moment from 'moment';
 
 /** Components & Helpers */
@@ -16,11 +17,11 @@ function CourseAssignment({
 	id,
 	title,
 	dueDate,
-	classGrade,
-	userGrade,
-	submitStatus,
+	grades,
 	classSubmittals,
 }) {
+	const currentUser = useSelector((state) => state.auth.user);
+	const userGrade = grades[currentUser.uid];
 	const [isEditing, setIsEditing] = useState(false);
 
 	const editToggle = () => setIsEditing((edit) => !edit);
@@ -28,7 +29,7 @@ function CourseAssignment({
 	/** assignmentStatus will display 'danger' or success if depending if assignment
 	 * was submitted before assignment.dueDate
 	 */
-	const assignmentStatus = submitStatus ? 'success' : 'danger';
+	const assignmentStatus = userGrade ? 'success' : 'danger';
 
 	const saveGrade = (data) => {
 		console.log(data);
