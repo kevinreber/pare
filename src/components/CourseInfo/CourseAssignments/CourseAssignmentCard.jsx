@@ -1,6 +1,7 @@
 /** Dependencies */
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import moment from 'moment';
 
 /** Components & Helpers */
@@ -8,6 +9,8 @@ import AssignmentStatusIcon from './AssignmentStatusIcon';
 import EnterGradeBtn from './EnterGradeBtn';
 import EditGradeForm from './EditGradeForm';
 import Modal from '../../general/Modal';
+import { addFlashMessage } from '../../../store/actions/flashMessages';
+import db from '../../../config/fbConfig';
 
 /** Displays Assignment Data
  * Courses -> CourseList -> Course -> CourseInfo -> CourseInfoBody -> CourseAssignmentList -> CourseAssignment
@@ -20,6 +23,8 @@ function CourseAssignment({
 	grades,
 	classSubmittals,
 }) {
+	const { courseId } = useParams();
+	const dispatch = useDispatch();
 	const currentUser = useSelector((state) => state.auth.user);
 	const userGrade = grades[currentUser.uid];
 	const [isEditing, setIsEditing] = useState(false);
@@ -33,6 +38,26 @@ function CourseAssignment({
 
 	const saveGrade = (data) => {
 		console.log(data);
+
+		/** update DB and make change */
+		db.collection('class')
+			.doc(courseId)
+			.collection('assignments')
+			.doc(id)
+			.update({
+				grades: {
+					[currentUser.uid]: data,
+				},
+			});
+
+		/** Prompt change made */
+		dispatch(
+			addFlashMessage({
+				isOpen: true,
+				message: 'Grade Saved!',
+				type: 'success',
+			})
+		);
 		setIsEditing(false);
 	};
 
