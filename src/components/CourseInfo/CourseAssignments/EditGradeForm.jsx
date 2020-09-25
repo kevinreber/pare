@@ -12,6 +12,8 @@ function EditGradeForm({ assignmentName, userGrade = 0, save }) {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
+		console.log(+formData.userGrade);
+		console.log(formData.userGrade);
 		// Convert userGrade to integer
 		save(+formData.userGrade);
 
@@ -20,23 +22,23 @@ function EditGradeForm({ assignmentName, userGrade = 0, save }) {
 	};
 
 	return (
-		<div className='Enter-Grade-Form p-3'>
-			<h4 className='mb-5'>{assignmentName}</h4>
-			<form onSubmit={handleSubmit} className='container'>
-				<div className='form-group'>
-					<label htmlFor='userGrade' className='float-left'>
+		<div className="Enter-Grade-Form p-3">
+			<h4 className="mb-5">{assignmentName}</h4>
+			<form onSubmit={handleSubmit} className="container">
+				<div className="form-group">
+					<label htmlFor="userGrade" className="float-left">
 						Enter Grade
 					</label>
 					<input
-						id='userGrade'
-						name='userGrade'
-						className='form-control mate-form-input'
+						id="userGrade"
+						name="userGrade"
+						className="form-control mate-form-input"
 						onChange={handleChange}
 						value={formData.userGrade}
-						type='number'
+						type="number"
 					/>
 				</div>
-				<SubmitButton text='Save' />
+				<SubmitButton text="Save" />
 			</form>
 		</div>
 	);

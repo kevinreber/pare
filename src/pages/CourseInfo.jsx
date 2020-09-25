@@ -21,6 +21,7 @@ function CourseInfo() {
 	const { courseId } = useParams();
 
 	const [course, setCourse] = useState(null);
+	const [assignments, setAssignments] = useState([]);
 
 	// Toggle form for User to Add Course
 	const [showForm, setShowForm] = useState(false);
@@ -36,7 +37,7 @@ function CourseInfo() {
 	};
 
 	// get course assignments
-	const assignments = useSelector((state) => state.assignments);
+	// const assignments = useSelector((state) => state.assignments);
 
 	useEffect(() => {
 		if (courseId) {
@@ -44,7 +45,24 @@ function CourseInfo() {
 				.doc(courseId)
 				.onSnapshot((snapshot) => setCourse(snapshot.data()));
 		}
-	}, [courseId]);
+
+		if (course) {
+			db.collection('class')
+				.doc(courseId)
+				.collection('assignments')
+				.orderBy('dueDate', 'asc')
+				.onSnapshot((snapshot) =>
+					setAssignments(
+						snapshot.docs.map((doc) => {
+							return {
+								id: doc.id,
+								data: doc.data(),
+							};
+						})
+					)
+				);
+		}
+	}, [courseId, course]);
 
 	if (showForm) {
 		return (

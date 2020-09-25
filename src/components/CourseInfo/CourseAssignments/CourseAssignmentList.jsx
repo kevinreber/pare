@@ -13,8 +13,8 @@ function CourseAssignmentList({ assignments }) {
 				<CourseAssignmentCard
 					key={assignment.id}
 					id={assignment.id}
-					title={assignment.title}
-					dueDate={assignment.dueDate}
+					title={assignment.data.title}
+					dueDate={assignment.data.dueDate}
 					classGrade={assignment.classGrade}
 					userGrade={assignment.userGrade}
 					submitStatus={assignment.submitStatus}

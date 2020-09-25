@@ -1,4 +1,8 @@
+/** Dependencies */
 import React, { useState } from 'react';
+import moment from 'moment';
+
+/** Components & Helpers */
 import AssignmentStatusIcon from './AssignmentStatusIcon';
 import EnterGradeBtn from './EnterGradeBtn';
 import EditGradeForm from './EditGradeForm';
@@ -75,7 +79,7 @@ function CourseAssignment({
 						</tr>
 						<tr>
 							<td className="mate-text-secondary Assignment-Due font-italic text-left">
-								Due: {dueDate}
+								Due: {moment(dueDate.toDate()).startOf('day').fromNow()}
 							</td>
 							<td className="mate-text-secondary Assignment-Grade text-right pr-1">
 								{displayGrade}
