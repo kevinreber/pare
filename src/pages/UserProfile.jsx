@@ -65,14 +65,14 @@ function UserProfile() {
 
 	const sendMessage = async () => {
 		// store messageId given back
-		const messageId = await createNewMessage(messageData);
+		const messageId = await createNewMessage('messages', messageData);
 
 		// push user to message
 		history.push(`/messages/${messageId}`);
 		dispatch(
 			addFlashMessage({
 				isOpen: true,
-				message: 'Message Sent!',
+				message: 'Message Created!',
 				type: 'success',
 			})
 		);
@@ -82,27 +82,27 @@ function UserProfile() {
 	/** if User is viewing their own profile, show edit button instead of message button */
 	const DisplayButton =
 		userId !== currentUser.uid ? (
-			<p onClick={sendMessage} className='font-italic'>
-				<CTAButton text='Send Message' onClick={sendMessage} />
+			<p onClick={sendMessage} className="font-italic">
+				<CTAButton text="Send Message" onClick={sendMessage} />
 			</p>
 		) : (
-			<p className='font-italic'>
-				<CTAButton text='Edit' />
+			<p className="font-italic">
+				<CTAButton text="Edit" />
 			</p>
 		);
 
 	return (
-		<div className='UserProfile'>
+		<div className="UserProfile">
 			{isLoading ? (
 				<>
 					<p>Loading...</p>
 				</>
 			) : (
 				<>
-					<div className='UserProfile__BackBtn'>
+					<div className="UserProfile__BackBtn">
 						<BackButton />
 					</div>
-					<div className='UserProfile__Header'>
+					<div className="UserProfile__Header">
 						<UserProfileHeader
 							id={userId}
 							displayName={user.displayName}
@@ -124,7 +124,7 @@ function UserProfile() {
 						keywords={user.keywords}
 						availability={user.availability}
 					/>
-					<div className='UserProfile__Footer'>{DisplayButton}</div>
+					<div className="UserProfile__Footer">{DisplayButton}</div>
 				</>
 			)}
 		</div>
