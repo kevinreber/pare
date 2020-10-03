@@ -23,8 +23,9 @@ const SearchCategories = [
 ];
 
 function Search() {
-	const [quickSearch, setQuickSearch] = useState('today');
+	const [quickSearch, setQuickSearch] = useState('Today');
 	const toggleQuickSearch = (e) => {
+		setPosts([]);
 		setQuickSearch(e.target.innerText);
 	};
 
@@ -32,16 +33,33 @@ function Search() {
 	const [posts, setPosts] = useState([]);
 
 	useEffect(() => {
-		db.collection('feeds')
-			.where('type', '==', quickSearch)
-			.onSnapshot((snapshot) =>
-				setPosts(
-					snapshot.docs.map((doc) => ({
-						id: doc.id,
-						data: doc.data(),
-					}))
-				)
-			);
+		const nowDate = new Date();
+
+		/** if quickSearch is set to 'Today'
+		 * filter through each snapshot and compare timestamps to find posts that were posted
+		 * within 24 hrs
+		 * 86400000 = 24 hrs in milliseconds
+		 */
+		if (quickSearch === 'Today') {
+			db.collection('feeds').onSnapshot((snapshot) => {
+				snapshot.docs.forEach((doc) => {
+					if (nowDate - doc.data().timestamp.toDate().getTime() < 86400000) {
+						setPosts((posts) => [...posts, { id: doc.id, data: doc.data() }]);
+					}
+				});
+			});
+		} else {
+			db.collection('feeds')
+				.where('type', '==', quickSearch)
+				.onSnapshot((snapshot) =>
+					setPosts(
+						snapshot.docs.map((doc) => ({
+							id: doc.id,
+							data: doc.data(),
+						}))
+					)
+				);
+		}
 	}, [quickSearch]);
 
 	/** Quick Search Category List */
