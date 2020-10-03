@@ -25,7 +25,7 @@ const SearchCategories = [
 function Search() {
 	const [quickSearch, setQuickSearch] = useState('today');
 	const toggleQuickSearch = (e) => {
-		setQuickSearch(e.target.innerText.toLowerCase());
+		setQuickSearch(e.target.innerText);
 	};
 
 	const [search, setSearch] = useState('');
@@ -47,25 +47,24 @@ function Search() {
 	/** Quick Search Category List */
 	const SearchCategoryList = SearchCategories.map((category, index) => (
 		<ListItem
+			key={category.toLowerCase()}
 			button
 			id={category.toLowerCase()}
 			onClick={toggleQuickSearch}
-			className={
-				quickSearch === category.toLowerCase() ? 'active' : 'inactive'
-			}>
+			className={quickSearch === category ? 'active' : 'inactive'}>
 			<ListItemText primary={category} />
 		</ListItem>
 	));
 
 	return (
-		<div className='Search'>
-			<div className='Search-Header'>
+		<div className="Search">
+			<div className="Search-Header">
 				<Searchbar value={search} setValue={setSearch} />
-				<div className='Search-Categories'>
+				<div className="Search-Categories">
 					<List>{SearchCategoryList}</List>
 				</div>
 			</div>
-			<div className='Search__List'>
+			<div className="Search__List">
 				{posts.length > 0 ? (
 					<FeedList posts={posts} />
 				) : (
@@ -76,7 +75,7 @@ function Search() {
 				className={`Search__Footer ${
 					search.length === 0 ? 'disabled-btn' : ''
 				}`}>
-				<CTAButton text='Search' />
+				<CTAButton text="Search" />
 			</div>
 		</div>
 	);
