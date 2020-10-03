@@ -20,6 +20,9 @@ function Courses() {
 	const dispatch = useDispatch();
 	const currentUser = useSelector((state) => state.auth.user);
 
+	/** Get courseCatalog from redux store */
+	const courseCatalog = useSelector((state) => state.courseCatalog);
+
 	const [courses, setCourses] = useState([]);
 
 	/** Current Semester courses */
@@ -74,7 +77,9 @@ function Courses() {
 		async function getCourseCatalog() {
 			await dispatch(fetchCourseCatalog());
 		}
-		getCourseCatalog();
+		if (!courseCatalog.courses) {
+			getCourseCatalog();
+		}
 	}, [dispatch]);
 
 	if (showForm) {

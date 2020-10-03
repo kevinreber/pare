@@ -124,7 +124,7 @@ function PostInfo() {
 						title={post.title}
 						username={post.username}
 						user_id={post.userId}
-						avatar={'https://randomuser.me/api/portraits/thumb/women/75.jpg'}
+						avatar={post.avatar}
 						description={post.description}
 						location={post.location}
 						type={post.type}
@@ -133,7 +133,7 @@ function PostInfo() {
 						attachment_preview={post.attachment_preview}
 						attachment={post.attachment}
 						timestamp={post.createdAt}
-						comments={[]}
+						comments={post.num_of_comments}
 						isBookmarked={false}
 					/>
 				</div>
