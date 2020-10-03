@@ -14,7 +14,7 @@ import {
 } from './types';
 
 /** Helpers */
-import { increment } from '../../config/fbConfig';
+import { increment, decrement } from '../../config/fbConfig';
 import db from '../../config/fbConfig';
 
 export function addPostToFB(post) {
@@ -96,6 +96,9 @@ export function deleteCommentFromPost(postId, commentId) {
 			.catch((err) =>
 				dispatch(dispatchError(REMOVE_COMMENT_ON_POST_FAIL, err))
 			);
+		db.collection('feeds').doc(postId).update({
+			num_of_comments: decrement,
+		});
 	};
 }
 
