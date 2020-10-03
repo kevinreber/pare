@@ -14,7 +14,7 @@ function ChatFooter({ send, type = 'message' }) {
 
 	const INITIAL_STATE = {
 		message: '',
-		timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+		createdAt: firebase.firestore.FieldValue.serverTimestamp(),
 		username: currentUser.displayName,
 		userId: currentUser.uid,
 		avatar: currentUser.photoURL,
@@ -37,21 +37,21 @@ function ChatFooter({ send, type = 'message' }) {
 		<>
 			<form onSubmit={handleSubmit}>
 				<input
-					name='message'
+					name="message"
 					onChange={handleChange}
 					value={formData.message}
-					type='text'
+					type="text"
 					placeholder={`Type ${type} here...`}
 				/>
-				<div className='message__attachments'>
+				<div className="message__attachments">
 					<IconButton>
-						<ImageIcon fontSize='large' />
+						<ImageIcon fontSize="large" />
 					</IconButton>
 				</div>
 				<IconButton
-					type='submit'
+					type="submit"
 					disabled={!formData.message}
-					variant='contained'>
+					variant="contained">
 					<SendIcon />
 				</IconButton>
 			</form>

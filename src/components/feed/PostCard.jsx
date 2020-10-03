@@ -43,7 +43,6 @@ function PostCard({
 	edit,
 }) {
 	const currentUser = useSelector((state) => state.auth.user);
-
 	const BookmarkStatus = !isBookmarked ? (
 		<BookmarkBorderOutlinedIcon />
 	) : (
@@ -58,11 +57,11 @@ function PostCard({
 	const eventTime =
 		start && end ? (
 			<>
-				<p className='event__time'>
-					Start: <span className='event__timestamp'> {convertTime(start)}</span>
+				<p className="event__time">
+					Start: <span className="event__timestamp"> {convertTime(start)}</span>
 				</p>
-				<p className='event__time'>
-					Ends: <span className='event__timestamp'> {convertTime(end)}</span>
+				<p className="event__time">
+					Ends: <span className="event__timestamp"> {convertTime(end)}</span>
 				</p>
 			</>
 		) : (
@@ -71,7 +70,7 @@ function PostCard({
 
 	const showAttachment = attachment ? (
 		<img
-			className='Post-Card__Attachment'
+			className="Post-Card__Attachment"
 			src={attachment_preview}
 			alt={attachment.name}
 		/>
@@ -97,24 +96,24 @@ function PostCard({
 	/************************************* */
 
 	return (
-		<div id={id} className='Post-Card'>
-			<div className='Post-Card__Main'>
-				<div className='Post-Card__Left'>
+		<div id={id} className="Post-Card">
+			<div className="Post-Card__Main">
+				<div className="Post-Card__Left">
 					<Link to={`/users/${userId}`}>
 						<Avatar alt={username} src={avatar} />
 					</Link>
 				</div>
-				<div className='Post-Card__Center'>
+				<div className="Post-Card__Center">
 					<Link to={`/post/${id}`}>
-						<div className='Post-Card__Header'>
+						<div className="Post-Card__Header">
 							<h5>{title}</h5>
-							<span className='mate-text-secondary username'>{username}</span>
+							<span className="mate-text-secondary username">{username}</span>
 						</div>
-						<div className='Post-Card__Body mate-text-secondary'>
-							<p className='description'>{description}</p>
+						<div className="Post-Card__Body mate-text-secondary">
+							<p className="description">{description}</p>
 							{showAttachment}
 							{location ? (
-								<span className='location'>
+								<span className="location">
 									<LocationOnIcon />
 									{location}
 								</span>
@@ -127,9 +126,14 @@ function PostCard({
 					</Link>
 				</div>
 			</div>
-			<div className='Post-Card__Footer'>
+			<div className="Post-Card__Footer">
 				<IconButton>
-					<ModeCommentOutlinedIcon />
+					<Link to={`/post/${id}`}>
+						<ModeCommentOutlinedIcon />
+						{comments ? (
+							<span className="number-of-comments">{comments}</span>
+						) : null}
+					</Link>
 				</IconButton>
 				<IconButton>
 					<CalendarTodayOutlinedIcon />
@@ -142,9 +146,11 @@ function PostCard({
 					<ShareIcon />
 				</IconButton>
 			</div>
-			<div className='Post-Card__Right Post__timestamp'>
+			<div className="Post-Card__Right Post__timestamp">
 				<p>
-					{timestamp ? moment(timestamp.toDate()).startOf('day').fromNow() : ''}
+					{timestamp
+						? moment(timestamp.toDate()).startOf('day').fromNow()
+						: null}
 				</p>
 				{currentUser.uid === userId ? (
 					<>
@@ -160,9 +166,7 @@ function PostCard({
 							close={handleClose}
 						/>
 					</>
-				) : (
-					''
-				)}
+				) : null}
 			</div>
 		</div>
 	);

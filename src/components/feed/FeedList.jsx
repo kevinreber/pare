@@ -21,7 +21,7 @@ function feedList({ posts, remove, edit }) {
 			attachment_preview={post.data.attachment_preview}
 			attachment={post.data.attachment}
 			timestamp={post.data.timestamp}
-			comments={[]}
+			comments={post.data.num_of_comments}
 			isBookmarked={false}
 			remove={remove}
 			edit={edit}

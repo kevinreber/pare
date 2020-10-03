@@ -208,7 +208,8 @@ input,
   margin-left: -175px;
 }
 
-.MuiButtonBase-root.MuiIconButton-root {
+.MuiButtonBase-root.MuiIconButton-root,
+.MuiButtonBase-root.MuiIconButton-root>.MuiIconButton-label>a {
   font-size: large;
   color: var(--tertiary-color);
 }

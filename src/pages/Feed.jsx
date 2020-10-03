@@ -24,7 +24,6 @@ import AddIcon from '@material-ui/icons/Add';
 function Feed() {
 	const dispatch = useDispatch();
 	const [posts, setPosts] = useState([]);
-
 	const [confirmDialog, setConfirmDialog] = useState({
 		isOpen: false,
 		title: '',

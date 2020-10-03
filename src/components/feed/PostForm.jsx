@@ -39,7 +39,7 @@ function PostForm({ save }) {
 		attachment_preview: '',
 		attachment: '',
 		timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-		comments: [],
+		num_of_comments: 0,
 	};
 
 	const [errors, setErrors] = useState('');

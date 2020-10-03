@@ -51,7 +51,7 @@ function PostInfo() {
 			db.collection('feeds')
 				.doc(postId)
 				.collection('comments')
-				.orderBy('timestamp', 'desc')
+				.orderBy('createdAt', 'desc')
 				.onSnapshot((snapshot) =>
 					setComments(
 						snapshot.docs.map((doc) => {
@@ -102,22 +102,22 @@ function PostInfo() {
 	};
 
 	return (
-		<div className='PostInfo'>
+		<div className="PostInfo">
 			<Notification notify={notify} setNotify={setNotify} />
 			<ConfirmDialog
 				confirmDialog={confirmDialog}
 				setConfirmDialog={setConfirmDialog}
 			/>
-			<div className='PostInfo__Header bottom-border-header Body-Header'>
+			<div className="PostInfo__Header bottom-border-header Body-Header">
 				<BackButton />
-				<h5 className='text-center'>
+				<h5 className="text-center">
 					{post.type
 						? post.type.charAt(0).toUpperCase() + post.type.slice(1)
 						: 'Post'}
 				</h5>
 			</div>
-			<div className='PostInfo__Body'>
-				<div className='PostInfo__Post'>
+			<div className="PostInfo__Body">
+				<div className="PostInfo__Post">
 					<PostCard
 						id={postId}
 						key={postId}
@@ -132,12 +132,12 @@ function PostInfo() {
 						end={post.end}
 						attachment_preview={post.attachment_preview}
 						attachment={post.attachment}
-						timestamp={post.timestamp}
+						timestamp={post.createdAt}
 						comments={[]}
 						isBookmarked={false}
 					/>
 				</div>
-				<div id='PostInfo__CommentList' className='PostInfo__CommentList'>
+				<div id="PostInfo__CommentList" className="PostInfo__CommentList">
 					{comments ? (
 						<CommentsList
 							postId={postId}
@@ -146,12 +146,12 @@ function PostInfo() {
 							edit={editComment}
 						/>
 					) : (
-						<NoData text='comments' />
+						<NoData text="comments" />
 					)}
 				</div>
 			</div>
 
-			<div className='PostInfo__Footer'>
+			<div className="PostInfo__Footer">
 				<ChatFooter send={sendComment} type={'comment'} />
 			</div>
 		</div>

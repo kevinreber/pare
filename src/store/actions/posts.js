@@ -12,6 +12,9 @@ import {
 	REMOVE_COMMENT_ON_POST,
 	REMOVE_COMMENT_ON_POST_FAIL,
 } from './types';
+
+/** Helpers */
+import { increment } from '../../config/fbConfig';
 import db from '../../config/fbConfig';
 
 export function addPostToFB(post) {
@@ -66,6 +69,9 @@ export function addCommentToPost(postId, comment) {
 				dispatch(addComment(comment));
 			})
 			.catch((err) => dispatch(dispatchError(ADD_COMMENT_ON_POST_FAIL, err)));
+		db.collection('feeds').doc(postId).update({
+			num_of_comments: increment,
+		});
 	};
 }
 

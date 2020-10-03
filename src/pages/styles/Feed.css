@@ -78,6 +78,11 @@
     justify-content: space-evenly;
 }
 
+.number-of-comments {
+    font-size: smaller;
+    align-items: center;
+}
+
 .Post__timestamp {
     font-size: x-small;
     font-style: italic;
