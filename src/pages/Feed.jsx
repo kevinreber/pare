@@ -107,6 +107,7 @@ function Feed() {
 			<ConfirmDialog
 				confirmDialog={confirmDialog}
 				setConfirmDialog={setConfirmDialog}
+				type="error"
 			/>
 			<div className="Feed__List">
 				{posts ? (
