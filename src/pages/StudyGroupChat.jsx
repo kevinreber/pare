@@ -92,6 +92,7 @@ function StudyGroupChat() {
 
 			// add studyGroup.title value to input in StudyGroupChatAdmin
 			// if user wants to change Study Group's title
+			// ! CHECK members /
 			if (isLoading && studyGroup.title) {
 				setStudyGroupForm({
 					title: studyGroup.title,

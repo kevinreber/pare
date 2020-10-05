@@ -44,22 +44,11 @@ function Connect() {
 
 	useEffect(() => {
 		if (allStudyGroups) {
-			const userStudyGroups = [];
-
 			// Filter which Study Groups user is currently in
-			for (let studyGroup of allStudyGroups) {
-				let opt = false;
-				for (let user of studyGroup.data.users) {
-					if (user.uid === currentUser.uid) {
-						opt = true;
-					}
-				}
-				if (opt) {
-					userStudyGroups.push(studyGroup);
-				}
-			}
-
-			setUserStudyGroups(userStudyGroups);
+			const studyGroups = allStudyGroups.filter(
+				(studyGroup) => studyGroup.data.users[currentUser.uid]
+			);
+			setUserStudyGroups(studyGroups);
 		}
 	}, [allStudyGroups, currentUser.uid]);
 
