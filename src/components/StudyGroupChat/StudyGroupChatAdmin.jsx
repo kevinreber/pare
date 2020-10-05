@@ -73,12 +73,39 @@ function StudyGroupChatAdmin({
 		(member) => member.uid === currentUser.uid
 	);
 
+	const removeUserPrompt = (user) => {
+		setConfirmDialog({
+			isOpen: true,
+			title: `Remove ${user.displayName} from Study Group?`,
+			subtitle: "You can't undo this operation",
+			onConfirm: () => {
+				removeUser(user.uid);
+			},
+		});
+	};
+
+	// Remove user, using userID as reference
 	const removeUser = (user) => {
 		removeUserFromCollection('study-group', studyGroupId, user);
+
+		dispatch(
+			addFlashMessage({
+				isOpen: true,
+				message: 'Removed user from study group',
+				type: 'error',
+			})
+		);
+
+		// Reset UI state
+		setConfirmDialog({
+			isOpen: false,
+			title: '',
+			subtitle: '',
+		});
+		handleClose();
 	};
 
 	const leaveGroupPrompt = () => {
-		console.log(members);
 		setConfirmDialog({
 			isOpen: true,
 			title: 'Are you sure you want to leave the Study Group?',
@@ -93,12 +120,13 @@ function StudyGroupChatAdmin({
 	 * ! Update displayName of user's messages
 	 */
 	const leaveGroup = () => {
-		const user = {
-			uid: currentUser.uid,
-			displayName: currentUser.displayName,
-			photoURL: currentUser.photoURL,
-			admin: userAdminStatus[0].admin,
-		};
+		const user = currentUser.uid;
+		// {
+		// 	uid: currentUser,
+		// 	displayName: currentUser.displayName,
+		// 	photoURL: currentUser.photoURL,
+		// 	admin: userAdminStatus,
+		// };
 
 		removeUserFromCollection('study-group', studyGroupId, user, members);
 		console.log('leaving group...');
@@ -125,7 +153,7 @@ function StudyGroupChatAdmin({
 		}
 	};
 
-	const MembersList = members.map((member) => (
+	const MembersList = Object.values(members).map((member) => (
 		<div className="Member__Card">
 			<div className="Member__Info">
 				<Link to={`/users/${member.uid}`} className="mate-text-secondary">
@@ -139,14 +167,7 @@ function StudyGroupChatAdmin({
 						<MoreHorizOutlinedIcon />
 					</IconButton>
 					<PopoverActions
-						remove={() =>
-							removeUser({
-								uid: member.uid,
-								displayName: member.displayName,
-								photoURL: member.photoURL,
-								admin: member.admin,
-							})
-						}
+						remove={() => removeUserPrompt(member)}
 						id={popoverId}
 						open={open}
 						anchorEl={anchorEl}
@@ -155,9 +176,7 @@ function StudyGroupChatAdmin({
 						block={true}
 					/>
 				</div>
-			) : (
-				''
-			)}
+			) : null}
 		</div>
 	));
 
@@ -204,9 +223,7 @@ function StudyGroupChatAdmin({
 							)}
 						</IconButton>
 					</>
-				) : (
-					''
-				)}
+				) : null}
 			</div>
 			<div className="Admin__Body">
 				<div className="Admin-Members__Header">
@@ -228,9 +245,7 @@ function StudyGroupChatAdmin({
 							<p>Share Link</p>
 						</div>
 					</div>
-				) : (
-					''
-				)}
+				) : null}
 				<div className="Admin-Members__List">{MembersList}</div>
 				<div className="Admin-Members__Footer">
 					<ConfirmDialog

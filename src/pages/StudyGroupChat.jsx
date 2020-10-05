@@ -36,6 +36,7 @@ function StudyGroupChat() {
 	};
 	const [studyGroup, setStudyGroup] = useState({});
 	const [studyGroupForm, setStudyGroupForm] = useState(INITIAL_STATE);
+	const [groupMembers, setGroupMembers] = useState([]);
 	const [messages, setMessages] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 
@@ -55,6 +56,14 @@ function StudyGroupChat() {
 			db.collection('study-group')
 				.doc(studyGroupId)
 				.onSnapshot((snapshot) => setStudyGroup(snapshot.data()));
+
+			/** Get Study Group Members */
+			db.collection('study-group')
+				.doc(studyGroupId)
+				.collection('users')
+				.onSnapshot((snapshot) =>
+					setGroupMembers(snapshot.docs.map((doc) => doc.data()))
+				);
 
 			/** Get Study Group Messages */
 			db.collection('study-group')
@@ -93,15 +102,15 @@ function StudyGroupChat() {
 			// add studyGroup.title value to input in StudyGroupChatAdmin
 			// if user wants to change Study Group's title
 			// ! CHECK members /
-			if (isLoading && studyGroup.title) {
+			if (isLoading && studyGroup.title && groupMembers) {
 				setStudyGroupForm({
 					title: studyGroup.title,
-					members: studyGroup.members,
+					members: groupMembers,
 				});
 				setIsLoading(false);
 			}
 		}
-	}, [studyGroupId, studyGroup, isLoading]);
+	}, [studyGroupId, studyGroup, isLoading, groupMembers, setGroupMembers]);
 
 	const handleChange = (e) => {
 		if (e === 'reset') {
@@ -139,7 +148,7 @@ function StudyGroupChat() {
 					<StudyGroupChatAdmin
 						studyGroupId={studyGroupId}
 						title={studyGroupForm.title}
-						members={studyGroup.users}
+						members={groupMembers}
 						currentUser={currentUser}
 						handleChange={handleChange}
 						saveChanges={updateStudyGroupTitle}
@@ -172,7 +181,10 @@ function StudyGroupChat() {
 			messages.map((message, index) => {
 				const lastMessage = messages.length - 1 === index;
 				return (
-					<div id={message.id} ref={lastMessage ? setRef : null}>
+					<div
+						key={message.id}
+						id={message.id}
+						ref={lastMessage ? setRef : null}>
 						<p
 							className={`StudyGroupChatBody__message chat__message ${
 								currentUser.uid === message.data.uid ? 'chat__receiver' : ''

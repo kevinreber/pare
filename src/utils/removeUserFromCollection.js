@@ -11,8 +11,20 @@ async function removeUserFromCollection(collection, docId, data, users = []) {
 
 	// Remove user from users array
 	if (data) {
-		ref.update({ users: firebase.firestore.FieldValue.arrayRemove(data) });
-		console.log('success');
+		// study group DB is stored differently
+		if (collection === 'study-group') {
+			console.log(data);
+			// look for user in users collection by their userID
+			await db
+				.collection(collection)
+				.doc(docId)
+				.collection('users')
+				.doc(data)
+				.delete();
+		} else {
+			ref.update({ users: firebase.firestore.FieldValue.arrayRemove(data) });
+			console.log('success');
+		}
 	}
 
 	// if last user left, delete Study Group
