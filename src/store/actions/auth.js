@@ -37,7 +37,7 @@ async function checkIfUserExists(user) {
 }
 
 /** Adds new User to DB
- *  @param {Object}
+ *  @param {Object} user
  */
 function addNewUserToDB(user) {
 	const data = {
@@ -60,6 +60,7 @@ function addNewUserToDB(user) {
 			portfolio: '',
 		},
 		school: 'U.C. Berkeley',
+		portfolio: [],
 		keywords: [],
 		availability: {
 			Mon: [],
