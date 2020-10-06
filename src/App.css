@@ -293,6 +293,14 @@ a:hover {
   color: var(--user-chat-color);
 }
 
+.MuiButtonBase-root.MuiIconButton-root.Share__Btn {
+  color: var(--primary-color);
+}
+
+.MuiButtonBase-root.MuiIconButton-root.Share__Btn small {
+  margin-left: 2px;
+}
+
 /********************************* */
 /** Forms                          *
 /********************************* */

@@ -39,16 +39,12 @@ function PopoverActions({
 					<IconButton className="Delete__Btn" onClick={() => remove()}>
 						{block ? <BlockIcon /> : <DeleteIcon />}
 					</IconButton>
-				) : (
-					''
-				)}
+				) : null}
 				{editBtn ? (
 					<IconButton className="Edit__Btn" onClick={() => edit()}>
 						<EditIcon />
 					</IconButton>
-				) : (
-					''
-				)}
+				) : null}
 			</Popover>
 		</>
 	);

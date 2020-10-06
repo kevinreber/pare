@@ -1,11 +1,13 @@
 /** Dependencies */
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
 
 /** Components & Helpers */
 import PopoverActions from '../general/PopoverActions';
+import PopoverShareAction from '../general/PopoverShareAction';
+import { addFlashMessage } from '../../store/actions/flashMessages';
 
 /** MUI */
 import IconButton from '@material-ui/core/IconButton';
@@ -18,6 +20,9 @@ import BookmarkIcon from '@material-ui/icons/Bookmark';
 import ShareIcon from '@material-ui/icons/Share';
 import SendIcon from '@material-ui/icons/Send';
 import Avatar from '@material-ui/core/Avatar';
+
+/** ! TEMP URL */
+const HOST_URL = 'localhost:3000';
 
 /** PostCard
  *  If user created Post, they will see an option to delete the Post
@@ -42,6 +47,7 @@ function PostCard({
 	remove,
 	edit,
 }) {
+	const dispatch = useDispatch();
 	const currentUser = useSelector((state) => state.auth.user);
 	const BookmarkStatus = !isBookmarked ? (
 		<BookmarkBorderOutlinedIcon />
@@ -64,9 +70,7 @@ function PostCard({
 					Ends: <span className="event__timestamp"> {convertTime(end)}</span>
 				</p>
 			</>
-		) : (
-			''
-		);
+		) : null;
 
 	const showAttachment = attachment ? (
 		<img
@@ -74,18 +78,43 @@ function PostCard({
 			src={attachment_preview}
 			alt={attachment.name}
 		/>
-	) : (
-		''
-	);
+	) : null;
 
 	const deletePost = () => {
 		remove(id);
 	};
+
 	const editPost = () => {
 		edit(id);
 	};
 
-	/** PopoverActions Props ***************/
+	// Copies link of post to browser clipboard
+	const copyLinkToClipBoard = async (link) => {
+		try {
+			await navigator.clipboard.writeText(link);
+			/** Prompt change made */
+			dispatch(
+				addFlashMessage({
+					isOpen: true,
+					message: 'Copied to Clipboard!',
+					type: 'success',
+				})
+			);
+		} catch (err) {
+			/** Prompt change made */
+			dispatch(
+				addFlashMessage({
+					isOpen: true,
+					message: 'Error!',
+					type: 'danger',
+				})
+			);
+		}
+		// close share popover after copy to clipboard
+		handleShareClose();
+	};
+
+	/** PopoverActions Props for Admin ***************/
 	const [anchorEl, setAnchorEl] = useState(null);
 	const togglePopover = (e) => {
 		setAnchorEl(e.currentTarget);
@@ -93,6 +122,16 @@ function PostCard({
 	const handleClose = () => setAnchorEl(null);
 	const open = Boolean(anchorEl);
 	const popoverId = open ? 'simple-popover' : undefined;
+	/************************************* */
+
+	/** PopoverActions Props for Share Icon***************/
+	const [shareAnchorEl, setShareAnchorEl] = useState(null);
+	const toggleSharePopover = (e) => {
+		setShareAnchorEl(e.currentTarget);
+	};
+	const handleShareClose = () => setShareAnchorEl(null);
+	const openShare = Boolean(shareAnchorEl);
+	const popoverShareId = open ? 'simple-popover' : undefined;
 	/************************************* */
 
 	return (
@@ -117,10 +156,7 @@ function PostCard({
 									<LocationOnIcon />
 									{location}
 								</span>
-							) : (
-								''
-							)}
-
+							) : null}
 							<span>{eventTime}</span>
 						</div>
 					</Link>
@@ -142,9 +178,16 @@ function PostCard({
 				<IconButton>
 					<SendIcon />
 				</IconButton>
-				<IconButton>
+				<IconButton onClick={toggleSharePopover}>
 					<ShareIcon />
 				</IconButton>
+				<PopoverShareAction
+					id={popoverShareId}
+					open={openShare}
+					anchorEl={shareAnchorEl}
+					close={handleShareClose}
+					shareLink={() => copyLinkToClipBoard(`${HOST_URL}/post/${id}`)}
+				/>
 			</div>
 			<div className="Post-Card__Right Post__timestamp">
 				<p>
