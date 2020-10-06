@@ -23,7 +23,6 @@ function Notification() {
 
 	/** get status of flashMessages  in store*/
 	let notify = useSelector((state) => state.flashMessages);
-	console.log(notify);
 
 	/** Close Notification */
 	const handleClose = (e, reason) => {
