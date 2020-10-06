@@ -1,5 +1,6 @@
 /** Dependencies */
 import React, { useState } from 'react';
+import firebase from 'firebase';
 import moment from 'moment';
 import { original, produce } from 'immer';
 
@@ -7,6 +8,8 @@ import { original, produce } from 'immer';
 import DatePicker from 'react-datepicker';
 import CTAButton from '../general/CTAButton';
 import useFields from '../../hooks/useFields';
+import createFbTimestamp from '../../utils/createFbTimestamp';
+import db from '../../config/fbConfig';
 
 /** MUI */
 import { IconButton } from '@material-ui/core';
@@ -25,16 +28,15 @@ const DAYS = [
 	'sunday',
 ];
 
-function BeTutorForm({ user, update, availability }) {
+function BeTutorForm({ uid, user, update, availability }) {
 	// Form Data
 	const INITIAL_STATE = {
 		keywords: '',
-		portfolio: [],
+		portfolio: '',
 	};
 	console.log(availability);
-
+	console.log(user);
 	const [formData, setFormData] = useState(INITIAL_STATE);
-
 	const [changeMade, setChangeMade] = useState(false);
 	// const availability = {
 	// 	monday: {
@@ -83,16 +85,16 @@ function BeTutorForm({ user, update, availability }) {
 		<>
 			<TimePicker
 				clearable
-				variant='inline'
+				variant="inline"
 				minutesStep={5}
 				label={day.charAt(0).toUpperCase() + day.slice(1)}
 				value={availability[day][0].start}
 				onChange={(e) => handleDate(e, day, 'start', index)}
 			/>
-			<p className='TimePicker__Seperator'>—</p>
+			<p className="TimePicker__Seperator">—</p>
 			<TimePicker
 				clearable
-				variant='inline'
+				variant="inline"
 				minutesStep={5}
 				value={availability[day][0].end}
 				onChange={(e) => handleDate(e, day, 'end', index)}
@@ -120,7 +122,7 @@ function BeTutorForm({ user, update, availability }) {
 					value={availability[day].end}
 				/>
 			</div> */}
-			<div className='Availability__Remove'>
+			<div className="Availability__Remove">
 				<IconButton>
 					<RemoveCircleOutlineSharpIcon />
 				</IconButton>
@@ -130,9 +132,9 @@ function BeTutorForm({ user, update, availability }) {
 
 	// Build Fields for Availability
 	const dayFields = DAYS.map((day, index) => (
-		<div className='Availability__Day'>
-			<div className='Availability__TimePicker'>{timePickers(day)}</div>
-			<div className='Availability__Add'>
+		<div className="Availability__Day">
+			<div className="Availability__TimePicker">{timePickers(day)}</div>
+			<div className="Availability__Add">
 				<IconButton>
 					<AddCircleOutlineRoundedIcon />
 				</IconButton>
@@ -140,47 +142,79 @@ function BeTutorForm({ user, update, availability }) {
 		</div>
 	));
 
+	// Removes user field data from DB
+	const removeData = (field, data) => {
+		console.log(field, data);
+		db.collection('users')
+			.doc(uid)
+			.update({
+				[field]: firebase.firestore.FieldValue.arrayRemove(data),
+			});
+
+		db.collection('users').doc(uid).update({
+			lastUpdatedAt: createFbTimestamp(),
+		});
+	};
+
+	// Build list of elements for User Keywords and User Portfolio Links
+	const fieldList = (field, arrayOfData) => {
+		return arrayOfData.map((data, index) => (
+			<li data-name={field} key={index}>
+				{data}
+				<IconButton onClick={() => removeData(field, data)}>
+					<RemoveCircleOutlineSharpIcon />
+				</IconButton>
+			</li>
+		));
+	};
+
 	return (
-		<div className='BeTutorForm'>
-			<form className='container mb-3' onSubmit={handleSubmit}>
-				<div className='form-group'>
-					<label htmlFor='keywords' className='float-left'>
-						I can help in...
-					</label>
+		<div className="BeTutorForm">
+			<form className="container mb-3" onSubmit={handleSubmit}>
+				<div className="form-group">
+					<label className="float-left">I can help in...</label>
 					<input
-						id='keywords'
-						className='form-control mate-form-input'
-						type='text'
+						className="form-control mate-form-input"
+						type="text"
 						onChange={handleChange}
-						name='keywords'
+						name="keywords"
 						value={formData.keywords}
+						placeholder="use commas to separate keywords..."
 					/>
 				</div>
-				<div className='form-group BeTutor__Portfolio'>
-					<label htmlFor='portfolio-links' className='float-left'>
-						Portfolio Links
-					</label>
+				{user.keywords.length > 0 ? (
+					<ul className="User-Keywords">
+						{fieldList('keywords', user.keywords)}
+					</ul>
+				) : null}
+				<div className="form-group BeTutor__Portfolio">
+					<label className="float-left">Portfolio Links</label>
 					<input
-						id='portfolio-links'
-						className='form-control mate-form-input'
-						type='text'
+						className="form-control mate-form-input"
+						type="url"
 						onChange={handleChange}
-						name='portfolio'
+						name="portfolio"
 						value={formData.portfolio}
+						placeholder="ex. linkedin, github, website..."
 					/>
-					<div className='Portfolio__Add'>
+					{user.portfolio.length > 0 ? (
+						<ul className="User-Porfolio-Links">
+							{fieldList('portfolio', user.portfolio)}
+						</ul>
+					) : null}
+					<div className="Portfolio__Add">
 						<IconButton>
 							<AddCircleOutlineRoundedIcon />
 						</IconButton>
 					</div>
 				</div>
-				<div className='Be-Tutor__Availability'>
+				<div className="Be-Tutor__Availability">
 					<MuiPickersUtilsProvider utils={DateFnsUtils}>
 						{dayFields}
 					</MuiPickersUtilsProvider>
 				</div>
 				<div className={`Search__Footer ${!changeMade ? 'disabled-btn' : ''}`}>
-					<CTAButton text='Save' />
+					<CTAButton text="Save" />
 				</div>
 			</form>
 		</div>

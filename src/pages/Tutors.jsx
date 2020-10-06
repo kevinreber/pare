@@ -15,6 +15,7 @@ function Tutor() {
 	const userAvailability = useSelector((state) => state.availability);
 
 	const [tutors, setTutors] = useState([]);
+	const [user, setUser] = useState(null);
 
 	useEffect(() => {
 		function getTutors() {
@@ -31,6 +32,17 @@ function Tutor() {
 		}
 		getTutors();
 	}, []);
+
+	useEffect(() => {
+		function getUserTutorInfo() {
+			db.collection('users')
+				.doc(currentUser.uid)
+				.onSnapshot((snapshot) => setUser(snapshot.data()));
+		}
+		if (currentUser) {
+			getUserTutorInfo();
+		}
+	}, [currentUser]);
 
 	// State will determine what courses to show in CourseList
 	const [active, setActive] = useState('findTutor');
@@ -52,18 +64,19 @@ function Tutor() {
 			<TutorList tutors={tutors} />
 		) : (
 			<BeTutorForm
-				user={currentUser}
+				uid={currentUser.uid}
+				user={user}
 				update={updateUser}
 				availability={userAvailability}
 			/>
 		);
 
 	return (
-		<div className='Tutors'>
-			<div className='Tutors-Header Body-Header'>
-				<div className='Tutor-Find-Tutor'>
+		<div className="Tutors">
+			<div className="Tutors-Header Body-Header">
+				<div className="Tutor-Find-Tutor">
 					<h5
-						id='findTutor'
+						id="findTutor"
 						className={
 							active === 'findTutor' ? 'mate-text-primary' : 'mate-text-active'
 						}
@@ -71,9 +84,9 @@ function Tutor() {
 						Find a Tutor
 					</h5>
 				</div>
-				<div className='Tutor-Be-Tutor'>
+				<div className="Tutor-Be-Tutor">
 					<h5
-						id='beTutor'
+						id="beTutor"
 						className={
 							active === 'beTutor' ? 'mate-text-primary' : 'mate-text-active'
 						}
@@ -82,7 +95,7 @@ function Tutor() {
 					</h5>
 				</div>
 			</div>
-			<div className='Tutors__Body'>
+			<div className="Tutors__Body">
 				{TutorsBody}
 				{/* <div className='Courses-CourseList'>{courseList}</div>
 			<div className='CourseForm p-3'>

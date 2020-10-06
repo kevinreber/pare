@@ -72,7 +72,7 @@ function addNewUserToDB(user) {
 		},
 		createdAt: createFbTimestamp(),
 		lastLoginAt: createFbTimestamp(),
-		updatedAt: createFbTimestamp(),
+		lastUpdatedAt: createFbTimestamp(),
 	};
 
 	db.collection('users').doc(user.uid).set(data);

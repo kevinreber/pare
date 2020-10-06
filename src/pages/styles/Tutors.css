@@ -31,7 +31,9 @@
     border-bottom: 1px solid var(--tertiary-color);
 }
 
-/** Be Tutor Form  */
+/*************************************************/
+/** Be Tutor Form                                */
+/*************************************************/
 
 .BeTutorForm {
     margin-top: 1rem;
@@ -89,4 +91,16 @@
 
 .BeTutorForm .Availability__Day>.Availability__Add>button {
     padding: 0;
+}
+
+.BeTutorForm .User-Porfolio-Links {
+    text-align: left;
+    margin-bottom: 0;
+    margin-top: .5rem;
+    padding-left: .5rem;
+    padding-right: .5rem;
+}
+
+.BeTutorForm .User-Porfolio-Links li {
+    padding: .2rem;
 }
