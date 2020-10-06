@@ -1,4 +1,5 @@
 /** Components & Helpers */
+import addUserToCollection from './addUserToCollection';
 import db from '../config/fbConfig';
 
 /**
@@ -20,25 +21,24 @@ async function createNewMessage(
 	// Make new document
 	const newMessage = await db.collection(collection).add(messageData);
 
-	// Add chat message to 'chats' collection
-	if (chatData) {
-		db.collection(collection)
-			.doc(newMessage.id)
-			.collection(subCollection)
-			.add(chatData);
+	// if 'study-group' collection, add user to 'users' subcollection
+	if (collection === 'study-group') {
+		db.collection(collection).doc(newMessage.id).set(messageData);
 
-		// if 'study-group' collection, add user to 'users' subcollection
-		if (collection === 'study-group') {
+		const addUser = {
+			uid: user.uid,
+			admin: true,
+			displayName: user.displayName,
+			photoURL: user.photoURL,
+		};
+		addUserToCollection(collection, newMessage.id, user.uid, addUser);
+
+		// Add chat message to 'chats' collection
+		if (chatData) {
 			db.collection(collection)
 				.doc(newMessage.id)
-				.collection('users')
-				.doc(user.uid)
-				.set({
-					uid: user.uid,
-					admin: true,
-					displayName: user.displayName,
-					photoURL: user.photoURL,
-				});
+				.collection(subCollection)
+				.add(chatData);
 		}
 	}
 

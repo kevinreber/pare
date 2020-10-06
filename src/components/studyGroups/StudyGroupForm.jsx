@@ -37,11 +37,14 @@ function StudyGroupForm({ save, studyGroups, user }) {
 	const history = useHistory();
 	const dispatch = useDispatch();
 
+	// ! NEED TO MATCH NEW DB SCHEMA
+	// ! WHEN MAKING NEW STUDY GROUP
 	// Form Data
 	const INITIAL_STATE = {
 		active: true,
 		private: false,
-		users: [{ uid, displayName, photoURL, admin: true }],
+		admin: [uid],
+		usersList: [uid],
 		count: 0,
 		maxUsers: null,
 		title: '',
@@ -100,7 +103,7 @@ function StudyGroupForm({ save, studyGroups, user }) {
 			studyGroupId: id,
 			[name]: value,
 		}));
-		addStudyGroupPrompt(id, name);
+		addStudyGroupPrompt(id, value);
 	};
 
 	/** Prompts Confirmation Dialog to Add User to Study Group */
@@ -116,7 +119,7 @@ function StudyGroupForm({ save, studyGroups, user }) {
 					photoURL,
 					admin: false,
 				};
-				addUserToCollection('study-group', id, 'users', userData);
+				addUserToCollection('study-group', id, uid, userData);
 
 				history.push(`/study-groups/${id}`);
 				dispatch(

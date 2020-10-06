@@ -28,23 +28,15 @@ function AutocompleteStudyGroups({
 
 	/** Get Users Study Groups*/
 	useEffect(() => {
-		let studyGroupOptions = [];
+		// Filter all public study groups
 		const publicStudyGroups = options.filter(
 			(studyGroup) => !studyGroup.data.private
 		);
 
 		// Filter which Study Groups user is not currently in
-		for (let studyGroup of publicStudyGroups) {
-			let opt = true;
-			for (let user of studyGroup.data.users) {
-				if (user.uid === currentUser.uid) {
-					opt = false;
-				}
-			}
-			if (opt) {
-				studyGroupOptions.push(studyGroup);
-			}
-		}
+		const studyGroupOptions = publicStudyGroups.filter(
+			(studyGroup) => !studyGroup.data.usersList.includes(currentUser.uid)
+		);
 
 		setStudyGroupChoices(studyGroupOptions);
 	}, [options, currentUser]);
@@ -52,7 +44,7 @@ function AutocompleteStudyGroups({
 	/** Commit onChange changes and filter through options */
 	function onSearch(e) {
 		onChange(e);
-		console.log(e.target, value);
+
 		toggleOptions(true);
 		let opts = studyGroupChoices.filter(
 			(studyGroup) =>

@@ -36,7 +36,7 @@ function StudyGroupChat() {
 	};
 	const [studyGroup, setStudyGroup] = useState({});
 	const [studyGroupForm, setStudyGroupForm] = useState(INITIAL_STATE);
-	const [groupMembers, setGroupMembers] = useState([]);
+	const [groupMembers, setGroupMembers] = useState(null);
 	const [messages, setMessages] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 
@@ -49,9 +49,8 @@ function StudyGroupChat() {
 			node.scrollIntoView({ smooth: true });
 		}
 	}, []);
-
 	useEffect(() => {
-		if (studyGroupId) {
+		function getData() {
 			/** Get Study Group Info */
 			db.collection('study-group')
 				.doc(studyGroupId)
@@ -62,7 +61,14 @@ function StudyGroupChat() {
 				.doc(studyGroupId)
 				.collection('users')
 				.onSnapshot((snapshot) =>
-					setGroupMembers(snapshot.docs.map((doc) => doc.data()))
+					setGroupMembers(
+						snapshot.docs.map((doc) => {
+							return {
+								id: doc.id,
+								data: doc.data(),
+							};
+						})
+					)
 				);
 
 			/** Get Study Group Messages */
@@ -110,6 +116,9 @@ function StudyGroupChat() {
 				setIsLoading(false);
 			}
 		}
+		if (studyGroupId) {
+			getData();
+		}
 	}, [studyGroupId, studyGroup, isLoading, groupMembers, setGroupMembers]);
 
 	const handleChange = (e) => {
@@ -141,7 +150,7 @@ function StudyGroupChat() {
 		return <p>Loading...</p>;
 	}
 
-	if (showAdmin) {
+	if (showAdmin && groupMembers) {
 		return (
 			<Modal
 				content={

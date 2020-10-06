@@ -21,6 +21,12 @@ async function removeUserFromCollection(collection, docId, data, users = []) {
 				.collection('users')
 				.doc(data)
 				.delete();
+
+			// Remove user's ID from usersList
+			await ref.update({
+				usersList: firebase.firestore.FieldValue.arrayRemove(data),
+			});
+			console.log('success');
 		} else {
 			ref.update({ users: firebase.firestore.FieldValue.arrayRemove(data) });
 			console.log('success');

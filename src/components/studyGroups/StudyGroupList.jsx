@@ -11,7 +11,7 @@ import { List } from '@material-ui/core';
 function StudyGroupList({ studyGroups = [] }) {
 	/** Card Displaying Study Groups Information */
 	const groupList = studyGroups.map((studyGroup) => (
-		<div className="StudyGroups__Card">
+		<div key={studyGroup.id} className="StudyGroups__Card">
 			<Link to={`/study-groups/${studyGroup.id}`}>
 				<table key={studyGroup.id} className="table-hover StudyGroups__table">
 					<tbody>

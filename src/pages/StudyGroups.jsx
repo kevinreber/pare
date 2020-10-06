@@ -43,10 +43,10 @@ function Connect() {
 	}, []);
 
 	useEffect(() => {
-		if (allStudyGroups) {
+		if (allStudyGroups.length > 0) {
 			// Filter which Study Groups user is currently in
-			const studyGroups = allStudyGroups.filter(
-				(studyGroup) => studyGroup.data.users[currentUser.uid]
+			const studyGroups = allStudyGroups.filter((studyGroup) =>
+				studyGroup.data.usersList.includes(currentUser.uid)
 			);
 			setUserStudyGroups(studyGroups);
 		}
@@ -56,7 +56,7 @@ function Connect() {
 
 	if (filter !== '' && userStudyGroups && userStudyGroups.length !== 0) {
 		// filter study groups to display
-		const filteredGroups = allStudyGroups.filter(
+		const filteredGroups = userStudyGroups.filter(
 			(studyGroup) =>
 				studyGroup.data.title.toLowerCase().indexOf(filter.toLowerCase()) > -1
 		);
@@ -76,7 +76,13 @@ function Connect() {
 
 	const addStudyGroup = async (data) => {
 		// store studyGroupId given back
-		const newStudyGroupId = await createNewMessage('study-group', data);
+		const newStudyGroupId = await createNewMessage(
+			'study-group',
+			data,
+			null,
+			null,
+			currentUser
+		);
 
 		// push user to message
 		history.push(`/study-groups/${newStudyGroupId}`);

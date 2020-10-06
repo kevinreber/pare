@@ -12,15 +12,14 @@ async function addUserToCollection(collection, docId, field, data) {
 	// Add data to collection group's array of users
 	if (data) {
 		if (collection === 'study-group') {
-			console.log(collection, docId, field, data);
-			// ref.update({ [field]: data });
+			console.log(docId, field, data);
 			db.collection(collection)
 				.doc(docId)
 				.collection('users')
 				.doc(field)
 				.set(data);
 
-			// Append users ID to usersList
+			// Append user's ID to usersList
 			await ref.update({
 				usersList: firebase.firestore.FieldValue.arrayUnion(data.uid),
 			});

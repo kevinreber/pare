@@ -70,16 +70,17 @@ function StudyGroupChatAdmin({
 
 	// if user is admin, they will see admin settings
 	const userAdminStatus = members.filter(
-		(member) => member.uid === currentUser.uid
-	);
+		(member) => member.id === currentUser.uid
+	)[0].data.admin;
 
+	// Prompt to remove user
 	const removeUserPrompt = (user) => {
 		setConfirmDialog({
 			isOpen: true,
-			title: `Remove ${user.displayName} from Study Group?`,
+			title: `Remove ${user.data.displayName} from Study Group?`,
 			subtitle: "You can't undo this operation",
 			onConfirm: () => {
-				removeUser(user.uid);
+				removeUser(user.id);
 			},
 		});
 	};
@@ -120,7 +121,6 @@ function StudyGroupChatAdmin({
 	 * ! Update displayName of user's messages
 	 */
 	const leaveGroup = () => {
-		const user = currentUser.uid;
 		// {
 		// 	uid: currentUser,
 		// 	displayName: currentUser.displayName,
@@ -128,7 +128,12 @@ function StudyGroupChatAdmin({
 		// 	admin: userAdminStatus,
 		// };
 
-		removeUserFromCollection('study-group', studyGroupId, user, members);
+		removeUserFromCollection(
+			'study-group',
+			studyGroupId,
+			currentUser.uid,
+			members
+		);
 		console.log('leaving group...');
 
 		// redirect user to study-groups
@@ -153,15 +158,15 @@ function StudyGroupChatAdmin({
 		}
 	};
 
-	const MembersList = Object.values(members).map((member) => (
-		<div className="Member__Card">
+	const MembersList = members.map((member) => (
+		<div key={member.id} className="Member__Card">
 			<div className="Member__Info">
-				<Link to={`/users/${member.uid}`} className="mate-text-secondary">
-					<Avatar alt={member.displayName} src={member.photoURL} />
-					<p>{member.displayName}</p>
+				<Link to={`/users/${member.data.uid}`} className="mate-text-secondary">
+					<Avatar alt={member.data.displayName} src={member.data.photoURL} />
+					<p>{member.data.displayName}</p>
 				</Link>
 			</div>
-			{userAdminStatus[0].admin && member.uid !== currentUser.uid ? (
+			{userAdminStatus && member.data.uid !== currentUser.uid ? (
 				<div className="Member__Admin-Settings">
 					<IconButton onClick={togglePopover}>
 						<MoreHorizOutlinedIcon />
@@ -209,7 +214,7 @@ function StudyGroupChatAdmin({
 					</>
 				)}
 
-				{userAdminStatus[0].admin ? (
+				{userAdminStatus ? (
 					<>
 						<IconButton onClick={handleEdit}>
 							{showEdit ? (
@@ -230,7 +235,7 @@ function StudyGroupChatAdmin({
 					<h6 className="mate-text-primary">Group Members</h6>
 					<p className="member-number">{members.length} Members</p>
 				</div>
-				{userAdminStatus[0].admin ? (
+				{userAdminStatus ? (
 					<div className="Admin-Members__Add">
 						<div className="Add__Btn">
 							<IconButton>
