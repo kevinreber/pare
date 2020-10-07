@@ -37,6 +37,8 @@
 
 .BeTutorForm {
     margin-top: 1rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
 }
 
 .BeTutorForm .Be-Tutor__Availability,
@@ -101,6 +103,52 @@
     padding-right: .5rem;
 }
 
-.BeTutorForm .User-Porfolio-Links li {
-    /* padding: .2rem; */
+/*************************************************/
+/** Be Tutor Form - Portfolio                    */
+/*************************************************/
+
+.BeTutorForm .User-Porfolio-Links li[data-name="portfolio"] {
+    font-weight: 200;
+    font-size: .95rem;
+}
+
+.BeTutorForm .User-Porfolio-Links li>button {
+    padding: .2rem 1rem;
+}
+
+/*************************************************/
+/** Be Tutor Form - Keywords                     */
+/*************************************************/
+
+.BeTutorForm .User-Keywords {
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+}
+
+.BeTutorForm .User-Keywords>li .MuiChip-root {
+    background-color: var(--bg-color);
+    border: 1px solid var(--tertiary-color);
+    color: var(--secondary-color);
+    margin-right: .5rem;
+    margin-bottom: .5rem;
+}
+
+.BeTutorForm .User-Keywords>li .MuiChip-root svg {
+    color: var(--tertiary-color);
+}
+
+.BeTutorForm .User-Keywords>li .MuiChip-root svg:hover {
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+.form-footer {
+    display: flex;
+    justify-content: space-between;
+    font-style: italic;
+}
+
+.form-footer>.info-text {
+    color: var(--tertiary-color);
 }

@@ -17,6 +17,7 @@ import db from '../../config/fbConfig';
 import { IconButton } from '@material-ui/core';
 import AddCircleOutlineRoundedIcon from '@material-ui/icons/AddCircleOutlineRounded';
 import RemoveCircleOutlineSharpIcon from '@material-ui/icons/RemoveCircleOutlineSharp';
+import Chip from '@material-ui/core/Chip';
 import DateFnsUtils from '@date-io/date-fns';
 import { TimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 
@@ -59,7 +60,6 @@ function BeTutorForm({ uid, user, update, availability }) {
 	/** Handles general fields in form */
 	const handleChange = (e) => {
 		if (!changeMade) setChangeMade(true);
-		console.log(e.target);
 		if (e.target.name) {
 			const { name, value } = e.target;
 			setFormData((fData) => ({ ...fData, [name]: value }));
@@ -150,9 +150,18 @@ function BeTutorForm({ uid, user, update, availability }) {
 
 	// Returns true if data is verified
 	const verifyData = (data, variant) => {
-		// Verifies if data is empty string
+		// Verifies keywords doesn't exceed 10 and if data is empty string
 		if (variant === 'keywords') {
-			if (data === '' || data.trim() === '') {
+			if (user.keywords.length === 10) {
+				dispatch(
+					addFlashMessage({
+						isOpen: true,
+						message: 'Only allowed 10 keywords',
+						type: 'error',
+					})
+				);
+				return false;
+			} else if (data === '' || data.trim() === '') {
 				dispatch(
 					addFlashMessage({
 						isOpen: true,
@@ -181,7 +190,10 @@ function BeTutorForm({ uid, user, update, availability }) {
 	};
 
 	// Adds user field data from DB
-	const addData = (field, data) => {
+	const addData = (field, data, e = null) => {
+		if (e) {
+			e.preventDefault();
+		}
 		if (verifyData(data, field)) {
 			db.collection('users')
 				.doc(uid)
@@ -205,6 +217,13 @@ function BeTutorForm({ uid, user, update, availability }) {
 				[field]: firebase.firestore.FieldValue.arrayRemove(data),
 			});
 		updateUser(uid);
+		dispatch(
+			addFlashMessage({
+				isOpen: true,
+				message: 'Removed Field',
+				type: 'success',
+			})
+		);
 	};
 
 	// updates user's last update timestamp
@@ -216,66 +235,95 @@ function BeTutorForm({ uid, user, update, availability }) {
 
 	// Build list of elements for User Keywords and User Portfolio Links
 	const fieldList = (field, arrayOfData) => {
-		return arrayOfData.map((data, index) => (
-			<li data-name={field} key={index}>
-				{data}
-				<IconButton onClick={() => removeData(field, data)}>
-					<RemoveCircleOutlineSharpIcon />
-				</IconButton>
-			</li>
-		));
+		if (field === 'keywords') {
+			return arrayOfData.map((data, index) => (
+				<li data-name={field} key={index}>
+					<Chip
+						label={data}
+						onDelete={() => removeData(field, data)}
+						size="small"
+						//   className={classes.chip}
+					/>
+				</li>
+			));
+		} else {
+			return arrayOfData.map((data, index) => (
+				<li data-name={field} key={index}>
+					{data}
+					<IconButton onClick={() => removeData(field, data)}>
+						<RemoveCircleOutlineSharpIcon />
+					</IconButton>
+				</li>
+			));
+		}
 	};
 
 	return (
 		<div className="BeTutorForm">
-			<form className="container mb-3" onSubmit={handleSubmit}>
+			{/* <form className="container mb-3" onSubmit={handleSubmit}> */}
+			<form onSubmit={(e) => addData('keywords', formData.keywords, e)}>
 				<div className="form-group">
 					<label className="float-left">I can help in...</label>
+					<small className="char-count">
+						{10 - user.keywords.length} keywords left
+					</small>
 					<input
 						className="form-control mate-form-input"
 						type="text"
 						onChange={handleChange}
 						name="keywords"
 						value={formData.keywords}
-						placeholder="use commas to separate keywords..."
+						maxLength="25"
+						placeholder="ex. python, photoshop, calculus..."
 					/>
+					<div className="keyword-form-footer form-footer">
+						<small className="info-text">*press enter after each keyword</small>
+						<small
+							className={`char-count ${
+								25 - formData.keywords.length <= 10 ? 'error-limit' : ''
+							}`}>
+							{25 - formData.keywords.length} characters left
+						</small>
+					</div>
 				</div>
-				{user.keywords.length > 0 ? (
+			</form>
+			{user.keywords.length > 0 ? (
+				<>
 					<ul className="User-Keywords">
 						{fieldList('keywords', user.keywords)}
 					</ul>
+				</>
+			) : null}
+			<div className="form-group BeTutor__Portfolio">
+				<label className="float-left">Portfolio Links</label>
+				<input
+					className="form-control mate-form-input"
+					type="text"
+					onChange={handleChange}
+					name="portfolio"
+					value={formData.portfolio}
+					placeholder="ex. linkedin, github, website..."
+				/>
+				{user.portfolio.length > 0 ? (
+					<ul className="User-Porfolio-Links">
+						{fieldList('portfolio', user.portfolio)}
+					</ul>
 				) : null}
-				<div className="form-group BeTutor__Portfolio">
-					<label className="float-left">Portfolio Links</label>
-					<input
-						className="form-control mate-form-input"
-						type="text"
-						onChange={handleChange}
-						name="portfolio"
-						value={formData.portfolio}
-						placeholder="ex. linkedin, github, website..."
-					/>
-					{user.portfolio.length > 0 ? (
-						<ul className="User-Porfolio-Links">
-							{fieldList('portfolio', user.portfolio)}
-						</ul>
-					) : null}
-					<div className="Portfolio__Add">
-						<IconButton
-							onClick={() => addData('portfolio', formData.portfolio)}>
-							<AddCircleOutlineRoundedIcon />
-						</IconButton>
-					</div>
+				<div className="Portfolio__Add">
+					<IconButton onClick={() => addData('portfolio', formData.portfolio)}>
+						<AddCircleOutlineRoundedIcon />
+					</IconButton>
 				</div>
-				<div className="Be-Tutor__Availability">
-					<MuiPickersUtilsProvider utils={DateFnsUtils}>
-						{dayFields}
-					</MuiPickersUtilsProvider>
-				</div>
-				<div className={`Search__Footer ${!changeMade ? 'disabled-btn' : ''}`}>
+			</div>
+			<div className="Be-Tutor__Availability">
+				<MuiPickersUtilsProvider utils={DateFnsUtils}>
+					{dayFields}
+				</MuiPickersUtilsProvider>
+			</div>
+			{/* <div className={`Search__Footer ${!changeMade ? 'disabled-btn' : ''}`}>
 					<CTAButton text="Save" />
 				</div>
-			</form>
+			</form> */}
 		</div>
 	);
 }
