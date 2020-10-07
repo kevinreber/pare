@@ -244,27 +244,15 @@ function BeTutorForm({ uid, user, update, availability }) {
 
 	// Build list of elements for User Keywords and User Portfolio Links
 	const fieldList = (field, arrayOfData) => {
-		if (field === 'keywords') {
-			return arrayOfData.map((data, index) => (
-				<li data-name={field} key={index}>
-					<Chip
-						label={data}
-						onDelete={() => removeData(field, data)}
-						size="small"
-						//   className={classes.chip}
-					/>
-				</li>
-			));
-		} else {
-			return arrayOfData.map((data, index) => (
-				<li data-name={field} key={index}>
-					{data}
-					<IconButton onClick={() => removeData(field, data)}>
-						<RemoveCircleOutlineSharpIcon />
-					</IconButton>
-				</li>
-			));
-		}
+		return arrayOfData.map((data, index) => (
+			<li data-name={field} key={index}>
+				<Chip
+					label={data}
+					onDelete={() => removeData(field, data)}
+					size={field === 'keywords' ? 'small' : null}
+				/>
+			</li>
+		));
 	};
 
 	return (
@@ -303,41 +291,41 @@ function BeTutorForm({ uid, user, update, availability }) {
 					</ul>
 				</>
 			) : null}
-			<div className="form-group BeTutor__Portfolio">
-				<div className="Portolio__Label">
-					<label className="float-left">Portfolio Links</label>
-					<small className="char-count">
-						{5 - user.portfolio.length} portfolio links left
-					</small>
+			<form onSubmit={(e) => addData('portfolio', formData.portfolio, e)}>
+				<div className="form-group BeTutor__Portfolio">
+					<div className="Portolio__Label">
+						<label className="float-left">Portfolio Links</label>
+						<small className="char-count">
+							{5 - user.portfolio.length} links left
+						</small>
+					</div>
+					<div className="Portfolio__Input">
+						<input
+							className="form-control mate-form-input"
+							type="text"
+							onChange={handleChange}
+							name="portfolio"
+							value={formData.portfolio}
+							maxLength="30"
+							placeholder="ex. linkedin, github, website..."
+						/>
+						<div className="portfolio-form-footer form-footer">
+							<small className="info-text">*press enter after each link</small>
+							<small
+								className={`char-count ${
+									30 - formData.portfolio.length <= 10 ? 'error-limit' : ''
+								}`}>
+								{30 - formData.portfolio.length} characters left
+							</small>
+						</div>
+					</div>
 				</div>
-				<div className="Portfolio__Input">
-					<input
-						className="form-control mate-form-input"
-						type="text"
-						onChange={handleChange}
-						name="portfolio"
-						value={formData.portfolio}
-						maxLength="30"
-						placeholder="ex. linkedin, github, website..."
-					/>
-					<small
-						className={`char-count ${
-							30 - formData.portfolio.length <= 10 ? 'error-limit' : ''
-						}`}>
-						{30 - formData.portfolio.length} characters left
-					</small>
-				</div>
-				{user.portfolio.length > 0 ? (
-					<ul className="User-Porfolio-Links">
-						{fieldList('portfolio', user.portfolio)}
-					</ul>
-				) : null}
-				<div className="Portfolio__Add">
-					<IconButton onClick={() => addData('portfolio', formData.portfolio)}>
-						<AddCircleOutlineRoundedIcon />
-					</IconButton>
-				</div>
-			</div>
+			</form>
+			{user.portfolio.length > 0 ? (
+				<ul className="User-Portfolio-Links">
+					{fieldList('portfolio', user.portfolio)}
+				</ul>
+			) : null}
 			<div className="Be-Tutor__Availability">
 				<MuiPickersUtilsProvider utils={DateFnsUtils}>
 					{dayFields}

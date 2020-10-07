@@ -99,37 +99,23 @@
 /** Be Tutor Form - Portfolio                    */
 /*************************************************/
 
-.BeTutorForm .User-Porfolio-Links {
-    text-align: left;
-    margin-bottom: 0;
-    padding-left: .5rem;
-    padding-right: .5rem;
-}
-
-.BeTutorForm .User-Porfolio-Links li[data-name="portfolio"] {
-    font-weight: 200;
-    font-size: .95rem;
-}
-
-.BeTutorForm .User-Porfolio-Links li>button {
-    padding: .2rem 1rem;
-}
-
-.BeTutor__Portfolio .BeTutor__Portfolio small.char-count {
+/* .BeTutor__Portfolio .BeTutor__Portfolio small.char-count {
     float: right;
-}
+} */
 
 /*************************************************/
 /** Be Tutor Form - Keywords                     */
 /*************************************************/
 
-.BeTutorForm .User-Keywords {
+.BeTutorForm .User-Keywords,
+.BeTutorForm .User-Portfolio-Links {
     display: flex;
     justify-content: start;
     flex-wrap: wrap;
 }
 
-.BeTutorForm .User-Keywords>li .MuiChip-root {
+.BeTutorForm .User-Keywords>li .MuiChip-root,
+.BeTutorForm .User-Portfolio-Links>li .MuiChip-root {
     background-color: var(--bg-color);
     border: 1px solid var(--tertiary-color);
     color: var(--secondary-color);
@@ -137,13 +123,14 @@
     margin-bottom: .5rem;
 }
 
-.BeTutorForm .User-Keywords>li .MuiChip-root svg {
+.BeTutorForm .User-Keywords>li .MuiChip-root svg,
+.BeTutorForm .User-Portfolio-Links>li .MuiChip-root svg {
     color: var(--tertiary-color);
 }
 
-.BeTutorForm .User-Keywords>li .MuiChip-root svg:hover {
+.BeTutorForm .User-Keywords>li .MuiChip-root svg:hover,
+.BeTutorForm .User-Portfolio-Links>li .MuiChip-root svg:hover {
     color: var(--primary-color);
-    border: 1px solid var(--primary-color);
 }
 
 .form-footer {
