@@ -175,7 +175,16 @@ function BeTutorForm({ uid, user, update, availability }) {
 		// Verifies if data is valid URL
 		if (variant === 'portfolio') {
 			const regexp = /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
-			if (!regexp.test(data)) {
+			if (user.portfolio.length === 5) {
+				dispatch(
+					addFlashMessage({
+						isOpen: true,
+						message: 'Only allowed 5 portfolio links',
+						type: 'error',
+					})
+				);
+				return false;
+			} else if (!regexp.test(data)) {
 				dispatch(
 					addFlashMessage({
 						isOpen: true,
@@ -273,16 +282,16 @@ function BeTutorForm({ uid, user, update, availability }) {
 						onChange={handleChange}
 						name="keywords"
 						value={formData.keywords}
-						maxLength="25"
+						maxLength="30"
 						placeholder="ex. python, photoshop, calculus..."
 					/>
 					<div className="keyword-form-footer form-footer">
 						<small className="info-text">*press enter after each keyword</small>
 						<small
 							className={`char-count ${
-								25 - formData.keywords.length <= 10 ? 'error-limit' : ''
+								30 - formData.keywords.length <= 10 ? 'error-limit' : ''
 							}`}>
-							{25 - formData.keywords.length} characters left
+							{30 - formData.keywords.length} characters left
 						</small>
 					</div>
 				</div>
@@ -295,15 +304,29 @@ function BeTutorForm({ uid, user, update, availability }) {
 				</>
 			) : null}
 			<div className="form-group BeTutor__Portfolio">
-				<label className="float-left">Portfolio Links</label>
-				<input
-					className="form-control mate-form-input"
-					type="text"
-					onChange={handleChange}
-					name="portfolio"
-					value={formData.portfolio}
-					placeholder="ex. linkedin, github, website..."
-				/>
+				<div className="Portolio__Label">
+					<label className="float-left">Portfolio Links</label>
+					<small className="char-count">
+						{5 - user.portfolio.length} portfolio links left
+					</small>
+				</div>
+				<div className="Portfolio__Input">
+					<input
+						className="form-control mate-form-input"
+						type="text"
+						onChange={handleChange}
+						name="portfolio"
+						value={formData.portfolio}
+						maxLength="30"
+						placeholder="ex. linkedin, github, website..."
+					/>
+					<small
+						className={`char-count ${
+							30 - formData.portfolio.length <= 10 ? 'error-limit' : ''
+						}`}>
+						{30 - formData.portfolio.length} characters left
+					</small>
+				</div>
 				{user.portfolio.length > 0 ? (
 					<ul className="User-Porfolio-Links">
 						{fieldList('portfolio', user.portfolio)}

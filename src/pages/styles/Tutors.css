@@ -95,17 +95,16 @@
     padding: 0;
 }
 
-.BeTutorForm .User-Porfolio-Links {
-    text-align: left;
-    margin-bottom: 0;
-    margin-top: .5rem;
-    padding-left: .5rem;
-    padding-right: .5rem;
-}
-
 /*************************************************/
 /** Be Tutor Form - Portfolio                    */
 /*************************************************/
+
+.BeTutorForm .User-Porfolio-Links {
+    text-align: left;
+    margin-bottom: 0;
+    padding-left: .5rem;
+    padding-right: .5rem;
+}
 
 .BeTutorForm .User-Porfolio-Links li[data-name="portfolio"] {
     font-weight: 200;
@@ -114,6 +113,10 @@
 
 .BeTutorForm .User-Porfolio-Links li>button {
     padding: .2rem 1rem;
+}
+
+.BeTutor__Portfolio .BeTutor__Portfolio small.char-count {
+    float: right;
 }
 
 /*************************************************/
