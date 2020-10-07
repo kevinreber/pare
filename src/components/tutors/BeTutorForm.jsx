@@ -255,35 +255,42 @@ function BeTutorForm({ uid, user, update, availability }) {
 		));
 	};
 
+	// listens for key down events
+	const handleKeyDown = (field, data, e) => {
+		if (['Enter', 'Tab', ','].includes(e.key)) {
+			e.preventDefault();
+			addData(field, data, e);
+		}
+	};
+
 	return (
 		<div className="BeTutorForm">
 			{/* <form className="container mb-3" onSubmit={handleSubmit}> */}
-			<form onSubmit={(e) => addData('keywords', formData.keywords, e)}>
-				<div className="form-group">
-					<label className="float-left">I can help in...</label>
-					<small className="char-count">
-						{10 - user.keywords.length} keywords left
+			<div className="form-group">
+				<label className="float-left">I can help in...</label>
+				<small className="char-count">
+					{10 - user.keywords.length} keywords left
+				</small>
+				<input
+					className="form-control mate-form-input"
+					type="text"
+					onChange={handleChange}
+					onKeyDown={(e) => handleKeyDown('keywords', formData.keywords, e)}
+					name="keywords"
+					value={formData.keywords}
+					maxLength="30"
+					placeholder="ex. python, photoshop, calculus..."
+				/>
+				<div className="keyword-form-footer form-footer">
+					<small className="info-text">*use comma to separate keywords</small>
+					<small
+						className={`char-count ${
+							30 - formData.keywords.length <= 10 ? 'error-limit' : ''
+						}`}>
+						{30 - formData.keywords.length} characters left
 					</small>
-					<input
-						className="form-control mate-form-input"
-						type="text"
-						onChange={handleChange}
-						name="keywords"
-						value={formData.keywords}
-						maxLength="30"
-						placeholder="ex. python, photoshop, calculus..."
-					/>
-					<div className="keyword-form-footer form-footer">
-						<small className="info-text">*press enter after each keyword</small>
-						<small
-							className={`char-count ${
-								30 - formData.keywords.length <= 10 ? 'error-limit' : ''
-							}`}>
-							{30 - formData.keywords.length} characters left
-						</small>
-					</div>
 				</div>
-			</form>
+			</div>
 			{user.keywords.length > 0 ? (
 				<>
 					<ul className="User-Keywords">
@@ -291,36 +298,35 @@ function BeTutorForm({ uid, user, update, availability }) {
 					</ul>
 				</>
 			) : null}
-			<form onSubmit={(e) => addData('portfolio', formData.portfolio, e)}>
-				<div className="form-group BeTutor__Portfolio">
-					<div className="Portolio__Label">
-						<label className="float-left">Portfolio Links</label>
-						<small className="char-count">
-							{5 - user.portfolio.length} links left
+			<div className="form-group BeTutor__Portfolio">
+				<div className="Portolio__Label">
+					<label className="float-left">Portfolio Links</label>
+					<small className="char-count">
+						{5 - user.portfolio.length} links left
+					</small>
+				</div>
+				<div className="Portfolio__Input">
+					<input
+						className="form-control mate-form-input"
+						type="text"
+						onChange={handleChange}
+						onKeyDown={(e) => handleKeyDown('portfolio', formData.portfolio, e)}
+						name="portfolio"
+						value={formData.portfolio}
+						maxLength="30"
+						placeholder="ex. linkedin, github, website..."
+					/>
+					<div className="portfolio-form-footer form-footer">
+						<small className="info-text">*use comma to separate links</small>
+						<small
+							className={`char-count ${
+								30 - formData.portfolio.length <= 10 ? 'error-limit' : ''
+							}`}>
+							{30 - formData.portfolio.length} characters left
 						</small>
 					</div>
-					<div className="Portfolio__Input">
-						<input
-							className="form-control mate-form-input"
-							type="text"
-							onChange={handleChange}
-							name="portfolio"
-							value={formData.portfolio}
-							maxLength="30"
-							placeholder="ex. linkedin, github, website..."
-						/>
-						<div className="portfolio-form-footer form-footer">
-							<small className="info-text">*press enter after each link</small>
-							<small
-								className={`char-count ${
-									30 - formData.portfolio.length <= 10 ? 'error-limit' : ''
-								}`}>
-								{30 - formData.portfolio.length} characters left
-							</small>
-						</div>
-					</div>
 				</div>
-			</form>
+			</div>
 			{user.portfolio.length > 0 ? (
 				<ul className="User-Portfolio-Links">
 					{fieldList('portfolio', user.portfolio)}
