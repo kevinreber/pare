@@ -3,13 +3,14 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 /** Components & Helpers */
+import ConfirmDialog from '../general/ConfirmDialog';
 import SubmitButton from '../general/SubmitButton';
 import Autocomplete from '../general/Autocomplete';
 
 /** Form to add a course.
  * Courses -> 'Join Class' Button -> Modal -> CourseForm
  */
-function CourseForm({ save }) {
+function CourseForm({ save, confirmDialog, setConfirmDialog }) {
 	// Form Data
 	const INITIAL_STATE = {
 		courseName: '',
@@ -45,8 +46,6 @@ function CourseForm({ save }) {
 		}));
 	};
 
-	const resetFormData = () => setFormData(INITIAL_STATE);
-
 	/** User must enter in a class with a valid class ID */
 	const validateFormData = () => {
 		/** Clear any existing errors */
@@ -70,18 +69,20 @@ function CourseForm({ save }) {
 		e.preventDefault();
 		if (validateFormData()) {
 			save(formData);
-			// Clear state of form
-			resetFormData();
 		}
 	};
 
 	return (
-		<div className='CourseForm p-3'>
+		<div className="CourseForm p-3">
+			<ConfirmDialog
+				confirmDialog={confirmDialog}
+				setConfirmDialog={setConfirmDialog}
+			/>
 			<h4>Join Class</h4>
-			<form className='container mb-3' onSubmit={handleSubmit}>
+			<form className="container mb-3" onSubmit={handleSubmit}>
 				<Autocomplete
 					id={'courseName'}
-					name='courseName'
+					name="courseName"
 					onChange={handleChange}
 					value={formData.courseName}
 					label={'Search'}
@@ -90,14 +91,14 @@ function CourseForm({ save }) {
 					setId={setId}
 					placeholder={'ex: COMPSCI 61A'}
 				/>
-				<div className='form-group CourseFormSemesterFields'>
+				<div className="form-group CourseFormSemesterFields">
 					<select
-						id='courseSemester'
-						className='form-control mate-form-input mr-2'
+						id="courseSemester"
+						className="form-control mate-form-input mr-2"
 						onChange={handleChange}
-						name='courseSemester'
+						name="courseSemester"
 						value={formData.courseSemester}>
-						<option className='option-disabled' value='' disabled selected>
+						<option className="option-disabled" value="" disabled selected>
 							Semester
 						</option>
 						<option>Fall</option>
@@ -105,12 +106,12 @@ function CourseForm({ save }) {
 						<option>Summer</option>
 					</select>
 					<select
-						id='courseYear'
-						className='form-control mate-form-input ml-2'
+						id="courseYear"
+						className="form-control mate-form-input ml-2"
 						onChange={handleChange}
-						name='courseYear'
+						name="courseYear"
 						value={formData.courseYear}>
-						<option className='option-disabled' value='' disabled selected>
+						<option className="option-disabled" value="" disabled selected>
 							Year
 						</option>
 						<option>2020</option>
@@ -120,8 +121,8 @@ function CourseForm({ save }) {
 						<option>2016</option>
 					</select>
 				</div>
-				<div className='alert errors'>{errors}</div>
-				<SubmitButton text='Join' />
+				<div className="alert errors">{errors}</div>
+				<SubmitButton text="Join" />
 			</form>
 		</div>
 	);

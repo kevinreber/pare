@@ -25,6 +25,12 @@ function Courses() {
 
 	const [courses, setCourses] = useState([]);
 
+	const [confirmDialog, setConfirmDialog] = useState({
+		isOpen: false,
+		title: '',
+		subtitle: '',
+	});
+
 	/** Current Semester courses */
 	const currentCourses = courses.filter(
 		(course) => course.data.semester.toLowerCase() === 'fall 2020'
@@ -53,6 +59,18 @@ function Courses() {
 	// Toggle form for User to Add Course
 	const [showForm, setShowForm] = useState(false);
 	const toggleForm = () => setShowForm((show) => !show);
+
+	/** Prompts Confirmation Dialog to Delete Post ********/
+	const addCoursePrompt = (courseData) => {
+		setConfirmDialog({
+			isOpen: true,
+			title: `Add ${courseData.courseName}?`,
+			subtitle: '',
+			onConfirm: () => {
+				addCourse(courseData);
+			},
+		});
+	};
 
 	const addCourse = (courseData) => {
 		dispatch(addCourseToFB(courseData, currentUser.uid));
@@ -85,7 +103,13 @@ function Courses() {
 	if (showForm) {
 		return (
 			<Modal
-				content={<CourseForm save={addCourse} />}
+				content={
+					<CourseForm
+						save={addCoursePrompt}
+						confirmDialog={confirmDialog}
+						setConfirmDialog={setConfirmDialog}
+					/>
+				}
 				closeModal={toggleForm}
 			/>
 		);
