@@ -47,6 +47,7 @@ input::placeholder {
 
 .Search__List {
     margin-top: 26vh;
+    margin-bottom: 12rem;
 }
 
 .MuiButtonBase-root.MuiListItem-root.inactive.MuiListItem-gutters.MuiListItem-button {
