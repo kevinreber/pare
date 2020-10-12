@@ -27,6 +27,8 @@ function CourseInfo() {
 	const [showForm, setShowForm] = useState(false);
 	const toggleForm = () => setShowForm((show) => !show);
 
+	const currentUser = useSelector((state) => state.auth.user);
+
 	const addAssignment = (assignmentData) => {
 		console.log(assignmentData);
 		db.collection('class')
@@ -67,7 +69,9 @@ function CourseInfo() {
 	if (showForm) {
 		return (
 			<Modal
-				content={<AssignmentForm save={addAssignment} />}
+				content={
+					<AssignmentForm save={addAssignment} userId={currentUser.uid} />
+				}
 				closeModal={toggleForm}
 			/>
 		);

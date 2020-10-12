@@ -12,12 +12,13 @@ import 'react-datepicker/dist/react-datepicker.css';
 import TextField from '@material-ui/core/TextField';
 
 /** Form to add a assignment. */
-function AssignmentForm({ save }) {
+function AssignmentForm({ save, userId }) {
 	// Form Data
 	const INITIAL_STATE = {
 		title: '',
 		type: '',
-		dueDate: createFbTimestamp(),
+		dueDate: null,
+		grades: [userId],
 	};
 
 	const [formData, setFormData] = useState(INITIAL_STATE);
