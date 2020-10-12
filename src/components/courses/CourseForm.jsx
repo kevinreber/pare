@@ -10,7 +10,7 @@ import Autocomplete from '../general/Autocomplete';
 /** Form to add a course.
  * Courses -> 'Join Class' Button -> Modal -> CourseForm
  */
-function CourseForm({ save, confirmDialog, setConfirmDialog }) {
+function CourseForm({ save, confirmDialog, setConfirmDialog, courses }) {
 	// Form Data
 	const INITIAL_STATE = {
 		courseName: '',
@@ -18,7 +18,7 @@ function CourseForm({ save, confirmDialog, setConfirmDialog }) {
 		courseYear: null,
 		courseId: null,
 	};
-
+	console.log(courses);
 	/** Get courseCatalog from redux store */
 	const courseCatalog = useSelector((state) => state.courseCatalog);
 
@@ -61,6 +61,13 @@ function CourseForm({ save, confirmDialog, setConfirmDialog }) {
 		if (!formData.courseYear) {
 			setErrors('Invalid year');
 			return false;
+		}
+		// Check if course is already added to user's course list
+		for (let course of courses) {
+			if (course.id === formData.courseId) {
+				setErrors('Course Already added!');
+				return false;
+			}
 		}
 		return true;
 	};

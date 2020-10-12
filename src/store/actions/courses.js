@@ -67,8 +67,10 @@ export function addCourseToFB(
 			// Add first user into to class
 			course.users = [userId];
 
+			// store course ID as document ID
 			db.collection('class')
-				.add(course)
+				.doc(course.course.id.toString())
+				.set(course)
 				.then(() => {
 					// make async call to DB
 					dispatch(addCourse(course));

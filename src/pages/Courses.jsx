@@ -108,6 +108,7 @@ function Courses() {
 						save={addCoursePrompt}
 						confirmDialog={confirmDialog}
 						setConfirmDialog={setConfirmDialog}
+						courses={courses}
 					/>
 				}
 				closeModal={toggleForm}
