@@ -15,7 +15,6 @@ import './styles/Search.css';
 /** MUI */
 import { List, ListItem, ListItemText } from '@material-ui/core';
 import FeedList from '../components/Feed/FeedList';
-import { getDefaultLocale } from 'react-datepicker';
 
 const SearchCategories = [
 	'Alerts',

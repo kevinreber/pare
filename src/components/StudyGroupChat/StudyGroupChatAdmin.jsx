@@ -9,7 +9,6 @@ import PopoverActions from '../general/PopoverActions';
 import ConfirmDialog from '../general/ConfirmDialog';
 import removeUserFromCollection from '../../utils/removeUserFromCollection';
 import { addFlashMessage } from '../../store/actions/flashMessages';
-import db from '../../config/fbConfig';
 
 /** MUI */
 import IconButton from '@material-ui/core/IconButton';

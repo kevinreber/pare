@@ -7,7 +7,6 @@ import FeedList from '../components/Feed/FeedList';
 import PostForm from '../components/Feed/PostForm';
 import NoData from '../components/general/NoData';
 import Modal from '../components/general/Modal';
-import Notification from '../components/general/Notification';
 import ConfirmDialog from '../components/general/ConfirmDialog';
 import { addPostToFB, deletePostFromFB } from '../store/actions/posts';
 import { addFlashMessage } from '../store/actions/flashMessages';

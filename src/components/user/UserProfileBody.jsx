@@ -16,10 +16,6 @@ function UserProfileBody({
 	keywords,
 	availability,
 }) {
-	const obj = {
-		email,
-		social,
-	};
 	const showTutorFields = isTutor ? (
 		<>
 			<UserFields label={'I can help in...'} content={keywords} />
@@ -32,9 +28,9 @@ function UserProfileBody({
 			<UserFields label={'test'} content={obj} />
 			<UserFields label={'test'} content={obj} /> */}
 		</>
-	) : (
-		<></>
-	);
+	) : 
+		null
+	;
 
 	return (
 		<div className='UserProfile__Body'>
