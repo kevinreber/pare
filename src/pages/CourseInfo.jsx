@@ -10,7 +10,6 @@ import CourseInfoHeader from '../components/CourseInfo/CourseInfoHeader';
 import CTAButton from '../components/general/CTAButton';
 import Modal from '../components/general/Modal';
 import AssignmentForm from '../components/CourseInfo/CourseAssignments/AssignmentForm';
-import createFbTimestamp from '../utils/createFbTimestamp';
 import db from '../config/fbConfig';
 import './styles/CourseInfo.css';
 
@@ -39,8 +38,6 @@ function CourseInfo() {
 	};
 
 	// get course assignments
-	// const assignments = useSelector((state) => state.assignments);
-
 	useEffect(() => {
 		if (courseId) {
 			db.collection('class')

@@ -44,7 +44,7 @@ function Header() {
 	};
 
 	const currentUser = useSelector((state) => state.auth.user);
-	console.log(currentUser);
+
 	/** Initialize useStyles */
 	const classes = useStyles();
 	const [drawer, setDrawer] = useState(false);
