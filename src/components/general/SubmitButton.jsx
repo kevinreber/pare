@@ -17,7 +17,7 @@ function SubmitButton({ text, reset = false, resetForm }) {
 					</button>
 				</>
 			) : (
-				''
+				null
 			)}
 		</div>
 	);
