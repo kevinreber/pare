@@ -23,6 +23,9 @@ import AddIcon from '@material-ui/icons/Add';
 function Feed() {
 	const dispatch = useDispatch();
 	const [posts, setPosts] = useState([]);
+
+	// Flag to keep track of refreshing most recent data
+	const [fetchData, setFetchData] = useState(true);
 	const [confirmDialog, setConfirmDialog] = useState({
 		isOpen: false,
 		title: '',
@@ -30,18 +33,35 @@ function Feed() {
 	});
 
 	useEffect(() => {
+		// get data from 'feed' collection
 		const getData = async () => {
-			const data = await db.collection('feeds')
-				.orderBy('timestamp', 'desc').get();
+			 await db.collection('feeds')
+				.orderBy('timestamp', 'desc').get()
+				.then((data) => {
+					setPosts(
+							data.docs.map((doc) => ({
+								id: doc.id,
+								data: doc.data(),
+							})));
+				}).catch(err => console.log(err));
+			// db.collection('feeds')
+			// .orderBy('timestamp', 'desc')
+			// .onSnapshot((data) => {
+			// 	setPosts(
+			// 			data.docs.map((doc) => ({
+			// 				id: doc.id,
+			// 				data: doc.data(),
+			// 			})));
+			// });
 
-				setPosts(
-						data.docs.map((doc) => ({
-							id: doc.id,
-							data: doc.data(),
-						})));
+			// Flag to keep track of refreshing most recent data
+			setFetchData(false);
 		}
-		getData();
-	}, [posts]);
+
+		if(fetchData){
+			getData();
+		}
+	}, [fetchData]);
 
 	// Toggle form for User to Add Course
 	const [showForm, setShowForm] = useState(false);
@@ -57,6 +77,8 @@ function Feed() {
 				type: 'success',
 			})
 		);
+		// get most recent posts
+		setFetchData(true);
 	};
 
 	/** Prompts Confirmation Dialog to Delete Post*/
@@ -85,11 +107,8 @@ function Feed() {
 				type: 'error',
 			})
 		);
-	};
-
-	/** Prompts Modal to edit Post information */
-	const editPost = (id) => {
-		console.log('editing..', id);
+		// get most recent posts
+		setFetchData(true);
 	};
 
 	if (showForm) {
@@ -110,8 +129,8 @@ function Feed() {
 				type="error"
 			/>
 			<div className="Feed__List">
-				{posts ? (
-					<FeedList posts={posts} remove={deletePostPrompt} edit={editPost} />
+				{posts.length > 0 ? (
+					<FeedList posts={posts} remove={deletePostPrompt} setFetchData={setFetchData}/>
 				) : (
 					<NoData text="posts" />
 				)}
