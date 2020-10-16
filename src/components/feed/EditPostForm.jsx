@@ -1,11 +1,10 @@
 /** Dependencies */
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
 import firebase from 'firebase';
-import moment from 'moment';
 
 /** Components */
 import SubmitButton from '../general/SubmitButton';
+import ConfirmDialog from '../general/ConfirmDialog';
 import dateAndTimeFormatter from '../../utils/dateAndTimeFormatter';
 
 /** MUI */
@@ -17,23 +16,14 @@ import CancelIcon from '@material-ui/icons/Cancel';
 /** Form for user's to create a Post
  *  Feed -> FeedList -> PostCard -> EditPostForm
  */
-function EditPostForm({ save, title, description, location, type,start, end, attachment_preview, attachment }) {
+function EditPostForm({ save, userId, username, avatar, title, description, location=null, type=null, start=null, end=null, attachment_preview=null, attachment=null, timestamp, comments }) {
 	/** Post Type options */
 	const postTypeOptions = ['Networking','Campus','Opportunities','Marketplace','Events'];
 
-	/** Get user data */
-	const user = useSelector((state) => {
-		return {
-			userId: state.auth.user.uid,
-			username: state.auth.user.displayName,
-			avatar: state.auth.user.photoURL,
-		};
-	});
-
 	const INITIAL_STATE = {
-		userId: user.userId,
-		username: user.username,
-		avatar: user.avatar,
+		userId: userId,
+		username: username,
+		avatar: avatar,
 		title: title,
 		description: description,
 		location: location,
@@ -42,9 +32,18 @@ function EditPostForm({ save, title, description, location, type,start, end, att
 		end: end,
 		attachment_preview: attachment_preview,
 		attachment: attachment,
+		timestamp: timestamp,
+		num_of_comments: comments
 	};
+
 	const [errors, setErrors] = useState('');
 	const [formData, setFormData] = useState(INITIAL_STATE);
+
+	const [confirmDialog, setConfirmDialog] = useState({
+		isOpen: false,
+		title: '',
+		subtitle: '',
+	});
 
 	/** Update state in formData */
 	const handleChange = (e) => {
@@ -116,14 +115,25 @@ function EditPostForm({ save, title, description, location, type,start, end, att
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (validateFormData()) {
-			save(formData);
-			// Clear state of form
-			setFormData(INITIAL_STATE);
+
+			/** Prompts Modal to edit Post information */
+			setConfirmDialog({
+				isOpen: true,
+				title: 'Save changes?',
+				subtitle: "",
+				onConfirm: () => {
+					save(formData)
+				},
+			});
 		}
 	};
-
+	
 	return (
 		<div className="PostForm p-3">
+							<ConfirmDialog
+				confirmDialog={confirmDialog}
+				setConfirmDialog={setConfirmDialog}
+			/>
 			<h4>Edit Post</h4>
 			<form className="container mb-3" onSubmit={handleSubmit}>
 				<div className="form-group">
@@ -210,7 +220,11 @@ function EditPostForm({ save, title, description, location, type,start, end, att
 						id="event-start"
 						type="datetime-local"
 						className="float-right"
-						defaultValue={dateAndTimeFormatter(formData.start.toDate())}
+						defaultValue={
+							 formData.start ? 
+							dateAndTimeFormatter(formData.start.toDate())
+							: null
+							}
 						name="start"
 						onChange={handleChange}
 						InputLabelProps={{
@@ -226,7 +240,10 @@ function EditPostForm({ save, title, description, location, type,start, end, att
 						id="event-end"
 						type="datetime-local"
 						className="float-right"
-						defaultValue={dateAndTimeFormatter(formData.end.toDate())}
+						defaultValue={
+							formData.end ? 
+							dateAndTimeFormatter(formData.end.toDate())
+							: null}
 						name="end"
 						onChange={handleChange}
 						InputLabelProps={{

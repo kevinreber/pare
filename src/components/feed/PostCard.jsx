@@ -7,6 +7,8 @@ import moment from 'moment';
 /** Components & Helpers */
 import PopoverActions from '../general/PopoverActions';
 import PopoverShareAction from '../general/PopoverShareAction';
+import EditPostForm from './EditPostForm';
+import Modal from '../general/Modal';
 import { addFlashMessage } from '../../store/actions/flashMessages';
 
 /** MUI */
@@ -45,19 +47,47 @@ function PostCard({
 	comments = null,
 	isBookmarked = false,
 	remove,
-	edit,
+	edit
 }) {
 	const dispatch = useDispatch();
 	const currentUser = useSelector((state) => state.auth.user);
+	const [showEditForm, setShowEditForm] = useState(false);
 	const BookmarkStatus = !isBookmarked ? (
 		<BookmarkBorderOutlinedIcon />
 	) : (
 		<BookmarkIcon />
 	);
 
+	/** PopoverActions Props for Admin ***************/
+	const [anchorEl, setAnchorEl] = useState(null);
+	const togglePopover = (e) => {
+		setAnchorEl(e.currentTarget);
+	};
+	const handleClose = () => setAnchorEl(null);
+	const open = Boolean(anchorEl);
+	const popoverId = open ? 'simple-popover' : undefined;
+	/************************************* */
+
+	/** PopoverActions Props for Share Icon***************/
+	const [shareAnchorEl, setShareAnchorEl] = useState(null);
+	const toggleSharePopover = (e) => {
+		setShareAnchorEl(e.currentTarget);
+	};
+	const handleShareClose = () => setShareAnchorEl(null);
+	const openShare = Boolean(shareAnchorEl);
+	const popoverShareId = open ? 'simple-popover' : undefined;
+	/************************************* */
+
 	/** converts time */
 	const convertTime = (time) => {
 		return moment(time.toDate()).calendar();
+	};
+
+	const toggleEditForm = () => {
+		// close popovers
+		handleClose();
+		handleShareClose();
+		setShowEditForm(show=> !show);
 	};
 
 	const eventTime =
@@ -84,9 +114,39 @@ function PostCard({
 		remove(id);
 	};
 
-	const editPost = () => {
-		edit(id);
+	// Updates edited post's data
+	const editPost = (data) => {
+		edit(id, data);
+		// close popover and edit form
+		toggleEditForm();
 	};
+
+	if (showEditForm){
+		return (
+			<Modal
+				content={
+					<EditPostForm 
+						save={editPost}
+						userId={userId}
+						username={username}
+						avatar={avatar}
+						title={title}
+						description={description}
+						location={location}
+						type={type}
+						start={start}
+						end={end}
+						attachment_preview={attachment_preview}
+						attachment={attachment}
+						timestamp={timestamp}
+						comments={comments}
+					/>	
+				}
+				closeModal={toggleEditForm}
+				full={true}
+			/>
+		)
+	}
 
 	// Copies link of post to browser clipboard
 	const copyLinkToClipBoard = async (link) => {
@@ -113,26 +173,6 @@ function PostCard({
 		// close share popover after copy to clipboard
 		handleShareClose();
 	};
-
-	/** PopoverActions Props for Admin ***************/
-	const [anchorEl, setAnchorEl] = useState(null);
-	const togglePopover = (e) => {
-		setAnchorEl(e.currentTarget);
-	};
-	const handleClose = () => setAnchorEl(null);
-	const open = Boolean(anchorEl);
-	const popoverId = open ? 'simple-popover' : undefined;
-	/************************************* */
-
-	/** PopoverActions Props for Share Icon***************/
-	const [shareAnchorEl, setShareAnchorEl] = useState(null);
-	const toggleSharePopover = (e) => {
-		setShareAnchorEl(e.currentTarget);
-	};
-	const handleShareClose = () => setShareAnchorEl(null);
-	const openShare = Boolean(shareAnchorEl);
-	const popoverShareId = open ? 'simple-popover' : undefined;
-	/************************************* */
 
 	return (
 		<div id={id} className="Post-Card">
@@ -202,7 +242,7 @@ function PostCard({
 						</IconButton>
 						<PopoverActions
 							remove={deletePost}
-							edit={editPost}
+							edit={toggleEditForm}
 							id={popoverId}
 							open={open}
 							anchorEl={anchorEl}

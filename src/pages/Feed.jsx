@@ -8,7 +8,7 @@ import PostForm from '../components/Feed/PostForm';
 import NoData from '../components/general/NoData';
 import Modal from '../components/general/Modal';
 import ConfirmDialog from '../components/general/ConfirmDialog';
-import { addPostToFB, deletePostFromFB } from '../store/actions/posts';
+import { addPostToFB, deletePostFromFB, editPostInFB } from '../store/actions/posts';
 import { addFlashMessage } from '../store/actions/flashMessages';
 import db from '../config/fbConfig';
 import './styles/Feed.css';
@@ -24,8 +24,7 @@ function Feed() {
 	const dispatch = useDispatch();
 	const [posts, setPosts] = useState([]);
 
-	// Flag to keep track of refreshing most recent data
-	const [fetchData, setFetchData] = useState(true);
+	const [isLoading, setIsLoading] = useState(true);
 	const [confirmDialog, setConfirmDialog] = useState({
 		isOpen: false,
 		title: '',
@@ -44,24 +43,14 @@ function Feed() {
 								data: doc.data(),
 							})));
 				}).catch(err => console.log(err));
-			// db.collection('feeds')
-			// .orderBy('timestamp', 'desc')
-			// .onSnapshot((data) => {
-			// 	setPosts(
-			// 			data.docs.map((doc) => ({
-			// 				id: doc.id,
-			// 				data: doc.data(),
-			// 			})));
-			// });
 
-			// Flag to keep track of refreshing most recent data
-			setFetchData(false);
+			setIsLoading(false);
 		}
 
-		if(fetchData){
+		if(isLoading){
 			getData();
 		}
-	}, [fetchData]);
+	}, [isLoading]);
 
 	// Toggle form for User to Add Course
 	const [showForm, setShowForm] = useState(false);
@@ -78,7 +67,7 @@ function Feed() {
 			})
 		);
 		// get most recent posts
-		setFetchData(true);
+		setIsLoading(true);
 	};
 
 	/** Prompts Confirmation Dialog to Delete Post*/
@@ -108,8 +97,22 @@ function Feed() {
 			})
 		);
 		// get most recent posts
-		setFetchData(true);
+		setIsLoading(true);
 	};
+
+	/** Updates Post */
+	const editPost = (id, data) => {
+		dispatch(editPostInFB(id, data));
+		dispatch(
+			addFlashMessage({
+				isOpen: true,
+				message: 'Update Successful!',
+				type: 'success',
+			})
+		);
+		// get most recent posts
+		setIsLoading(true);
+	}
 
 	if (showForm) {
 		return (
@@ -129,8 +132,8 @@ function Feed() {
 				type="error"
 			/>
 			<div className="Feed__List">
-				{posts.length > 0 ? (
-					<FeedList posts={posts} remove={deletePostPrompt} setFetchData={setFetchData}/>
+				{posts.length > 0 && !isLoading ? (
+					<FeedList posts={posts} remove={deletePostPrompt} edit={editPost}/>
 				) : (
 					<NoData text="posts" />
 				)}

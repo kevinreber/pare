@@ -58,6 +58,28 @@ function deletePost(postId) {
 	};
 }
 
+/** Update edited version of post */
+export function editPostInFB(id, data){
+	return (dispatch) => {
+		db.collection('feeds')
+		.doc(id)
+		.set(data)
+		.then(() => {
+			console.log('Post updated');
+			dispatch(editPost(id,data));
+		})
+		.catch((err) => dispatch(dispatchError(EDIT_POST_FAIL, err)));
+	}
+}
+
+/** Formats action data to input to dispatch */
+function editPost(postId) {
+	return {
+		type: EDIT_POST,
+		postId,
+	};
+}
+
 export function addCommentToPost(postId, comment) {
 	return (dispatch) => {
 		db.collection('feeds')

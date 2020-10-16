@@ -64,6 +64,7 @@ function PostForm({ save }) {
 
 			/** Handles 'start' and 'end' date fields */
 			if (name === 'end' || name === 'start') {
+
 				const date = new Date(value);
 				value = firebase.firestore.Timestamp.fromDate(date);
 			}
@@ -117,7 +118,6 @@ function PostForm({ save }) {
 
 	/** Handle's submitted form data */
 	const handleSubmit = (e) => {
-		console.log(formData);
 		e.preventDefault();
 		if (validateFormData()) {
 			save(formData);
