@@ -30,17 +30,18 @@ function Feed() {
 	});
 
 	useEffect(() => {
-		db.collection('feeds')
-			.orderBy('timestamp', 'desc')
-			.onSnapshot((snapshot) =>
+		const getData = async () => {
+			const data = await db.collection('feeds')
+				.orderBy('timestamp', 'desc').get();
+
 				setPosts(
-					snapshot.docs.map((doc) => ({
-						id: doc.id,
-						data: doc.data(),
-					}))
-				)
-			);
-	}, []);
+						data.docs.map((doc) => ({
+							id: doc.id,
+							data: doc.data(),
+						})));
+		}
+		getData();
+	}, [posts]);
 
 	// Toggle form for User to Add Course
 	const [showForm, setShowForm] = useState(false);
