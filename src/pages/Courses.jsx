@@ -10,6 +10,7 @@ import NoData from '../components/general/NoData';
 import CTAButton from '../components/general/CTAButton';
 import { addCourseToFB } from '../store/actions/courses';
 import { fetchCourseCatalog } from '../store/actions/courseCatalog';
+import { addFlashMessage } from '../store/actions/flashMessages';
 import db from '../config/fbConfig';
 import './styles/Courses.css';
 
@@ -77,7 +78,15 @@ function Courses() {
 	const addCourse = (courseData) => {
 		dispatch(addCourseToFB(courseData, currentUser.uid));
 		setShowForm(false);
-		setConfirmDialog(CONFIRM_DIALOG_INITIAL_STATE)
+		setConfirmDialog(CONFIRM_DIALOG_INITIAL_STATE);
+		/** Prompt change made */
+		dispatch(
+			addFlashMessage({
+				isOpen: true,
+				message: 'Course Added',
+				type: 'success',
+					})
+		);
 	};
 
 	useEffect(() => {
