@@ -8,7 +8,6 @@ import './styles/BackButton.css';
 function BackButton() {
 	const history = useHistory();
 	const goBack = () => {
-		console.log('click');
 		history.goBack();
 	};
 
