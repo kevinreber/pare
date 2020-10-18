@@ -1,3 +1,7 @@
+/*************************************************/
+/** Find Tutor                                   */
+/*************************************************/
+
 .Tutors {
     display: flex;
     flex-direction: column;
@@ -13,22 +17,35 @@
 .Tutor.Tutor-Card {
     display: flex;
     padding: 1rem;
+    font-size: 16px;
+}
+
+.Tutor.Tutor-Card p,
+.Tutor.Tutor-Card ul {
+    margin-bottom: .5rem;
+}
+.Tutor.Tutor-Card .MuiChip-root.MuiChip-sizeSmall>.MuiChip-label.MuiChip-labelSmall{
+    font-size: 11px;
+}
+.Tutor.Tutor-Card .Tutor-Card__Header {
+    font-size: 1rem;
+    margin-bottom: .25rem;
+}
+
+.Tutor.Tutor-Card .Tutor-Card__Body {
     font-size: 14px;
-}
-
-.Tutor.Tutor-Card .Tutor-Card-Term {
-    font-size: 12px;
-}
-
-.Tutor.Tutor-Card .Tutor-Name,
-.Tutor.Tutor-Card .Tutor-Title {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    color: var(--secondary-color);
 }
 
 .mate-table {
     width: 100%;
     border-bottom: 1px solid var(--tertiary-color);
+}
+
+.Tutor.Tutor-Card .User-Keywords>li .MuiChip-root,
+.Tutor.Tutor-Card .User-Classes>li .MuiChip-root {
+    /* Default --secondary color */
+    color: var(--secondary);
 }
 
 /*************************************************/
@@ -95,36 +112,6 @@
     padding: 0;
 }
 
-/*************************************************/
-/** Be Tutor Form - Keywords & Portfolio         */
-/*************************************************/
-
-.BeTutorForm .User-Keywords,
-.BeTutorForm .User-Portfolio-Links {
-    display: flex;
-    justify-content: start;
-    flex-wrap: wrap;
-}
-
-.BeTutorForm .User-Keywords>li .MuiChip-root,
-.BeTutorForm .User-Portfolio-Links>li .MuiChip-root {
-    background-color: var(--bg-color);
-    border: 1px solid var(--tertiary-color);
-    color: var(--secondary-color);
-    margin-right: .5rem;
-    margin-bottom: .5rem;
-}
-
-.BeTutorForm .User-Keywords>li .MuiChip-root svg,
-.BeTutorForm .User-Portfolio-Links>li .MuiChip-root svg {
-    color: var(--tertiary-color);
-}
-
-.BeTutorForm .User-Keywords>li .MuiChip-root svg:hover,
-.BeTutorForm .User-Portfolio-Links>li .MuiChip-root svg:hover {
-    color: var(--primary-color);
-}
-
 .form-footer {
     display: flex;
     justify-content: space-between;
@@ -133,4 +120,38 @@
 
 .form-footer>.info-text {
     color: var(--tertiary-color);
+}
+
+/*************************************************/
+/** User Info Chips                              */
+/*************************************************/
+
+.User-Keywords,
+.User-Portfolio-Links,
+.User-Classes {
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+}
+
+.User-Keywords>li .MuiChip-root,
+.User-Portfolio-Links>li .MuiChip-root,
+.User-Classes>li .MuiChip-root {
+    background-color: var(--bg-color);
+    border: 1px solid var(--tertiary-color);
+    color: var(--secondary-color);
+    margin-right: .5rem;
+    margin-bottom: .5rem;
+}
+
+.User-Keywords>li .MuiChip-root svg,
+.User-Portfolio-Links>li .MuiChip-root svg,
+.User-Classes>li .MuiChip-root svg {
+    color: var(--tertiary-color);
+}
+
+.User-Keywords>li .MuiChip-root svg:hover,
+.User-Portfolio-Links>li .MuiChip-root svg:hover,
+.User-Classes>li .MuiChip-root svg:hover {
+    color: var(--primary-color);
 }
