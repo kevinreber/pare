@@ -7,6 +7,7 @@ import {
 } from './types';
 import axios from 'axios';
 import db from '../../config/fbConfig';
+import firebase from 'firebase';
 
 export function fetchCoursesfromFB(courses) {
 	return (dispatch, { getFirebase, getFirestore }) => {
@@ -55,32 +56,46 @@ export function addCourseToFB(
 ) {
 	return async (dispatch) => {
 		const BASE_URL = 'https://www.berkeleytime.com';
+		const ref = db.collection('class').doc(courseId);
 
-		try {
-			const response = await axios.get(
-				`${BASE_URL}/api/catalog/catalog_json/course_box/?course_id=${courseId}`
-			);
-			const course = response.data;
-			// append semester
-			course.semester = `${courseSemester} ${courseYear}`;
+		ref.get().then( async (doc) => {
 
-			// Add first user into to class
-			course.users = [userId];
-
-			// store course ID as document ID
-			db.collection('class')
-				.doc(course.course.id.toString())
-				.set(course)
-				.then(() => {
-					// make async call to DB
-					dispatch(addCourse(course));
-				})
-				.catch((err) => {
-					dispatch(dispatchError('ADD_COURSE_ERROR', err));
+			// check if course exists in Firebase DB
+			// if course exists, append userId into users list
+			if(doc.exists){
+				 await ref.update({
+					users: firebase.firestore.FieldValue.arrayUnion(userId),
 				});
-		} catch (err) {
-			console.log(err);
-		}
+			} else {
+				try {
+					const response = await axios.get(
+						`${BASE_URL}/api/catalog/catalog_json/course_box/?course_id=${courseId}`
+					);
+					const course = response.data;
+					// append semester
+					course.semester = `${courseSemester} ${courseYear}`;
+		
+					// Add first user into to class
+					course.users = [userId];
+		
+					// store course ID as document ID
+					db.collection('class')
+						.doc(course.course.id.toString())
+						.set(course)
+						.then(() => {
+							// make async call to DB
+							dispatch(addCourse(course));
+						})
+						.catch((err) => {
+							dispatch(dispatchError('ADD_COURSE_ERROR', err));
+						});
+				} catch (err) {
+					console.log(err);
+				}
+			}
+
+		})
+
 	};
 }
 
