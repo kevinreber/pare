@@ -16,7 +16,6 @@ import db from '../../../config/fbConfig';
  * Courses -> CourseList -> Course -> CourseInfo -> CourseInfoBody -> CourseAssignmentList -> CourseAssignment
  */
 function CourseAssignment({
-	key,
 	id,
 	title,
 	dueDate,
@@ -87,32 +86,33 @@ function CourseAssignment({
 					}
 				/>
 			) : (
-				<table
-					key={key}
-					id={id}
-					className="Assignment Assignment-Card mate-table table-hover">
-					<AssignmentStatusIcon color={assignmentStatus} />
-					<tbody>
-						<tr>
-							<th
-								colspan="2"
-								className="mate-text-primary Assignment-Title text-left">
-								{title}
-							</th>
-							{/* <td className='mate-text-secondary Assignment-Grade text-right pr-1'>
-								Class Grade: {classGrade}%
-							</td> */}
-						</tr>
-						<tr>
-							<td className="mate-text-secondary Assignment-Due font-italic text-left">
-								Due: {moment(dueDate.toDate()).startOf('day').fromNow()}
-							</td>
-							<td className="mate-text-secondary Assignment-Grade text-right pr-1">
-								{displayGrade}
-							</td>
-						</tr>
-					</tbody>
-				</table>
+				<li key={id}>
+					<table
+						id={id}
+						className="Assignment Assignment-Card mate-table table-hover">
+						<AssignmentStatusIcon color={assignmentStatus} />
+						<tbody>
+							<tr>
+								<th
+									colspan="2"
+									className="mate-text-primary Assignment-Title text-left">
+									{title}
+								</th>
+								{/* <td className='mate-text-secondary Assignment-Grade text-right pr-1'>
+									Class Grade: {classGrade}%
+								</td> */}
+							</tr>
+							<tr>
+								<td className="mate-text-secondary Assignment-Due font-italic text-left">
+									Due: {moment(dueDate.toDate()).startOf('day').fromNow()}
+								</td>
+								<td className="mate-text-secondary Assignment-Grade text-right pr-1">
+									{displayGrade}
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</li>
 			)}
 		</>
 	);

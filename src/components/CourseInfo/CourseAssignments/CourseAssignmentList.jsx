@@ -14,7 +14,6 @@ function CourseAssignmentList({ assignments }) {
 		assignments && assignments.length !== 0 ? (
 			assignments.map((assignment) => (
 				<CourseAssignmentCard
-					key={assignment.id}
 					id={assignment.id}
 					title={assignment.data.title}
 					dueDate={assignment.data.dueDate}
@@ -28,7 +27,7 @@ function CourseAssignmentList({ assignments }) {
 	return (
 		<>
 			{/* <div className="Courses-Header pt-2 pb-1"></div> */}
-			<div className="Course-Info-Body-List">{AssignmentList}</div>
+			<ul className="Course-Info-Body-List">{AssignmentList}</ul>
 		</>
 	);
 }

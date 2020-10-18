@@ -20,16 +20,18 @@ function Courses() {
 	const dispatch = useDispatch();
 	const currentUser = useSelector((state) => state.auth.user);
 
+	const CONFIRM_DIALOG_INITIAL_STATE = {
+		isOpen: false,
+		title: '',
+		subtitle: '',
+	}
+
 	/** Get courseCatalog from redux store */
 	const courseCatalog = useSelector((state) => state.courseCatalog);
 
 	const [courses, setCourses] = useState([]);
 
-	const [confirmDialog, setConfirmDialog] = useState({
-		isOpen: false,
-		title: '',
-		subtitle: '',
-	});
+	const [confirmDialog, setConfirmDialog] = useState(CONFIRM_DIALOG_INITIAL_STATE);
 
 	/** Current Semester courses */
 	const currentCourses = courses.filter(
@@ -75,6 +77,7 @@ function Courses() {
 	const addCourse = (courseData) => {
 		dispatch(addCourseToFB(courseData, currentUser.uid));
 		setShowForm(false);
+		setConfirmDialog(CONFIRM_DIALOG_INITIAL_STATE)
 	};
 
 	useEffect(() => {
@@ -98,7 +101,7 @@ function Courses() {
 		if (!courseCatalog.courses) {
 			getCourseCatalog();
 		}
-	}, [dispatch]);
+	}, [dispatch, courseCatalog]);
 
 	if (showForm) {
 		return (
@@ -142,9 +145,9 @@ function Courses() {
 			</div>
 			<div className="Courses__CourseList">{courseList}</div>
 			<div className="CourseForm p-3">
-				<p onClick={toggleForm} className="font-italic">
+				<div onClick={toggleForm} className="font-italic">
 					<CTAButton text="Join Class" />
-				</p>
+				</div>
 			</div>
 		</div>
 	);

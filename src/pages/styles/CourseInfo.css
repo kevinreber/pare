@@ -61,20 +61,28 @@
     text-align: left;
 }
 
-.CourseDetailsTable th {
+.CourseDetailsTable .table-header {
+    width: 96px;
     padding-right: 1rem;
 }
 
-.CourseDetailsTable th,
-.CourseDetailsTable td {
+.CourseDetailsTable  {
     text-align: left;
+}
+
+.CourseDetailsTable>li{
+    display: flex;
+    justify-content: space-between;
+}
+
+.CourseDetailsTable .table-content{
+    margin-right: auto;
 }
 
 .OverallGrading,
 .CourseGradesTable th,
 .CourseGradesTable td,
-.CourseDetailsTable th,
-.CourseDetailsTable td {
+.CourseDetailsTable  {
     font-weight: 400;
 }
 
@@ -144,4 +152,25 @@
 
 .CourseInfoTitle {
     margin-bottom: 0;
+}
+
+.MuiPaper-root.MuiDialog-paper.MuiDialog-paperScrollPaper.MuiDialog-paperWidthSm.MuiPaper-elevation24.MuiPaper-rounded{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 400px;
+    width: 280px;
+    color: var(--secondary-color);
+    background-color: var(--tertiary-color);
+}
+
+.MuiDialogActions-root.MuiDialogActions-spacing>.MuiButtonBase-root.MuiButton-root.MuiButton-text{
+    border: 1px solid var(--danger-color);
+    color: var(--danger-color);
+}
+
+.MuiDialogActions-root.MuiDialogActions-spacing>.MuiButtonBase-root.MuiButton-root.MuiButton-text:hover{
+    border: 1px solid var(--danger-color);
+    color: var(--secondary-color);
+    background-color: var(--danger-color);
 }

@@ -1,7 +1,8 @@
 /** Dependencies */
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useParams, useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import firebase from 'firebase';
 
 /** Components & Helpers */
 import BackButton from '../components/general/BackButton';
@@ -10,6 +11,7 @@ import CourseInfoHeader from '../components/CourseInfo/CourseInfoHeader';
 import CTAButton from '../components/general/CTAButton';
 import Modal from '../components/general/Modal';
 import AssignmentForm from '../components/CourseInfo/CourseAssignments/AssignmentForm';
+import { addFlashMessage } from '../store/actions/flashMessages';
 import db from '../config/fbConfig';
 import './styles/CourseInfo.css';
 
@@ -18,6 +20,8 @@ import './styles/CourseInfo.css';
  */
 function CourseInfo() {
 	const { courseId } = useParams();
+	const history = useHistory();
+	const dispatch = useDispatch();
 
 	const [course, setCourse] = useState(null);
 	const [assignments, setAssignments] = useState([]);
@@ -29,13 +33,31 @@ function CourseInfo() {
 	const currentUser = useSelector((state) => state.auth.user);
 
 	const addAssignment = (assignmentData) => {
-		console.log(assignmentData);
 		db.collection('class')
 			.doc(courseId)
 			.collection('assignments')
 			.add(assignmentData);
 		setShowForm(false);
 	};
+
+
+	/** Remove user from course users list */
+	const removeCourse = () => {
+		db.collection('class').doc(courseId).update({
+			users: firebase.firestore.FieldValue.arrayRemove(currentUser.uid)
+		});
+		// redirect user
+		history.push('/courses');
+
+		/** Prompt user left course */
+		dispatch(
+			addFlashMessage({
+				isOpen: true,
+				message: 'Removed Course',
+				type: 'error',
+			})
+		);
+	}
 
 	// get course assignments
 	useEffect(() => {
@@ -96,6 +118,7 @@ function CourseInfo() {
 					semester={course.semester}
 					sections={course.sections}
 					title={`${course.course.abbreviation} ${course.course.course_number}`}
+					removeCourse={removeCourse}
 				/>
 			</div>
 			<div className="CourseInfo__Body">

@@ -15,10 +15,10 @@ function CourseForm({ save, confirmDialog, setConfirmDialog, courses }) {
 	const INITIAL_STATE = {
 		courseName: '',
 		courseSemester: '',
-		courseYear: null,
+		courseYear: '',
 		courseId: null,
 	};
-	console.log(courses);
+
 	/** Get courseCatalog from redux store */
 	const courseCatalog = useSelector((state) => state.courseCatalog);
 
@@ -76,6 +76,9 @@ function CourseForm({ save, confirmDialog, setConfirmDialog, courses }) {
 		e.preventDefault();
 		if (validateFormData()) {
 			save(formData);
+			
+			// Reset form data
+			setFormData(INITIAL_STATE);
 		}
 	};
 
@@ -105,7 +108,7 @@ function CourseForm({ save, confirmDialog, setConfirmDialog, courses }) {
 						onChange={handleChange}
 						name="courseSemester"
 						value={formData.courseSemester}>
-						<option className="option-disabled" value="" disabled selected>
+						<option className="option-disabled" value="" disabled>
 							Semester
 						</option>
 						<option>Fall</option>
@@ -118,7 +121,7 @@ function CourseForm({ save, confirmDialog, setConfirmDialog, courses }) {
 						onChange={handleChange}
 						name="courseYear"
 						value={formData.courseYear}>
-						<option className="option-disabled" value="" disabled selected>
+						<option className="option-disabled" value="" disabled>
 							Year
 						</option>
 						<option>2020</option>

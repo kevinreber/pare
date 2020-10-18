@@ -7,17 +7,14 @@ import db from '../../config/fbConfig';
 /** Displays Header information of Course Info Page
  * Courses -> CourseList -> Course -> CourseInfo -> CourseInfoHeader -> CourseDetails && CourseOverallGrades
  */
-function CourseInfoHeader({ course, semester, sections, title }) {
+function CourseInfoHeader({ course, semester, sections, title, removeCourse}) {
 	const [showCourseDetails, setShowCourseDetails] = useState(false);
 
 	const toggleShowCourseDetails = () => setShowCourseDetails((show) => !show);
 
 	if (showCourseDetails) {
 		return (
-			<Modal
-				content={<CourseDetails course={course} title={title} />}
-				closeModal={toggleShowCourseDetails}
-			/>
+				<CourseDetails course={course} title={title} show={showCourseDetails} toggle={toggleShowCourseDetails} removeCourse={removeCourse}/>
 		);
 	}
 

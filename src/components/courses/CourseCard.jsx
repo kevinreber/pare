@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
 /** Card displaying course information
  * Courses -> CourseList -> CourseCard -> CourseInfo
  */
-function CourseCard({ id, key, department, number, term, title }) {
+function CourseCard({ id, department, number, term, title }) {
 	return (
-		<div className="CourseCard">
+		<div key={id} className="CourseCard">
 			<Link to={`/courses/${id}`} className="mate-text-secondary">
-				<table key={key} className="mate-table table-hover">
+				<table className="mate-table table-hover">
 					<tbody className="Course Course-Card">
 						<tr>
 							<td className="mate-text-primary Course-Name">
