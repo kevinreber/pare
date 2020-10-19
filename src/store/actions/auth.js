@@ -101,7 +101,9 @@ export function googleLogin() {
 
 export function setCurrentUser(user) {
 	return (dispatch) => {
-		dispatch(setCurrUser(user));
+		db.collection('users').doc(user.uid).get().then(doc => {
+			dispatch(setCurrUser(doc.data()));
+		})
 	};
 }
 
