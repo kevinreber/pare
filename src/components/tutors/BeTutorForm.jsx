@@ -23,12 +23,12 @@ import { TimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 
 const DAYS = [
 	'monday',
-	'tuesday',
-	'wednesday',
-	'thursday',
-	'friday',
-	'saturday',
-	'sunday',
+	// 'tuesday',
+	// 'wednesday',
+	// 'thursday',
+	// 'friday',
+	// 'saturday',
+	// 'sunday',
 ];
 
 function BeTutorForm({ uid, user, update, availability }) {
@@ -40,7 +40,6 @@ function BeTutorForm({ uid, user, update, availability }) {
 		portfolio: '',
 	};
 	console.log(availability);
-	console.log(user);
 	const [formData, setFormData] = useState(INITIAL_STATE);
 	const [changeMade, setChangeMade] = useState(false);
 
@@ -72,9 +71,10 @@ function BeTutorForm({ uid, user, update, availability }) {
 	}
 
 	const handleDate = (time, day, type, index) => {
-		setChangeMade(true);
-		const availability = { time, day, type, index };
-		update(availability);
+		console.log(time);
+		// setChangeMade(true);
+		// const availability = { time, day, type, index };
+		// update(availability);
 	};
 
 	const handleSubmit = (e) => {
@@ -94,7 +94,7 @@ function BeTutorForm({ uid, user, update, availability }) {
 				variant="inline"
 				minutesStep={5}
 				label={day.charAt(0).toUpperCase() + day.slice(1)}
-				value={availability[day][0].start}
+				value={availability[day][index].start}
 				onChange={(e) => handleDate(e, day, 'start', index)}
 			/>
 			<p className="TimePicker__Seperator">—</p>
@@ -102,7 +102,7 @@ function BeTutorForm({ uid, user, update, availability }) {
 				clearable
 				variant="inline"
 				minutesStep={5}
-				value={availability[day][0].end}
+				value={availability[day][index].end}
 				onChange={(e) => handleDate(e, day, 'end', index)}
 			/>
 
@@ -128,18 +128,20 @@ function BeTutorForm({ uid, user, update, availability }) {
 					value={availability[day].end}
 				/>
 			</div> */}
-			<div className="Availability__Remove">
-				<IconButton>
-					<RemoveCircleOutlineSharpIcon />
-				</IconButton>
-			</div>
+			{index !== 0 ?
+				(<div className="Availability__Remove">
+					<IconButton>
+						<RemoveCircleOutlineSharpIcon />
+					</IconButton>
+				</div>) : null
+			}
 		</>
 	);
 
 	// Build Fields for Availability
 	const dayFields = DAYS.map((day, index) => (
 		<div className="Availability__Day">
-			<div className="Availability__TimePicker">{timePickers(day)}</div>
+			<div className="Availability__TimePicker">{timePickers(day, index)}</div>
 			<div className="Availability__Add">
 				<IconButton>
 					<AddCircleOutlineRoundedIcon />

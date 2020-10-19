@@ -14,12 +14,13 @@ function UserProfileBody({
 	isTutor,
 	social,
 	keywords,
+	portfolio,
 	availability,
 }) {
 	const showTutorFields = isTutor ? (
 		<>
 			<UserFields label={'I can help in...'} content={keywords} />
-			<UserFields label={'Portfolio'} content={'www.google.com'} />
+			<UserFields label={'Portfolio'} content={portfolio} />
 			<UserFields label={'Availability'} content={availability} />
 			{/* <UserFields label={'test'} content={obj} />
 			<UserFields label={'test'} content={obj} />

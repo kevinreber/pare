@@ -122,6 +122,7 @@ function UserProfile() {
 						isTutor={user.isTutor}
 						social={user.social}
 						keywords={user.keywords}
+						portfolio={user.portfolio}
 						availability={user.availability}
 					/>
 					<div className="UserProfile__Footer">{DisplayButton}</div>

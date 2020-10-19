@@ -12,7 +12,6 @@ import './styles/Tutors.css';
 function Tutor() {
 	const dispatch = useDispatch();
 	const currentUser = useSelector((state) => state.auth.user);
-	const userAvailability = useSelector((state) => state.availability);
 
 	const [tutors, setTutors] = useState([]);
 	const [user, setUser] = useState(null);
@@ -67,7 +66,7 @@ function Tutor() {
 				uid={currentUser.uid}
 				user={user}
 				update={updateUser}
-				availability={userAvailability}
+				availability={currentUser.availability}
 			/>
 		);
 
@@ -99,9 +98,9 @@ function Tutor() {
 				{TutorsBody}
 				{/* <div className='Courses-CourseList'>{courseList}</div>
 			<div className='CourseForm p-3'>
-				<p onClick={toggleForm} className='font-italic'>
+				<div onClick={toggleForm} className='font-italic'>
 					<CTAButton text='Join Class' />
-				</p>
+				</div>
 			</div> */}
 			</div>
 		</div>

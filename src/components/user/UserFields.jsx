@@ -12,21 +12,22 @@ function UserFields({ label, content = '-' }) {
 		);
 	};
 
+	// format handler for availability
 	const availability = (obj) => {
 		let rows = !obj ? (
 			'-'
 		) : (
-			<>{Object.keys(obj).map((key) => tableRows(key, obj[key]))}</>
+			<>{Object.keys(obj).map((key, index) => tableRows(key, obj[key], index))}</>
 		);
 
 		return rows;
 	};
 
-	const tableRows = (key, arr) => {
+	const tableRows = (key, arr, idx) => {
 		return (
 			<>
-				<tr>
-					<th>{key}:</th>
+				<tr key={idx}>
+					<th>{key.charAt(0).toUpperCase() + key.slice(1)}:</th>
 					{buildValues(arr)}
 				</tr>
 			</>
