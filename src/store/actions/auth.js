@@ -18,28 +18,21 @@ import {
  *  @param {string}
  */
 async function checkIfUserExists(user) {
-	const getUser = await db.collection('users').doc(user.uid).get();
-	console.log(user.exists);
+	const userRef = db.collection('users').doc(user.uid);
 
-	if (getUser.exists) {
-		updateUserLogin(user);
-	} else {
-		addNewUserToDB(user);
-	}
-	console.log('done...');
-	// return user.exists;
-	// if (db.collection('users').doc(userId).get().exists) {
-	// 	return true;
-	// }
-	// return false;
-	// console.log(user.exists);
-	// return user.exists;
+	await userRef.get().then(async (doc) => {
+		if (doc.exists) {
+			 updateUserLogin(user);
+		} else {
+			addNewUserToDB(user);
+		}
+	}).catch((err)=> console.log(err));
 }
 
 /** Adds new User to DB
  *  @param {Object} user
  */
-function addNewUserToDB(user) {
+async function addNewUserToDB(user) {
 	const data = {
 		displayName: user.displayName,
 		name: {
@@ -63,42 +56,43 @@ function addNewUserToDB(user) {
 		portfolio: [],
 		keywords: [],
 		availability: {
-			Mon: [],
-			Tue: [],
-			Wed: [],
-			Thu: [],
-			Fri: [],
-			Sat: [],
-			Sun: [],
+			monday: [],
+			tuesday: [],
+			wednesday: [],
+			thursday: [],
+			friday: [],
+			saturday: [],
+			sunday: [],
 		},
 		createdAt: createFbTimestamp(),
 		lastLoginAt: createFbTimestamp(),
 		lastUpdatedAt: createFbTimestamp(),
 	};
 
-	db.collection('users').doc(user.uid).set(data);
+	await db.collection('users').doc(user.uid).set(data);
 	console.log('New user created', data);
 }
 
-function updateUserLogin(user) {
+async function updateUserLogin(user) {
 	console.log('updating user last login...');
-	db.collection('users')
+	await db.collection('users')
 		.doc(user.uid)
 		.update({ lastLoginAt: createFbTimestamp() });
 }
 
 export function googleLogin() {
 	return (dispatch) => {
-		auth
+		 auth
 			.signInWithPopup(provider)
 			.then((result) => {
 				const token = result.credential.accessToken;
 				console.log(token);
 
-				// check if user exists and update user data
-				checkIfUserExists(result.user);
-
-				dispatch(setCurrUser(result.user));
+				checkIfUserExists(result.user)
+				// send user data to redux store
+				db.collection('users').doc(result.user.uid).get().then(doc => {
+					dispatch(setCurrUser(doc.data()));
+				})
 			})
 			// .then((result) => console.log('Login successful!', result.auth.email))
 			.catch((err) => dispatch(dispatchError(LOGIN_FAIL, err)));
