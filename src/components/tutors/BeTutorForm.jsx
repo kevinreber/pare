@@ -23,12 +23,12 @@ import { TimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 
 const DAYS = [
 	'monday',
-	// 'tuesday',
-	// 'wednesday',
-	// 'thursday',
-	// 'friday',
-	// 'saturday',
-	// 'sunday',
+	'tuesday',
+	'wednesday',
+	'thursday',
+	'friday',
+	'saturday',
+	'sunday',
 ];
 
 function BeTutorForm({ uid, user, update, availability }) {
@@ -39,22 +39,12 @@ function BeTutorForm({ uid, user, update, availability }) {
 		keywords: '',
 		portfolio: '',
 	};
-	console.log(availability);
+	
 	const [formData, setFormData] = useState(INITIAL_STATE);
+	const [userAvailability, setUserAvailability] = useState(availability);
 	const [changeMade, setChangeMade] = useState(false);
-
-	// const availability = {
-	// 	monday: {
-	// 		start: moment(new Date()).format(),
-	// 		end: moment(new Date()).format(),
-	// 	},
-	// 	tuesday: { start: new Date().getTime(), end: new Date().getTime() },
-	// 	wednesday: { start: new Date().getTime(), end: new Date().getTime() },
-	// 	thursday: { start: new Date().getTime(), end: new Date().getTime() },
-	// 	friday: { start: new Date().getTime(), end: new Date().getTime() },
-	// 	saturday: { start: new Date().getTime(), end: new Date().getTime() },
-	// 	sunday: { start: new Date().getTime(), end: new Date().getTime() },
-	// };
+	
+	console.log(userAvailability);
 
 	/** Handles general fields in form */
 	const handleChange = (e) => {
@@ -71,11 +61,43 @@ function BeTutorForm({ uid, user, update, availability }) {
 	}
 
 	const handleDate = (time, day, type, index) => {
+		let getDay = {...userAvailability[day]};
+		console.log(day, getDay, getDay[0]);
+		getDay[index] = {...getDay[index], [type]: time};
+		console.log(getDay);
+		
 		console.log(time);
 		// setChangeMade(true);
-		// const availability = { time, day, type, index };
+		const availability = { time, day, type, index };
+
+		// setUserAvailability( a => (
+		// 	{...a, 
+		// 		[day][0] : {[type] : time }
+		// 	}
+		// ))
+
+		setUserAvailability(
+			{...userAvailability, [day] : getDay
+				// getDay[0] = {[type] : time }
+				// getDay.map( idx => {
+				// 	if(idx === index) {
+				// 		return {...idx, [type] : time }
+				// 	}
+				// })
+			}
+		)
+
 		// update(availability);
 	};
+
+	// setData([...data].map(object => {
+	// 	if(object.username === user.username) {
+	// 	  return {
+	// 		...object,
+	// 		favoriteFood: 'Potatos',
+	// 		someNewRandomAttribute: 'X'
+	// 	  }
+	// 	}
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -92,17 +114,23 @@ function BeTutorForm({ uid, user, update, availability }) {
 			<TimePicker
 				clearable
 				variant="inline"
-				minutesStep={5}
+				minutesStep={15}
 				label={day.charAt(0).toUpperCase() + day.slice(1)}
-				value={availability[day][index].start}
+				// value={userAvailability[day][index].start}
+				value={userAvailability[day][index]
+				? userAvailability[day][index].start : new Date().getTime()
+				}
 				onChange={(e) => handleDate(e, day, 'start', index)}
 			/>
 			<p className="TimePicker__Seperator">—</p>
 			<TimePicker
 				clearable
 				variant="inline"
-				minutesStep={5}
-				value={availability[day][index].end}
+				minutesStep={15}
+				// value={userAvailability[day][index].end}
+				value={userAvailability[day][index] 
+				? userAvailability[day][index].end : new Date().getTime()
+				}
 				onChange={(e) => handleDate(e, day, 'end', index)}
 			/>
 
