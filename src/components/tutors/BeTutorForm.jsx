@@ -44,8 +44,6 @@ function BeTutorForm({ uid, user, update, availability }) {
 	const [userAvailability, setUserAvailability] = useState(availability);
 	const [changeMade, setChangeMade] = useState(false);
 	
-	console.log(userAvailability);
-
 	/** Handles general fields in form */
 	const handleChange = (e) => {
 		if (!changeMade) setChangeMade(true);
@@ -69,8 +67,19 @@ function BeTutorForm({ uid, user, update, availability }) {
 
 		setUserAvailability({
 			...userAvailability, [day] : getDay
-		})
+		});
+		updateUserAvailability(uid, day, type, userAvailability[day]);
 		// update(availability);
+	};
+
+	// updates user's availability
+	const updateUserAvailability = (uid, day, type, val) => {
+		// const updatedDay = userAvailability[day];
+		console.log(day, val);
+		db.collection('users').doc(uid).update({
+			// ['availability.' + day + [0]]: val
+			['availability.' + day + [0] + type]: userAvailability[day][0][type] 
+		});
 	};
 
 	const handleSubmit = (e) => {
