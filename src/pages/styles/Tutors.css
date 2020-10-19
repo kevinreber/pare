@@ -64,8 +64,12 @@
     flex-direction: column;
 }
 
-.BeTutorForm label.MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated.MuiInputLabel-shrink.MuiFormLabel-filled {
+.BeTutorForm label.MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated.MuiInputLabel-shrink.MuiFormLabel-filled,
+.BeTutorForm .MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated {
     color: var(--primary-color);
+}
+
+.BeTutorForm label.MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated.MuiInputLabel-shrink.MuiFormLabel-filled{
     font-size: 1.25rem;
     font-weight: 500;
 }
@@ -94,7 +98,7 @@
     align-items: baseline;
 }
 
-.BeTutorForm .Availability__Day .Availability__TimePicker .TimePicker__Seperator {
+.BeTutorForm .Availability__Day .Availability__TimePicker .TimePicker__Separator {
     position: absolute;
     left: 4.3rem;
     bottom: 0rem;
@@ -154,4 +158,38 @@
 .User-Portfolio-Links>li .MuiChip-root svg:hover,
 .User-Classes>li .MuiChip-root svg:hover {
     color: var(--primary-color);
+}
+
+/*************************************************/
+/** Time Clock Select Field                      */
+/*************************************************/
+
+.MuiToolbar-root.MuiToolbar-regular.MuiPickersToolbar-toolbar.MuiPickersTimePickerToolbar-toolbarAmpmLeftPadding.MuiToolbar-gutters .MuiPickersTimePickerToolbar-ampmSelection{
+    margin-right: 0;
+}
+
+.MuiPickersBasePicker-container>.MuiPickersToolbar-toolbar{
+    background-color: var(--user-chat-color);
+    color: var(--secondary-color);
+}
+
+.MuiPickersBasePicker-pickerView{
+    color: var(--secondary-color);
+    background-color: var(--bg-color);
+}
+
+.MuiPickersBasePicker-pickerView .MuiPickersClock-pin,
+.MuiPickersBasePicker-pickerView .MuiPickersClockPointer-pointer,
+.MuiPickersBasePicker-pickerView .MuiPickersClockPointer-thumb.MuiPickersClockPointer-noPoint,
+.MuiPickersBasePicker-pickerView .MuiPickersClockPointer-pointer.MuiPickersClockPointer-animateTransform,
+.MuiPickersBasePicker-pickerView .MuiPickersClockPointer-noPoint{
+    background-color: var(--user-chat-color);
+}
+
+.MuiPickersBasePicker-pickerView .MuiPickersClockPointer-thumb{
+    border: 14px solid var(--user-chat-color);
+}
+
+.MuiTypography-root.MuiPickersClockNumber-clockNumber.MuiTypography-body1{
+    color: var(--secondary-color);
 }

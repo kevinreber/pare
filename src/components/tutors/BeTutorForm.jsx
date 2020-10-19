@@ -62,42 +62,16 @@ function BeTutorForm({ uid, user, update, availability }) {
 
 	const handleDate = (time, day, type, index) => {
 		let getDay = {...userAvailability[day]};
-		console.log(day, getDay, getDay[0]);
+
 		getDay[index] = {...getDay[index], [type]: time};
-		console.log(getDay);
-		
-		console.log(time);
+
 		// setChangeMade(true);
-		const availability = { time, day, type, index };
 
-		// setUserAvailability( a => (
-		// 	{...a, 
-		// 		[day][0] : {[type] : time }
-		// 	}
-		// ))
-
-		setUserAvailability(
-			{...userAvailability, [day] : getDay
-				// getDay[0] = {[type] : time }
-				// getDay.map( idx => {
-				// 	if(idx === index) {
-				// 		return {...idx, [type] : time }
-				// 	}
-				// })
-			}
-		)
-
+		setUserAvailability({
+			...userAvailability, [day] : getDay
+		})
 		// update(availability);
 	};
-
-	// setData([...data].map(object => {
-	// 	if(object.username === user.username) {
-	// 	  return {
-	// 		...object,
-	// 		favoriteFood: 'Potatos',
-	// 		someNewRandomAttribute: 'X'
-	// 	  }
-	// 	}
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -116,21 +90,15 @@ function BeTutorForm({ uid, user, update, availability }) {
 				variant="inline"
 				minutesStep={15}
 				label={day.charAt(0).toUpperCase() + day.slice(1)}
-				// value={userAvailability[day][index].start}
-				value={userAvailability[day][index]
-				? userAvailability[day][index].start : new Date().getTime()
-				}
+				value={userAvailability[day][index] ? userAvailability[day][index].start : new Date().getTime()}
 				onChange={(e) => handleDate(e, day, 'start', index)}
 			/>
-			<p className="TimePicker__Seperator">—</p>
+			<p className="TimePicker__Separator">—</p>
 			<TimePicker
 				clearable
 				variant="inline"
 				minutesStep={15}
-				// value={userAvailability[day][index].end}
-				value={userAvailability[day][index] 
-				? userAvailability[day][index].end : new Date().getTime()
-				}
+				value={userAvailability[day][index]  ? userAvailability[day][index].end : new Date().getTime()}
 				onChange={(e) => handleDate(e, day, 'end', index)}
 			/>
 
