@@ -1,63 +1,61 @@
 /** Dependencies */
 import React from 'react';
+import moment from 'moment';
 
 /** Re-usable Field for User Body */
 function UserFields({ label, content = '-' }) {
 	const formatArray = (arr) => arr.join(', ');
-	const formatObject = (obj) => {
+	const formatAvailability = (data) => {
 		return (
 			<table>
-				<tbody>{availability(obj)}</tbody>
+				<tbody>{availability(data)}</tbody>
 			</table>
 		);
 	};
 
 	// format handler for availability
-	const availability = (obj) => {
-		let rows = !obj ? (
-			'-'
-		) : (
-			<>{Object.keys(obj).map((key, index) => tableRows(key, obj[key], index))}</>
-		);
-
-		return rows;
-	};
-
-	const tableRows = (key, arr, idx) => {
-		return (
-			<>
-				<tr key={idx}>
-					<th>{key.charAt(0).toUpperCase() + key.slice(1)}:</th>
-					{buildValues(arr)}
-				</tr>
-			</>
-		);
-	};
-
-	const buildValues = (arr) => {
-		let list =
-			!arr || arr.length === 0 ? (
-				<td>-</td>
-			) : (
+	const availability = (data) => 
+		(data.map((day) => 
+			(
 				<>
-					{arr.map((date) => (
-						<td>
-							{date.start} - {date.end}
-						</td>
-					))}
+					<tr key={day.data.day}>
+							<th>{day.id.charAt(0).toUpperCase() + day.id.slice(1)}:</th>
+							{buildValues(day.data['0'].start, day.data['0'].end)}
+					</tr>
+				</>
+			)
+		));
+
+	// convert to local time if not null
+	const buildValues = (start, end) => {
+		let startDate = null;
+		let endDate = null;
+		if	(start !== null && end !== null){
+			startDate = start.toDate();
+			endDate = end.toDate();
+		}
+		let list =
+			!startDate || !endDate ? (<td>-</td>) : (
+				<>
+					<td>
+						{moment(startDate).format('LT')} - {moment(endDate).format('LT')}
+					</td>
 				</>
 			);
 		return list;
 	};
-
+ 
 	let inputField;
 
 	switch (typeof content) {
 		case 'object':
-			if (Array.isArray(content)) {
+			if (label === 'Availability'){
+				inputField = formatAvailability(content);
+			}
+			else if (Array.isArray(content)) {
 				inputField = formatArray(content);
 			} else {
-				inputField = formatObject(content);
+				inputField = formatAvailability(content);
 			}
 			break;
 		default:

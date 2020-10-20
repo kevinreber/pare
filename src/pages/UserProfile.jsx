@@ -20,6 +20,7 @@ function UserProfile() {
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const currentUser = useSelector((state) => state.auth.user);
+	const [userAvailability, setUserAvailability] = useState([]);
 
 	const [user, setUser] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
@@ -40,10 +41,21 @@ function UserProfile() {
 				);
 			}
 
-			await db
-				.collection('users')
+			db.collection('users')
 				.doc(userId)
 				.onSnapshot((snapshot) => setUser(snapshot.data()));
+
+			db.collection('users')
+				.doc(userId)
+				.collection('availability')
+				.orderBy('day')
+				.onSnapshot((snapshot) => 
+				setUserAvailability(snapshot.docs.map((doc) => {
+					return {
+						id: doc.id,
+						data: doc.data()
+					}
+				})));
 
 			// Loading finished
 			setIsLoading(false);
@@ -123,7 +135,7 @@ function UserProfile() {
 						social={user.social}
 						keywords={user.keywords}
 						portfolio={user.portfolio}
-						availability={user.availability}
+						availability={userAvailability}
 					/>
 					<div className="UserProfile__Footer">{DisplayButton}</div>
 				</>

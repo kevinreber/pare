@@ -1,16 +1,14 @@
 /** Dependencies */
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 /** Components & Helpers */
 import TutorList from '../components/Tutors/TutorList';
 import BeTutorForm from '../components/Tutors/BeTutorForm';
-import { updateAvailability } from '../store/actions/availability';
 import db from '../config/fbConfig';
 import './styles/Tutors.css';
 
 function Tutor() {
-	const dispatch = useDispatch();
 	const currentUser = useSelector((state) => state.auth.user);
 
 	const [tutors, setTutors] = useState([]);
@@ -53,11 +51,6 @@ function Tutor() {
 	const [showSearch, setShowSearch] = useState(false);
 	const toggleSearch = () => setShowSearch((show) => !show);
 
-	const updateUser = (data) => {
-		console.log('updating...', data);
-		dispatch(updateAvailability(data));
-	};
-
 	const TutorsBody =
 		active === 'findTutor' ? (
 			<TutorList tutors={tutors} />
@@ -65,8 +58,6 @@ function Tutor() {
 			<BeTutorForm
 				uid={currentUser.uid}
 				user={user}
-				update={updateUser}
-				availability={currentUser.availability}
 			/>
 		);
 

@@ -1,12 +1,12 @@
 /** Dependencies */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import firebase from 'firebase';
 import moment from 'moment';
 import { original, produce } from 'immer';
 
 /** Components & Helpers */
-import DatePicker from 'react-datepicker';
+import DatePicker, { getDefaultLocale } from 'react-datepicker';
 import CTAButton from '../general/CTAButton';
 import useFields from '../../hooks/useFields';
 import createFbTimestamp from '../../utils/createFbTimestamp';
@@ -21,17 +21,7 @@ import Chip from '@material-ui/core/Chip';
 import DateFnsUtils from '@date-io/date-fns';
 import { TimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 
-const DAYS = [
-	'monday',
-	'tuesday',
-	'wednesday',
-	'thursday',
-	'friday',
-	'saturday',
-	'sunday',
-];
-
-function BeTutorForm({ uid, user, update, availability }) {
+function BeTutorForm({ uid, user, update }) {
 	const dispatch = useDispatch();
 
 	// Form Data
@@ -41,9 +31,29 @@ function BeTutorForm({ uid, user, update, availability }) {
 	};
 	
 	const [formData, setFormData] = useState(INITIAL_STATE);
-	const [userAvailability, setUserAvailability] = useState(availability);
+	const [userAvailability, setUserAvailability] = useState([]);
 	const [changeMade, setChangeMade] = useState(false);
 	
+	useEffect(() =>{
+		/** Get User Availability */
+		const getData = () => {
+			db.collection('users')
+			.doc(uid)
+			.collection('availability')
+			.orderBy('day')
+			.onSnapshot((snapshot) => 
+			setUserAvailability(snapshot.docs.map((doc) => {
+				return {
+					id: doc.id,
+					data: doc.data()
+				}
+			})));
+		}
+		if(uid){
+			getData();
+		}
+	}, [uid])
+
 	/** Handles general fields in form */
 	const handleChange = (e) => {
 		if (!changeMade) setChangeMade(true);
@@ -59,99 +69,87 @@ function BeTutorForm({ uid, user, update, availability }) {
 	}
 
 	const handleDate = (time, day, type, index) => {
-		let getDay = {...userAvailability[day]};
-
-		getDay[index] = {...getDay[index], [type]: time};
-
-		// setChangeMade(true);
-
-		setUserAvailability({
-			...userAvailability, [day] : getDay
-		});
-		updateUserAvailability(uid, day, type, userAvailability[day]);
-		// update(availability);
+		updateUserAvailability(day, type, index, time);
 	};
 
 	// updates user's availability
-	const updateUserAvailability = (uid, day, type, val) => {
-		// const updatedDay = userAvailability[day];
-		console.log(day, val);
-		db.collection('users').doc(uid).update({
-			// ['availability.' + day + [0]]: val
-			['availability.' + day + [0] + type]: userAvailability[day][0][type] 
+	const updateUserAvailability = (day, type, idx, time) => {
+		console.log(day, time);
+		db.collection('users').doc(uid).collection('availability').doc(day).update({
+			[idx.toString() + '.' + type] : time
 		});
 	};
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		update(formData);
+	// ! Temp
+	// const handleSubmit = (e) => {
+	// 	e.preventDefault();
+	// 	update(formData);
 
-		// Clear state of form
-		setFormData(INITIAL_STATE);
-		setChangeMade(false);
-	};
+	// 	// Clear state of form
+	// 	setFormData(INITIAL_STATE);
+	// 	setChangeMade(false);
+	// };
 
 	// 'Start' and 'End' Time Pickers
-	const timePickers = (day, index = 0) => (
-		<>
-			<TimePicker
-				clearable
-				variant="inline"
-				minutesStep={15}
-				label={day.charAt(0).toUpperCase() + day.slice(1)}
-				value={userAvailability[day][index] ? userAvailability[day][index].start : new Date().getTime()}
-				onChange={(e) => handleDate(e, day, 'start', index)}
-			/>
-			<p className="TimePicker__Separator">—</p>
-			<TimePicker
-				clearable
-				variant="inline"
-				minutesStep={15}
-				value={userAvailability[day][index]  ? userAvailability[day][index].end : new Date().getTime()}
-				onChange={(e) => handleDate(e, day, 'end', index)}
-			/>
+	const timePickers = (day, index = 0) => {
+		// let startTime = new Date().getTime();
+		// let endTime = new Date().getTime();
+		let startTime = null;
+		let endTime = null;
 
-			{/* Default HTML Input fields */}
-			{/* <div className='form-group'>
-				<label htmlFor={day} className='float-left'>
-					{day.charAt(0).toUpperCase() + day.slice(1)}
-				</label>
-				<input
-					className='form-control mate-form-input'
-					type='time'
-					onChange={(e) => handleDate(e, day, 'start', index)}
-					name={day}
-					value={availability[day].start}
-				/>
-			</div>
-			<div className='form-group'>
-				<input
-					className='form-control mate-form-input'
-					type='time'
-					onChange={(e) => handleDate(e, day, 'end', index)}
-					name={day}
-					value={availability[day].end}
-				/>
-			</div> */}
-			{index !== 0 ?
-				(<div className="Availability__Remove">
-					<IconButton>
-						<RemoveCircleOutlineSharpIcon />
-					</IconButton>
-				</div>) : null
+		if (day.data['0']) {
+			if (day.data['0'].start !== null){
+				startTime = day.data['0'].start.toDate();
 			}
-		</>
-	);
+			if(day.data['0'].end ){
+				endTime = day.data['0'].end.toDate();
+			}
+		}
+
+		return(
+		<div className={`TimePickers-Day TimePickers__${day.id}`}>
+			<label>{day.id.charAt(0).toUpperCase() + day.id.slice(1)}</label>
+			<div className={`TimePickers-Content`}>
+				<TimePicker
+					clearable
+					variant="inline"
+					minutesStep={15}
+					// label={day.id.charAt(0).toUpperCase() + day.id.slice(1)}
+					value={startTime}
+					placeholder='00:00 AM'
+					onChange={(e) => handleDate(e, day.id, 'start', index)}
+				/>
+				<p className="TimePicker__Separator">—</p>
+				<TimePicker
+					clearable
+					variant="inline"
+					minutesStep={15}
+					value={endTime}
+					placeholder='00:00 AM'
+					onChange={(e) => handleDate(e, day.id, 'end', index)}
+				/>
+
+				{index !== 0 ?
+					(<div className="Availability__Remove">
+						<IconButton>
+							<RemoveCircleOutlineSharpIcon />
+						</IconButton>
+					</div>) : null
+				}
+			</div>
+		</div>
+	)};
 
 	// Build Fields for Availability
-	const dayFields = DAYS.map((day, index) => (
+	const dayFields = userAvailability.map((day) => (
 		<div className="Availability__Day">
-			<div className="Availability__TimePicker">{timePickers(day, index)}</div>
-			<div className="Availability__Add">
+			<div className="Availability__TimePicker">{timePickers(day)}</div>
+			{/** ! Temp */}
+			{/* <div className="Availability__Add">
 				<IconButton>
 					<AddCircleOutlineRoundedIcon />
 				</IconButton>
-			</div>
+			</div> */}
 		</div>
 	));
 

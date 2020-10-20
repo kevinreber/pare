@@ -58,6 +58,10 @@
     padding-right: 1.5rem;
 }
 
+.Be-Tutor__Availability{
+    text-align: left
+}
+
 .BeTutorForm .Be-Tutor__Availability,
 .BeTutorForm .BeTutor__Portfolio {
     display: flex;
@@ -101,7 +105,7 @@
 .BeTutorForm .Availability__Day .Availability__TimePicker .TimePicker__Separator {
     position: absolute;
     left: 4.3rem;
-    bottom: 0rem;
+    bottom: -.5rem;
     font-weight: 300;
     font-size: 14px;
 }

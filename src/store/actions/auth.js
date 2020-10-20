@@ -55,21 +55,41 @@ async function addNewUserToDB(user) {
 		school: 'U.C. Berkeley',
 		portfolio: [],
 		keywords: [],
-		availability: {
-			monday: [],
-			tuesday: [],
-			wednesday: [],
-			thursday: [],
-			friday: [],
-			saturday: [],
-			sunday: [],
-		},
+		// availability: {
+		// 	monday: [],
+		// 	tuesday: [],
+		// 	wednesday: [],
+		// 	thursday: [],
+		// 	friday: [],
+		// 	saturday: [],
+		// 	sunday: [],
+		// },
 		createdAt: createFbTimestamp(),
 		lastLoginAt: createFbTimestamp(),
 		lastUpdatedAt: createFbTimestamp(),
 	};
 
+	const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+	
 	await db.collection('users').doc(user.uid).set(data);
+
+	// set availability
+	days.forEach(async (day) => {
+		let idx = 1;
+		await db.collection('users')
+			.doc(user.uid)
+			.collection('availability')
+			.doc(day)
+			.set({
+				'0': {
+						start: null,
+						end: null,
+						idx: 0
+					},
+				day: idx
+				});
+		idx++;
+	})
 	console.log('New user created', data);
 }
 
