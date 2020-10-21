@@ -3,12 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import firebase from 'firebase';
 import moment from 'moment';
-import { original, produce } from 'immer';
 
 /** Components & Helpers */
-import DatePicker, { getDefaultLocale } from 'react-datepicker';
 import CTAButton from '../general/CTAButton';
-import useFields from '../../hooks/useFields';
 import createFbTimestamp from '../../utils/createFbTimestamp';
 import { addFlashMessage } from '../../store/actions/flashMessages';
 import db from '../../config/fbConfig';
@@ -21,7 +18,7 @@ import Chip from '@material-ui/core/Chip';
 import DateFnsUtils from '@date-io/date-fns';
 import { TimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 
-function BeTutorForm({ uid, user, update }) {
+function BeTutorForm({ uid, user }) {
 	const dispatch = useDispatch();
 
 	// Form Data
@@ -74,7 +71,6 @@ function BeTutorForm({ uid, user, update }) {
 
 	// updates user's availability
 	const updateUserAvailability = (day, type, idx, time) => {
-		console.log(day, time);
 		db.collection('users').doc(uid).collection('availability').doc(day).update({
 			[idx.toString() + '.' + type] : time
 		});
@@ -92,8 +88,6 @@ function BeTutorForm({ uid, user, update }) {
 
 	// 'Start' and 'End' Time Pickers
 	const timePickers = (day, index = 0) => {
-		// let startTime = new Date().getTime();
-		// let endTime = new Date().getTime();
 		let startTime = null;
 		let endTime = null;
 
@@ -114,7 +108,6 @@ function BeTutorForm({ uid, user, update }) {
 					clearable
 					variant="inline"
 					minutesStep={15}
-					// label={day.id.charAt(0).toUpperCase() + day.id.slice(1)}
 					value={startTime}
 					placeholder='00:00 AM'
 					onChange={(e) => handleDate(e, day.id, 'start', index)}
