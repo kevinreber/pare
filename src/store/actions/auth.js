@@ -34,6 +34,7 @@ async function checkIfUserExists(user) {
  */
 async function addNewUserToDB(user) {
 	const data = {
+		uid: user.uid,
 		displayName: user.displayName,
 		name: {
 			first: '',
@@ -55,15 +56,6 @@ async function addNewUserToDB(user) {
 		school: 'U.C. Berkeley',
 		portfolio: [],
 		keywords: [],
-		// availability: {
-		// 	monday: [],
-		// 	tuesday: [],
-		// 	wednesday: [],
-		// 	thursday: [],
-		// 	friday: [],
-		// 	saturday: [],
-		// 	sunday: [],
-		// },
 		createdAt: createFbTimestamp(),
 		lastLoginAt: createFbTimestamp(),
 		lastUpdatedAt: createFbTimestamp(),
@@ -74,8 +66,7 @@ async function addNewUserToDB(user) {
 	await db.collection('users').doc(user.uid).set(data);
 
 	// set availability
-	days.forEach(async (day) => {
-		let idx = 1;
+	days.forEach(async (day, idx) => {
 		await db.collection('users')
 			.doc(user.uid)
 			.collection('availability')
@@ -86,9 +77,8 @@ async function addNewUserToDB(user) {
 						end: null,
 						idx: 0
 					},
-				day: idx
+				day: idx + 1
 				});
-		idx++;
 	})
 	console.log('New user created', data);
 }

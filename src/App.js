@@ -26,7 +26,7 @@ function App() {
 			});
 		}
 		getCurrentUser();
-	}, []);
+	}, [dispatch]);
 
 	const currentUser = useSelector((state) => state.auth.user);
 
