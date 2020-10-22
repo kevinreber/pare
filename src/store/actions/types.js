@@ -55,3 +55,6 @@ export const REMOVE_AVAILABILITY = 'REMOVE_AVAILABILITY';
 
 /** Flash Messages */
 export const ADD_FLASH_MESSAGE = 'ADD_FLASH_MESSAGE';
+
+/** Flash Messages */
+export const PROMPT_MESSAGE = 'PROMPT_MESSAGE';
