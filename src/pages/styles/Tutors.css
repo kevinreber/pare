@@ -49,6 +49,28 @@
 }
 
 /*************************************************/
+/** Tutor Switch Toggler                         */
+/*************************************************/
+
+.BeTutorForm .Switch-Toggle{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.BeTutorForm .MuiIconButton-label .PrivateSwitchBase-input-12.MuiSwitch-input>.MuiSwitch-thumb,
+.BeTutorForm .MuiIconButton-label .PrivateSwitchBase-input-12.MuiSwitch-input>.MuiSwitch-thumb:focus{
+    color: var(--tertiary-color);
+}
+
+.BeTutorForm .MuiSwitch-colorSecondary.Mui-checked + .MuiSwitch-track{
+    background-color: var(--user-chat-color);
+}
+
+.BeTutorForm .MuiSwitch-colorSecondary.Mui-checked{
+    color: var(--primary-color);
+}
+
+/*************************************************/
 /** Be Tutor Form                                */
 /*************************************************/
 

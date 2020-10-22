@@ -1,10 +1,13 @@
 /** Dependencies */
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { PropTypes } from 'prop-types';
 import firebase from 'firebase';
 
 /** Components & Helpers */
 import CTAButton from '../general/CTAButton';
+import ConfirmDialog from '../general/ConfirmDialog';
+import SwitchToggler from '../general/SwitchToggler/SwitchToggler';
 import createFbTimestamp from '../../utils/createFbTimestamp';
 import { addFlashMessage } from '../../store/actions/flashMessages';
 import db from '../../config/fbConfig';
@@ -17,8 +20,21 @@ import Chip from '@material-ui/core/Chip';
 import DateFnsUtils from '@date-io/date-fns';
 import { TimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 
+/**
+ * Form to fill out user's tutor info and availability.
+ * 
+ * @param {string}    uid     User's ID used to get User's availability.
+ * @param {object}    user    Object of user's data.
+ */
 function BeTutorForm({ uid, user }) {
 	const dispatch = useDispatch();
+
+	const CONFIRM_DIALOG_INITIAL_STATE = {
+		isOpen: false,
+		title: '',
+		subtitle: '',
+	}
+	const [confirmDialog, setConfirmDialog] = useState(CONFIRM_DIALOG_INITIAL_STATE);
 
 	// Form Data
 	const INITIAL_STATE = {
@@ -30,6 +46,33 @@ function BeTutorForm({ uid, user }) {
 	const [userAvailability, setUserAvailability] = useState([]);
 	const [changeMade, setChangeMade] = useState(false);
 	
+	// Toggles user's tutor status
+	const handleTutorToggle = () => {
+		db.collection('users')
+		.doc(uid)
+		.update({
+			isTutor: !user.isTutor
+		});
+		setConfirmDialog(CONFIRM_DIALOG_INITIAL_STATE);
+	}
+
+	// Prompt to toggle user's tutor status
+	// Only prompts when user is "turning on" tutor services
+	const promptTutorDialog = () => {
+		if(!user.isTutor){
+			setConfirmDialog({
+				isOpen: true,
+				title: "Offer tutoring services?",
+				subtitle: "Your profile and availability will appear in the Tutor section",
+				onConfirm: () => {
+					handleTutorToggle();
+				},
+			});
+		} else {
+			handleTutorToggle();
+		}
+	}
+
 	useEffect(() =>{
 		/** Get User Availability */
 		const getData = () => {
@@ -134,7 +177,7 @@ function BeTutorForm({ uid, user }) {
 
 	// Build Fields for Availability
 	const dayFields = userAvailability.map((day) => (
-		<div className="Availability__Day">
+		<div key={day.id} className="Availability__Day">
 			<div className="Availability__TimePicker">{timePickers(day)}</div>
 			{/** ! Temp */}
 			{/* <div className="Availability__Add">
@@ -262,6 +305,11 @@ function BeTutorForm({ uid, user }) {
 
 	return (
 		<div className="BeTutorForm">
+		<ConfirmDialog
+			confirmDialog={confirmDialog}
+			setConfirmDialog={setConfirmDialog}
+		/>
+		<SwitchToggler checked={user.isTutor} handleChange={promptTutorDialog} name={'is-tutor-toggle'}/>
 			{/* <form className="container mb-3" onSubmit={handleSubmit}> */}
 			<div className="form-group">
 				<label className="float-left">I can help in...</label>
@@ -340,6 +388,11 @@ function BeTutorForm({ uid, user }) {
 			</form> */}
 		</div>
 	);
+}
+
+BeTutorForm.propTypes = {
+	uid: PropTypes.string,
+	user: PropTypes.object
 }
 
 export default BeTutorForm;
