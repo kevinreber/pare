@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import firebase from 'firebase';
-import moment from 'moment';
 
 /** Components & Helpers */
 import CTAButton from '../general/CTAButton';
