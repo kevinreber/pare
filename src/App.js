@@ -20,7 +20,9 @@ function App() {
 			auth.onAuthStateChanged((user) => {
 				if (user) {
 					dispatch(setCurrentUser(user));
+					// localStorage.setItem('isSignedIn', JSON.stringify(true));
 				} else {
+					// localStorage.setItem('isSignedIn', JSON.stringify(false));
 					console.log('no user');
 				}
 			});

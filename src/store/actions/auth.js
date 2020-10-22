@@ -3,6 +3,11 @@ import { auth, provider } from '../../config/fbConfig';
 import createFbTimestamp from '../../utils/createFbTimestamp';
 import db from '../../config/fbConfig';
 
+// import firebase from 'firebase/app';
+import firebase from 'firebase';
+import 'firebase/firestore';
+import 'firebase/auth';
+
 /** Types */
 import {
 	SET_CURRENT_USER,
@@ -93,17 +98,20 @@ async function updateUserLogin(user) {
 export function googleLogin() {
 	return (dispatch) => {
 		 auth
-			.signInWithPopup(provider)
-			.then((result) => {
-				const token = result.credential.accessToken;
-				console.log(token);
-
-				checkIfUserExists(result.user)
-				// send user data to redux store
-				db.collection('users').doc(result.user.uid).get().then(doc => {
-					dispatch(setCurrUser(doc.data()));
-				})
-			})
+			 .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+			 .then(() => {
+				 auth.signInWithPopup(provider)
+				 .then((result) => {
+					 const token = result.credential.accessToken;
+					 console.log(token);
+	 
+					 checkIfUserExists(result.user)
+					 // send user data to redux store
+					 db.collection('users').doc(result.user.uid).get().then(doc => {
+						 dispatch(setCurrUser(doc.data()));
+					 })
+				 })
+			 })
 			// .then((result) => console.log('Login successful!', result.auth.email))
 			.catch((err) => dispatch(dispatchError(LOGIN_FAIL, err)));
 	};
