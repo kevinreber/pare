@@ -24,7 +24,6 @@ function TutorList({ tutors = [] }) {
 
 	// Build list of tutors
 	const List = tutors.map((tutor) => (
-		<>
 			<li key={tutor.id} className="mate-table table-hover">
 				<Link to={`/users/${tutor.id}`}>
 					<div className="Tutor Tutor-Card">
@@ -63,7 +62,6 @@ function TutorList({ tutors = [] }) {
 					</div>
 				</Link>
 			</li>
-		</>
 	));
 
 	return (

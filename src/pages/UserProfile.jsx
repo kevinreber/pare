@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 /** Components & Helpers */
 import UserProfileHeader from '../components/User/UserProfileHeader';
 import UserProfileBody from '../components/User/UserProfileBody';
+import ConfirmDialog from '../components/general/ConfirmDialog';
 import CTAButton from '../components/general/CTAButton';
 import BackButton from '../components/general/BackButton';
 import createFbTimestamp from '../utils/createFbTimestamp';
@@ -24,6 +25,11 @@ function UserProfile() {
 
 	const [user, setUser] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
+	const [confirmDialog, setConfirmDialog] = useState({
+		isOpen: false,
+		title: '',
+		subtitle: '',
+	});
 
 	useEffect(() => {
 		async function getUserData() {
@@ -75,6 +81,17 @@ function UserProfile() {
 		chats: [],
 	};
 
+	const sendMessagePrompt = () => {
+		setConfirmDialog({
+			isOpen: true,
+			title: 'Message user?',
+			subtitle: "",
+			onConfirm: () => {
+				sendMessage();
+			},
+		});
+	}
+
 	const sendMessage = async () => {
 		// store messageId given back
 		const messageId = await createNewMessage('messages', messageData);
@@ -94,9 +111,9 @@ function UserProfile() {
 	/** if User is viewing their own profile, show edit button instead of message button */
 	const DisplayButton =
 		userId !== currentUser.uid ? (
-			<p onClick={sendMessage} className="font-italic">
-				<CTAButton text="Send Message" onClick={sendMessage} />
-			</p>
+			<div onClick={sendMessagePrompt} className="font-italic">
+				<CTAButton text="Send Message" />
+			</div>
 		) : (
 			<p className="font-italic">
 				<CTAButton text="Edit" />
@@ -111,6 +128,10 @@ function UserProfile() {
 				</>
 			) : (
 				<>
+					<ConfirmDialog
+						confirmDialog={confirmDialog}
+						setConfirmDialog={setConfirmDialog}
+					/>
 					<div className="UserProfile__BackBtn">
 						<BackButton />
 					</div>
