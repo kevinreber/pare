@@ -1,0 +1,7 @@
+.Mate-Loader{
+    margin-top: 16rem;
+}
+
+.Mate-Loader svg{
+    color: var(--primary-color)
+}

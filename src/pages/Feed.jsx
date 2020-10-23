@@ -7,6 +7,7 @@ import FeedList from '../components/Feed/FeedList';
 import PostForm from '../components/Feed/PostForm';
 import NoData from '../components/general/NoData';
 import Modal from '../components/general/Modal';
+import Loader from '../components/layout/Loader/Loader';
 import ConfirmDialog from '../components/general/ConfirmDialog';
 import { addPostToFB, deletePostFromFB, editPostInFB } from '../store/actions/posts';
 import { addFlashMessage } from '../store/actions/flashMessages';
@@ -114,7 +115,7 @@ function Feed() {
 		setIsLoading(true);
 	}
 
-	if (showForm) {
+	if (showForm){
 		return (
 			<Modal
 				content={<PostForm save={addPost} />}
@@ -132,10 +133,11 @@ function Feed() {
 				type="error"
 			/>
 			<div className="Feed__List">
-				{posts.length > 0 && !isLoading ? (
-					<FeedList posts={posts} remove={deletePostPrompt} edit={editPost}/>
-				) : (
+				{isLoading ? (<Loader />) : null }
+				{posts.length === 0 && !isLoading ? (
 					<NoData text="posts" />
+				) : (
+					<FeedList posts={posts} remove={deletePostPrompt} edit={editPost}/>
 				)}
 			</div>
 			<Fab id="Feed-Add-Post-Btn" aria-label="add">
