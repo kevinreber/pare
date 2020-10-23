@@ -1,14 +1,22 @@
 /** Dependencies */
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { PropTypes } from 'prop-types';
 
 /** Components & Helpers */
+import Loader from '../layout/Loader/Loader';
 import NoData from '../general/NoData';
 
 /** MUI */
 import Chip from '@material-ui/core/Chip';
 
-function TutorList({ tutors = [] }) {
+/**
+ * Form to fill out user's tutor info and availability.
+ * 
+ * @param {array}    tutors			Array of objects containing tutor data.
+ * @param {boolean}  isLoading    	Status if data is loaded.
+ */
+function TutorList({ tutors, isLoading }) {
 
 	// Build list of elements for User Keywords and User Classes
 	const fieldList = (field, arrayOfData) => {
@@ -66,14 +74,19 @@ function TutorList({ tutors = [] }) {
 
 	return (
 		<>
-			{tutors.length > 0 ?
-				<ul className='Tutor-List'>
-					{List}
-				</ul> 
-				: ( <NoData text="tutors available" added={false}/>)
+			{tutors.length === 0 && isLoading ?
+				(<NoData text="tutors available" added={false}/>) :
+				(<ul className='Tutor-List'>
+						{List}
+				</ul> )
 			}
 		</>
 	)
+}
+
+TutorList.propTypes = {
+	tutors: PropTypes.array,
+	isLoading: PropTypes.bool
 }
 
 export default TutorList;

@@ -11,6 +11,7 @@ import './styles/Tutors.css';
 function Tutor() {
 	const currentUser = useSelector((state) => state.auth.user);
 
+	const [isLoading, setIsLoading] = useState(true);
 	const [tutors, setTutors] = useState([]);
 	const [user, setUser] = useState(null);
 
@@ -27,8 +28,11 @@ function Tutor() {
 					);
 				});
 		}
-		getTutors();
-	}, []);
+		if (isLoading) {
+			getTutors();
+			setIsLoading(false);
+		}
+	}, [isLoading]);
 
 	useEffect(() => {
 		function getUserTutorInfo() {
@@ -53,13 +57,12 @@ function Tutor() {
 
 	const TutorsBody =
 		active === 'findTutor' ? (
-			<TutorList tutors={tutors} />
+			<TutorList tutors={tutors} isLoading={isLoading} />
 		) : (
 			<BeTutorForm
 				uid={currentUser.uid}
 				user={user}
-			/>
-		);
+			/>);
 
 	return (
 		<div className="Tutors">

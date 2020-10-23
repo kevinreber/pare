@@ -6,6 +6,7 @@ import firebase from 'firebase';
 
 /** Components & Helpers */
 import CTAButton from '../general/CTAButton';
+import Loader from '../layout/Loader/Loader';
 import ConfirmDialog from '../general/ConfirmDialog';
 import SwitchToggler from '../general/SwitchToggler/SwitchToggler';
 import createFbTimestamp from '../../utils/createFbTimestamp';
@@ -23,8 +24,8 @@ import { TimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 /**
  * Form to fill out user's tutor info and availability.
  * 
- * @param {string}    uid     User's ID used to get User's availability.
- * @param {object}    user    Object of user's data.
+ * @param {string}    uid     		User's ID used to get User's availability.
+ * @param {object}    user    		Object of user's data.
  */
 function BeTutorForm({ uid, user }) {
 	const dispatch = useDispatch();
@@ -34,6 +35,7 @@ function BeTutorForm({ uid, user }) {
 		title: '',
 		subtitle: '',
 	}
+
 	const [confirmDialog, setConfirmDialog] = useState(CONFIRM_DIALOG_INITIAL_STATE);
 
 	// Form Data
@@ -45,6 +47,7 @@ function BeTutorForm({ uid, user }) {
 	const [formData, setFormData] = useState(INITIAL_STATE);
 	const [userAvailability, setUserAvailability] = useState([]);
 	const [changeMade, setChangeMade] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
 	
 	// Toggles user's tutor status
 	const handleTutorToggle = () => {
@@ -76,6 +79,7 @@ function BeTutorForm({ uid, user }) {
 	useEffect(() =>{
 		/** Get User Availability */
 		const getData = () => {
+
 			db.collection('users')
 			.doc(uid)
 			.collection('availability')
@@ -87,11 +91,14 @@ function BeTutorForm({ uid, user }) {
 					data: doc.data()
 				}
 			})));
+
+			setIsLoading(false);
 		}
-		if(uid){
+
+		if (uid) {
 			getData();
 		}
-	}, [uid])
+	}, [uid, setIsLoading])
 
 	/** Handles general fields in form */
 	const handleChange = (e) => {
@@ -303,87 +310,94 @@ function BeTutorForm({ uid, user }) {
 
 	return (
 		<div className="BeTutorForm">
-		<ConfirmDialog
-			confirmDialog={confirmDialog}
-			setConfirmDialog={setConfirmDialog}
-		/>
-		<SwitchToggler checked={user.isTutor} handleChange={promptTutorDialog} name={'is-tutor-toggle'}/>
-			{/* <form className="container mb-3" onSubmit={handleSubmit}> */}
-			<div className="form-group">
-				<label className="float-left">I can help in...</label>
-				<small className="char-count">
-					{10 - user.keywords.length} keywords left
-				</small>
-				<input
-					className="form-control mate-form-input"
-					type="text"
-					onChange={handleChange}
-					onKeyDown={(e) => handleKeyDown('keywords', formData.keywords, e)}
-					name="keywords"
-					value={formData.keywords}
-					maxLength="30"
-					placeholder="ex. python, photoshop, calculus..."
-				/>
-				<div className="keyword-form-footer form-footer">
-					<small className="info-text">*use comma to separate keywords</small>
-					<small
-						className={`char-count ${
-							30 - formData.keywords.length <= 10 ? 'error-limit' : ''
-						}`}>
-						{30 - formData.keywords.length} characters left
-					</small>
-				</div>
-			</div>
-			{user.keywords.length > 0 ? (
-				<>
-					<ul className="User-Keywords">
-						{fieldList('keywords', user.keywords)}
-					</ul>
-				</>
-			) : null}
-			<div className="form-group BeTutor__Portfolio">
-				<div className="Portfolio__Label">
-					<label className="float-left">Portfolio Links</label>
-					<small className="char-count">
-						{5 - user.portfolio.length} links left
-					</small>
-				</div>
-				<div className="Portfolio__Input">
-					<input
-						className="form-control mate-form-input"
-						type="text"
-						onChange={handleChange}
-						onKeyDown={(e) => handleKeyDown('portfolio', formData.portfolio, e)}
-						name="portfolio"
-						value={formData.portfolio}
-						maxLength="30"
-						placeholder="ex. linkedin, github, website..."
-					/>
-					<div className="portfolio-form-footer form-footer">
-						<small className="info-text">*use comma to separate links</small>
-						<small
-							className={`char-count ${
-								30 - formData.portfolio.length <= 10 ? 'error-limit' : ''
-							}`}>
-							{30 - formData.portfolio.length} characters left
+			<ConfirmDialog
+				confirmDialog={confirmDialog}
+				setConfirmDialog={setConfirmDialog}
+			/>
+			{ isLoading ? (<Loader />) 
+				: 
+				(
+					<>
+					<SwitchToggler checked={user.isTutor} handleChange={promptTutorDialog} name={'is-tutor-toggle'}/>
+					{/* <form className="container mb-3" onSubmit={handleSubmit}> */}
+					<div className="form-group">
+						<label className="float-left">I can help in...</label>
+						<small className="char-count">
+							{10 - user.keywords.length} keywords left
 						</small>
+						<input
+							className="form-control mate-form-input"
+							type="text"
+							onChange={handleChange}
+							onKeyDown={(e) => handleKeyDown('keywords', formData.keywords, e)}
+							name="keywords"
+							value={formData.keywords}
+							maxLength="30"
+							placeholder="ex. python, photoshop, calculus..."
+						/>
+						<div className="keyword-form-footer form-footer">
+							<small className="info-text">*use comma to separate keywords</small>
+							<small
+								className={`char-count ${
+									30 - formData.keywords.length <= 10 ? 'error-limit' : ''
+								}`}>
+								{30 - formData.keywords.length} characters left
+							</small>
+						</div>
 					</div>
-				</div>
-			</div>
-			{user.portfolio.length > 0 ? (
-				<ul className="User-Portfolio-Links">
-					{fieldList('portfolio', user.portfolio)}
-				</ul>
-			) : null}
-			<div className="Be-Tutor__Availability">
-				<MuiPickersUtilsProvider utils={DateFnsUtils}>
-					{dayFields}
-				</MuiPickersUtilsProvider>
-			</div>
-			{/* <div className={`Search__Footer ${!changeMade ? 'disabled-btn' : ''}`}>
-					<CTAButton text="Save" />
-				</div>
-			</form> */}
+					{user.keywords.length > 0 ? (
+						<>
+							<ul className="User-Keywords">
+								{fieldList('keywords', user.keywords)}
+							</ul>
+						</>
+					) : null}
+					<div className="form-group BeTutor__Portfolio">
+						<div className="Portfolio__Label">
+							<label className="float-left">Portfolio Links</label>
+							<small className="char-count">
+								{5 - user.portfolio.length} links left
+							</small>
+						</div>
+						<div className="Portfolio__Input">
+							<input
+								className="form-control mate-form-input"
+								type="text"
+								onChange={handleChange}
+								onKeyDown={(e) => handleKeyDown('portfolio', formData.portfolio, e)}
+								name="portfolio"
+								value={formData.portfolio}
+								maxLength="30"
+								placeholder="ex. linkedin, github, website..."
+							/>
+							<div className="portfolio-form-footer form-footer">
+								<small className="info-text">*use comma to separate links</small>
+								<small
+									className={`char-count ${
+										30 - formData.portfolio.length <= 10 ? 'error-limit' : ''
+									}`}>
+									{30 - formData.portfolio.length} characters left
+								</small>
+							</div>
+						</div>
+					</div>
+					{user.portfolio.length > 0 ? (
+						<ul className="User-Portfolio-Links">
+							{fieldList('portfolio', user.portfolio)}
+						</ul>
+					) : null}
+					<div className="Be-Tutor__Availability">
+						<MuiPickersUtilsProvider utils={DateFnsUtils}>
+							{dayFields}
+						</MuiPickersUtilsProvider>
+					</div>
+					{/* <div className={`Search__Footer ${!changeMade ? 'disabled-btn' : ''}`}>
+							<CTAButton text="Save" />
+						</div>
+					</form> */}
+				</>
+				)
+			}
 		</div>
 	);
 }

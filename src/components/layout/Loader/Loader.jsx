@@ -9,7 +9,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 function Loader() {
 	return (
 		<div id='Mate-Loader' className='Mate-Loader'>
-			<CircularProgress color='#75F3E7'/>
+			<CircularProgress />
 		</div>
 	);
 }
