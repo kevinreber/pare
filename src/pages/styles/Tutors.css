@@ -219,3 +219,17 @@
 .MuiTypography-root.MuiPickersClockNumber-clockNumber.MuiTypography-body1{
     color: var(--secondary-color);
 }
+
+.TimePickers-Content .MuiPaper-root.MuiDialog-paper.MuiDialog-paperScrollPaper.MuiDialog-paperWidthSm.MuiPaper-elevation24.MuiPaper-rounded{
+    height: 425px;
+}
+
+.TimePickers-Content .MuiPaper-root.MuiDialog-paper.MuiDialog-paperScrollPaper.MuiDialog-paperWidthSm.MuiPaper-elevation24.MuiPaper-rounded{
+    background-color: var(--bg-color);
+}
+
+.MuiPaper-root.MuiDialog-paper.MuiPickersModal-dialogRoot.MuiDialog-paperScrollPaper.MuiDialog-paperWidthSm.MuiPaper-elevation24.MuiPaper-rounded
+.MuiDialogActions-root.MuiPickersModal-withAdditionalAction.MuiDialogActions-spacing>.MuiButtonBase-root.MuiButton-root.MuiButton-text{
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+}

@@ -148,7 +148,6 @@ function BeTutorForm({ uid, user }) {
 			<div className={`TimePickers-Content`}>
 				<TimePicker
 					clearable
-					variant="inline"
 					minutesStep={15}
 					value={startTime}
 					placeholder='00:00 AM'
@@ -157,7 +156,6 @@ function BeTutorForm({ uid, user }) {
 				<p className="TimePicker__Separator">—</p>
 				<TimePicker
 					clearable
-					variant="inline"
 					minutesStep={15}
 					value={endTime}
 					placeholder='00:00 AM'
@@ -344,7 +342,7 @@ function BeTutorForm({ uid, user }) {
 				</>
 			) : null}
 			<div className="form-group BeTutor__Portfolio">
-				<div className="Portolio__Label">
+				<div className="Portfolio__Label">
 					<label className="float-left">Portfolio Links</label>
 					<small className="char-count">
 						{5 - user.portfolio.length} links left
