@@ -59,10 +59,8 @@ function Tutor() {
 		active === 'findTutor' ? (
 			<TutorList tutors={tutors} isLoading={isLoading} />
 		) : (
-			<BeTutorForm
-				uid={currentUser.uid}
-				user={user}
-			/>);
+			<BeTutorForm uid={currentUser.uid} user={user} />
+		);
 
 	return (
 		<div className="Tutors">

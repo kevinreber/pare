@@ -23,7 +23,7 @@ import { TimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 
 /**
  * Form to fill out user's tutor info and availability.
- * 
+ *
  * @param {string}    uid     		User's ID used to get User's availability.
  * @param {object}    user    		Object of user's data.
  */
@@ -34,39 +34,40 @@ function BeTutorForm({ uid, user }) {
 		isOpen: false,
 		title: '',
 		subtitle: '',
-	}
+	};
 
-	const [confirmDialog, setConfirmDialog] = useState(CONFIRM_DIALOG_INITIAL_STATE);
+	const [confirmDialog, setConfirmDialog] = useState(
+		CONFIRM_DIALOG_INITIAL_STATE
+	);
 
 	// Form Data
 	const INITIAL_STATE = {
 		keywords: '',
 		portfolio: '',
 	};
-	
+
 	const [formData, setFormData] = useState(INITIAL_STATE);
 	const [userAvailability, setUserAvailability] = useState([]);
 	const [changeMade, setChangeMade] = useState(false);
 	const [isLoading, setIsLoading] = useState(true);
-	
+
 	// Toggles user's tutor status
 	const handleTutorToggle = () => {
-		db.collection('users')
-		.doc(uid)
-		.update({
-			isTutor: !user.isTutor
+		db.collection('users').doc(uid).update({
+			isTutor: !user.isTutor,
 		});
 		setConfirmDialog(CONFIRM_DIALOG_INITIAL_STATE);
-	}
+	};
 
 	// Prompt to toggle user's tutor status
 	// Only prompts when user is "turning on" tutor services
 	const promptTutorDialog = () => {
-		if(!user.isTutor){
+		if (!user.isTutor) {
 			setConfirmDialog({
 				isOpen: true,
-				title: "Offer tutoring services?",
-				subtitle: "Your profile and availability will appear in the Tutor section",
+				title: 'Offer tutoring services?',
+				subtitle:
+					'Your profile and availability will appear in the Tutor section',
 				onConfirm: () => {
 					handleTutorToggle();
 				},
@@ -74,31 +75,33 @@ function BeTutorForm({ uid, user }) {
 		} else {
 			handleTutorToggle();
 		}
-	}
+	};
 
-	useEffect(() =>{
+	useEffect(() => {
 		/** Get User Availability */
 		const getData = () => {
-
 			db.collection('users')
-			.doc(uid)
-			.collection('availability')
-			.orderBy('day')
-			.onSnapshot((snapshot) => 
-			setUserAvailability(snapshot.docs.map((doc) => {
-				return {
-					id: doc.id,
-					data: doc.data()
-				}
-			})));
+				.doc(uid)
+				.collection('availability')
+				.orderBy('day')
+				.onSnapshot((snapshot) =>
+					setUserAvailability(
+						snapshot.docs.map((doc) => {
+							return {
+								id: doc.id,
+								data: doc.data(),
+							};
+						})
+					)
+				);
 
 			setIsLoading(false);
-		}
+		};
 
 		if (uid) {
 			getData();
 		}
-	}, [uid, setIsLoading])
+	}, [uid, setIsLoading]);
 
 	/** Handles general fields in form */
 	const handleChange = (e) => {
@@ -120,9 +123,13 @@ function BeTutorForm({ uid, user }) {
 
 	// updates user's availability
 	const updateUserAvailability = (day, type, idx, time) => {
-		db.collection('users').doc(uid).collection('availability').doc(day).update({
-			[idx.toString() + '.' + type] : time
-		});
+		db.collection('users')
+			.doc(uid)
+			.collection('availability')
+			.doc(day)
+			.update({
+				[idx.toString() + '.' + type]: time,
+			});
 	};
 
 	// ! Temp
@@ -141,44 +148,45 @@ function BeTutorForm({ uid, user }) {
 		let endTime = null;
 
 		if (day.data['0']) {
-			if (day.data['0'].start !== null){
+			if (day.data['0'].start !== null) {
 				startTime = day.data['0'].start.toDate();
 			}
-			if(day.data['0'].end ){
+			if (day.data['0'].end) {
 				endTime = day.data['0'].end.toDate();
 			}
 		}
 
-		return(
-		<div className={`TimePickers-Day TimePickers__${day.id}`}>
-			<label>{day.id.charAt(0).toUpperCase() + day.id.slice(1)}</label>
-			<div className={`TimePickers-Content`}>
-				<TimePicker
-					clearable
-					minutesStep={15}
-					value={startTime}
-					placeholder='00:00 AM'
-					onChange={(e) => handleDate(e, day.id, 'start', index)}
-				/>
-				<p className="TimePicker__Separator">—</p>
-				<TimePicker
-					clearable
-					minutesStep={15}
-					value={endTime}
-					placeholder='00:00 AM'
-					onChange={(e) => handleDate(e, day.id, 'end', index)}
-				/>
+		return (
+			<div className={`TimePickers-Day TimePickers__${day.id}`}>
+				<label>{day.id.charAt(0).toUpperCase() + day.id.slice(1)}</label>
+				<div className={`TimePickers-Content`}>
+					<TimePicker
+						clearable
+						minutesStep={15}
+						value={startTime}
+						placeholder="00:00 AM"
+						onChange={(e) => handleDate(e, day.id, 'start', index)}
+					/>
+					<p className="TimePicker__Separator">—</p>
+					<TimePicker
+						clearable
+						minutesStep={15}
+						value={endTime}
+						placeholder="00:00 AM"
+						onChange={(e) => handleDate(e, day.id, 'end', index)}
+					/>
 
-				{index !== 0 ?
-					(<div className="Availability__Remove">
-						<IconButton>
-							<RemoveCircleOutlineSharpIcon />
-						</IconButton>
-					</div>) : null
-				}
+					{index !== 0 ? (
+						<div className="Availability__Remove">
+							<IconButton>
+								<RemoveCircleOutlineSharpIcon />
+							</IconButton>
+						</div>
+					) : null}
+				</div>
 			</div>
-		</div>
-	)};
+		);
+	};
 
 	// Build Fields for Availability
 	const dayFields = userAvailability.map((day) => (
@@ -314,11 +322,15 @@ function BeTutorForm({ uid, user }) {
 				confirmDialog={confirmDialog}
 				setConfirmDialog={setConfirmDialog}
 			/>
-			{ isLoading ? (<Loader />) 
-				: 
-				(
-					<>
-					<SwitchToggler checked={user.isTutor} handleChange={promptTutorDialog} name={'is-tutor-toggle'}/>
+			{isLoading ? (
+				<Loader />
+			) : (
+				<>
+					<SwitchToggler
+						checked={user.isTutor}
+						handleChange={promptTutorDialog}
+						name={'is-tutor-toggle'}
+					/>
 					{/* <form className="container mb-3" onSubmit={handleSubmit}> */}
 					<div className="form-group">
 						<label className="float-left">I can help in...</label>
@@ -336,7 +348,9 @@ function BeTutorForm({ uid, user }) {
 							placeholder="ex. python, photoshop, calculus..."
 						/>
 						<div className="keyword-form-footer form-footer">
-							<small className="info-text">*use comma to separate keywords</small>
+							<small className="info-text">
+								*use comma to separate keywords
+							</small>
 							<small
 								className={`char-count ${
 									30 - formData.keywords.length <= 10 ? 'error-limit' : ''
@@ -364,14 +378,18 @@ function BeTutorForm({ uid, user }) {
 								className="form-control mate-form-input"
 								type="text"
 								onChange={handleChange}
-								onKeyDown={(e) => handleKeyDown('portfolio', formData.portfolio, e)}
+								onKeyDown={(e) =>
+									handleKeyDown('portfolio', formData.portfolio, e)
+								}
 								name="portfolio"
 								value={formData.portfolio}
 								maxLength="30"
 								placeholder="ex. linkedin, github, website..."
 							/>
 							<div className="portfolio-form-footer form-footer">
-								<small className="info-text">*use comma to separate links</small>
+								<small className="info-text">
+									*use comma to separate links
+								</small>
 								<small
 									className={`char-count ${
 										30 - formData.portfolio.length <= 10 ? 'error-limit' : ''
@@ -396,15 +414,14 @@ function BeTutorForm({ uid, user }) {
 						</div>
 					</form> */}
 				</>
-				)
-			}
+			)}
 		</div>
 	);
 }
 
 BeTutorForm.propTypes = {
 	uid: PropTypes.string,
-	user: PropTypes.object
-}
+	user: PropTypes.object,
+};
 
 export default BeTutorForm;
