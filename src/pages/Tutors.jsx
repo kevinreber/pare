@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 /** Components & Helpers */
-import TutorList from '../components/Tutors/TutorList';
+import FindTutors from '../components/Tutors/FindTutors';
 import BeTutorForm from '../components/Tutors/BeTutorForm';
 import db from '../config/fbConfig';
 import './styles/Tutors.css';
@@ -57,7 +57,7 @@ function Tutor() {
 
 	const TutorsBody =
 		active === 'findTutor' ? (
-			<TutorList tutors={tutors} isLoading={isLoading} />
+			<FindTutors tutors={tutors} isLoading={isLoading} />
 		) : (
 			<BeTutorForm uid={currentUser.uid} user={user} />
 		);

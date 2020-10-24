@@ -1,71 +1,71 @@
 :root {
-  --primary-color: #75f3e7;
-  --secondary-color: #eeeeee;
-  --tertiary-color: #393e46;
-  --tertiary-color-light: rgb(43, 47, 58);
-  --danger-color: #e15554;
-  --bg-color: #222831;
-  --user-chat-color: #65cac3;
+	--primary-color: #75f3e7;
+	--secondary-color: #eeeeee;
+	--tertiary-color: #393e46;
+	--tertiary-color-light: rgb(43, 47, 58);
+	--danger-color: #e15554;
+	--bg-color: #222831;
+	--user-chat-color: #65cac3;
 }
 
 body {
-  font-family: 'Rubik', sans-serif;
+	font-family: 'Rubik', sans-serif;
 }
 
 .App {
-  text-align: center;
+	text-align: center;
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+	height: 40vmin;
+	pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+	.App-logo {
+		animation: App-logo-spin infinite 20s linear;
+	}
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+	background-color: #282c34;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: calc(10px + 2vmin);
+	color: white;
 }
 
 .App-link {
-  color: #61dafb;
+	color: #61dafb;
 }
 
 body {
-  background-color: var(--bg-color);
-  color: var(--secondary-color);
+	background-color: var(--bg-color);
+	color: var(--secondary-color);
 }
 
 ul {
-  padding: 0;
-  list-style-type: none;
+	padding: 0;
+	list-style-type: none;
 }
 
 input,
 .mate-form-input {
-  border: 1px solid var(--tertiary-color);
-  background-color: var(--bg-color);
-  color: var(--secondary-color);
+	border: 1px solid var(--tertiary-color);
+	background-color: var(--bg-color);
+	color: var(--secondary-color);
 }
 
 input:focus,
 .mate-form-input:focus {
-  border-color: var(--bg-color);
-  background-color: var(--tertiary-color);
-  color: var(--secondary-color);
-  outline: none;
-  box-shadow: none;
+	border-color: var(--bg-color);
+	background-color: var(--tertiary-color);
+	color: var(--secondary-color);
+	outline: none;
+	box-shadow: none;
 }
 
 /* Change Autocomplete styles in Chrome*/
@@ -78,10 +78,10 @@ textarea:-webkit-autofill:focus,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
-  border: 1px solid var(--tertiary-color);
-  -webkit-text-fill-color: var(--secondary-color);
-  -webkit-box-shadow: 0 0 0px 1000px var(--bg-color) inset;
-  transition: background-color 5000s ease-in-out 0s;
+	border: 1px solid var(--tertiary-color);
+	-webkit-text-fill-color: var(--secondary-color);
+	-webkit-box-shadow: 0 0 0px 1000px var(--bg-color) inset;
+	transition: background-color 5000s ease-in-out 0s;
 }
 
 h1,
@@ -93,7 +93,7 @@ h6,
 label,
 .mate-text-primary,
 .success {
-  color: var(--primary-color);
+	color: var(--primary-color);
 }
 
 /********************************* */
@@ -101,180 +101,180 @@ label,
 /********************************* */
 
 .Body-Header {
-  display: flex;
-  position: fixed;
-  justify-content: space-around;
-  padding-top: 1.2rem;
-  padding-bottom: 1.2rem;
-  border-bottom: 2px solid var(--tertiary-color);
-  cursor: pointer;
-  height: 8vh;
-  background-color: var(--bg-color);
-  margin-top: 9.6vh;
-  width: 100%;
-  z-index: 25;
-  box-shadow: 0 20px 20px -20px rgba(0, 0, 0, 0.6);
+	display: flex;
+	position: fixed;
+	justify-content: space-around;
+	padding-top: 1.2rem;
+	padding-bottom: 1.2rem;
+	border-bottom: 2px solid var(--tertiary-color);
+	cursor: pointer;
+	height: 8vh;
+	background-color: var(--bg-color);
+	margin-top: 9.6vh;
+	width: 100%;
+	z-index: 25;
+	box-shadow: 0 20px 20px -20px rgba(0, 0, 0, 0.6);
 }
 
 .Body-Header h4,
 .Body-Header h5 {
-  margin: 0;
+	margin: 0;
 }
 
 .Page__Body {
-  flex: 1;
-  padding: 30px;
-  overflow: scroll;
-  margin-top: 18vh;
-  margin-bottom: 7rem;
+	flex: 1;
+	padding: 30px;
+	overflow: scroll;
+	margin-top: 18vh;
+	margin-bottom: 7rem;
 }
 
 /********************************* */
 
 .mate-bg-primary {
-  background-color: var(--bg-color);
+	background-color: var(--bg-color);
 }
 
 .mate-text-secondary {
-  color: var(--secondary-color);
+	color: var(--secondary-color);
 }
 
 .mate-text-danger,
 .danger {
-  color: var(--danger-color);
+	color: var(--danger-color);
 }
 
 .mate-text-active {
-  color: var(--tertiary-color);
+	color: var(--tertiary-color);
 }
 
 .mate-btn,
 input,
 .mate-form-input {
-  border-radius: 15px;
+	border-radius: 15px;
 }
 
 .description-input {
-  height: 74px;
+	height: 74px;
 }
 
 .mate-btn {
-  height: 45px;
+	height: 45px;
 }
 
 .mate-btn-danger {
-  background-color: var(--bg-color);
-  color: var(--danger-color);
-  border: 1px solid var(--danger-color);
+	background-color: var(--bg-color);
+	color: var(--danger-color);
+	border: 1px solid var(--danger-color);
 }
 
 label,
 input,
 .mate-form-input {
-  font-size: 16px;
+	font-size: 16px;
 }
 
-.NavBar>a:hover {
-  color: var(--primary-color);
+.NavBar > a:hover {
+	color: var(--primary-color);
 }
 
 .mate-btn {
-  font-size: 20px;
-  z-index: 1000;
+	font-size: 20px;
+	z-index: 1000;
 }
 
 .mate-btn-primary {
-  color: var(--bg-color);
-  background-color: var(--primary-color);
+	color: var(--bg-color);
+	background-color: var(--primary-color);
 }
 
 .mate-btn-secondary {
-  color: var(--primary-color);
-  background-color: var(--bg-color);
-  border: 1px solid var(--primary-color);
+	color: var(--primary-color);
+	background-color: var(--bg-color);
+	border: 1px solid var(--primary-color);
 }
 
 .mate-btn-secondary:hover {
-  color: var(--bg-color);
-  background-color: var(--primary-color);
-  border: 1px solid var(--primary-color);
+	color: var(--bg-color);
+	background-color: var(--primary-color);
+	border: 1px solid var(--primary-color);
 }
 
 .mate-btn-cta {
-  position: fixed;
-  width: 350px;
-  bottom: 7.5rem;
-  left: 50%;
-  margin-left: -175px;
+	position: fixed;
+	width: 350px;
+	bottom: 7.5rem;
+	left: 50%;
+	margin-left: -175px;
 }
 
 .MuiButtonBase-root.MuiIconButton-root,
-.MuiButtonBase-root.MuiIconButton-root>.MuiIconButton-label>a {
-  font-size: large;
-  color: var(--tertiary-color);
+.MuiButtonBase-root.MuiIconButton-root > .MuiIconButton-label > a {
+	font-size: large;
+	color: var(--tertiary-color);
 }
 
 .MuiButtonBase-root.MuiIconButton-root:hover {
-  color: var(--primary-color);
+	color: var(--primary-color);
 }
 
 .Mate-Card {
-  padding: 1.2rem;
+	padding: 1.2rem;
 }
 
 input::-webkit-input-placeholder {
-  /* Chrome/Opera/Safari */
-  color: var(--secondary-color);
-  text-transform: lowercase;
-  font-size: small;
+	/* Chrome/Opera/Safari */
+	color: var(--secondary-color);
+	text-transform: lowercase;
+	font-size: small;
 }
 
 input::-moz-placeholder {
-  /* Firefox 19+ */
-  color: var(--secondary-color);
-  text-transform: lowercase;
-  font-size: small;
+	/* Firefox 19+ */
+	color: var(--secondary-color);
+	text-transform: lowercase;
+	font-size: small;
 }
 
 input:-ms-input-placeholder {
-  /* IE 10+ */
-  color: var(--secondary-color);
-  font-size: small;
-  text-transform: lowercase;
+	/* IE 10+ */
+	color: var(--secondary-color);
+	font-size: small;
+	text-transform: lowercase;
 }
 
 input:-moz-placeholder {
-  /* Firefox 18- */
-  color: var(--secondary-color);
-  font-size: small;
-  text-transform: lowercase;
+	/* Firefox 18- */
+	color: var(--secondary-color);
+	font-size: small;
+	text-transform: lowercase;
 }
 
 .mate-form-input option:disabled.option-disabled {
-  color: var(--secondary-color);
-  font-size: small;
-  text-transform: lowercase;
+	color: var(--secondary-color);
+	font-size: small;
+	text-transform: lowercase;
 }
 
 select option:disabled {
-  color: var(--secondary-color);
-  font-size: small;
-  text-transform: lowercase;
+	color: var(--secondary-color);
+	font-size: small;
+	text-transform: lowercase;
 }
 
 .errors,
 .error-limit {
-  color: var(--danger-color);
+	color: var(--danger-color);
 }
 
 .errors {
-  font-size: smaller;
-  font-style: italic;
+	font-size: smaller;
+	font-style: italic;
 }
 
 a:hover {
-  text-decoration: none;
-  background-color: #12151a;
+	text-decoration: none;
+	background-color: #12151a;
 }
 
 /********************************* */
@@ -282,23 +282,23 @@ a:hover {
 /********************************* */
 
 .MuiPaper-root.MuiPopover-paper.MuiPaper-elevation8.MuiPaper-rounded {
-  background-color: var(--tertiary-color);
+	background-color: var(--tertiary-color);
 }
 
 .MuiButtonBase-root.MuiIconButton-root.Delete__Btn {
-  color: var(--danger-color);
+	color: var(--danger-color);
 }
 
 .MuiButtonBase-root.MuiIconButton-root.Edit__Btn {
-  color: var(--user-chat-color);
+	color: var(--user-chat-color);
 }
 
 .MuiButtonBase-root.MuiIconButton-root.Share__Btn {
-  color: var(--primary-color);
+	color: var(--primary-color);
 }
 
 .MuiButtonBase-root.MuiIconButton-root.Share__Btn small {
-  margin-left: 2px;
+	margin-left: 2px;
 }
 
 /********************************* */
@@ -306,53 +306,61 @@ a:hover {
 /********************************* */
 
 .date-input-group {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 1.5rem;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 1.5rem;
 }
 
 .MuiInputBase-input,
 .MuiInput-input {
-  color: var(--secondary-color) !important;
+	color: var(--secondary-color) !important;
 }
 
 .MuiInput-underline::after {
-  border-bottom: 1px solid var(--secondary-color) !important;
+	border-bottom: 1px solid var(--secondary-color) !important;
 }
 
 .MuiInput-underline::before {
-  border-bottom: 1px solid var(--tertiary-color) !important;
+	border-bottom: 1px solid var(--tertiary-color) !important;
 }
 
 .PostForm__Footer {
-  float: right;
+	float: right;
 }
 
 .message__attachments svg {
-  fill: var(--tertiary-color);
-  color: var(--tertiary-color);
+	fill: var(--tertiary-color);
+	color: var(--tertiary-color);
+}
+
+/********************************* */
+/** Checkbox                       *
+/********************************* */
+
+span.MuiButtonBase-root.MuiIconButton-root.PrivateSwitchBase-root-9.MuiCheckbox-root.MuiCheckbox-colorSecondary.PrivateSwitchBase-checked-10.Mui-checked.MuiIconButton-colorSecondary {
+	color: var(--primary-color);
 }
 
 /********************************* */
 /** Chat                           *
 /********************************* */
 
-.message__attachments>i {
-  color: var(--tertiary-color);
-  margin-right: .5rem;
-  /* padding: 1rem; */
+.message__attachments > i {
+	color: var(--tertiary-color);
+	margin-right: 0.5rem;
+	/* padding: 1rem; */
 }
 
-.message__attachments>i:hover {
-  color: var(--primary-color);
+.message__attachments > i:hover {
+	color: var(--primary-color);
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
+	from {
+		transform: rotate(0deg);
+	}
 
-  to {
-    transform: rotate(360deg);
-  }
+	to {
+		transform: rotate(360deg);
+	}
 }
