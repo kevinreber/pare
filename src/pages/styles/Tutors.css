@@ -3,153 +3,187 @@
 /*************************************************/
 
 .Tutors {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .Tutors__Body {
-    flex: 1;
-    overflow: scroll;
-    margin-top: 18vh;
-    margin-bottom: 9rem;
+	flex: 1;
+	overflow: scroll;
+	margin-top: 18vh;
+	margin-bottom: 9rem;
 }
 
+.Find-Tutors,
+.BeTutorForm {
+	margin-top: 1rem;
+	padding-left: 1.5rem;
+	padding-right: 1.5rem;
+}
+
+.Find-Tutors > form > .form-group {
+	display: flex;
+	flex-direction: column;
+}
+
+.Find-Tutors > form > .form-group > label {
+	text-align: left;
+}
+.Find-Tutors
+	> form
+	> .form-group.Find-Availability
+	.MuiTypography-root.MuiFormControlLabel-label.MuiTypography-body1 {
+	color: var(--secondary-color);
+}
+
+/*************************************************/
+/** Find Tutor List                              */
+/*************************************************/
+
 .Tutor.Tutor-Card {
-    display: flex;
-    padding: 1rem;
-    font-size: 16px;
+	display: flex;
+	padding: 1rem;
+	font-size: 16px;
 }
 
 .Tutor.Tutor-Card p,
 .Tutor.Tutor-Card ul {
-    margin-bottom: .5rem;
+	margin-bottom: 0.5rem;
 }
-.Tutor.Tutor-Card .MuiChip-root.MuiChip-sizeSmall>.MuiChip-label.MuiChip-labelSmall{
-    font-size: 11px;
+.Tutor.Tutor-Card
+	.MuiChip-root.MuiChip-sizeSmall
+	> .MuiChip-label.MuiChip-labelSmall {
+	font-size: 11px;
 }
 .Tutor.Tutor-Card .Tutor-Card__Header {
-    font-size: 1rem;
-    margin-bottom: .25rem;
+	font-size: 1rem;
+	margin-bottom: 0.25rem;
 }
 
 .Tutor.Tutor-Card .Tutor-Card__Body {
-    font-size: 14px;
-    color: var(--secondary-color);
+	font-size: 14px;
+	color: var(--secondary-color);
 }
 
 .mate-table {
-    width: 100%;
-    border-bottom: 1px solid var(--tertiary-color);
+	width: 100%;
+	border-bottom: 1px solid var(--tertiary-color);
 }
 
-.Tutor.Tutor-Card .User-Keywords>li .MuiChip-root,
-.Tutor.Tutor-Card .User-Classes>li .MuiChip-root {
-    /* Default --secondary color */
-    color: var(--secondary);
+.Tutor.Tutor-Card .User-Keywords > li .MuiChip-root,
+.Tutor.Tutor-Card .User-Classes > li .MuiChip-root {
+	/* Default --secondary color */
+	color: var(--secondary);
 }
 
 /*************************************************/
 /** Tutor Switch Toggler                         */
 /*************************************************/
 
-.BeTutorForm .Switch-Toggle{
-    display: flex;
-    justify-content: flex-end;
+.BeTutorForm .Switch-Toggle {
+	display: flex;
+	justify-content: flex-end;
 }
 
-.BeTutorForm .MuiIconButton-label .PrivateSwitchBase-input-12.MuiSwitch-input>.MuiSwitch-thumb,
-.BeTutorForm .MuiIconButton-label .PrivateSwitchBase-input-12.MuiSwitch-input>.MuiSwitch-thumb:focus{
-    color: var(--tertiary-color);
+.BeTutorForm
+	.MuiIconButton-label
+	.PrivateSwitchBase-input-12.MuiSwitch-input
+	> .MuiSwitch-thumb,
+.BeTutorForm
+	.MuiIconButton-label
+	.PrivateSwitchBase-input-12.MuiSwitch-input
+	> .MuiSwitch-thumb:focus {
+	color: var(--tertiary-color);
 }
 
-.BeTutorForm .MuiSwitch-colorSecondary.Mui-checked + .MuiSwitch-track{
-    background-color: var(--user-chat-color);
+.BeTutorForm .MuiSwitch-colorSecondary.Mui-checked + .MuiSwitch-track {
+	background-color: var(--user-chat-color);
 }
 
-.BeTutorForm .MuiSwitch-colorSecondary.Mui-checked{
-    color: var(--primary-color);
+.BeTutorForm .MuiSwitch-colorSecondary.Mui-checked {
+	color: var(--primary-color);
 }
 
 /*************************************************/
 /** Be Tutor Form                                */
 /*************************************************/
 
-.BeTutorForm {
-    margin-top: 1rem;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-}
-
-.Be-Tutor__Availability{
-    text-align: left
+.Be-Tutor__Availability {
+	text-align: left;
 }
 
 .BeTutorForm .Be-Tutor__Availability,
 .BeTutorForm .BeTutor__Portfolio {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
-.BeTutorForm label.MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated.MuiInputLabel-shrink.MuiFormLabel-filled,
-.BeTutorForm .MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated {
-    color: var(--primary-color);
+.BeTutorForm
+	label.MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated.MuiInputLabel-shrink.MuiFormLabel-filled,
+.BeTutorForm
+	.MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated {
+	color: var(--primary-color);
 }
 
-.BeTutorForm label.MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated.MuiInputLabel-shrink.MuiFormLabel-filled{
-    font-size: 1.25rem;
-    font-weight: 500;
+.BeTutorForm
+	label.MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated.MuiInputLabel-shrink.MuiFormLabel-filled {
+	font-size: 1.25rem;
+	font-weight: 500;
 }
 
 .BeTutorForm input.MuiInputBase-input.MuiInput-input {
-    font-weight: 300;
-    font-size: 14px;
-    margin-top: 0.2rem;
-    width: 88px;
+	font-weight: 300;
+	font-size: 14px;
+	margin-top: 0.2rem;
+	width: 88px;
 }
 
 .BeTutorForm input.MuiInputBase-input.MuiInput-input:active,
 .BeTutorForm input.MuiInputBase-input.MuiInput-input:focus {
-    background-color: var(--bg-color);
+	background-color: var(--bg-color);
 }
 
 .BeTutorForm .Availability__Day {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1rem;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 1rem;
 }
 
 .BeTutorForm .Availability__Day .Availability__TimePicker {
-    position: relative;
-    display: flex;
-    align-items: baseline;
+	position: relative;
+	display: flex;
+	align-items: baseline;
 }
 
-.BeTutorForm .Availability__Day .Availability__TimePicker .TimePicker__Separator {
-    position: absolute;
-    left: 4.3rem;
-    bottom: -.5rem;
-    font-weight: 300;
-    font-size: 14px;
+.BeTutorForm
+	.Availability__Day
+	.Availability__TimePicker
+	.TimePicker__Separator {
+	position: absolute;
+	left: 4.3rem;
+	bottom: -0.5rem;
+	font-weight: 300;
+	font-size: 14px;
 }
 
-.BeTutorForm .Availability__Day>.Availability__Add,
+.BeTutorForm .Availability__Day > .Availability__Add,
 .BeTutorForm .Portfolio__Add,
 .BeTutorForm .BeTutor__Portfolio label {
-    align-self: flex-start;
+	align-self: flex-start;
 }
 
-.BeTutorForm .Availability__Day>.Availability__Add>button {
-    padding: 0;
+.BeTutorForm .Availability__Day > .Availability__Add > button {
+	padding: 0;
 }
 
 .form-footer {
-    display: flex;
-    justify-content: space-between;
-    font-style: italic;
+	display: flex;
+	justify-content: space-between;
+	font-style: italic;
 }
 
-.form-footer>.info-text {
-    color: var(--tertiary-color);
+.form-footer > .info-text {
+	color: var(--tertiary-color);
 }
 
 /*************************************************/
@@ -159,77 +193,83 @@
 .User-Keywords,
 .User-Portfolio-Links,
 .User-Classes {
-    display: flex;
-    justify-content: start;
-    flex-wrap: wrap;
+	display: flex;
+	justify-content: start;
+	flex-wrap: wrap;
 }
 
-.User-Keywords>li .MuiChip-root,
-.User-Portfolio-Links>li .MuiChip-root,
-.User-Classes>li .MuiChip-root {
-    background-color: var(--bg-color);
-    border: 1px solid var(--tertiary-color);
-    color: var(--secondary-color);
-    margin-right: .5rem;
-    margin-bottom: .5rem;
+.User-Keywords > li .MuiChip-root,
+.User-Portfolio-Links > li .MuiChip-root,
+.User-Classes > li .MuiChip-root {
+	background-color: var(--bg-color);
+	border: 1px solid var(--tertiary-color);
+	color: var(--secondary-color);
+	margin-right: 0.5rem;
+	margin-bottom: 0.5rem;
 }
 
-.User-Keywords>li .MuiChip-root svg,
-.User-Portfolio-Links>li .MuiChip-root svg,
-.User-Classes>li .MuiChip-root svg {
-    color: var(--tertiary-color);
+.User-Keywords > li .MuiChip-root svg,
+.User-Portfolio-Links > li .MuiChip-root svg,
+.User-Classes > li .MuiChip-root svg {
+	color: var(--tertiary-color);
 }
 
-.User-Keywords>li .MuiChip-root svg:hover,
-.User-Portfolio-Links>li .MuiChip-root svg:hover,
-.User-Classes>li .MuiChip-root svg:hover {
-    color: var(--primary-color);
+.User-Keywords > li .MuiChip-root svg:hover,
+.User-Portfolio-Links > li .MuiChip-root svg:hover,
+.User-Classes > li .MuiChip-root svg:hover {
+	color: var(--primary-color);
 }
 
 /*************************************************/
 /** Time Clock Select Field                      */
 /*************************************************/
 
-.MuiToolbar-root.MuiToolbar-regular.MuiPickersToolbar-toolbar.MuiPickersTimePickerToolbar-toolbarAmpmLeftPadding.MuiToolbar-gutters .MuiPickersTimePickerToolbar-ampmSelection{
-    margin-right: 0;
+.MuiToolbar-root.MuiToolbar-regular.MuiPickersToolbar-toolbar.MuiPickersTimePickerToolbar-toolbarAmpmLeftPadding.MuiToolbar-gutters
+	.MuiPickersTimePickerToolbar-ampmSelection {
+	margin-right: 0;
 }
 
-.MuiPickersBasePicker-container>.MuiPickersToolbar-toolbar{
-    background-color: var(--user-chat-color);
-    color: var(--secondary-color);
+.MuiPickersBasePicker-container > .MuiPickersToolbar-toolbar {
+	background-color: var(--user-chat-color);
+	color: var(--secondary-color);
 }
 
-.MuiPickersBasePicker-pickerView{
-    color: var(--secondary-color);
-    background-color: var(--bg-color);
+.MuiPickersBasePicker-pickerView {
+	color: var(--secondary-color);
+	background-color: var(--bg-color);
 }
 
 .MuiPickersBasePicker-pickerView .MuiPickersClock-pin,
 .MuiPickersBasePicker-pickerView .MuiPickersClockPointer-pointer,
-.MuiPickersBasePicker-pickerView .MuiPickersClockPointer-thumb.MuiPickersClockPointer-noPoint,
-.MuiPickersBasePicker-pickerView .MuiPickersClockPointer-pointer.MuiPickersClockPointer-animateTransform,
-.MuiPickersBasePicker-pickerView .MuiPickersClockPointer-noPoint{
-    background-color: var(--user-chat-color);
+.MuiPickersBasePicker-pickerView
+	.MuiPickersClockPointer-thumb.MuiPickersClockPointer-noPoint,
+.MuiPickersBasePicker-pickerView
+	.MuiPickersClockPointer-pointer.MuiPickersClockPointer-animateTransform,
+.MuiPickersBasePicker-pickerView .MuiPickersClockPointer-noPoint {
+	background-color: var(--user-chat-color);
 }
 
-.MuiPickersBasePicker-pickerView .MuiPickersClockPointer-thumb{
-    border: 14px solid var(--user-chat-color);
+.MuiPickersBasePicker-pickerView .MuiPickersClockPointer-thumb {
+	border: 14px solid var(--user-chat-color);
 }
 
-.MuiTypography-root.MuiPickersClockNumber-clockNumber.MuiTypography-body1{
-    color: var(--secondary-color);
+.MuiTypography-root.MuiPickersClockNumber-clockNumber.MuiTypography-body1 {
+	color: var(--secondary-color);
 }
 
-.TimePickers-Content .MuiPaper-root.MuiDialog-paper.MuiDialog-paperScrollPaper.MuiDialog-paperWidthSm.MuiPaper-elevation24.MuiPaper-rounded{
-    height: 425px;
+.TimePickers-Content
+	.MuiPaper-root.MuiDialog-paper.MuiDialog-paperScrollPaper.MuiDialog-paperWidthSm.MuiPaper-elevation24.MuiPaper-rounded {
+	height: 425px;
 }
 
-.TimePickers-Content .MuiPaper-root.MuiDialog-paper.MuiDialog-paperScrollPaper.MuiDialog-paperWidthSm.MuiPaper-elevation24.MuiPaper-rounded{
-    background-color: var(--bg-color);
+.TimePickers-Content
+	.MuiPaper-root.MuiDialog-paper.MuiDialog-paperScrollPaper.MuiDialog-paperWidthSm.MuiPaper-elevation24.MuiPaper-rounded {
+	background-color: var(--bg-color);
 }
 
 .MuiPaper-root.MuiDialog-paper.MuiPickersModal-dialogRoot.MuiDialog-paperScrollPaper.MuiDialog-paperWidthSm.MuiPaper-elevation24.MuiPaper-rounded
-.MuiDialogActions-root.MuiPickersModal-withAdditionalAction.MuiDialogActions-spacing>.MuiButtonBase-root.MuiButton-root.MuiButton-text{
-    border: 1px solid var(--primary-color);
-    color: var(--primary-color);
+	.MuiDialogActions-root.MuiPickersModal-withAdditionalAction.MuiDialogActions-spacing
+	> .MuiButtonBase-root.MuiButton-root.MuiButton-text {
+	border: 1px solid var(--primary-color);
+	color: var(--primary-color);
 }
