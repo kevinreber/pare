@@ -28,11 +28,29 @@ function Tutor() {
 					);
 				});
 		}
+
+		function getTutorsAvailability() {
+			// const availabilities =
+			console.log('getting...');
+			tutors.map(async (tutor) => {
+				await db
+					.collection('users')
+					.doc(tutor.id)
+					.collection('availability')
+					.orderBy('day')
+					.get()
+					.then((data) => {
+						console.log(data.docs);
+					});
+			});
+		}
+
 		if (isLoading) {
 			getTutors();
+			getTutorsAvailability();
 			setIsLoading(false);
 		}
-	}, [isLoading]);
+	}, [isLoading, tutors]);
 
 	useEffect(() => {
 		function getUserTutorInfo() {
