@@ -50,9 +50,49 @@ function FindTutors({ tutors, isLoading }) {
 		setAvailability((fData) => ({ ...fData, [name]: !availability[name] }));
 	};
 
+	const handleSubmit = (e) => {
+		e.preventDefault();
+
+		const filteredTutorKeywords = tutors.filter((tutor) => {
+			// check if tutors keywords include user's search
+			let result = tutor.data.keywords.some((keyword) =>
+				search.toLowerCase().includes(keyword.toLowerCase())
+			);
+			if (result) {
+				return tutor;
+			}
+		});
+		console.log(filteredTutorKeywords);
+
+		const filteredTutorAvailability = [];
+
+		// = filteredTutorKeywords.filter(tutor => {
+		// check if tutors availability include user's search
+		// let result = tutor.data.availability.some((day) =>
+		// 	.includes(day)
+		// );
+		// 	if ()
+		// })
+
+		// filter tutors by availability
+		for (let tutor of filteredTutorKeywords) {
+			// for (let day in availability) {
+			// 	if (day && tutor.data[day].start && tutor.data[day].end) {
+			// 		filteredTutorAvailability.push(tutor);
+			// 	}
+			// }
+		}
+
+		console.log(filteredTutorAvailability);
+		// setFilteredTutors(filteredKeywords);
+		// setFilteredTutors = (tutors => {
+		// 	[...tutors, ]
+		// })
+	};
+
 	return (
 		<div className="Find-Tutors">
-			<form>
+			<form onSubmit={handleSubmit}>
 				<div className="form-group">
 					<label htmlFor="tutor-search">I need help in...</label>
 					<div className="Search__Elements">
