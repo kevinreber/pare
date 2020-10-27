@@ -16,38 +16,46 @@ function Tutor() {
 	const [user, setUser] = useState(null);
 
 	useEffect(() => {
+		// Gets all available tutors data
 		function getTutors() {
 			db.collection('users')
 				.where('isTutor', '==', true)
-				.onSnapshot((snapshot) => {
+				.get()
+				.then((data) => {
 					setTutors(
-						snapshot.docs.map((doc) => ({
-							id: doc.id,
-							data: doc.data(),
-						}))
+						data.docs.map(async (doc) => {
+							return {
+								id: doc.id,
+								data: doc.data(),
+								availability: await getTutorsAvailability(doc.id),
+							};
+						})
 					);
 				});
 		}
 
-		function getTutorsAvailability() {
-			// const availabilities =
-			console.log('getting...');
-			tutors.map(async (tutor) => {
-				await db
-					.collection('users')
-					.doc(tutor.id)
-					.collection('availability')
-					.orderBy('day')
-					.get()
-					.then((data) => {
-						console.log(data.docs);
+		// Gets tutor's availability
+		async function getTutorsAvailability(id) {
+			await db
+				.collection('users')
+				.doc(id)
+				.collection('availability')
+				.orderBy('day')
+				.get()
+				.then((data) => {
+					let userAvailability = data.docs.map((doc) => {
+						return {
+							id: doc.id,
+							data: doc.data(),
+						};
 					});
-			});
+					return userAvailability;
+				})
+				.catch((err) => console.log(err));
 		}
 
 		if (isLoading) {
 			getTutors();
-			getTutorsAvailability();
 			setIsLoading(false);
 		}
 	}, [isLoading, tutors]);
