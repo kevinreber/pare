@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { PropTypes } from 'prop-types';
 
 /** Components & Helpers */
 import SubmitButton from '../general/SubmitButton';
@@ -31,6 +32,10 @@ const PrivateCheckbox = withStyles({
 
 /** Form to add a course.
  * StudyGroups -> 'Join Study Group' Button -> Modal -> StudyGroupForm
+ *
+ * @param {function}	save			Function to save new Study Group to DB.
+ * @param {array}		studyGroups		Array of objects containing Study Group data.
+ * @param {object}	 	user			Object of current user's data.
  */
 function StudyGroupForm({ save, studyGroups, user }) {
 	const { uid, displayName, photoURL } = user;
@@ -279,5 +284,11 @@ function StudyGroupForm({ save, studyGroups, user }) {
 		</div>
 	);
 }
+
+StudyGroupForm.propTypes = {
+	save: PropTypes.func,
+	studyGroups: PropTypes.array,
+	user: PropTypes.object,
+};
 
 export default StudyGroupForm;

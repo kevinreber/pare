@@ -1,12 +1,15 @@
 /** Dependencies */
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { PropTypes } from 'prop-types';
 
 /** MUI */
 import { List } from '@material-ui/core';
 
 /** Creates a List of User's StudyGroups
  * StudyGroups -> StudyGroupsList -> StudyGroupCard -> StudyGroupChat
+ *
+ * @param {array}    studyGroups	Array of objects containing Study Group data.
  */
 function StudyGroupList({ studyGroups = [] }) {
 	/** Card Displaying Study Groups Information */
@@ -38,5 +41,9 @@ function StudyGroupList({ studyGroups = [] }) {
 		</div>
 	);
 }
+
+StudyGroupList.propTypes = {
+	studyGroups: PropTypes.array,
+};
 
 export default StudyGroupList;

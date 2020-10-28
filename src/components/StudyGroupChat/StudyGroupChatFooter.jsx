@@ -1,7 +1,7 @@
 /** Dependencies */
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import firebase from 'firebase';
+import { PropTypes } from 'prop-types';
 
 /** Components & Helpers */
 import useFields from '../../hooks/useFields';
@@ -17,6 +17,10 @@ import PanoramaOutlinedIcon from '@material-ui/icons/PanoramaOutlined';
 
 /** Displays Study Group's Chat Footer that allows the user to enter a message
  * StudyGroups -> StudyGroupsList -> StudyGroupCard -> StudyGroupChat -> StudyGroupChatFooter
+ *
+ * @param {function}	send	Function to send new message to DB of Study Group.
+ * @param {object}	 	user	Object of current user's data.
+ *
  */
 function StudyGroupChatFooter({ send, user }) {
 	const dispatch = useDispatch();
@@ -81,5 +85,10 @@ function StudyGroupChatFooter({ send, user }) {
 		</>
 	);
 }
+
+StudyGroupChatFooter.propTypes = {
+	send: PropTypes.func,
+	user: PropTypes.object,
+};
 
 export default StudyGroupChatFooter;

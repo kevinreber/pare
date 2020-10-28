@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
+import { PropTypes } from 'prop-types';
 
 /** Components & Helpers */
 import PopoverActions from '../general/PopoverActions';
@@ -12,6 +13,20 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import MoreHorizOutlinedIcon from '@material-ui/icons/MoreHorizOutlined';
 
+/** Comment Card Component
+ * Feed -> FeedList -> PostCard -> CommentList -> CommentCard
+ *
+ * @param {string}		postId		ID of post.
+ * @param {string} 		id			ID used to remove comment of post.
+ * @param {string} 		message		Comment's message.
+ * @param {string}		userId		ID of user who commented.
+ * @param {string}		username	Username of user who commented.
+ * @param {string}		avatar		Avatar of user who commented.
+ * @param {object }		timestamp	Date object of when commented was created.
+ * @param {function}	remove		Function to remove comment.
+ * @param {function}	edit		function to edit comment.
+ *
+ */
 function CommentCard({
 	postId,
 	id,
@@ -76,5 +91,17 @@ function CommentCard({
 		</div>
 	);
 }
+
+CommentCard.propTypes = {
+	postId: PropTypes.string,
+	id: PropTypes.string,
+	message: PropTypes.string,
+	userId: PropTypes.string,
+	username: PropTypes.string,
+	avatar: PropTypes.string,
+	timestamp: PropTypes.object,
+	remove: PropTypes.func,
+	edit: PropTypes.func,
+};
 
 export default CommentCard;

@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { PropTypes } from 'prop-types';
 
 /** Components & Helpers */
 import CTAButton from '../general/CTAButton';
@@ -20,13 +21,16 @@ import BlockIcon from '@material-ui/icons/Block';
 import LinkRoundedIcon from '@material-ui/icons/LinkRounded';
 
 /** Modal for Study Group Admin
- *  Admin controls will only show if user has admin access
+ * Admin controls will only show if user has admin access.
+ * StudyGroup -> StudyGroupChat -> StudyGroupChatAdmin
  *
- *  @param {string} title
- *  @param {Array} members
- *  @param {Object} currentUser
+ * @param {string}		studyGroupId	Study Group Id used to reference Study Group in DB.
+ * @param {string} 		title			Title of Study Group.
+ * @param {Array} 		members			Members of Study Group.
+ * @param {Object}		currentUser		Current logged in user's data.
+ * @param {function}	handleChange	Handles changes by updating state.
+ * @param {function}	saveChanges		Saves changes made to Study Group.
  *
- *  StudyGroup -> StudyGroupChat -> StudyGroupChatAdmin
  */
 function StudyGroupChatAdmin({
 	studyGroupId,
@@ -276,5 +280,14 @@ function StudyGroupChatAdmin({
 		</div>
 	);
 }
+
+StudyGroupChatAdmin.prototypes = {
+	studyGroupId: PropTypes.string,
+	title: PropTypes.string,
+	members: PropTypes.array,
+	currentUser: PropTypes.object,
+	handleChange: PropTypes.func,
+	saveChanges: PropTypes.func,
+};
 
 export default StudyGroupChatAdmin;
