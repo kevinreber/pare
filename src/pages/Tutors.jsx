@@ -93,13 +93,13 @@ function Tutor() {
 		setActive(e.target.id);
 	};
 
-	// Toggle form for User to Add Course
-	const [showSearch, setShowSearch] = useState(false);
-	const toggleSearch = () => setShowSearch((show) => !show);
-
 	const TutorsBody =
 		active === 'findTutor' ? (
-			<FindTutors tutors={tutors} isLoading={loadTutorsAvailabilities} />
+			<FindTutors
+				tutors={tutors}
+				isLoading={loadTutorsAvailabilities}
+				setLoadTutorData={() => setIsLoadingTutors(true)}
+			/>
 		) : (
 			<BeTutorForm uid={currentUser.uid} user={user} />
 		);
@@ -128,15 +128,7 @@ function Tutor() {
 					</h5>
 				</div>
 			</div>
-			<div className="Tutors__Body">
-				{TutorsBody}
-				{/* <div className='Courses-CourseList'>{courseList}</div>
-			<div className='CourseForm p-3'>
-				<div onClick={toggleForm} className='font-italic'>
-					<CTAButton text='Join Class' />
-				</div>
-			</div> */}
-			</div>
+			<div className="Tutors__Body">{TutorsBody}</div>
 		</div>
 	);
 }

@@ -17,6 +17,10 @@
 .Find-Tutors,
 .BeTutorForm {
 	margin-top: 1rem;
+}
+
+.Find-Tutors__Form,
+.BeTutorForm {
 	padding-left: 1.5rem;
 	padding-right: 1.5rem;
 }
@@ -42,7 +46,7 @@
 
 .Tutor.Tutor-Card {
 	display: flex;
-	padding: 1rem;
+	padding: 1rem 1.25rem;
 	font-size: 16px;
 }
 

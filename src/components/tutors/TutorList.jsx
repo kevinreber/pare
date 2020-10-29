@@ -73,7 +73,7 @@ function TutorList({ tutors, isLoading }) {
 	return (
 		<>
 			{isLoading ? <Loader /> : null}
-			{tutors.length === 0 && isLoading ? (
+			{tutors.length === 0 ? (
 				<NoData text="tutors available" added={false} />
 			) : (
 				<ul className="Tutor-List">{List}</ul>

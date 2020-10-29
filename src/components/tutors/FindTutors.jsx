@@ -26,10 +26,11 @@ const DAYS = [
 /**
  * Search bar that filters tutors.
  *
- * @param {array}    tutors			Array of objects containing tutor data.
- * @param {boolean}  isLoading    	Status if data is loaded.
+ * @param {array}    tutors				Array of objects containing tutor data.
+ * @param {boolean}  isLoading    		Status if data is loaded.
+ * @param {function} setLoadTutorData 	Function that set's state to load updated Tutor data.
  */
-function FindTutors({ tutors, isLoading }) {
+function FindTutors({ tutors, isLoading, setLoadTutorData }) {
 	const AVAILABILITY_INITIAL_STATE = {
 		monday: false,
 		tuesday: false,
@@ -43,93 +44,106 @@ function FindTutors({ tutors, isLoading }) {
 	const [filteredTutors, setFilteredTutors] = useState([]);
 	const [availability, setAvailability] = useState(AVAILABILITY_INITIAL_STATE);
 	const [search, setSearch] = useState('');
+	const [usedSearch, setUsedSearch] = useState(false);
 
 	const handleChange = (e) => {
-		const { name, value } = e.target;
-		console.log(name, e.target, value);
+		const { name } = e.target;
 		setAvailability((fData) => ({ ...fData, [name]: !availability[name] }));
 	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		let filteredTutorKeywords = tutors;
 
-		const filteredTutorKeywords = tutors.filter((tutor) => {
-			// check if tutors keywords include user's search
-			let result = tutor.data.keywords.some((keyword) =>
-				search.toLowerCase().includes(keyword.toLowerCase())
-			);
-			if (result) {
-				return tutor;
-			}
-		});
-		console.log(filteredTutorKeywords);
+		// if user is using search bar
+		if (search !== '' && search.trim() !== '') {
+			filteredTutorKeywords = tutors.filter((tutor) => {
+				// check if tutors keywords include user's search
+				let result = tutor.data.keywords.some((keyword) =>
+					search.toLowerCase().includes(keyword.toLowerCase())
+				);
+				if (result) {
+					return tutor;
+				}
+			});
+		}
 
 		const filteredTutorAvailability = [];
 
-		// = filteredTutorKeywords.filter(tutor => {
-		// check if tutors availability include user's search
-		// let result = tutor.data.availability.some((day) =>
-		// 	.includes(day)
-		// );
-		// 	if ()
-		// })
-
 		// filter tutors by availability
 		for (let tutor of filteredTutorKeywords) {
-			// for (let day in availability) {
-			// 	if (day && tutor.data[day].start && tutor.data[day].end) {
-			// 		filteredTutorAvailability.push(tutor);
-			// 	}
-			// }
+			for (let day of tutor.availability) {
+				// if user has checked availability of day and tutor is available on that specified day
+				if (availability[day.id] && day.data['0'].start && day.data['0'].end) {
+					filteredTutorAvailability.push(tutor);
+				}
+			}
 		}
 
-		console.log(filteredTutorAvailability);
-		// setFilteredTutors(filteredKeywords);
-		// setFilteredTutors = (tutors => {
-		// 	[...tutors, ]
-		// })
+		const filtered =
+			filteredTutorAvailability.length !== 0
+				? filteredTutorAvailability
+				: filteredTutorKeywords;
+		setFilteredTutors(filtered);
+		setLoadTutorData();
+		setUsedSearch(true);
+	};
+
+	const resetSearch = () => {
+		setFilteredTutors([]);
+		setAvailability(AVAILABILITY_INITIAL_STATE);
+		setSearch('');
+		setUsedSearch(false);
 	};
 
 	return (
 		<div className="Find-Tutors">
-			<form onSubmit={handleSubmit}>
-				<div className="form-group">
-					<label htmlFor="tutor-search">I need help in...</label>
-					<div className="Search__Elements">
-						<div className="Search__Icon">
-							<SearchIcon />
+			{!usedSearch ? (
+				<form className="Find-Tutors__Form" onSubmit={handleSubmit}>
+					<div className="form-group">
+						<label htmlFor="tutor-search">I need help in...</label>
+						<div className="Search__Elements">
+							<div className="Search__Icon">
+								<SearchIcon />
+							</div>
+							<input
+								id="tutor-search"
+								className="form-control mate-form-input"
+								type="search"
+								onChange={(e) => setSearch(e.target.value)}
+								name="search"
+								value={search}
+								maxLength="30"
+								placeholder="eg. photoshop, python, math"
+							/>
 						</div>
-						<input
-							id="tutor-search"
-							className="form-control mate-form-input"
-							type="search"
-							onChange={(e) => setSearch(e.target.value)}
-							name="search"
-							value={search}
-							maxLength="30"
-							placeholder="eg. photoshop, python, math"
-						/>
 					</div>
-				</div>
-				<div className="form-group Find-Availability">
-					<label>Availability</label>
-					{DAYS.map((day, index) => (
-						<FormControlLabel
-							key={index + 1}
-							control={
-								<Checkbox
-									checked={availability[day]}
-									onChange={handleChange}
-									name={day}
-								/>
-							}
-							label={capitalizeFirstLetter(day)}
-						/>
-					))}
-				</div>
-				<CTAButton text="Search" />
-			</form>
-			<TutorList tutors={filteredTutors} isLoading={isLoading} />
+					<div className="form-group Find-Availability">
+						<label>Availability</label>
+						{DAYS.map((day, index) => (
+							<FormControlLabel
+								key={index + 1}
+								control={
+									<Checkbox
+										checked={availability[day]}
+										onChange={handleChange}
+										name={day}
+									/>
+								}
+								label={capitalizeFirstLetter(day)}
+							/>
+						))}
+					</div>
+					<CTAButton text="Search" />
+				</form>
+			) : (
+				<>
+					<TutorList tutors={filteredTutors} isLoading={isLoading} />
+					<div onClick={resetSearch}>
+						<CTAButton text="New Search" />
+					</div>
+				</>
+			)}
 		</div>
 	);
 }
@@ -137,6 +151,7 @@ function FindTutors({ tutors, isLoading }) {
 FindTutors.propTypes = {
 	tutors: PropTypes.array,
 	isLoading: PropTypes.bool,
+	setLoadTutorData: PropTypes.func,
 };
 
 export default FindTutors;
