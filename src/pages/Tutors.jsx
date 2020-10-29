@@ -11,54 +11,70 @@ import './styles/Tutors.css';
 function Tutor() {
 	const currentUser = useSelector((state) => state.auth.user);
 
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoadingTutors, setIsLoadingTutors] = useState(true);
+	const [loadTutorsAvailabilities, setLoadTutorsAvailabilities] = useState(
+		false
+	);
 	const [tutors, setTutors] = useState([]);
 	const [user, setUser] = useState(null);
 
 	useEffect(() => {
 		// Gets all available tutors data
-		function getTutors() {
-			db.collection('users')
+		async function getTutors() {
+			await db
+				.collection('users')
 				.where('isTutor', '==', true)
 				.get()
 				.then((data) => {
 					setTutors(
-						data.docs.map(async (doc) => {
+						data.docs.map((doc) => {
 							return {
 								id: doc.id,
 								data: doc.data(),
-								availability: await getTutorsAvailability(doc.id),
 							};
 						})
 					);
-				});
+				})
+				.catch((err) => console.log(err));
+			setIsLoadingTutors(false);
+			setLoadTutorsAvailabilities(true);
+		}
+
+		if (isLoadingTutors) {
+			getTutors();
 		}
 
 		// Gets tutor's availability
-		async function getTutorsAvailability(id) {
-			await db
-				.collection('users')
-				.doc(id)
-				.collection('availability')
-				.orderBy('day')
-				.get()
-				.then((data) => {
-					let userAvailability = data.docs.map((doc) => {
-						return {
-							id: doc.id,
-							data: doc.data(),
-						};
-					});
-					return userAvailability;
-				})
-				.catch((err) => console.log(err));
-		}
+		if (loadTutorsAvailabilities) {
+			const tutorsCopy = [...tutors];
+			tutors.forEach(async (tutor, idx) => {
+				// Set tutor's availability
+				const availability = await db
+					.collection('users')
+					.doc(tutorsCopy[idx].id)
+					.collection('availability')
+					.orderBy('day')
+					.get()
+					.then((data) => {
+						let userAvailability = data.docs.map((doc) => {
+							return {
+								id: doc.id,
+								data: doc.data(),
+							};
+						});
+						return userAvailability;
+					})
+					.catch((err) => console.log(err));
 
-		if (isLoading) {
-			getTutors();
-			setIsLoading(false);
+				tutorsCopy[idx] = {
+					...tutorsCopy[idx],
+					availability,
+				};
+			});
+			setTutors(tutorsCopy);
+			setLoadTutorsAvailabilities(false);
 		}
-	}, [isLoading, tutors]);
+	}, [isLoadingTutors, tutors, loadTutorsAvailabilities]);
 
 	useEffect(() => {
 		function getUserTutorInfo() {
@@ -83,7 +99,7 @@ function Tutor() {
 
 	const TutorsBody =
 		active === 'findTutor' ? (
-			<FindTutors tutors={tutors} isLoading={isLoading} />
+			<FindTutors tutors={tutors} isLoading={loadTutorsAvailabilities} />
 		) : (
 			<BeTutorForm uid={currentUser.uid} user={user} />
 		);
