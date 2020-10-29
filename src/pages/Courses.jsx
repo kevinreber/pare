@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import CourseList from '../components/Courses/CourseList';
 import CourseForm from '../components/Courses/CourseForm';
 import Modal from '../components/general/Modal';
+import Loader from '../components/layout/Loader/Loader';
 import NoData from '../components/general/NoData';
 import CTAButton from '../components/general/CTAButton';
 import { addCourseToFB } from '../store/actions/courses';
@@ -25,39 +26,39 @@ function Courses() {
 		isOpen: false,
 		title: '',
 		subtitle: '',
-	}
+	};
 
 	/** Get courseCatalog from redux store */
 	const courseCatalog = useSelector((state) => state.courseCatalog);
 
-	const [courses, setCourses] = useState([]);
+	const [courses, setCourses] = useState(null);
+	const [isLoading, setIsLoading] = useState(true);
 
-	const [confirmDialog, setConfirmDialog] = useState(CONFIRM_DIALOG_INITIAL_STATE);
+	const [confirmDialog, setConfirmDialog] = useState(
+		CONFIRM_DIALOG_INITIAL_STATE
+	);
 
 	/** Current Semester courses */
-	const currentCourses = courses.filter(
-		(course) => course.data.semester.toLowerCase() === 'fall 2020'
-	);
+	const currentCourses =
+		!isLoading && courses
+			? courses.filter(
+					(course) => course.data.semester.toLowerCase() === 'fall 2020'
+			  )
+			: null;
+
 	/** Past Semester Courses */
-	const pastCourses = courses.filter(
-		(course) => course.data.semester.toLowerCase() !== 'fall 2020'
-	);
+	const pastCourses =
+		!isLoading && courses
+			? courses.filter(
+					(course) => course.data.semester.toLowerCase() !== 'fall 2020'
+			  )
+			: null;
 
 	// State will determine what courses to show in CourseList
 	const [active, setActive] = useState('current');
 	const toggleCourses = (e) => {
 		setActive(e.target.id);
 	};
-
-	// build list of courses, if no courses exist return 'No courses added'
-	const courseList =
-		courses && courses.length !== 0 ? (
-			<CourseList
-				courses={active === 'current' ? currentCourses : pastCourses}
-			/>
-		) : (
-			<NoData text={'courses'} />
-		);
 
 	// Toggle form for User to Add Course
 	const [showForm, setShowForm] = useState(false);
@@ -85,22 +86,28 @@ function Courses() {
 				isOpen: true,
 				message: 'Course Added',
 				type: 'success',
-					})
+			})
 		);
 	};
 
 	useEffect(() => {
-		db.collection('class')
-			.where('users', 'array-contains', currentUser.uid)
-			.onSnapshot((snapshot) =>
-				setCourses(
-					snapshot.docs.map((doc) => ({
-						id: doc.id,
-						data: doc.data(),
-					}))
-				)
-			);
-	}, []);
+		const getData = () => {
+			db.collection('class')
+				.where('users', 'array-contains', currentUser.uid)
+				.onSnapshot((snapshot) =>
+					setCourses(
+						snapshot.docs.map((doc) => ({
+							id: doc.id,
+							data: doc.data(),
+						}))
+					)
+				);
+			setIsLoading(false);
+		};
+		if (isLoading) {
+			getData();
+		}
+	}, [currentUser, isLoading]);
 
 	useEffect(() => {
 		/** get course catalog on page load */
@@ -111,6 +118,24 @@ function Courses() {
 			getCourseCatalog();
 		}
 	}, [dispatch, courseCatalog]);
+
+	// build list of courses, if no courses exist return 'No courses added'
+	let courseList;
+	if (isLoading) {
+		courseList = <Loader />;
+	} else if (!isLoading) {
+		courseList =
+			!courses ||
+			courses.length === 0 ||
+			(active === 'current' && currentCourses.length === 0) ||
+			(active === 'past' && pastCourses.length === 0) ? (
+				<NoData text={'courses'} />
+			) : (
+				<CourseList
+					courses={active === 'current' ? currentCourses : pastCourses}
+				/>
+			);
+	}
 
 	if (showForm) {
 		return (

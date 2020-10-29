@@ -8,6 +8,7 @@ import moment from 'moment';
 import NoData from '../components/general/NoData';
 import StudyGroupChatAdmin from '../components/StudyGroupChat/StudyGroupChatAdmin';
 import Modal from '../components/general/Modal';
+import Loader from '../components/layout/Loader/Loader';
 import BackButton from '../components/general/BackButton';
 import StudyGroupChatFooter from '../components/StudyGroupChat/StudyGroupChatFooter';
 import createFbTimestamp from '../utils/createFbTimestamp';
@@ -229,7 +230,7 @@ function StudyGroupChat() {
 			<div
 				id="StudyGroupChat__Body"
 				className="StudyGroupChat__Body Page__Body">
-				{StudyGroupChatBody}
+				{isLoading ? <Loader /> : <>{StudyGroupChatBody}</>}
 			</div>
 			<div className="StudyGroupChat__Footer">
 				<StudyGroupChatFooter send={sendMessage} user={currentUser} />
