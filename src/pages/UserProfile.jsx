@@ -10,6 +10,8 @@ import ConfirmDialog from '../components/general/ConfirmDialog';
 import CTAButton from '../components/general/CTAButton';
 import BackButton from '../components/general/BackButton';
 import Loader from '../components/layout/Loader/Loader';
+import Modal from '../components/general/Modal';
+import UserEditProfileForm from '../components/User/UserEditProfileForm';
 import createFbTimestamp from '../utils/createFbTimestamp';
 import { addFlashMessage } from '../store/actions/flashMessages';
 import createNewMessage from '../utils/createNewMessage';
@@ -24,6 +26,7 @@ function UserProfile() {
 	const currentUser = useSelector((state) => state.auth.user);
 	const [editProfile, setEditProfile] = useState(false);
 	const [userAvailability, setUserAvailability] = useState([]);
+	const [userCourses, setUserCourses] = useState([]);
 	const [userPosts, setUserPosts] = useState(null);
 
 	const [user, setUser] = useState({});
@@ -65,6 +68,17 @@ function UserProfile() {
 									data: doc.data(),
 								};
 							})
+						)
+					);
+
+				db.collection('class')
+					.where('users', 'array-contains', currentUser.uid)
+					.onSnapshot((snapshot) =>
+						setUserCourses(
+							snapshot.docs.map((doc) => ({
+								id: doc.id,
+								data: doc.data(),
+							}))
 						)
 					);
 
@@ -143,6 +157,33 @@ function UserProfile() {
 			</div>
 		);
 
+	const saveEdits = (data) => {
+		console.log(data);
+		dispatch(
+			addFlashMessage({
+				isOpen: true,
+				message: 'Changes Saved!',
+				type: 'success',
+			})
+		);
+		toggleEditProfile();
+	};
+
+	if (editProfile) {
+		return (
+			<Modal
+				content={
+					<UserEditProfileForm
+						bio={user.bio}
+						organizations={user.organizations}
+						save={saveEdits}
+					/>
+				}
+				closeModal={toggleEditProfile}
+			/>
+		);
+	}
+
 	return (
 		<div className="UserProfile">
 			{isLoading ? (
@@ -173,7 +214,7 @@ function UserProfile() {
 						posts={userPosts}
 						bio={user.bio}
 						organizations={user.organizations}
-						classes={user.classes}
+						classes={userCourses}
 						email={user.email}
 						isTutor={user.isTutor}
 						social={user.social}

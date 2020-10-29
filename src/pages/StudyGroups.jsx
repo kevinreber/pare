@@ -127,9 +127,9 @@ function Connect() {
 				{isLoading ? <Loader /> : <>{List}</>}
 			</div>
 			<div className="CourseForm p-3">
-				<p onClick={toggleForm} className="font-italic">
+				<div onClick={toggleForm} className="font-italic">
 					<CTAButton text="Add Study Group" />
-				</p>
+				</div>
 			</div>
 		</div>
 	);
