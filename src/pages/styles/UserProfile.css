@@ -62,7 +62,7 @@
 	z-index: 100;
 }
 
-.UserProfile>.UserProfile__Body {
+.UserProfile > .UserProfile__Body {
 	text-align: left;
 	padding-left: 2.5rem;
 	padding-right: 2.5rem;
@@ -73,7 +73,7 @@
 	margin-bottom: 10rem;
 }
 
-.UserProfile>.UserProfile__Body p {
+.UserProfile > .UserProfile__Body p {
 	margin: 0;
 }
 
@@ -81,6 +81,40 @@
 	margin-bottom: 1rem;
 }
 
-.UserProfile .UserProfile__Body .UserProfile__Body-Field .UserProfile__Body-Input {
+.UserProfile
+	.UserProfile__Body
+	.UserProfile__Body-Field
+	.UserProfile__Body-Input {
 	margin-left: 0.5rem;
+}
+
+.User-Availability-List > li {
+	display: flex;
+	justify-content: space-between;
+}
+
+.User-Availability-List > li > .Available-Time > .empty {
+	margin-right: 4rem;
+}
+
+.User-Availability-List > li > .Available-Time {
+	font-weight: 200;
+	font-size: 15px;
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	margin-left: auto;
+}
+
+.User-Availability-List > li > .Available-Day {
+	margin-right: auto;
+}
+
+.empty {
+	color: var(--tertiary-color);
+	font-style: italic;
+}
+
+.Available-Day {
+	font-weight: 400;
 }

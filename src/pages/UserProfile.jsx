@@ -9,6 +9,7 @@ import UserProfileBody from '../components/User/UserProfileBody';
 import ConfirmDialog from '../components/general/ConfirmDialog';
 import CTAButton from '../components/general/CTAButton';
 import BackButton from '../components/general/BackButton';
+import Loader from '../components/layout/Loader/Loader';
 import createFbTimestamp from '../utils/createFbTimestamp';
 import { addFlashMessage } from '../store/actions/flashMessages';
 import createNewMessage from '../utils/createNewMessage';
@@ -21,7 +22,9 @@ function UserProfile() {
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const currentUser = useSelector((state) => state.auth.user);
+	const [editProfile, setEditProfile] = useState(false);
 	const [userAvailability, setUserAvailability] = useState([]);
+	const [userPosts, setUserPosts] = useState(null);
 
 	const [user, setUser] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
@@ -45,31 +48,51 @@ function UserProfile() {
 						type: 'error',
 					})
 				);
+			} else {
+				db.collection('users')
+					.doc(userId)
+					.onSnapshot((snapshot) => setUser(snapshot.data()));
+
+				db.collection('users')
+					.doc(userId)
+					.collection('availability')
+					.orderBy('day')
+					.onSnapshot((snapshot) =>
+						setUserAvailability(
+							snapshot.docs.map((doc) => {
+								return {
+									id: doc.id,
+									data: doc.data(),
+								};
+							})
+						)
+					);
+
+				db.collection('feeds')
+					// firebase does not allow you to use 'where'
+					// and 'orderby' on different fields
+					.where('userId', '==', userId)
+					.get()
+					.then((data) => {
+						setUserPosts(
+							data.docs.map((doc) => ({
+								id: doc.id,
+								data: doc.data(),
+							}))
+						);
+					})
+					.catch((err) => console.log(err));
+
+				// Loading finished
+				setIsLoading(false);
 			}
-
-			db.collection('users')
-				.doc(userId)
-				.onSnapshot((snapshot) => setUser(snapshot.data()));
-
-			db.collection('users')
-				.doc(userId)
-				.collection('availability')
-				.orderBy('day')
-				.onSnapshot((snapshot) => 
-				setUserAvailability(snapshot.docs.map((doc) => {
-					return {
-						id: doc.id,
-						data: doc.data()
-					}
-				})));
-
-			// Loading finished
-			setIsLoading(false);
 		}
 		if (userId) {
 			getUserData();
 		}
 	}, [userId, dispatch, history]);
+
+	const toggleEditProfile = () => setEditProfile((edit) => !edit);
 
 	/** Send New Message to User ****************************************/
 	const messageData = {
@@ -85,12 +108,12 @@ function UserProfile() {
 		setConfirmDialog({
 			isOpen: true,
 			title: 'Message user?',
-			subtitle: "",
+			subtitle: '',
 			onConfirm: () => {
 				sendMessage();
 			},
 		});
-	}
+	};
 
 	const sendMessage = async () => {
 		// store messageId given back
@@ -115,16 +138,16 @@ function UserProfile() {
 				<CTAButton text="Send Message" />
 			</div>
 		) : (
-			<p className="font-italic">
+			<div onClick={toggleEditProfile} className="font-italic">
 				<CTAButton text="Edit" />
-			</p>
+			</div>
 		);
 
 	return (
 		<div className="UserProfile">
 			{isLoading ? (
 				<>
-					<p>Loading...</p>
+					<Loader />
 				</>
 			) : (
 				<>
@@ -147,7 +170,7 @@ function UserProfile() {
 						/>
 					</div>
 					<UserProfileBody
-						posts={user.posts}
+						posts={userPosts}
 						bio={user.bio}
 						organizations={user.organizations}
 						classes={user.classes}

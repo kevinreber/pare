@@ -1,17 +1,31 @@
 /** Dependencies */
 import React from 'react';
+import { PropTypes } from 'prop-types';
 
-/** Components & Helpers */
+/** Components & Helpers*/
 import UserFields from './UserFields';
 
-/** Body for User Profile */
+/** Body for User Profile.
+ * UserProfile -> UserProfileBody => UserFields
+ *
+ * @param 	{array}		posts				Array of objects of user's posts.
+ * @param 	{string}	bio					User's bio.
+ * @param 	{array}		organizations		Array of strings of user's organizations.
+ * @param 	{array}		classes				Array of strings of user's courses.
+ * @param 	{string}	email				String of user's email
+ * @param 	{boolean}	isTutor				Boolean to display user's tutor information.
+ * @param 	{object}	social				Object of strings of user's social information.
+ * @param 	{array}		keywords			Array of strings of user's tutoring services.
+ * @param 	{array}		portfolio			Array of strings of user's portfolio links.
+ * @param 	{array}		availability		Array of object of user's availability.
+ */
 function UserProfileBody({
 	posts,
 	bio,
 	organizations,
 	classes,
 	email,
-	isTutor,
+	isTutor = false,
 	social,
 	keywords,
 	portfolio,
@@ -22,19 +36,11 @@ function UserProfileBody({
 			<UserFields label={'I can help in...'} content={keywords} />
 			<UserFields label={'Portfolio'} content={portfolio} />
 			<UserFields label={'Availability'} content={availability} />
-			{/* <UserFields label={'test'} content={obj} />
-			<UserFields label={'test'} content={obj} />
-			<UserFields label={'test'} content={obj} />
-			<UserFields label={'test'} content={obj} />
-			<UserFields label={'test'} content={obj} />
-			<UserFields label={'test'} content={obj} /> */}
 		</>
-	) : 
-		null
-	;
+	) : null;
 
 	return (
-		<div className='UserProfile__Body'>
+		<div className="UserProfile__Body">
 			<UserFields label={'About'} content={bio} />
 			<UserFields label={'Organizations'} content={organizations} />
 			<UserFields label={'Classes Taken'} content={classes} />
@@ -42,5 +48,18 @@ function UserProfileBody({
 		</div>
 	);
 }
+
+UserProfileBody.propTypes = {
+	posts: PropTypes.array,
+	bio: PropTypes.string,
+	organizations: PropTypes.array,
+	classes: PropTypes.array,
+	email: PropTypes.string,
+	isTutor: PropTypes.bool,
+	social: PropTypes.object,
+	keywords: PropTypes.array,
+	portfolio: PropTypes.array,
+	availability: PropTypes.array,
+};
 
 export default UserProfileBody;
