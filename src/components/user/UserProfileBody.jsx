@@ -42,7 +42,7 @@ function UserProfileBody({
 	return (
 		<div className="UserProfile__Body">
 			<UserFields label={'About'} content={bio} />
-			<UserFields label={'Organizations'} content={organizations} />
+			{/* <UserFields label={'Organizations'} content={organizations} /> */}
 			<UserFields label={'Classes Taken'} content={classes} />
 			{showTutorFields}
 		</div>

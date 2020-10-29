@@ -50,12 +50,28 @@ function UserFields({ label, content = '-' }) {
 		return list;
 	};
 
+	// Format Courses
+	const formatCourses = (courses) => {
+		const list = (
+			<ul className="User-Course-List">
+				{courses.map((course) => {
+					const title = `${course.data.course.abbreviation} ${course.data.course.course_number}`;
+					return <li key={course.id}>{title}</li>;
+				})}
+			</ul>
+		);
+		return list;
+	};
+
 	let inputField;
 
 	switch (typeof content) {
 		case 'object':
 			if (label === 'Availability') {
 				inputField = formatAvailability(content);
+			}
+			if (label === 'Classes Taken') {
+				inputField = formatCourses(content);
 			} else if (Array.isArray(content)) {
 				inputField = formatArray(content);
 			} else {
