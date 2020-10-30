@@ -72,7 +72,7 @@ function UserProfile() {
 					);
 
 				db.collection('class')
-					.where('users', 'array-contains', currentUser.uid)
+					.where('users', 'array-contains', userId)
 					.onSnapshot((snapshot) =>
 						setUserCourses(
 							snapshot.docs.map((doc) => ({
@@ -157,8 +157,14 @@ function UserProfile() {
 			</div>
 		);
 
+	const updateUserData = (data) => {
+		db.collection('users').doc(userId).update({
+			bio: data.bio,
+		});
+	};
+
 	const saveEdits = (data) => {
-		console.log(data);
+		updateUserData(data);
 		dispatch(
 			addFlashMessage({
 				isOpen: true,
