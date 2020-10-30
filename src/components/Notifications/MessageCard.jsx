@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import { PropTypes } from 'prop-types';
 
 /** Components & Helpers */
 import db from '../../config/fbConfig';
@@ -11,6 +12,9 @@ import Avatar from '@material-ui/core/Avatar';
 
 /** Message card for Message List
  * Notifications -> MessagesList -> MessageCard
+ *
+ * @param 	{object}	message		Objects of message's data.
+ * @param 	{string}	userId		String of current user's Id.
  */
 function MessageCard({ message, userId }) {
 	const [receiverId, setReceiverId] = useState(null);
@@ -52,20 +56,20 @@ function MessageCard({ message, userId }) {
 	}, [receiverId]);
 
 	return (
-		<div className='MessageCard'>
-			<div className='Container'>
-				<div className='MessageCard__Left'>
+		<div className="MessageCard">
+			<div className="Container">
+				<div className="MessageCard__Left">
 					<Link to={`/users/${receiverId}`}>
 						<Avatar src={receiver.photoURL} alt={receiver.displayName} />
 					</Link>
 				</div>
-				<div className='MessageCard__Center'>
+				<div className="MessageCard__Center">
 					<Link to={`/messages/${message.id}`}>
 						<h5>{receiver.displayName}</h5>
 						{chats.length > 0 ? <p>{chats[0].content}</p> : <p>Loading...</p>}
 					</Link>
 				</div>
-				<div className='MessageCard__Right'>
+				<div className="MessageCard__Right">
 					<p>
 						{moment(message.data.createdAt.toDate()).startOf('day').fromNow()}
 					</p>
@@ -74,5 +78,10 @@ function MessageCard({ message, userId }) {
 		</div>
 	);
 }
+
+MessageCard.prototypes = {
+	message: PropTypes.array,
+	userId: PropTypes.object,
+};
 
 export default MessageCard;
