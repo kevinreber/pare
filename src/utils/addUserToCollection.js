@@ -1,10 +1,16 @@
 /** Dependencies */
 import firebase from 'firebase';
+import { PropTypes } from 'prop-types';
 
 /** Helpers */
 import db from '../config/fbConfig';
 
-/** Adds user to collection */
+/** Adds user to 'users' sub-collection or field array.
+ * @param	{string}	collection		Collection to be accessed.
+ * @param	{string}	docId			Document Id to update.
+ * @param	{string}	field			Document Id of 'users' sub-collection OR field to update.
+ * @param	{object}	data			Data to be added to document.
+ */
 async function addUserToCollection(collection, docId, field, data) {
 	// Get Document information
 	const ref = await db.collection(collection).doc(docId);
@@ -30,5 +36,12 @@ async function addUserToCollection(collection, docId, field, data) {
 		}
 	}
 }
+
+addUserToCollection.prototypes = {
+	collection: PropTypes.string.isRequired,
+	docId: PropTypes.string.isRequired,
+	field: PropTypes.string,
+	data: PropTypes.object,
+};
 
 export default addUserToCollection;
