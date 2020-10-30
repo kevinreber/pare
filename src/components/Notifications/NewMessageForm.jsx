@@ -1,15 +1,19 @@
 /** Dependencies */
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { PropTypes } from 'prop-types';
 
 /** Components & Helpers */
 import SubmitButton from '../general/SubmitButton';
 import createFbTimestamp from '../../utils/createFbTimestamp';
-import AutocompleteUsers from '../general/AutocompleteUsers';
+import AutocompleteUsers from './AutocompleteUsers';
 import './styles/NewMessageForm.css';
 
-/** Form for user to create New Message
+/** Form for user to create New Message.
  *  Notifications[Messages] -> NewMessageForm
+ *
+ * @param 	{function}	send			Function to send New Message Form Data to DB.
+ * @param 	{string}	receiverId		User Id of receiver.
  */
 function NewMessageForm({ send, receiverId = null }) {
 	const userId = useSelector((state) => state.auth.user.uid);
@@ -136,12 +140,12 @@ function NewMessageForm({ send, receiverId = null }) {
 	};
 
 	return (
-		<div className='NewMessage__Form' onClick={toggleShowOptions}>
+		<div className="NewMessage__Form" onClick={toggleShowOptions}>
 			<h4>New Message</h4>
 			<form onSubmit={handleSubmit}>
 				<AutocompleteUsers
 					id={'receiverUser'}
-					name='displayName'
+					name="displayName"
 					onChange={handleReceiver}
 					value={receiverUser.displayName}
 					// options={usersList}
@@ -150,21 +154,21 @@ function NewMessageForm({ send, receiverId = null }) {
 					showOptions={showOptions}
 					toggleOptions={toggleOptions}
 				/>
-				<div className='form-group'>
+				<div className="form-group">
 					<textarea
-						rows='3'
-						id='content'
-						className='form-control mate-form-input'
-						type='text'
+						rows="3"
+						id="content"
+						className="form-control mate-form-input"
+						type="text"
 						onChange={handleChatChange}
-						name='content'
+						name="content"
 						value={chatData.content}
 						required
 					/>
 				</div>
-				<div className='alert errors'>{errors}</div>
+				<div className="alert errors">{errors}</div>
 				<SubmitButton
-					text='Send Message'
+					text="Send Message"
 					reset={true}
 					resetForm={resetFormData}
 				/>
@@ -172,5 +176,10 @@ function NewMessageForm({ send, receiverId = null }) {
 		</div>
 	);
 }
+
+NewMessageForm.prototypes = {
+	send: PropTypes.func,
+	receiverId: PropTypes.string,
+};
 
 export default NewMessageForm;
