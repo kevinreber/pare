@@ -34,14 +34,13 @@ async function createNewMessage(
 			photoURL: user.photoURL,
 		};
 		addUserToCollection(collection, newMessage.id, user.uid, addUser);
-
-		// Add chat message to 'chats' collection
-		if (chatData) {
-			db.collection(collection)
-				.doc(newMessage.id)
-				.collection(subCollection)
-				.add(chatData);
-		}
+	}
+	// Add chat message to 'chats' collection
+	if (chatData) {
+		db.collection(collection)
+			.doc(newMessage.id)
+			.collection(subCollection)
+			.add(chatData);
 	}
 
 	return newMessage.id;
