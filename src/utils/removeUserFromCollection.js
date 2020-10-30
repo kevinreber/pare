@@ -47,8 +47,8 @@ async function removeUserFromCollection(collection, docId, data, users = []) {
 }
 
 removeUserFromCollection.propTypes = {
-	collection: PropTypes.string,
-	docId: PropTypes.string,
+	collection: PropTypes.string.isRequired,
+	docId: PropTypes.string.isRequired,
 	data: PropTypes.object,
 	users: PropTypes.array,
 };
