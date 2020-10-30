@@ -1,48 +1,56 @@
 .Autocomplete {
-    position: relative;
+	position: relative;
 }
 
 .Autocomplete .options {
-    background-color: var(--tertiary-color-light);
-    box-shadow: 0 0 12px 0 #222222;
-    width: 100%;
-    position: absolute;
-    z-index: 99999999999;
+	background-color: var(--tertiary-color-light);
+	box-shadow: 0 0 12px 0 #222222;
+	width: 100%;
+	position: absolute;
+	z-index: 99999999999;
 }
 
 .Autocomplete .options .option {
-    padding: .5rem;
-    border-bottom: 1px solid var(--tertiary-color);
+	padding: 0.5rem;
+	border-bottom: 1px solid var(--tertiary-color);
 }
 
 .Autocomplete input {
-    padding-left: 2.5rem;
+	padding-left: 2.5rem;
 }
 
 /*********************************************/
 /** AUTOCOMPLETE USER                        */
 /*********************************************/
 .Autocomplete .options .option.User-option {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: .5rem 4rem;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	padding: 0.5rem 4rem;
 }
 
+.Autocomplete
+	.options
+	.option.User-option
+	.MuiAvatar-root.MuiAvatar-circle.MuiAvatar-colorDefault {
+	max-width: 32px;
+	max-height: 32px;
+	margin-right: 1.25rem;
+}
 
-.Autocomplete .options .option.User-option .MuiAvatar-root.MuiAvatar-circle.MuiAvatar-colorDefault {
-    max-width: 32px;
-    max-height: 32px;
-    margin-right: 1.25rem;
+.Autocomplete .options > .option.User-option > .username > p {
+	margin-left: 1rem;
+	margin-top: 0;
+	margin-bottom: 0;
 }
 
 /*********************************************/
 /** AUTOCOMPLETE STUDY GROUPS                */
 /*********************************************/
 .StudyGroupForm {
-    margin-top: 5rem;
+	margin-top: 5rem;
 }
 
 .StudyGroupForm .Autocomplete {
-    margin-bottom: 6rem;
+	margin-bottom: 6rem;
 }

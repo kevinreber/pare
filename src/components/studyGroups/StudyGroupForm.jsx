@@ -6,8 +6,7 @@ import { PropTypes } from 'prop-types';
 
 /** Components & Helpers */
 import SubmitButton from '../general/SubmitButton';
-import Autocomplete from '../general/Autocomplete';
-import AutocompleteStudyGroups from '../general/AutocompleteStudyGroups';
+import AutocompleteStudyGroups from './AutocompleteStudyGroups';
 import ConfirmDialog from '../general/ConfirmDialog';
 import createFbTimestamp from '../../utils/createFbTimestamp';
 import addUserToCollection from '../../utils/addUserToCollection';
