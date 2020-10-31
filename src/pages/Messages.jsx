@@ -10,6 +10,7 @@ import PopoverActions from '../components/general/PopoverActions';
 import BackButton from '../components/general/BackButton';
 import ConfirmDialog from '../components/general/ConfirmDialog';
 import MessageFooter from '../components/Messages/MessageFooter';
+import Loader from '../components/layout/Loader/Loader';
 import createFbTimestamp from '../utils/createFbTimestamp';
 import { increment } from '../config/fbConfig';
 import { deleteMessageFromFB } from '../store/actions/messages';
@@ -30,6 +31,7 @@ function MessageChat() {
 	const dispatch = useDispatch();
 	const { messageId } = useParams();
 	const currentUser = useSelector((state) => state.auth.user);
+	const [isLoading, setIsLoading] = useState(true);
 
 	const [messageData, setMessageData] = useState(null);
 	const [chats, setChats] = useState([]);
@@ -61,29 +63,35 @@ function MessageChat() {
 	}, []);
 
 	useEffect(() => {
-		if (messageId) {
-			/** Get Message Info */
-			db.collection('messages')
-				.doc(messageId)
-				.onSnapshot((snapshot) => setMessageData(snapshot.data()));
+		const getData = () => {
+			if (messageId) {
+				/** Get Message Info */
+				db.collection('messages')
+					.doc(messageId)
+					.onSnapshot((snapshot) => setMessageData(snapshot.data()));
 
-			/** Get Chat Messages */
-			db.collection('messages')
-				.doc(messageId)
-				.collection('chats')
-				.orderBy('createdAt', 'asc')
-				.onSnapshot((snapshot) =>
-					setChats(
-						snapshot.docs.map((doc) => {
-							return {
-								id: doc.id,
-								data: doc.data(),
-							};
-						})
-					)
-				);
+				/** Get Chat Messages */
+				db.collection('messages')
+					.doc(messageId)
+					.collection('chats')
+					.orderBy('createdAt', 'asc')
+					.onSnapshot((snapshot) =>
+						setChats(
+							snapshot.docs.map((doc) => {
+								return {
+									id: doc.id,
+									data: doc.data(),
+								};
+							})
+						)
+					);
+			}
+		};
+
+		if (isLoading) {
+			getData();
 		}
-	}, [messageId]);
+	}, [messageId, isLoading]);
 
 	// get Receiver's ID
 	useEffect(() => {
@@ -92,23 +100,21 @@ function MessageChat() {
 			setReceiverId(id);
 		}
 
-		if (messageData) {
+		if (messageData && isLoading) {
 			getReceiver();
 		}
-	}, [messageData, currentUser]);
+	}, [messageData, currentUser, isLoading]);
 
 	// get Receiver's data
 	useEffect(() => {
-		if (receiverId) {
+		if (receiverId && isLoading) {
 			db.collection('users')
 				.doc(receiverId[0])
 				.onSnapshot((snapshot) => setReceiver(snapshot.data()));
-		}
-	}, [receiverId]);
 
-	if (!messageData) {
-		return <p>Loading...</p>;
-	}
+			setIsLoading(false);
+		}
+	}, [receiverId, isLoading]);
 
 	/** Delete Message */
 	const deleteMessage = () => {
@@ -118,7 +124,6 @@ function MessageChat() {
 		});
 
 		dispatch(deleteMessageFromFB(messageId));
-		// db.collection('messages').doc(messageId).delete();
 
 		// redirect user to feed and flash message
 		history.push('/feed');
@@ -147,7 +152,7 @@ function MessageChat() {
 	const deleteMessagePrompt = (id) => {
 		setConfirmDialog({
 			isOpen: true,
-			title: 'Are you sure you want to remove this message?',
+			title: `Remove message with ${receiver.displayName}`,
 			subtitle: "You can't undo this operation",
 			onConfirm: () => {
 				deleteMessage();
@@ -162,7 +167,10 @@ function MessageChat() {
 			chats.map((message, index) => {
 				const lastMessage = chats.length - 1 === index;
 				return (
-					<div id={message.index} ref={lastMessage ? setRef : null}>
+					<li
+						key={message.id}
+						id={message.id}
+						ref={lastMessage ? setRef : null}>
 						<p
 							className={`MessageChatBody__message chat__message ${
 								currentUser.uid === message.data.uid ? 'chat__receiver' : ''
@@ -174,7 +182,7 @@ function MessageChat() {
 									: ''}
 							</span>
 						</p>
-					</div>
+					</li>
 				);
 			})
 		) : (
@@ -183,13 +191,14 @@ function MessageChat() {
 
 	return (
 		<div className="MessageChat">
-			{receiver ? (
+			{receiver && !isLoading ? (
 				<>
 					<div className="MessageChat__Header bottom-border-header">
 						<BackButton />
 						<ConfirmDialog
 							confirmDialog={confirmDialog}
 							setConfirmDialog={setConfirmDialog}
+							type="error"
 						/>
 						<div className="MessageChat__Title">
 							<Link to={`/users/${receiverId}`}>
@@ -210,15 +219,15 @@ function MessageChat() {
 							editBtn={false}
 						/>
 					</div>
-					<div id="MessageChat__Body" className="MessageChat__Body Page__Body">
+					<ul id="MessageChat__Body" className="MessageChat__Body Page__Body">
 						{ChatBody}
-					</div>
+					</ul>
 					<div className="MessageChat__Footer">
 						<MessageFooter send={sendMessage} uid={currentUser.uid} />
 					</div>
 				</>
 			) : (
-				''
+				<Loader />
 			)}
 		</div>
 	);
