@@ -94,11 +94,15 @@ function AutocompleteUsers({
 		setFilteredOptions(opts);
 	}
 
-	function onClick(e) {
+	function handleClick(id, name, displayName) {
 		setFilteredOptions([]);
 		toggleOptions(false);
-		onChange(e);
-		setId(e);
+		const data = {
+			name,
+			displayName,
+		};
+		onChange(null, data);
+		setId(id);
 	}
 
 	/** Build list of autofill options */
@@ -113,12 +117,15 @@ function AutocompleteUsers({
 							className="option User-option"
 							data-name={name}
 							data-value={option.data.displayName}
-							onClick={onClick}>
+							onClick={() =>
+								handleClick(option.id, name, option.data.displayName)
+							}>
 							<Avatar
 								src={option.data.photoURL}
 								alt={option.data.displayName}
+								id={option.id}
 							/>
-							<div className="username">
+							<div className="username" id={option.id}>
 								<p>{option.data.displayName}</p>
 							</div>
 						</li>

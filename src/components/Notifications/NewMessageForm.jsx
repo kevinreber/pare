@@ -114,8 +114,8 @@ function NewMessageForm({ send, receiverId = null }) {
 	};
 
 	/** Stores receiving user's Id in state */
-	const setId = (e) => {
-		let { id } = e.target;
+	const setId = (id) => {
+		console.log(id);
 		setReceiverUser((fData) => ({
 			...fData,
 			uid: id,
@@ -123,13 +123,24 @@ function NewMessageForm({ send, receiverId = null }) {
 	};
 
 	/** Stores receiving user's displayName in state */
-	const handleReceiver = (e) => {
+	const handleReceiver = (e = null, data = null) => {
 		resetErrors();
-		let { name, value } = !e.target.dataset.name ? e.target : e.target.dataset;
-		setReceiverUser((fData) => ({
-			...fData,
-			[name]: value,
-		}));
+		if (data) {
+			let { name, displayName } = data;
+			setReceiverUser((fData) => ({
+				...fData,
+				[name]: displayName,
+			}));
+		}
+		if (e) {
+			let { name, value } = !e.target.dataset.name
+				? e.target
+				: e.target.dataset;
+			setReceiverUser((fData) => ({
+				...fData,
+				[name]: value,
+			}));
+		}
 	};
 
 	/** Stores state of Chat */
