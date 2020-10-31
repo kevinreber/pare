@@ -9,7 +9,11 @@ import NoData from '../components/general/NoData';
 import Modal from '../components/general/Modal';
 import Loader from '../components/layout/Loader/Loader';
 import ConfirmDialog from '../components/general/ConfirmDialog';
-import { addPostToFB, deletePostFromFB, editPostInFB } from '../store/actions/posts';
+import {
+	addPostToFB,
+	deletePostFromFB,
+	editPostInFB,
+} from '../store/actions/posts';
 import { addFlashMessage } from '../store/actions/flashMessages';
 import db from '../config/fbConfig';
 import './styles/Feed.css';
@@ -35,20 +39,24 @@ function Feed() {
 	useEffect(() => {
 		// get data from 'feed' collection
 		const getData = async () => {
-			 await db.collection('feeds')
-				.orderBy('timestamp', 'desc').get()
+			await db
+				.collection('feeds')
+				.orderBy('timestamp', 'desc')
+				.get()
 				.then((data) => {
 					setPosts(
-							data.docs.map((doc) => ({
-								id: doc.id,
-								data: doc.data(),
-							})));
-				}).catch(err => console.log(err));
+						data.docs.map((doc) => ({
+							id: doc.id,
+							data: doc.data(),
+						}))
+					);
+				})
+				.catch((err) => console.log(err));
 
 			setIsLoading(false);
-		}
+		};
 
-		if(isLoading){
+		if (isLoading) {
 			getData();
 		}
 	}, [isLoading]);
@@ -75,7 +83,7 @@ function Feed() {
 	const deletePostPrompt = (id) => {
 		setConfirmDialog({
 			isOpen: true,
-			title: 'Are you sure you want to remove this post?',
+			title: 'Are you sure you want to remove post?',
 			subtitle: "You can't undo this operation",
 			onConfirm: () => {
 				deletePost(id);
@@ -113,9 +121,9 @@ function Feed() {
 		);
 		// get most recent posts
 		setIsLoading(true);
-	}
+	};
 
-	if (showForm){
+	if (showForm) {
 		return (
 			<Modal
 				content={<PostForm save={addPost} />}
@@ -133,11 +141,11 @@ function Feed() {
 				type="error"
 			/>
 			<div className="Feed__List">
-				{isLoading ? (<Loader />) : null }
+				{isLoading ? <Loader /> : null}
 				{posts.length === 0 && !isLoading ? (
 					<NoData text="posts" />
 				) : (
-					<FeedList posts={posts} remove={deletePostPrompt} edit={editPost}/>
+					<FeedList posts={posts} remove={deletePostPrompt} edit={editPost} />
 				)}
 			</div>
 			<Fab id="Feed-Add-Post-Btn" aria-label="add">
