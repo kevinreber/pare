@@ -10,6 +10,7 @@ import '../general/styles/Autocomplete.css';
 /** MUI */
 import SearchIcon from '@material-ui/icons/Search';
 import Avatar from '@material-ui/core/Avatar';
+import Chip from '@material-ui/core/Chip';
 
 /** Autocomplete list of users.
  *
@@ -22,7 +23,9 @@ import Avatar from '@material-ui/core/Avatar';
  * @param 	{function} 	setId 			Function to store state of receiving user's Id.
  * @param 	{boolean} 	showOptions 	Boolean to show autocomplete list of optional users.
  * @param 	{function} 	toggleOption 	Toggles showOptions.
- *
+ * @param	{object}	receiver		Receiving user data.
+ * @param 	{boolean}	receiverChosen	Boolean if receiving user has been chosen.
+ * @param	{function}	clearData		Clears state of receiving user.
  */
 function AutocompleteUsers({
 	id,
@@ -34,6 +37,9 @@ function AutocompleteUsers({
 	setId,
 	showOptions,
 	toggleOptions,
+	receiver,
+	receiverChosen,
+	clearData,
 }) {
 	const currentUser = useSelector((state) => state.auth.user);
 
@@ -94,12 +100,12 @@ function AutocompleteUsers({
 		setFilteredOptions(opts);
 	}
 
-	function handleClick(id, name, displayName) {
+	function handleClick(id, displayName, photoURL) {
 		setFilteredOptions([]);
 		toggleOptions(false);
 		const data = {
-			name,
 			displayName,
+			photoURL,
 		};
 		onChange(null, data);
 		setId(id);
@@ -113,12 +119,17 @@ function AutocompleteUsers({
 				{filteredOptions.map((option) => {
 					return (
 						<li
+							key={option.id}
 							id={option.id}
 							className="option User-option"
 							data-name={name}
 							data-value={option.data.displayName}
 							onClick={() =>
-								handleClick(option.id, name, option.data.displayName)
+								handleClick(
+									option.id,
+									option.data.displayName,
+									option.data.photoURL
+								)
 							}>
 							<Avatar
 								src={option.data.photoURL}
@@ -155,6 +166,13 @@ function AutocompleteUsers({
 				placeholder={placeholder}
 				required
 			/>
+			{receiverChosen ? (
+				<Chip
+					avatar={<Avatar src={receiver.photoURL} />}
+					label={receiver.displayName}
+					onDelete={clearData}
+				/>
+			) : null}
 			{optionList}
 		</div>
 	);
@@ -170,6 +188,9 @@ AutocompleteUsers.prototypes = {
 	setId: PropTypes.func,
 	showOptions: PropTypes.bool,
 	toggleOptions: PropTypes.func,
+	receiver: PropTypes.object,
+	receiverChosen: PropTypes.bool,
+	clearData: PropTypes.func,
 };
 
 export default AutocompleteUsers;

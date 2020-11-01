@@ -36,9 +36,12 @@ function NewMessageForm({ send, receiverId = null }) {
 	const RECEIVER_INITIAL_STATE = {
 		uid: '',
 		displayName: '',
+		photoURL: '',
 	};
 
 	const [receiverUser, setReceiverUser] = useState(RECEIVER_INITIAL_STATE);
+	const [receiverChosen, setReceiverChosen] = useState(false);
+
 	const [formData, setFormData] = useState(FORM_INITIAL_STATE);
 	const [chatData, setChatData] = useState(CHAT_INITIAL_STATE);
 	const [showOptions, setShowOptions] = useState(false);
@@ -115,21 +118,23 @@ function NewMessageForm({ send, receiverId = null }) {
 
 	/** Stores receiving user's Id in state */
 	const setId = (id) => {
-		console.log(id);
 		setReceiverUser((fData) => ({
 			...fData,
 			uid: id,
 		}));
+
+		setReceiverChosen(true);
 	};
 
 	/** Stores receiving user's displayName in state */
 	const handleReceiver = (e = null, data = null) => {
 		resetErrors();
 		if (data) {
-			let { name, displayName } = data;
+			let { displayName, photoURL } = data;
 			setReceiverUser((fData) => ({
 				...fData,
-				[name]: displayName,
+				displayName,
+				photoURL,
 			}));
 		}
 		if (e) {
@@ -164,7 +169,14 @@ function NewMessageForm({ send, receiverId = null }) {
 					placeholder={'Search User...'}
 					showOptions={showOptions}
 					toggleOptions={toggleOptions}
+					receiver={receiverUser}
+					receiverChosen={receiverChosen}
+					clearData={() => {
+						setReceiverUser(RECEIVER_INITIAL_STATE);
+						setReceiverChosen(false);
+					}}
 				/>
+
 				<div className="form-group">
 					<textarea
 						rows="3"

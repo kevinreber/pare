@@ -1,12 +1,30 @@
 .NewMessage__Form {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+	padding-left: 1.5rem;
+	padding-right: 1.5rem;
 }
 
 .NewMessage__Form .MuiInputBase-input {
-    border: 1px solid var(--tertiary-color);
+	border: 1px solid var(--tertiary-color);
 }
 
-.NewMessage__Form>form>.form-group>textarea {
-    height: 200px;
+.NewMessage__Form > form > .form-group > textarea {
+	height: 200px;
+}
+
+/*************************************************/
+/** Receiving User Message Chip                  */
+/*************************************************/
+
+.NewMessage__Form .Autocomplete .MuiChip-root.MuiChip-deletable {
+	background-color: var(--tertiary-color);
+	color: var(--secondary-color);
+	height: 32px;
+	position: absolute;
+	left: 2.5rem;
+	top: 3px;
+	padding: 3px;
+}
+
+.NewMessage__Form .Autocomplete .MuiChip-root.MuiChip-deletable svg:hover {
+	color: var(--primary-color);
 }
