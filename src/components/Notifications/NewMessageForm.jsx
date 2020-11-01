@@ -14,8 +14,15 @@ import './styles/NewMessageForm.css';
  *
  * @param 	{function}	send			Function to send New Message Form Data to DB.
  * @param 	{string}	receiverId		User Id of receiver.
+ * @param 	{string}	content			Content for message to be sent.
+ * @param	{boolean}	showAllUsers
  */
-function NewMessageForm({ send, receiverId = null }) {
+function NewMessageForm({
+	send,
+	receiverId = null,
+	content = '',
+	showAllUsers = false,
+}) {
 	const userId = useSelector((state) => state.auth.user.uid);
 
 	const FORM_INITIAL_STATE = {
@@ -28,7 +35,7 @@ function NewMessageForm({ send, receiverId = null }) {
 	};
 
 	const CHAT_INITIAL_STATE = {
-		content: '',
+		content: content,
 		uid: userId,
 		createdAt: createFbTimestamp(),
 	};
@@ -175,6 +182,7 @@ function NewMessageForm({ send, receiverId = null }) {
 						setReceiverUser(RECEIVER_INITIAL_STATE);
 						setReceiverChosen(false);
 					}}
+					allUsers={showAllUsers}
 				/>
 
 				<div className="form-group">
@@ -203,6 +211,7 @@ function NewMessageForm({ send, receiverId = null }) {
 NewMessageForm.prototypes = {
 	send: PropTypes.func,
 	receiverId: PropTypes.string,
+	content: PropTypes.string,
 };
 
 export default NewMessageForm;

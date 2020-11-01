@@ -26,6 +26,7 @@ import Chip from '@material-ui/core/Chip';
  * @param	{object}	receiver		Receiving user data.
  * @param 	{boolean}	receiverChosen	Boolean if receiving user has been chosen.
  * @param	{function}	clearData		Clears state of receiving user.
+ * @param 	{boolean}	allUsers		Boolean to show all users or filter users to be displayed.
  */
 function AutocompleteUsers({
 	id,
@@ -40,6 +41,7 @@ function AutocompleteUsers({
 	receiver,
 	receiverChosen,
 	clearData,
+	allUsers = false,
 }) {
 	const currentUser = useSelector((state) => state.auth.user);
 
@@ -60,9 +62,9 @@ function AutocompleteUsers({
 		);
 	}, []);
 
-	/** Get Users */
+	/** Get Messaged Users */
 	useEffect(() => {
-		if (users) {
+		if (users && !allUsers) {
 			db.collection('messages')
 				.where('users', 'array-contains', currentUser.uid)
 				// .orderBy('lastUpdatedAt')
@@ -71,11 +73,11 @@ function AutocompleteUsers({
 					setMessagedUsers(snapshot.docs.map((doc) => doc.data()));
 				});
 		}
-	}, [users, currentUser]);
+	}, [users, currentUser, allUsers]);
 
 	/** Filter Users to avoid duplicate messages */
 	useEffect(() => {
-		if (messagedUsers) {
+		if (messagedUsers && !allUsers) {
 			// Set to avoid any userId repeats
 			const set = new Set();
 
@@ -85,8 +87,8 @@ function AutocompleteUsers({
 
 			let options = users.filter((user) => !set.has(user.id));
 			setUsersList(options);
-		}
-	}, [messagedUsers, users]);
+		} else if (allUsers) setUsersList(users);
+	}, [messagedUsers, users, allUsers]);
 
 	/** Commit onChange changes and filter through options */
 	function onSearch(e) {
@@ -191,6 +193,7 @@ AutocompleteUsers.prototypes = {
 	receiver: PropTypes.object,
 	receiverChosen: PropTypes.bool,
 	clearData: PropTypes.func,
+	allUsers: PropTypes.bool,
 };
 
 export default AutocompleteUsers;

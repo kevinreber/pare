@@ -1,6 +1,6 @@
 /** Dependencies */
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
 
@@ -8,8 +8,10 @@ import moment from 'moment';
 import PopoverActions from '../general/PopoverActions';
 import PopoverShareAction from '../general/PopoverShareAction';
 import EditPostForm from './EditPostForm';
+import NewMessageForm from '../Notifications/NewMessageForm';
 import Modal from '../general/Modal';
 import { addFlashMessage } from '../../store/actions/flashMessages';
+import createNewMessage from '../../utils/createNewMessage';
 
 /** MUI */
 import IconButton from '@material-ui/core/IconButton';
@@ -47,11 +49,15 @@ function PostCard({
 	comments = null,
 	isBookmarked = false,
 	remove,
-	edit
+	edit,
 }) {
 	const dispatch = useDispatch();
+	const history = useHistory();
 	const currentUser = useSelector((state) => state.auth.user);
+
 	const [showEditForm, setShowEditForm] = useState(false);
+	const [showMessageForm, setShowMessageForm] = useState(false);
+
 	const BookmarkStatus = !isBookmarked ? (
 		<BookmarkBorderOutlinedIcon />
 	) : (
@@ -87,7 +93,7 @@ function PostCard({
 		// close popovers
 		handleClose();
 		handleShareClose();
-		setShowEditForm(show=> !show);
+		setShowEditForm((show) => !show);
 	};
 
 	const eventTime =
@@ -114,6 +120,8 @@ function PostCard({
 		remove(id);
 	};
 
+	/** Edit Post Form **************************/
+
 	// Updates edited post's data
 	const editPost = (data) => {
 		edit(id, data);
@@ -121,11 +129,11 @@ function PostCard({
 		toggleEditForm();
 	};
 
-	if (showEditForm){
+	if (showEditForm) {
 		return (
 			<Modal
 				content={
-					<EditPostForm 
+					<EditPostForm
 						save={editPost}
 						userId={userId}
 						username={username}
@@ -140,13 +148,55 @@ function PostCard({
 						attachment={attachment}
 						timestamp={timestamp}
 						comments={comments}
-					/>	
+					/>
 				}
 				closeModal={toggleEditForm}
 				full={true}
 			/>
-		)
+		);
 	}
+	/******************************************** */
+
+	/** Forward Post as Message Form **************/
+	const toggleMessageForm = () => {
+		setShowMessageForm((show) => !show);
+	};
+
+	const sendMessage = async (messageData, chatData) => {
+		// store messageId given back
+		const messageId = await createNewMessage(
+			'messages',
+			messageData,
+			'chats',
+			chatData
+		);
+
+		// push user to message
+		history.push(`/messages/${messageId}`);
+		dispatch(
+			addFlashMessage({
+				isOpen: true,
+				message: 'Message Sent!',
+				type: 'success',
+			})
+		);
+	};
+
+	if (showMessageForm) {
+		return (
+			<Modal
+				content={
+					<NewMessageForm
+						send={sendMessage}
+						content={`Check out this post at ${HOST_URL}/post/${id}!`}
+						showAllUsers={true}
+					/>
+				}
+				closeModal={toggleMessageForm}
+			/>
+		);
+	}
+	/******************************************** */
 
 	// Copies link of post to browser clipboard
 	const copyLinkToClipBoard = async (link) => {
@@ -215,7 +265,7 @@ function PostCard({
 					<CalendarTodayOutlinedIcon />
 				</IconButton>
 				<IconButton>{BookmarkStatus}</IconButton>
-				<IconButton>
+				<IconButton onClick={toggleMessageForm}>
 					<SendIcon />
 				</IconButton>
 				<IconButton onClick={toggleSharePopover}>
