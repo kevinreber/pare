@@ -1,6 +1,6 @@
 .Notifications__Body {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 /*************************************************/
@@ -8,38 +8,50 @@
 /*************************************************/
 
 .MessageList {
-    margin-top: 18vh;
+	margin-top: 18vh;
 }
 
 .MessageCard {
-    border-bottom: 1px solid var(--tertiary-color);
+	border-bottom: 1px solid var(--tertiary-color);
 }
 
-.MessageCard>.Container {
-    display: flex;
-    justify-content: space-between;
-    padding: 1.25rem;
+.MessageCard > .Container {
+	display: flex;
+	justify-content: space-between;
+	padding: 1.25rem;
 }
 
-.MessageCard>.Container p,
-.MessageCard>.Container h5 {
-    margin: 0;
+.MessageCard > .Container p,
+.MessageCard > .Container h5 {
+	margin: 0;
 }
 
-.MessageCard>.Container>.MessageCard__Left {
-    margin-right: 1rem;
+.MessageCard > .Container > .MessageCard__Left {
+	margin-right: 1rem;
 }
 
-.MessageCard>.Container>.MessageCard__Center {
-    flex: 1;
-    text-align: left;
+.MessageCard > .Container > .MessageCard__Center {
+	flex: 1;
+	text-align: left;
 }
 
-.MessageCard>.Container>.MessageCard__Center h5 {
-    font-size: 16px;
+.MessageCard > .Container > .MessageCard__Center p {
+	font-style: italic;
+}
+
+.MessageCard > .Container > .MessageCard__Center h5 {
+	font-size: 16px;
 }
 
 .MessageCard p {
-    color: var(--secondary-color);
-    font-size: 12px;
+	color: var(--secondary-color);
+	font-size: 12px;
+}
+
+.MessageCard > .Container > .MessageCard__Right > p.timestamp {
+	position: absolute;
+	right: 1rem;
+	font-size: 10px;
+	font-style: italic;
+	color: var(--tertiary-color);
 }

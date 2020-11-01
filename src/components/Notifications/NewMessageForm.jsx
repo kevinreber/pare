@@ -15,7 +15,7 @@ import './styles/NewMessageForm.css';
  * @param 	{function}	send			Function to send New Message Form Data to DB.
  * @param 	{string}	receiverId		User Id of receiver.
  * @param 	{string}	content			Content for message to be sent.
- * @param	{boolean}	showAllUsers
+ * @param 	{boolean}	showAllUsers	Boolean to show all users or filter users to be displayed.
  */
 function NewMessageForm({
 	send,
@@ -208,10 +208,11 @@ function NewMessageForm({
 	);
 }
 
-NewMessageForm.prototypes = {
+NewMessageForm.propTypes = {
 	send: PropTypes.func,
 	receiverId: PropTypes.string,
 	content: PropTypes.string,
+	showAllUsers: PropTypes.bool,
 };
 
 export default NewMessageForm;

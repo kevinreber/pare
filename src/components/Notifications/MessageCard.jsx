@@ -55,6 +55,15 @@ function MessageCard({ message, userId }) {
 		}
 	}, [receiverId]);
 
+	// Create content truncated preview of message content
+	let contentPreview = null;
+	if (chats.length > 0) {
+		contentPreview =
+			chats[0].content.length > 30
+				? chats[0].content.substr(0, 30) + '...'
+				: chats[0].content;
+	}
+
 	return (
 		<div className="MessageCard">
 			<div className="Container">
@@ -66,11 +75,13 @@ function MessageCard({ message, userId }) {
 				<div className="MessageCard__Center">
 					<Link to={`/messages/${message.id}`}>
 						<h5>{receiver.displayName}</h5>
-						{chats.length > 0 ? <p>{chats[0].content}</p> : <p>Loading...</p>}
+						<p>{contentPreview}</p>
 					</Link>
 				</div>
 				<div className="MessageCard__Right">
-					<p>{dateFromNowFormatter(message.data.createdAt)}</p>
+					<p className="timestamp">
+						{dateFromNowFormatter(message.data.createdAt)}
+					</p>
 				</div>
 			</div>
 		</div>

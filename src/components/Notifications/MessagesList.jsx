@@ -12,7 +12,7 @@ import MessageCard from './MessageCard';
  *
  * @param 	{array}		messages		Array of objects containing each message's data.
  * @param 	{string}	userId			String of current user's Id.
- * @param 	{boolean}	toggleForm		Toggle's form to create new message.
+ * @param 	{function}	toggleForm		Toggle's form to create new message.
  */
 function MessagesList({ messages, userId, toggleForm }) {
 	const List = messages ? (
@@ -37,10 +37,10 @@ function MessagesList({ messages, userId, toggleForm }) {
 	);
 }
 
-MessagesList.prototypes = {
+MessagesList.propTypes = {
 	messages: PropTypes.array,
-	userId: PropTypes.object,
-	toggleForm: PropTypes.bool,
+	userId: PropTypes.string,
+	toggleForm: PropTypes.func,
 };
 
 export default MessagesList;
