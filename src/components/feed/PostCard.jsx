@@ -12,6 +12,7 @@ import NewMessageForm from '../Notifications/NewMessageForm';
 import Modal from '../general/Modal';
 import { addFlashMessage } from '../../store/actions/flashMessages';
 import createNewMessage from '../../utils/createNewMessage';
+import dateFromNowFormatter from '../../utils/dateFromNowFormatter';
 
 /** MUI */
 import IconButton from '@material-ui/core/IconButton';
@@ -280,11 +281,7 @@ function PostCard({
 				/>
 			</div>
 			<div className="Post-Card__Right Post__timestamp">
-				<p>
-					{timestamp
-						? moment(timestamp.toDate()).startOf('day').fromNow()
-						: null}
-				</p>
+				<p>{timestamp ? dateFromNowFormatter(timestamp) : null}</p>
 				{currentUser.uid === userId ? (
 					<>
 						<IconButton onClick={togglePopover}>

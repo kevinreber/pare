@@ -1,10 +1,10 @@
 /** Dependencies */
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import moment from 'moment';
 import { PropTypes } from 'prop-types';
 
 /** Components & Helpers */
+import dateFromNowFormatter from '../../utils/dateFromNowFormatter';
 import db from '../../config/fbConfig';
 
 /** MUI */
@@ -70,18 +70,16 @@ function MessageCard({ message, userId }) {
 					</Link>
 				</div>
 				<div className="MessageCard__Right">
-					<p>
-						{moment(message.data.createdAt.toDate()).startOf('day').fromNow()}
-					</p>
+					<p>{dateFromNowFormatter(message.data.createdAt)}</p>
 				</div>
 			</div>
 		</div>
 	);
 }
 
-MessageCard.prototypes = {
-	message: PropTypes.array,
-	userId: PropTypes.object,
+MessageCard.propTypes = {
+	message: PropTypes.object,
+	userId: PropTypes.string,
 };
 
 export default MessageCard;
