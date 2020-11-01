@@ -84,9 +84,7 @@ function CommentCard({
 							close={handleClose}
 						/>
 					</>
-				) : (
-					''
-				)}
+				) : null}
 			</div>
 		</div>
 	);

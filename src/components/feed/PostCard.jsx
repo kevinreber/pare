@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { PropTypes } from 'prop-types';
 import moment from 'moment';
 
 /** Components & Helpers */
@@ -32,6 +33,24 @@ const HOST_URL = 'localhost:3000';
 /** PostCard
  *  If user created Post, they will see an option to delete the Post
  *  Feed -> FeedList -> PostCard
+ *
+ * @param {string}		id					Post's unique ID.
+ * @param {string}		title				Post's title.
+ * @param {string}		username			Username of user who created post.
+ * @param {string}		userId				User's ID of user who created post.
+ * @param {string}		avatar				Avatar of user who created post.
+ * @param {string}		description			Post's description.
+ * @param {string}		location			Post's location.
+ * @param {string}		type				Post's type of event.
+ * @param {date}		start				Post's event start time.
+ * @param {date}		end					Post's event end time.
+ * @param {file}		attachment_preview	Preview of post's attachment.
+ * @param {file}		attachment			Post's attachment.
+ * @param {object}		timestamp			Firebase object timestamps.
+ * @param {number}		comments			Number of comments post has.
+ * @param {boolean}		isBookmarked		Bookmark status of post.
+ * @param {function} 	remove				Function to remove post. User will only see if they made post.
+ * @param {function} 	edit				Function to edit post. User will only see if they made post.
  */
 function PostCard({
 	id,
@@ -301,5 +320,21 @@ function PostCard({
 		</div>
 	);
 }
+
+PostCard.propTypes = {
+	id: PropTypes.string.isRequired,
+	title: PropTypes.string.isRequired,
+	username: PropTypes.string.isRequired,
+	userId: PropTypes.string.isRequired,
+	avatar: PropTypes.string,
+	description: PropTypes.string.isRequired,
+	location: PropTypes.string,
+	type: PropTypes.string,
+	timestamp: PropTypes.object.isRequired,
+	comments: PropTypes.number,
+	isBookmarked: PropTypes.bool,
+	remove: PropTypes.func,
+	edit: PropTypes.func,
+};
 
 export default PostCard;

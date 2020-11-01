@@ -269,9 +269,9 @@ function StudyGroupChatAdmin({
 						</>
 					) : (
 						<>
-							<p onClick={leaveGroupPrompt}>
+							<div onClick={leaveGroupPrompt}>
 								<CTAButton text="Leave Group" danger={true} />
-							</p>
+							</div>
 						</>
 					)}
 				</div>
@@ -281,7 +281,7 @@ function StudyGroupChatAdmin({
 	);
 }
 
-StudyGroupChatAdmin.prototypes = {
+StudyGroupChatAdmin.propTypes = {
 	studyGroupId: PropTypes.string,
 	title: PropTypes.string,
 	members: PropTypes.array,

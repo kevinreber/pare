@@ -1,5 +1,6 @@
 /** Dependencies */
 import React from 'react';
+import { PropTypes } from 'prop-types';
 
 /** MUI */
 import IconButton from '@material-ui/core/IconButton';
@@ -8,7 +9,18 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import BlockIcon from '@material-ui/icons/Block';
 
-/** Popover with basic CRUD actions */
+/** Popover with basic CRUD actions
+ *
+ * @param {function}	remove		Remove action.
+ * @param {function}	edit		Edit action.
+ * @param {string}		id			ID to be used as reference.
+ * @param {boolean}		open		Boolean status to show popover.
+ * @param {boolean}		anchorEl	Boolean where to display popover.
+ * @param {function}	close		Closes popover.
+ * @param {boolean}		deleteBtn	Boolean to show Delete Button.
+ * @param {boolean}		editBtn		Boolean to show Edit Button.
+ * @param {boolean}		block		Boolean to show Block Button.
+ */
 function PopoverActions({
 	remove,
 	edit,
@@ -49,5 +61,17 @@ function PopoverActions({
 		</>
 	);
 }
+
+PopoverActions.propTypes = {
+	remove: PropTypes.func,
+	edit: PropTypes.func,
+	id: PropTypes.string,
+	open: PropTypes.bool,
+	anchorEl: PropTypes.bool,
+	close: PropTypes.func,
+	deleteBtn: PropTypes.bool,
+	editBtn: PropTypes.bool,
+	block: PropTypes.bool,
+};
 
 export default PopoverActions;

@@ -1,5 +1,6 @@
 /** Dependencies */
 import React from 'react';
+import { PropTypes } from 'prop-types';
 
 /** MUI */
 import IconButton from '@material-ui/core/IconButton';
@@ -23,13 +24,20 @@ function PopoverShareAction({ id, open, anchorEl, close, shareLink }) {
 					vertical: 'bottom',
 					horizontal: 'center',
 				}}>
-				<IconButton className="Share__Btn">
-					<LinkIcon onClick={shareLink} />
+				<IconButton className="Share__Btn" onClick={shareLink}>
+					<LinkIcon />
 					<small>share</small>
 				</IconButton>
 			</Popover>
 		</>
 	);
 }
+
+PopoverShareAction.propTypes = {
+	id: PropTypes.string,
+	open: PropTypes.bool,
+	close: PropTypes.func,
+	shareLink: PropTypes.func,
+};
 
 export default PopoverShareAction;

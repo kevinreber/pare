@@ -1,10 +1,18 @@
 /** Dependencies */
 import React from 'react';
+import { PropTypes } from 'prop-types';
 
 /** Components & Helpers */
 import PostCard from './PostCard';
 
-function feedList({ posts, remove, edit }) {
+/** FeedList of Posts.
+ *  Feed -> FeedList -> PostCard
+ *
+ * @param {array} 		posts	Array of objects containing data for each post.
+ * @param {function} 	remove	Function to remove post. User will only see if they made post.
+ * @param {function} 	edit	Function to edit post. User will only see if they made post.
+ */
+function FeedList({ posts, remove, edit }) {
 	const List = posts.map((post) => (
 		<PostCard
 			id={post.id}
@@ -31,4 +39,10 @@ function feedList({ posts, remove, edit }) {
 	return <>{List}</>;
 }
 
-export default feedList;
+FeedList.propTypes = {
+	posts: PropTypes.array,
+	remove: PropTypes.func,
+	edit: PropTypes.func,
+};
+
+export default FeedList;

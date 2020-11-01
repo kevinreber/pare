@@ -1,5 +1,6 @@
 /** Dependencies */
 import React from 'react';
+import { PropTypes } from 'prop-types';
 
 /** Components & Helpers */
 import DialogButton from './DialogButton';
@@ -49,7 +50,12 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-/** Confirmation Dialog to verify user wants to perform action */
+/** Confirmation Dialog to verify user wants to perform action.
+ *
+ * @param {object}		confirmDialog		Object of strings to display in dialog.
+ * @param {function}	setConfirmDialog	Action to happen if User confirms dialog prompt.
+ * @param {string}		type				Style type of confirmation dialog to display.
+ */
 function ConfirmDialog({
 	color,
 	confirmDialog,
@@ -90,5 +96,11 @@ function ConfirmDialog({
 		</Dialog>
 	);
 }
+
+ConfirmDialog.propTypes = {
+	confirmDialog: PropTypes.object,
+	setConfirmDialog: PropTypes.func,
+	type: PropTypes.string,
+};
 
 export default ConfirmDialog;

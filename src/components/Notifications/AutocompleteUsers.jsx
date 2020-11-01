@@ -180,7 +180,7 @@ function AutocompleteUsers({
 	);
 }
 
-AutocompleteUsers.prototypes = {
+AutocompleteUsers.propTypes = {
 	id: PropTypes.string,
 	onChange: PropTypes.func,
 	name: PropTypes.string,
