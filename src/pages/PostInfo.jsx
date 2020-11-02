@@ -123,7 +123,7 @@ function PostInfo() {
 						key={postId}
 						title={post.title}
 						username={post.username}
-						user_id={post.userId}
+						userId={post.userId}
 						avatar={post.avatar}
 						description={post.description}
 						location={post.location}
@@ -132,7 +132,7 @@ function PostInfo() {
 						end={post.end}
 						attachment_preview={post.attachment_preview}
 						attachment={post.attachment}
-						timestamp={post.createdAt}
+						timestamp={post.timestamp}
 						comments={post.num_of_comments}
 						isBookmarked={false}
 					/>
