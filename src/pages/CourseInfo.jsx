@@ -10,6 +10,7 @@ import CourseAssignmentList from '../components/CourseInfo/CourseAssignments/Cou
 import CourseInfoHeader from '../components/CourseInfo/CourseInfoHeader';
 import CTAButton from '../components/general/CTAButton';
 import Modal from '../components/general/Modal';
+import Loader from '../components/layout/Loader/Loader';
 import AssignmentForm from '../components/CourseInfo/CourseAssignments/AssignmentForm';
 import { addFlashMessage } from '../store/actions/flashMessages';
 import db from '../config/fbConfig';
@@ -22,6 +23,7 @@ function CourseInfo() {
 	const { courseId } = useParams();
 	const history = useHistory();
 	const dispatch = useDispatch();
+	const [isLoading, setIsLoading] = useState(true);
 
 	const [course, setCourse] = useState(null);
 	const [assignments, setAssignments] = useState([]);
@@ -37,15 +39,25 @@ function CourseInfo() {
 			.doc(courseId)
 			.collection('assignments')
 			.add(assignmentData);
+
+		/** Prompt user added assignment */
+		dispatch(
+			addFlashMessage({
+				isOpen: true,
+				message: 'Added assignment!',
+				type: 'success',
+			})
+		);
 		setShowForm(false);
 	};
 
-
 	/** Remove user from course users list */
 	const removeCourse = () => {
-		db.collection('class').doc(courseId).update({
-			users: firebase.firestore.FieldValue.arrayRemove(currentUser.uid)
-		});
+		db.collection('class')
+			.doc(courseId)
+			.update({
+				users: firebase.firestore.FieldValue.arrayRemove(currentUser.uid),
+			});
 		// redirect user
 		history.push('/courses');
 
@@ -57,17 +69,17 @@ function CourseInfo() {
 				type: 'error',
 			})
 		);
-	}
+	};
 
 	// get course assignments
 	useEffect(() => {
-		if (courseId) {
+		if (courseId && isLoading) {
 			db.collection('class')
 				.doc(courseId)
 				.onSnapshot((snapshot) => setCourse(snapshot.data()));
 		}
 
-		if (course) {
+		if (course && isLoading) {
 			db.collection('class')
 				.doc(courseId)
 				.collection('assignments')
@@ -82,8 +94,9 @@ function CourseInfo() {
 						})
 					)
 				);
+			setIsLoading(false);
 		}
-	}, [courseId, course]);
+	}, [courseId, course, isLoading]);
 
 	if (showForm) {
 		return (
@@ -96,43 +109,33 @@ function CourseInfo() {
 		);
 	}
 
-	// const saveEdit = () => {
-	// 	setErrors('');
-	// 	if (formData.title === '' && formData.title.trim() === '') {
-	// 		setErrors('*Can not leave title empty!');
-	// 	} else {
-	// 		saveChanges();
-	// 		// setShowEdit to false
-	// 		setShowEdit(false);
-	// 	}
-	// };
-
-	const courseInfo = course ? (
-		<div className="CourseInfo">
-			<div className="CourseInfo__BackBtn">
-				<BackButton />
+	const courseInfo =
+		!isLoading && course ? (
+			<div className="CourseInfo">
+				<div className="CourseInfo__BackBtn">
+					<BackButton />
+				</div>
+				<div className="CourseInfo__Header">
+					<CourseInfoHeader
+						course={course}
+						semester={course.semester}
+						sections={course.sections}
+						title={`${course.course.abbreviation} ${course.course.course_number}`}
+						removeCourse={removeCourse}
+					/>
+				</div>
+				<div className="CourseInfo__Body">
+					<CourseAssignmentList assignments={assignments} />
+				</div>
+				<div className="AssignmentForm p-3">
+					<div onClick={toggleForm} className="font-italic">
+						<CTAButton text="Add Assignment" />
+					</div>
+				</div>
 			</div>
-			<div className="CourseInfo__Header">
-				<CourseInfoHeader
-					course={course}
-					semester={course.semester}
-					sections={course.sections}
-					title={`${course.course.abbreviation} ${course.course.course_number}`}
-					removeCourse={removeCourse}
-				/>
-			</div>
-			<div className="CourseInfo__Body">
-				<CourseAssignmentList assignments={assignments} />
-			</div>
-			<div className="AssignmentForm p-3">
-				<p onClick={toggleForm} className="font-italic">
-					<CTAButton text="Add Assignment" />
-				</p>
-			</div>
-		</div>
-	) : (
-		<p>Loading...</p>
-	);
+		) : (
+			<Loader />
+		);
 
 	return <>{courseInfo}</>;
 }
