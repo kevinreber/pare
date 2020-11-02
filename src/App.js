@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Header from './components/layout/Header';
 import NavBar from './components/layout/NavBar';
 import Notification from './components/general/Notification';
+import SubModal from './components/general/SubModal';
 import Routes from './routes/Routes';
 import { setCurrentUser } from './store/actions/auth';
 import { auth } from './config/fbConfig';
@@ -34,9 +35,10 @@ function App() {
 
 	/** if no currentUser is logged in, hide the Header and NavBar */
 	return (
-		<div className='App'>
+		<div className="App">
 			{currentUser ? (
 				<>
+					<SubModal />
 					<Header />
 					<Notification />
 					<Routes />

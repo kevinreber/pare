@@ -8,8 +8,8 @@ import moment from 'moment';
 import AssignmentStatusIcon from './AssignmentStatusIcon';
 import EnterGradeBtn from './EnterGradeBtn';
 import EditGradeForm from './EditGradeForm';
-import Modal from '../../general/Modal';
 import { addFlashMessage } from '../../../store/actions/flashMessages';
+import { showModalContent } from '../../../store/actions/modal';
 import db from '../../../config/fbConfig';
 
 /** Displays Assignment Data
@@ -49,6 +49,15 @@ function CourseAssignment({ id, title, dueDate, grades, classSubmittals }) {
 				type: 'success',
 			})
 		);
+
+		/** Close Grade Modal */
+		dispatch(
+			showModalContent({
+				isOpen: false,
+				content: null,
+			})
+		);
+
 		setIsEditing(false);
 	};
 
@@ -64,83 +73,36 @@ function CourseAssignment({ id, title, dueDate, grades, classSubmittals }) {
 		<EnterGradeBtn enterGrade={editToggle} />
 	);
 
+	// if editing grade, show Edit Grade Form for user to input grade
+	if (isEditing) {
+		dispatch(
+			showModalContent({
+				isOpen: true,
+				content: (
+					<EditGradeForm
+						assignmentName={title}
+						userGrade={userGrade}
+						save={saveGrade}
+					/>
+				),
+			})
+		);
+	}
+
 	return (
 		<>
-			{isEditing ? (
-				<Modal
-					closeModal={editToggle}
-					content={
-						<EditGradeForm
-							assignmentName={title}
-							userGrade={userGrade}
-							save={saveGrade}
-						/>
-					}
-				/>
-			) : (
-				<>
-					<AssignmentStatusIcon color={assignmentStatus} />
-					<div>
-						<h5 className="mate-text-primary Assignment-Title text-left">
-							{title}
-						</h5>
-						<p className="mate-text-secondary Assignment-Due font-italic text-left">
-							Due: {moment(dueDate.toDate()).startOf('day').fromNow()}
-						</p>
-					</div>
-					{displayGrade}
-				</>
-			)}
+			<AssignmentStatusIcon color={assignmentStatus} />
+			<div>
+				<h5 className="mate-text-primary Assignment-Title text-left">
+					{title}
+				</h5>
+				<p className="mate-text-secondary Assignment-Due font-italic text-left">
+					Due: {moment(dueDate.toDate()).startOf('day').fromNow()}
+				</p>
+			</div>
+			{displayGrade}
 		</>
 	);
 }
 
 export default CourseAssignment;
-
-// {/* <>
-// 	<AssignmentStatusIcon color={assignmentStatus} />
-// 	{/* <tbody> */}
-// 	<div>
-// 		<h5 className="mate-text-primary Assignment-Title text-left">
-// 			{title}
-// 		</h5>
-// 		{/* <td className='mate-text-secondary Assignment-Grade text-right pr-1'>
-// 					Class Grade: {classGrade}%
-// 				</td> */}
-// 	</div>
-// 	<div>
-// 		<p className="mate-text-secondary Assignment-Due font-italic text-left">
-// 			Due: {moment(dueDate.toDate()).startOf('day').fromNow()}
-// 		</p>
-// 		{/* <div className="mate-text-secondary Assignment-Grade text-right pr-1"> */}
-// 		{displayGrade}
-// 		{/* </div> */}
-// 	</div>
-// 	{/* </tbody> */}
-// </>; */}
-
-// {/* <table
-// 	id={id}
-// 	className="Assignment Assignment-Card mate-table table-hover">
-// 	<AssignmentStatusIcon color={assignmentStatus} />
-// 	<tbody>
-// 		<tr>
-// 			<th
-// 				colspan="2"
-// 				className="mate-text-primary Assignment-Title text-left">
-// 				{title}
-// 			</th>
-// 			{/* <td className='mate-text-secondary Assignment-Grade text-right pr-1'>
-// 				Class Grade: {classGrade}%
-// 			</td> */}
-// 		</tr>
-// 		<tr>
-// 			<td className="mate-text-secondary Assignment-Due font-italic text-left">
-// 				Due: {moment(dueDate.toDate()).startOf('day').fromNow()}
-// 	</td>
-// 			<td className="mate-text-secondary Assignment-Grade text-right pr-1">
-// 				{displayGrade}
-// 			</td>
-// 		</tr>
-// 	</tbody>
-// </table> */}

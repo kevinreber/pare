@@ -34,6 +34,8 @@ function EditGradeForm({ assignmentName, userGrade = 0, save }) {
 						onChange={handleChange}
 						value={formData.userGrade}
 						type="number"
+						min="0"
+						max="100"
 					/>
 				</div>
 				<SubmitButton text="Save" />

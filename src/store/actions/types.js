@@ -58,3 +58,6 @@ export const ADD_FLASH_MESSAGE = 'ADD_FLASH_MESSAGE';
 
 /** Flash Messages */
 export const PROMPT_MESSAGE = 'PROMPT_MESSAGE';
+
+/** Modal Content */
+export const SHOW_MODAL = 'SHOW_MODAL';
