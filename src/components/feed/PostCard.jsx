@@ -14,6 +14,7 @@ import Modal from '../general/Modal';
 import { addFlashMessage } from '../../store/actions/flashMessages';
 import createNewMessage from '../../utils/createNewMessage';
 import dateFromNowFormatter from '../../utils/dateFromNowFormatter';
+import copyLinkToClipBoard from '../../utils/copyLinkToClipBoard';
 
 /** MUI */
 import IconButton from '@material-ui/core/IconButton';
@@ -219,9 +220,9 @@ function PostCard({
 	/******************************************** */
 
 	// Copies link of post to browser clipboard
-	const copyLinkToClipBoard = async (link) => {
+	const shareLink = () => {
 		try {
-			await navigator.clipboard.writeText(link);
+			copyLinkToClipBoard(`/post/${id}`);
 			/** Prompt change made */
 			dispatch(
 				addFlashMessage({
@@ -296,7 +297,7 @@ function PostCard({
 					open={openShare}
 					anchorEl={shareAnchorEl}
 					close={handleShareClose}
-					shareLink={() => copyLinkToClipBoard(`${HOST_URL}/post/${id}`)}
+					shareLink={shareLink}
 				/>
 			</div>
 			<div className="Post-Card__Right Post__timestamp">

@@ -10,6 +10,7 @@ import PopoverActions from '../general/PopoverActions';
 import ConfirmDialog from '../general/ConfirmDialog';
 import removeUserFromCollection from '../../utils/removeUserFromCollection';
 import { addFlashMessage } from '../../store/actions/flashMessages';
+import copyLinkToClipBoard from '../../utils/copyLinkToClipBoard';
 
 /** MUI */
 import IconButton from '@material-ui/core/IconButton';
@@ -30,7 +31,6 @@ import LinkRoundedIcon from '@material-ui/icons/LinkRounded';
  * @param {Object}		currentUser		Current logged in user's data.
  * @param {function}	handleChange	Handles changes by updating state.
  * @param {function}	saveChanges		Saves changes made to Study Group.
- *
  */
 function StudyGroupChatAdmin({
 	studyGroupId,
@@ -124,13 +124,6 @@ function StudyGroupChatAdmin({
 	 * ! Update displayName of user's messages
 	 */
 	const leaveGroup = () => {
-		// {
-		// 	uid: currentUser,
-		// 	displayName: currentUser.displayName,
-		// 	photoURL: currentUser.photoURL,
-		// 	admin: userAdminStatus,
-		// };
-
 		removeUserFromCollection(
 			'study-group',
 			studyGroupId,
@@ -158,6 +151,29 @@ function StudyGroupChatAdmin({
 			saveChanges();
 			// setShowEdit to false
 			setShowEdit(false);
+		}
+	};
+
+	const shareLink = () => {
+		try {
+			copyLinkToClipBoard(`/study-groups/${studyGroupId}`);
+			/** Prompt change made */
+			dispatch(
+				addFlashMessage({
+					isOpen: true,
+					message: 'Copied to Clipboard!',
+					type: 'success',
+				})
+			);
+		} catch (err) {
+			/** Prompt change made */
+			dispatch(
+				addFlashMessage({
+					isOpen: true,
+					message: 'Error!',
+					type: 'danger',
+				})
+			);
 		}
 	};
 
@@ -247,7 +263,7 @@ function StudyGroupChatAdmin({
 							<p>Add Members</p>
 						</div>
 						<div className="Add__Btn">
-							<IconButton>
+							<IconButton onClick={shareLink}>
 								<LinkRoundedIcon />
 							</IconButton>
 							<p>Share Link</p>
