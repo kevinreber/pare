@@ -1,176 +1,178 @@
 .CourseInfo {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .CourseInfo .CourseInfo__BackBtn {
-    position: relative;
+	position: relative;
 }
 
 .CourseInfo .CourseInfo__BackBtn .BackButton {
-    top: 5.25rem;
-    z-index: 100;
+	top: 5.25rem;
+	z-index: 100;
 }
 
 .CourseInfo__Header {
-    display: flex;
-    position: fixed;
-    justify-content: center;
-    align-items: baseline;
-    padding-top: 1.2rem;
-    padding-bottom: 1.2rem;
-    border-bottom: 2px solid var(--tertiary-color);
-    cursor: pointer;
-    height: 8vh;
-    background-color: var(--bg-color);
-    margin-top: 9.6vh;
-    width: 100%;
-    z-index: 25;
-    box-shadow: 0 20px 20px -20px rgba(0, 0, 0, 0.6);
+	display: flex;
+	position: fixed;
+	justify-content: center;
+	align-items: baseline;
+	padding-top: 1.2rem;
+	padding-bottom: 1.2rem;
+	border-bottom: 2px solid var(--tertiary-color);
+	cursor: pointer;
+	height: 8vh;
+	background-color: var(--bg-color);
+	margin-top: 9.6vh;
+	width: 100%;
+	z-index: 25;
+	box-shadow: 0 20px 20px -20px rgba(0, 0, 0, 0.6);
 }
 
 .CourseInfo__Header h5 {
-    font-size: 18px;
-    margin-right: 1rem;
+	font-size: 18px;
+	margin-right: 1rem;
 }
 
 .CourseInfo__Header p {
-    font-size: 14px;
+	font-size: 14px;
 }
 
 .CourseDetails,
 .CourseDetails table {
-    margin-left: auto;
-    margin-right: auto;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .CourseDetails {
-    margin-top: 5rem;
+	margin-top: 5rem;
 }
 
 .CourseDetailsTable {
-    font-size: 16px;
+	font-size: 16px;
 }
 
 .CourseGradesTable {
-    font-size: 16px;
+	font-size: 16px;
 }
 
 .CourseGradesTable th {
-    padding-right: 1rem;
-    text-align: left;
+	padding-right: 1rem;
+	text-align: left;
 }
 
 .CourseDetailsTable .table-header {
-    width: 96px;
-    padding-right: 1rem;
+	width: 96px;
+	padding-right: 1rem;
 }
 
-.CourseDetailsTable  {
-    text-align: left;
+.CourseDetailsTable {
+	text-align: left;
 }
 
-.CourseDetailsTable>li{
-    display: flex;
-    justify-content: space-between;
+.CourseDetailsTable > li {
+	display: flex;
+	justify-content: space-between;
 }
 
-.CourseDetailsTable .table-content{
-    margin-right: auto;
+.CourseDetailsTable .table-content {
+	margin-right: auto;
 }
 
 .OverallGrading,
 .CourseGradesTable th,
 .CourseGradesTable td,
-.CourseDetailsTable  {
-    font-weight: 400;
+.CourseDetailsTable {
+	font-weight: 400;
 }
 
 .CourseInfo__Body {
-    flex: 1;
-    overflow: scroll;
-    margin-top: 17vh;
-    margin-bottom: 7rem;
+	flex: 1;
+	overflow: scroll;
+	margin-top: 17vh;
+	margin-bottom: 7rem;
 }
 
 .CourseInfo__Body .Course-Info-Title {
-    font-size: 14px;
+	font-size: 14px;
 }
 
 .Assignment.Assignment-Card .Assignment-Due {
-    font-size: 12px;
+	font-size: 12px;
 }
 
 .Assignment.Assignment-Card .Assignment-Grade {
-    font-size: 12px;
+	font-size: 12px;
 }
 
 .Assignment.Assignment-Card .Assignment-Title {
-    font-size: 14px;
-    font-weight: 400;
+	font-size: 14px;
+	font-weight: 400;
 }
 
 .Assignment.Assignment-Card {
-    position: relative;
-    padding-top: .75rem;
-    padding-bottom: 1rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    border-collapse: separate;
+	position: relative;
+	padding: 1.5rem 2rem 0.5rem 2rem;
+	border-collapse: separate;
+	display: flex;
+	justify-content: space-between;
 }
 
 .Assignment .Enter-Grade-Btn {
-    background-color: var(--danger-color);
-    font-size: 12px;
-    padding: .2rem;
+	background-color: var(--danger-color);
+	font-size: 12px;
+	padding: 0.2rem;
+	height: 30px;
 }
 
 .Assignment .Assignment-Status {
-    position: absolute;
-    left: 1rem;
-    top: 1.4rem;
-    font-size: 9px;
+	position: absolute;
+	left: 1rem;
+	top: 1.7rem;
+	font-size: 9px;
 }
 
 .Assignment .Change-Grade {
-    color: var(--tertiary-color);
-    position: absolute;
-    right: .4rem;
-    bottom: 17%;
-    font-size: 14px;
+	color: var(--tertiary-color);
+	position: absolute;
+	right: 0.4rem;
+	top: 1.5rem;
+	font-size: 14px;
 }
 
 .CourseInfoHeader .Course-Card-Term {
-    font-size: 12px;
+	font-size: 12px;
 }
 
 .mate-more-info {
-    margin-left: 6px;
-    font-size: 14px;
-    color: var(--tertiary-color);
+	margin-left: 6px;
+	font-size: 14px;
+	color: var(--tertiary-color);
 }
 
 .CourseInfoTitle {
-    margin-bottom: 0;
+	margin-bottom: 0;
 }
 
-.MuiPaper-root.MuiDialog-paper.MuiDialog-paperScrollPaper.MuiDialog-paperWidthSm.MuiPaper-elevation24.MuiPaper-rounded{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 400px;
-    width: 280px;
-    color: var(--secondary-color);
-    background-color: var(--tertiary-color);
+.MuiPaper-root.MuiDialog-paper.MuiDialog-paperScrollPaper.MuiDialog-paperWidthSm.MuiPaper-elevation24.MuiPaper-rounded {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 400px;
+	width: 280px;
+	color: var(--secondary-color);
+	background-color: var(--tertiary-color);
 }
 
-.MuiDialogActions-root.MuiDialogActions-spacing>.MuiButtonBase-root.MuiButton-root.MuiButton-text{
-    border: 1px solid var(--danger-color);
-    color: var(--danger-color);
+.MuiDialogActions-root.MuiDialogActions-spacing
+	> .MuiButtonBase-root.MuiButton-root.MuiButton-text {
+	border: 1px solid var(--danger-color);
+	color: var(--danger-color);
 }
 
-.MuiDialogActions-root.MuiDialogActions-spacing>.MuiButtonBase-root.MuiButton-root.MuiButton-text:hover{
-    border: 1px solid var(--danger-color);
-    color: var(--secondary-color);
-    background-color: var(--danger-color);
+.MuiDialogActions-root.MuiDialogActions-spacing
+	> .MuiButtonBase-root.MuiButton-root.MuiButton-text:hover {
+	border: 1px solid var(--danger-color);
+	color: var(--secondary-color);
+	background-color: var(--danger-color);
 }

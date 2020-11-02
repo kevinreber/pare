@@ -15,13 +15,7 @@ import db from '../../../config/fbConfig';
 /** Displays Assignment Data
  * Courses -> CourseList -> Course -> CourseInfo -> CourseInfoBody -> CourseAssignmentList -> CourseAssignment
  */
-function CourseAssignment({
-	id,
-	title,
-	dueDate,
-	grades,
-	classSubmittals,
-}) {
+function CourseAssignment({ id, title, dueDate, grades, classSubmittals }) {
 	const { courseId } = useParams();
 	const dispatch = useDispatch();
 	const currentUser = useSelector((state) => state.auth.user);
@@ -36,8 +30,6 @@ function CourseAssignment({
 	const assignmentStatus = userGrade ? 'success' : 'danger';
 
 	const saveGrade = (data) => {
-		console.log(data);
-
 		/** update DB and make change */
 		db.collection('class')
 			.doc(courseId)
@@ -62,12 +54,12 @@ function CourseAssignment({
 
 	/** Shows user's grade and button to edit grade */
 	const displayGrade = userGrade ? (
-		<>
-			Your Grade: {userGrade}%
+		<div div className="mate-text-secondary Assignment-Grade text-right pr-1">
+			<p>Your Grade: {userGrade}%</p>
 			<div onClick={editToggle} className="Change-Grade">
 				<i className="fas fa-edit"></i>
 			</div>
-		</>
+		</div>
 	) : (
 		<EnterGradeBtn enterGrade={editToggle} />
 	);
@@ -86,36 +78,69 @@ function CourseAssignment({
 					}
 				/>
 			) : (
-				<li key={id}>
-					<table
-						id={id}
-						className="Assignment Assignment-Card mate-table table-hover">
-						<AssignmentStatusIcon color={assignmentStatus} />
-						<tbody>
-							<tr>
-								<th
-									colspan="2"
-									className="mate-text-primary Assignment-Title text-left">
-									{title}
-								</th>
-								{/* <td className='mate-text-secondary Assignment-Grade text-right pr-1'>
-									Class Grade: {classGrade}%
-								</td> */}
-							</tr>
-							<tr>
-								<td className="mate-text-secondary Assignment-Due font-italic text-left">
-									Due: {moment(dueDate.toDate()).startOf('day').fromNow()}
-								</td>
-								<td className="mate-text-secondary Assignment-Grade text-right pr-1">
-									{displayGrade}
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</li>
+				<>
+					<AssignmentStatusIcon color={assignmentStatus} />
+					<div>
+						<h5 className="mate-text-primary Assignment-Title text-left">
+							{title}
+						</h5>
+						<p className="mate-text-secondary Assignment-Due font-italic text-left">
+							Due: {moment(dueDate.toDate()).startOf('day').fromNow()}
+						</p>
+					</div>
+					{displayGrade}
+				</>
 			)}
 		</>
 	);
 }
 
 export default CourseAssignment;
+
+// {/* <>
+// 	<AssignmentStatusIcon color={assignmentStatus} />
+// 	{/* <tbody> */}
+// 	<div>
+// 		<h5 className="mate-text-primary Assignment-Title text-left">
+// 			{title}
+// 		</h5>
+// 		{/* <td className='mate-text-secondary Assignment-Grade text-right pr-1'>
+// 					Class Grade: {classGrade}%
+// 				</td> */}
+// 	</div>
+// 	<div>
+// 		<p className="mate-text-secondary Assignment-Due font-italic text-left">
+// 			Due: {moment(dueDate.toDate()).startOf('day').fromNow()}
+// 		</p>
+// 		{/* <div className="mate-text-secondary Assignment-Grade text-right pr-1"> */}
+// 		{displayGrade}
+// 		{/* </div> */}
+// 	</div>
+// 	{/* </tbody> */}
+// </>; */}
+
+// {/* <table
+// 	id={id}
+// 	className="Assignment Assignment-Card mate-table table-hover">
+// 	<AssignmentStatusIcon color={assignmentStatus} />
+// 	<tbody>
+// 		<tr>
+// 			<th
+// 				colspan="2"
+// 				className="mate-text-primary Assignment-Title text-left">
+// 				{title}
+// 			</th>
+// 			{/* <td className='mate-text-secondary Assignment-Grade text-right pr-1'>
+// 				Class Grade: {classGrade}%
+// 			</td> */}
+// 		</tr>
+// 		<tr>
+// 			<td className="mate-text-secondary Assignment-Due font-italic text-left">
+// 				Due: {moment(dueDate.toDate()).startOf('day').fromNow()}
+// 	</td>
+// 			<td className="mate-text-secondary Assignment-Grade text-right pr-1">
+// 				{displayGrade}
+// 			</td>
+// 		</tr>
+// 	</tbody>
+// </table> */}
