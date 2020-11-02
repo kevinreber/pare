@@ -225,16 +225,15 @@ function PostForm({ save }) {
 
 									{suggestions.map((suggestion, idx) => {
 										const style = {
-											padding: '.5rem',
 											backgroundColor: suggestion.active
 												? '#393e46'
 												: 'rgb(43, 47, 58)',
-											color: '#eeeeee',
 										};
 
 										return (
 											<div
 												key={idx}
+												className="Autocomplete-Location-Item"
 												{...getSuggestionItemProps(suggestion, { style })}>
 												{suggestion.description}
 											</div>

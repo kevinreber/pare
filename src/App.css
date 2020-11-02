@@ -377,3 +377,8 @@ span.MuiButtonBase-root.MuiIconButton-root.PrivateSwitchBase-root-9.MuiCheckbox-
 	z-index: 100;
 	text-align: left;
 }
+
+.Autocomplete-Location-Item {
+	padding: 0.5rem;
+	color: var(var(--secondary-color));
+}
