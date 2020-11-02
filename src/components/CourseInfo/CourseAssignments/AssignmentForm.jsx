@@ -90,7 +90,7 @@ function AssignmentForm({ save, userId }) {
 					</small>
 				</div>
 				<div className="form-group">
-					<label className="float-left" for="type">
+					<label className="float-left" htmlFor="type">
 						Type
 					</label>
 					<select
@@ -98,8 +98,9 @@ function AssignmentForm({ save, userId }) {
 						onChange={handleChange}
 						name="type"
 						className="Assignment-Form-Type Mate-Form-Select mate-form-input form-control"
-						id="type">
-						<option value="" disabled selected className="text-disabled">
+						id="type"
+						defaultValue={formData.type}>
+						<option value="" disabled className="text-disabled">
 							Select a type
 						</option>
 						<option>Homework</option>
