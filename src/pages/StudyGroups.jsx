@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 /** Components */
 import CTAButton from '../components/general/CTAButton';
-import Searchbar from '../components/general/Searchbar';
+import Searchbar from '../components/general/SearchBar/Searchbar';
 import Modal from '../components/general/Modal';
 import Loader from '../components/layout/Loader/Loader';
 import NoData from '../components/general/NoData';

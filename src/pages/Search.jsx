@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 /** Components & Helpers */
 import NoData from '../components/general/NoData';
 import CTAButton from '../components/general/CTAButton';
-import Searchbar from '../components/general/Searchbar';
+import Searchbar from '../components/general/SearchBar/Searchbar';
 import ConfirmDialog from '../components/general/ConfirmDialog';
 import Loader from '../components/layout/Loader/Loader';
 import { deletePostFromFB } from '../store/actions/posts';
@@ -71,7 +71,8 @@ function Search() {
 								}
 							}
 						});
-					});
+					})
+					.catch((err) => console.log(err));
 			} else {
 				db.collection('feeds')
 					.where('type', '==', quickSearch)
@@ -93,7 +94,28 @@ function Search() {
 		}
 	}, [quickSearch, isLoading, startSearch]);
 
-	useEffect(() => {}, []);
+	useEffect(() => {
+		// if user uses search bar, filter out posts that match search keywords
+		const searchForPosts = () => {
+			db.collection('feeds')
+				.get()
+				.then((data) => {
+					data.docs.forEach((doc) => {
+						if (doc.data().description.includes(search)) {
+							setPosts((posts) => [...posts, { id: doc.id, data: doc.data() }]);
+						}
+					});
+				})
+				.catch((err) => console.log(err));
+
+			setIsLoading(false);
+			setStartSearch(false);
+		};
+
+		if (isLoading && startSearch) {
+			searchForPosts();
+		}
+	}, [isLoading, startSearch, search]);
 
 	/** Prompts Confirmation Dialog to Delete Post*/
 	const deletePostPrompt = (id) => {
@@ -126,6 +148,13 @@ function Search() {
 	/** Prompts Modal to edit Post information */
 	const editPost = (id) => {
 		console.log('editing..', id);
+	};
+
+	const handleSubmit = () => {
+		setPosts([]);
+		setQuickSearch('');
+		setIsLoading(true);
+		setStartSearch(true);
 	};
 
 	/** Quick Search Category List */
@@ -164,6 +193,7 @@ function Search() {
 				{isLoading && posts.length === 0 ? <Loader /> : SearchBody}
 			</div>
 			<div
+				onClick={handleSubmit}
 				className={`Search__Footer ${
 					search.length === 0 ? 'disabled-btn' : ''
 				}`}>
