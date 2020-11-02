@@ -364,3 +364,16 @@ span.MuiButtonBase-root.MuiIconButton-root.PrivateSwitchBase-root-9.MuiCheckbox-
 		transform: rotate(360deg);
 	}
 }
+
+/********************************* */
+/** Autocomplete Places            *
+/********************************* */
+.Autocomplete-Location {
+	position: relative;
+}
+
+.Autocomplete-Location-List {
+	position: absolute;
+	z-index: 100;
+	text-align: left;
+}

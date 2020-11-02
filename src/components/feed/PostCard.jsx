@@ -41,7 +41,7 @@ const HOST_URL = 'localhost:3000';
  * @param {string}		userId				User's ID of user who created post.
  * @param {string}		avatar				Avatar of user who created post.
  * @param {string}		description			Post's description.
- * @param {string}		location			Post's location.
+ * @param {object}		location			Post's location.
  * @param {string}		type				Post's type of event.
  * @param {date}		start				Post's event start time.
  * @param {date}		end					Post's event end time.
@@ -262,10 +262,10 @@ function PostCard({
 						<div className="Post-Card__Body mate-text-secondary">
 							<p className="description">{description}</p>
 							{showAttachment}
-							{location ? (
+							{location && location !== '' ? (
 								<span className="location">
 									<LocationOnIcon />
-									{location}
+									{location.address.formatted_address}
 								</span>
 							) : null}
 							<span>{eventTime}</span>
@@ -329,7 +329,7 @@ PostCard.propTypes = {
 	userId: PropTypes.string.isRequired,
 	avatar: PropTypes.string,
 	description: PropTypes.string.isRequired,
-	location: PropTypes.string,
+	location: PropTypes.object,
 	type: PropTypes.string,
 	timestamp: PropTypes.object,
 	comments: PropTypes.number,

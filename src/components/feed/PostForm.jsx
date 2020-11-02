@@ -2,6 +2,10 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import firebase from 'firebase';
+import PlacesAutocomplete, {
+	geocodeByAddress,
+	getLatLng,
+} from 'react-places-autocomplete';
 
 /** Components */
 import SubmitButton from '../general/SubmitButton';
@@ -31,7 +35,6 @@ function PostForm({ save }) {
 		avatar: user.avatar,
 		title: '',
 		description: '',
-		location: '',
 		type: '',
 		start: null,
 		end: null,
@@ -43,6 +46,20 @@ function PostForm({ save }) {
 
 	const [errors, setErrors] = useState('');
 	const [formData, setFormData] = useState(INITIAL_STATE);
+
+	// location data
+	const [address, setAddress] = useState('');
+	const [coordinates, setCoordinates] = useState({
+		lat: null,
+		lng: null,
+	});
+
+	const handleSelect = async (value) => {
+		const results = await geocodeByAddress(value);
+		const latLng = await getLatLng(results[0]);
+		setAddress(value);
+		setCoordinates(latLng);
+	};
 
 	/** Update state in formData */
 	const handleChange = (e) => {
@@ -112,6 +129,10 @@ function PostForm({ save }) {
 			setErrors('*Description required');
 			return false;
 		}
+		// setFormData((fData) => ({
+		// 	...fData,
+		// 	location: { address, coordinates },
+		// }));
 		return true;
 	};
 
@@ -119,6 +140,11 @@ function PostForm({ save }) {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (validateFormData()) {
+			formData.location = {
+				address,
+				coordinates,
+			};
+			console.log(formData);
 			save(formData);
 			// Clear state of form
 			setFormData(INITIAL_STATE);
@@ -176,14 +202,48 @@ function PostForm({ save }) {
 					<label htmlFor="location" className="float-left">
 						Location
 					</label>
-					<input
-						id="location"
-						className="form-control mate-form-input"
-						type="text"
-						onChange={handleChange}
-						name="location"
-						value={formData.location}
-					/>
+					<PlacesAutocomplete
+						value={address}
+						onChange={setAddress}
+						onSelect={handleSelect}>
+						{({
+							getInputProps,
+							suggestions,
+							getSuggestionItemProps,
+							loading,
+						}) => (
+							<div className="Autocomplete-Location">
+								<input
+									{...getInputProps({
+										placeholder: 'Type address',
+										id: 'location',
+										className: 'form-control mate-form-input',
+									})}
+								/>
+								<div className="Autocomplete-Location-List">
+									{loading ? <div>loading...</div> : null}
+
+									{suggestions.map((suggestion, idx) => {
+										const style = {
+											padding: '.5rem',
+											backgroundColor: suggestion.active
+												? '#393e46'
+												: 'rgb(43, 47, 58)',
+											color: '#eeeeee',
+										};
+
+										return (
+											<div
+												key={idx}
+												{...getSuggestionItemProps(suggestion, { style })}>
+												{suggestion.description}
+											</div>
+										);
+									})}
+								</div>
+							</div>
+						)}
+					</PlacesAutocomplete>
 				</div>
 				<div className="form-group d-flex justify-content-between align-items-baseline">
 					<label htmlFor="type" className="float-left mr-4">
