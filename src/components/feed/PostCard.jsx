@@ -331,7 +331,7 @@ PostCard.propTypes = {
 	description: PropTypes.string.isRequired,
 	location: PropTypes.string,
 	type: PropTypes.string,
-	timestamp: PropTypes.object.isRequired,
+	timestamp: PropTypes.object,
 	comments: PropTypes.number,
 	isBookmarked: PropTypes.bool,
 	remove: PropTypes.func,
