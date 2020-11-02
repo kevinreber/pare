@@ -13,12 +13,17 @@ function CourseAssignmentList({ assignments }) {
 	const AssignmentList =
 		assignments && assignments.length !== 0 ? (
 			assignments.map((assignment) => (
-				<CourseAssignmentCard
+				<li
+					key={assignment.id}
 					id={assignment.id}
-					title={assignment.data.title}
-					dueDate={assignment.data.dueDate}
-					grades={assignment.data.grades}
-				/>
+					className="Assignment Assignment-Card mate-table table-hover">
+					<CourseAssignmentCard
+						id={assignment.id}
+						title={assignment.data.title}
+						dueDate={assignment.data.dueDate}
+						grades={assignment.data.grades}
+					/>
+				</li>
 			))
 		) : (
 			<NoData text={'Assignments'} />
