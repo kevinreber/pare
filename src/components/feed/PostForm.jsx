@@ -31,8 +31,8 @@ function PostForm({ save }) {
 		avatar: user.avatar,
 		title: '',
 		description: '',
-		location: null,
-		type: null,
+		location: '',
+		type: '',
 		start: null,
 		end: null,
 		attachment_preview: '',
@@ -64,7 +64,6 @@ function PostForm({ save }) {
 
 			/** Handles 'start' and 'end' date fields */
 			if (name === 'end' || name === 'start') {
-
 				const date = new Date(value);
 				value = firebase.firestore.Timestamp.fromDate(date);
 			}
@@ -195,8 +194,8 @@ function PostForm({ save }) {
 						className="form-control mate-form-input"
 						onChange={handleChange}
 						name="type"
-						value={formData.type}>
-						<option className="option-disabled" value="" disabled selected>
+						defaultValue={formData.type}>
+						<option className="option-disabled" value="" disabled>
 							Select Type
 						</option>
 						<option>Networking</option>
