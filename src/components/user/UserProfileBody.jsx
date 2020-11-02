@@ -31,6 +31,7 @@ function UserProfileBody({
 	portfolio,
 	availability,
 }) {
+	console.log(availability);
 	const showTutorFields = isTutor ? (
 		<>
 			<UserFields label={'I can help in...'} content={keywords} />

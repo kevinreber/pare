@@ -3,6 +3,9 @@ import React from 'react';
 import moment from 'moment';
 import { PropTypes } from 'prop-types';
 
+/** Helpers */
+import capitalizeFirstLetter from '../../utils/capitalizeFirstLetter';
+
 /** Builds an input field of User Field data.
  * UserProfile -> UserProfileBody => UserFields
  *
@@ -12,22 +15,22 @@ import { PropTypes } from 'prop-types';
  */
 function UserFields({ label, content = '-' }) {
 	const formatArray = (arr) => arr.join(', ');
-	const formatAvailability = (data) => {
-		return <ul className="User-Availability-List">{availability(data)}</ul>;
-	};
 
 	// format handler for availability
-	const availability = (data) =>
-		data.map((day) => (
-			<li key={day.data.day}>
-				<p className="Available-Day">
-					{day.id.charAt(0).toUpperCase() + day.id.slice(1)}:
-				</p>
-				<div className="Available-Time">
-					{buildValues(day.data['0'].start, day.data['0'].end)}
-				</div>
-			</li>
-		));
+	const formatAvailability = (data) => {
+		return (
+			<ul className="User-Availability-List">
+				{data.map((day) => (
+					<li key={day.id}>
+						<p className="Available-Day">{capitalizeFirstLetter(day.id)}:</p>
+						<div className="Available-Time">
+							{buildValues(day.data['0'].start, day.data['0'].end)}
+						</div>
+					</li>
+				))}
+			</ul>
+		);
+	};
 
 	// convert to local time if not null
 	const buildValues = (start, end) => {
@@ -54,32 +57,30 @@ function UserFields({ label, content = '-' }) {
 	const formatCourses = (courses) => {
 		const list = (
 			<ul className="User-Course-List">
-				{courses.map((course) => {
-					const title = `${course.data.course.abbreviation} ${course.data.course.course_number}`;
-					return <li key={course.id}>{title}</li>;
-				})}
+				{courses.length > 0 ? (
+					<>
+						{courses.map((course) => {
+							const title = `${course.data.course.abbreviation} ${course.data.course.course_number}`;
+							return <li key={course.id}>{title}</li>;
+						})}
+					</>
+				) : (
+					<li>-</li>
+				)}
 			</ul>
 		);
+
 		return list;
 	};
 
 	let inputField;
 
-	switch (typeof content) {
-		case 'object':
-			if (label === 'Availability') {
-				inputField = formatAvailability(content);
-			}
-			if (label === 'Classes Taken') {
-				inputField = formatCourses(content);
-			} else if (Array.isArray(content)) {
-				inputField = formatArray(content);
-			} else {
-				inputField = formatAvailability(content);
-			}
-			break;
-		default:
-			inputField = content;
+	if (label === 'Availability') {
+		inputField = formatAvailability(content);
+	} else if (label === 'Classes Taken') {
+		inputField = formatCourses(content);
+	} else if (Array.isArray(content)) {
+		inputField = formatArray(content);
 	}
 
 	return (
