@@ -15,7 +15,7 @@ import BlockIcon from '@material-ui/icons/Block';
  * @param {function}	edit		Edit action.
  * @param {string}		id			ID to be used as reference.
  * @param {boolean}		open		Boolean status to show popover.
- * @param {boolean}		anchorEl	Boolean where to display popover.
+ * @param {object}		anchorEl	Object of where to display popover.
  * @param {function}	close		Closes popover.
  * @param {boolean}		deleteBtn	Boolean to show Delete Button.
  * @param {boolean}		editBtn		Boolean to show Edit Button.
@@ -67,7 +67,7 @@ PopoverActions.propTypes = {
 	edit: PropTypes.func,
 	id: PropTypes.string,
 	open: PropTypes.bool,
-	anchorEl: PropTypes.bool,
+	anchorEl: PropTypes.object,
 	close: PropTypes.func,
 	deleteBtn: PropTypes.bool,
 	editBtn: PropTypes.bool,
