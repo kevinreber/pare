@@ -7,6 +7,7 @@ import NoData from '../components/general/NoData';
 import CTAButton from '../components/general/CTAButton';
 import Searchbar from '../components/general/Searchbar';
 import ConfirmDialog from '../components/general/ConfirmDialog';
+import Loader from '../components/layout/Loader/Loader';
 import { deletePostFromFB } from '../store/actions/posts';
 import { addFlashMessage } from '../store/actions/flashMessages';
 import db from '../config/fbConfig';
@@ -30,12 +31,14 @@ function Search() {
 	const dispatch = useDispatch();
 	const [quickSearch, setQuickSearch] = useState('Today');
 	const toggleQuickSearch = (e) => {
+		setIsLoading(true);
 		setPosts([]);
 		setQuickSearch(e.target.innerText);
-		setIsLoading(true);
 	};
 
 	const [search, setSearch] = useState('');
+	const [startSearch, setStartSearch] = useState(false);
+
 	const [posts, setPosts] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 
@@ -47,44 +50,50 @@ function Search() {
 
 	useEffect(() => {
 		const nowDate = new Date();
-		async function getData() {
+		function getData() {
 			/** if quickSearch is set to 'Today'
 			 * filter through each snapshot and compare timestamps to find posts that were posted
 			 * within 24 hrs
 			 * 86400000 = 24 hrs in milliseconds
 			 */
 			if (quickSearch === 'Today') {
-				await db.collection('feeds').onSnapshot((snapshot) => {
-					snapshot.docs.forEach((doc) => {
-						if (doc.data().timestamp) {
-							const postDate = doc.data().timestamp.toDate().getTime();
-							if (nowDate - postDate < 86400000) {
-								setPosts((posts) => [
-									...posts,
-									{ id: doc.id, data: doc.data() },
-								]);
+				db.collection('feeds')
+					.get()
+					.then((data) => {
+						data.docs.forEach((doc) => {
+							if (doc.data().timestamp) {
+								const postDate = doc.data().timestamp.toDate().getTime();
+								if (nowDate - postDate < 86400000) {
+									setPosts((posts) => [
+										...posts,
+										{ id: doc.id, data: doc.data() },
+									]);
+								}
 							}
-						}
+						});
 					});
-				});
 			} else {
-				await db
-					.collection('feeds')
+				db.collection('feeds')
 					.where('type', '==', quickSearch)
-					.onSnapshot((snapshot) =>
+					.get()
+					.then((data) => {
 						setPosts(
-							snapshot.docs.map((doc) => ({
+							data.docs.map((doc) => ({
 								id: doc.id,
 								data: doc.data(),
 							}))
-						)
-					);
+						);
+					})
+					.catch((err) => console.log(err));
 			}
 			setIsLoading(false);
 		}
+		if (isLoading && !startSearch) {
+			getData();
+		}
+	}, [quickSearch, isLoading, startSearch]);
 
-		getData();
-	}, [quickSearch]);
+	useEffect(() => {}, []);
 
 	/** Prompts Confirmation Dialog to Delete Post*/
 	const deletePostPrompt = (id) => {
@@ -119,10 +128,6 @@ function Search() {
 		console.log('editing..', id);
 	};
 
-	if (isLoading) {
-		return <p>Loading...</p>;
-	}
-
 	/** Quick Search Category List */
 	const SearchCategoryList = SearchCategories.map((category, index) => (
 		<ListItem
@@ -134,6 +139,13 @@ function Search() {
 			<ListItemText primary={category} />
 		</ListItem>
 	));
+
+	const SearchBody =
+		posts.length === 0 && !isLoading ? (
+			<NoData text={'posts'} />
+		) : (
+			<FeedList posts={posts} remove={deletePostPrompt} edit={editPost} />
+		);
 
 	return (
 		<div className="Search">
@@ -149,11 +161,7 @@ function Search() {
 				</div>
 			</div>
 			<div className="Search__List">
-				{posts.length > 0 ? (
-					<FeedList posts={posts} remove={deletePostPrompt} edit={editPost} />
-				) : (
-					<NoData text={'posts'} />
-				)}
+				{isLoading && posts.length === 0 ? <Loader /> : SearchBody}
 			</div>
 			<div
 				className={`Search__Footer ${
