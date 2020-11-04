@@ -3,6 +3,7 @@ export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT_USER = 'LOGOUT_USER';
 export const LOGOUT_FAIL = 'LOGOUT_FAIL';
+export const DELETE_ACCOUNT = 'DELETE_ACCOUNT';
 
 /** Messages */
 export const ADD_NEW_MESSAGE = 'ADD_NEW_MESSAGE';

@@ -14,6 +14,7 @@ import {
 	LOGIN_FAIL,
 	LOGOUT_USER,
 	LOGOUT_FAIL,
+	DELETE_ACCOUNT,
 } from './types';
 
 /** Checks if user is already in DB
@@ -25,13 +26,16 @@ import {
 async function checkIfUserExists(user) {
 	const userRef = db.collection('users').doc(user.uid);
 
-	await userRef.get().then(async (doc) => {
-		if (doc.exists) {
-			 updateUserLogin(user);
-		} else {
-			addNewUserToDB(user);
-		}
-	}).catch((err)=> console.log(err));
+	await userRef
+		.get()
+		.then(async (doc) => {
+			if (doc.exists) {
+				updateUserLogin(user);
+			} else {
+				addNewUserToDB(user);
+			}
+		})
+		.catch((err) => console.log(err));
 }
 
 /** Adds new User to DB
@@ -66,52 +70,64 @@ async function addNewUserToDB(user) {
 		lastUpdatedAt: createFbTimestamp(),
 	};
 
-	const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
-	
+	const days = [
+		'monday',
+		'tuesday',
+		'wednesday',
+		'thursday',
+		'friday',
+		'saturday',
+		'sunday',
+	];
+
 	await db.collection('users').doc(user.uid).set(data);
 
 	// set availability
 	days.forEach(async (day, idx) => {
-		await db.collection('users')
+		await db
+			.collection('users')
 			.doc(user.uid)
 			.collection('availability')
 			.doc(day)
 			.set({
-				'0': {
-						start: null,
-						end: null,
-						idx: 0
-					},
-				day: idx + 1
-				});
-	})
+				0: {
+					start: null,
+					end: null,
+					idx: 0,
+				},
+				day: idx + 1,
+			});
+	});
 	console.log('New user created', data);
 }
 
 async function updateUserLogin(user) {
 	console.log('updating user last login...');
-	await db.collection('users')
+	await db
+		.collection('users')
 		.doc(user.uid)
 		.update({ lastLoginAt: createFbTimestamp() });
 }
 
 export function googleLogin() {
 	return (dispatch) => {
-		 auth
-			 .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-			 .then(() => {
-				 auth.signInWithPopup(provider)
-				 .then((result) => {
-					 const token = result.credential.accessToken;
-					 console.log(token);
-	 
-					 checkIfUserExists(result.user)
-					 // send user data to redux store
-					 db.collection('users').doc(result.user.uid).get().then(doc => {
-						 dispatch(setCurrUser(doc.data()));
-					 })
-				 })
-			 })
+		auth
+			.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+			.then(() => {
+				auth.signInWithPopup(provider).then((result) => {
+					const token = result.credential.accessToken;
+					console.log(token);
+
+					checkIfUserExists(result.user);
+					// send user data to redux store
+					db.collection('users')
+						.doc(result.user.uid)
+						.get()
+						.then((doc) => {
+							dispatch(setCurrUser(doc.data()));
+						});
+				});
+			})
 			// .then((result) => console.log('Login successful!', result.auth.email))
 			.catch((err) => dispatch(dispatchError(LOGIN_FAIL, err)));
 	};
@@ -119,9 +135,12 @@ export function googleLogin() {
 
 export function setCurrentUser(user) {
 	return (dispatch) => {
-		db.collection('users').doc(user.uid).get().then(doc => {
-			dispatch(setCurrUser(doc.data()));
-		})
+		db.collection('users')
+			.doc(user.uid)
+			.get()
+			.then((doc) => {
+				dispatch(setCurrUser(doc.data()));
+			});
 	};
 }
 
@@ -149,6 +168,20 @@ function logOutUser(user) {
 	return {
 		type: LOGOUT_USER,
 		user,
+	};
+}
+
+export function deleteAccount(id) {
+	return (dispatch) => {
+		db.collection('users')
+			.doc(id)
+			.delete()
+			.then(() => {
+				console.log('Account successfully deleted!');
+			})
+			.catch((err) => {
+				console.error('Error removing account: ', err);
+			});
 	};
 }
 

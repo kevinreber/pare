@@ -79,6 +79,8 @@ function UserFields({ label, content = '-' }) {
 		inputField = formatAvailability(content);
 	} else if (label === 'Classes Taken') {
 		inputField = formatCourses(content);
+	} else if (label === 'About') {
+		inputField = <p>{content}</p>;
 	} else if (Array.isArray(content)) {
 		inputField = formatArray(content);
 	}

@@ -14,6 +14,7 @@ import Loader from '../../components/layout/Loader/Loader';
 import Modal from '../../components/general/Modal';
 import createFbTimestamp from '../../utils/createFbTimestamp';
 import { addFlashMessage } from '../../store/actions/flashMessages';
+import { deleteAccount } from '../../store/actions/auth';
 import createNewMessage from '../../utils/createNewMessage';
 import './UserProfile.css';
 import db from '../../config/fbConfig';
@@ -175,6 +176,34 @@ function UserProfile() {
 		toggleEditProfile();
 	};
 
+	const deleteAccountPrompt = () => {
+		setEditProfile(false);
+		setConfirmDialog({
+			isOpen: true,
+			title: 'Delete account?',
+			subtitle: "You can't undo this operation",
+			onConfirm: () => {
+				deleteUserAccount();
+			},
+		});
+	};
+
+	const deleteUserAccount = () => {
+		setConfirmDialog({
+			...confirmDialog,
+			isOpen: false,
+		});
+
+		dispatch(deleteAccount(userId));
+		dispatch(
+			addFlashMessage({
+				isOpen: true,
+				message: 'Deleted Account',
+				type: 'error',
+			})
+		);
+	};
+
 	if (editProfile) {
 		return (
 			<Modal
@@ -183,6 +212,7 @@ function UserProfile() {
 						bio={user.bio}
 						organizations={user.organizations}
 						save={saveEdits}
+						deleteAccount={deleteAccountPrompt}
 					/>
 				}
 				closeModal={toggleEditProfile}

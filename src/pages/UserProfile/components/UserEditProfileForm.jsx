@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { PropTypes } from 'prop-types';
 
 /** Components */
-import CTAButton from '../../../components/general/CTAButton';
+import SubmitButton from '../../../components/general/SubmitButton';
 
 /** Form to edit User's Profile.
  * UserProfile -> UserProfileBody -> UserEditProfileForm
@@ -11,8 +11,9 @@ import CTAButton from '../../../components/general/CTAButton';
  * @param 	{string}	bio					User's bio.
  * @param 	{array}		organizations		Array of strings of user's organizations.
  * @param	{function}	save				Saves changes made to User's Profile.
+ * @param	{function}	deleteAccount		Deletes User's account.
  */
-function UserEditProfileForm({ bio, organizations, save }) {
+function UserEditProfileForm({ bio, organizations, save, deleteAccount }) {
 	const INITIAL_STATE = { bio: bio };
 
 	const [formData, setFormData] = useState(INITIAL_STATE);
@@ -28,6 +29,11 @@ function UserEditProfileForm({ bio, organizations, save }) {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		save(formData);
+	};
+
+	const deleteAccountPrompt = (e) => {
+		e.preventDefault();
+		deleteAccount();
 	};
 
 	return (
@@ -56,7 +62,14 @@ function UserEditProfileForm({ bio, organizations, save }) {
 					</small>
 				</div>
 				<div className="font-italic">
-					<CTAButton text="Save Changes" />
+					{/* <CTAButton text="Save Changes" /> */}
+					<SubmitButton
+						text="Save Changes"
+						reset={true}
+						resetText={'Delete Account'}
+						resetForm={deleteAccountPrompt}
+						danger={true}
+					/>
 				</div>
 			</form>
 		</div>
@@ -67,6 +80,7 @@ UserEditProfileForm.propTypes = {
 	bio: PropTypes.string,
 	organizations: PropTypes.array,
 	save: PropTypes.func,
+	deleteAccount: PropTypes.func,
 };
 
 export default UserEditProfileForm;
