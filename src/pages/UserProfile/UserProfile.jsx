@@ -176,6 +176,7 @@ function UserProfile() {
 		toggleEditProfile();
 	};
 
+	/** User Deletes Account ****************************/
 	const deleteAccountPrompt = () => {
 		setEditProfile(false);
 		setConfirmDialog({
@@ -198,11 +199,12 @@ function UserProfile() {
 		dispatch(
 			addFlashMessage({
 				isOpen: true,
-				message: 'Deleted Account',
+				message: 'Account Deleted',
 				type: 'error',
 			})
 		);
 	};
+	/****************************************************/
 
 	if (editProfile) {
 		return (
