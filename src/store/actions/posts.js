@@ -59,17 +59,17 @@ function deletePost(postId) {
 }
 
 /** Update edited version of post */
-export function editPostInFB(id, data){
+export function editPostInFB(id, data) {
 	return (dispatch) => {
 		db.collection('feeds')
-		.doc(id)
-		.set(data)
-		.then(() => {
-			console.log('Post updated');
-			dispatch(editPost(id,data));
-		})
-		.catch((err) => dispatch(dispatchError(EDIT_POST_FAIL, err)));
-	}
+			.doc(id)
+			.set(data)
+			.then(() => {
+				console.log('Post updated');
+				dispatch(editPost(id, data));
+			})
+			.catch((err) => dispatch(dispatchError(EDIT_POST_FAIL, err)));
+	};
 }
 
 /** Formats action data to input to dispatch */
