@@ -9,7 +9,7 @@ import moment from 'moment';
 import EditPostForm from './EditPostForm';
 import PopoverActions from '../../../components/general/PopoverActions';
 import PopoverShareAction from '../../../components/general/PopoverShareAction';
-import NewMessageForm from '../../../components/Notifications/NewMessageForm';
+import NewMessageForm from '../../Notifications/components/NewMessageForm';
 import Modal from '../../../components/general/Modal';
 import { addFlashMessage } from '../../../store/actions/flashMessages';
 import createNewMessage from '../../../utils/createNewMessage';
