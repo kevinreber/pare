@@ -10,6 +10,7 @@ import PlacesAutocomplete, {
 /** Components && Helpers */
 import SubmitButton from '../../../components/general/SubmitButton';
 import createFbTimestamp from '../../../utils/createFbTimestamp';
+import fileIsImage from '../../../utils/validateImage';
 
 /** MUI */
 import IconButton from '@material-ui/core/IconButton';
@@ -60,9 +61,7 @@ function PostForm({ save }) {
 	const handleSelect = async (value) => {
 		const results = await geocodeByAddress(value);
 		const latLng = await getLatLng(results[0]);
-		console.log(results, value);
 		setAddress(value);
-		// setAddressData(results);
 		setCoordinates(latLng);
 	};
 
@@ -74,7 +73,9 @@ function PostForm({ save }) {
 		if (e.target.files) {
 			resetAttachment();
 			const file = e.target.files[0];
-			if (validateAttachment(file)) {
+
+			/** Validates attachment and prompts error */
+			if (fileIsImage(file, setErrors)) {
 				setFormData((fData) => ({
 					...fData,
 					attachment_preview: URL.createObjectURL(file),
@@ -94,18 +95,6 @@ function PostForm({ save }) {
 				[name]: value,
 			}));
 		}
-	};
-
-	/** Validates attachment and prompts error */
-	const validateAttachment = (file) => {
-		if (
-			file.type.indexOf('image') === -1 ||
-			!file.name.match(/.(jpg|jpeg|png|gif)$/i)
-		) {
-			setErrors('*File not supported');
-			return false;
-		}
-		return true;
 	};
 
 	/** Reset all formData */
