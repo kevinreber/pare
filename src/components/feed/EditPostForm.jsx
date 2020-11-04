@@ -6,10 +6,11 @@ import PlacesAutocomplete, {
 	getLatLng,
 } from 'react-places-autocomplete';
 
-/** Components */
+/** Components && Helpers */
 import SubmitButton from '../general/SubmitButton';
 import ConfirmDialog from '../general/ConfirmDialog';
 import dateAndTimeFormatter from '../../utils/dateAndTimeFormatter';
+import createFbTimestamp from '../../utils/createFbTimestamp';
 
 /** MUI */
 import IconButton from '@material-ui/core/IconButton';
@@ -34,6 +35,7 @@ function EditPostForm({
 	attachment_preview = null,
 	attachment = null,
 	timestamp,
+	last_updated = null,
 	comments,
 }) {
 	/** Post Type options */
@@ -57,6 +59,7 @@ function EditPostForm({
 		attachment_preview: attachment_preview,
 		attachment: attachment,
 		timestamp: timestamp,
+		last_updated: createFbTimestamp(),
 		num_of_comments: comments,
 	};
 

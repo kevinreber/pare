@@ -48,6 +48,7 @@ const HOST_URL = 'localhost:3000';
  * @param {file}		attachment_preview	Preview of post's attachment.
  * @param {file}		attachment			Post's attachment.
  * @param {object}		timestamp			Firebase object timestamps.
+ * @param {object}		last_updated		Firebase object timestamp, stores last update on post.
  * @param {number}		comments			Number of comments post has.
  * @param {boolean}		isBookmarked		Bookmark status of post.
  * @param {function} 	remove				Function to remove post. User will only see if they made post.
@@ -67,6 +68,7 @@ function PostCard({
 	attachment_preview = null,
 	attachment = null,
 	timestamp,
+	last_updated = null,
 	comments = null,
 	isBookmarked = false,
 	remove,
@@ -257,7 +259,12 @@ function PostCard({
 					<Link to={`/post/${id}`}>
 						<div className="Post-Card__Header">
 							<h5>{title}</h5>
-							<span className="mate-text-secondary username">{username}</span>
+							<div className="Post-Card__Sub-Header">
+								<span className="mate-text-secondary username">{username}</span>
+								<span className="mate-text-secondary edited">
+									{last_updated && timestamp !== last_updated ? '(Edited)' : ''}
+								</span>
+							</div>
 						</div>
 						<div className="Post-Card__Body mate-text-secondary">
 							<p className="description">{description}</p>
@@ -332,6 +339,7 @@ PostCard.propTypes = {
 	location: PropTypes.object,
 	type: PropTypes.string,
 	timestamp: PropTypes.object,
+	last_updated: PropTypes.object,
 	comments: PropTypes.number,
 	isBookmarked: PropTypes.bool,
 	remove: PropTypes.func,

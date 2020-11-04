@@ -1,129 +1,138 @@
 .Feed {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .Feed__List {
-    flex: 1;
-    overflow: scroll;
-    margin-top: 10vh;
-    margin-bottom: 10rem;
+	flex: 1;
+	overflow: scroll;
+	margin-top: 10vh;
+	margin-bottom: 10rem;
 }
 
 .Post-Card__Header {
-    margin-bottom: .5rem;
-    width: 80%;
+	margin-bottom: 0.5rem;
+	width: 80%;
 }
 
-.Post-Card__Header>h5 {
-    margin: 0;
+.Post-Card__Header > h5 {
+	margin: 0;
 }
 
-.Post-Card__Header>.username {
-    font-size: small;
-    font-style: italic;
-    color: var(--tertiary-color);
+.Post-Card__Sub-Header > .username,
+.Post-Card__Sub-Header > .edited {
+	font-size: small;
+	font-style: italic;
+	color: var(--tertiary-color);
+}
+
+.Post-Card__Sub-Header > .edited {
+	margin-left: auto;
+}
+
+.Post-Card__Sub-Header {
+	display: flex;
+	justify-content: space-between;
 }
 
 .Post-Card__Right.Post__timestamp {
-    color: var(--tertiary-color);
-    position: absolute;
-    padding-right: 1.2rem;
-    right: 0;
-    display: flex;
-    flex-direction: column;
+	color: var(--tertiary-color);
+	position: absolute;
+	padding-right: 1.2rem;
+	right: 0;
+	display: flex;
+	flex-direction: column;
 }
 
-.Post-Card__Right.Post__timestamp>p {
-    margin-bottom: 0;
+.Post-Card__Right.Post__timestamp > p {
+	margin-bottom: 0;
 }
 
 .Post-Card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: relative;
-    border-bottom: 1px solid var(--tertiary-color);
-    padding: 1rem 1.5rem .2rem 1.5rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	position: relative;
+	border-bottom: 1px solid var(--tertiary-color);
+	padding: 1rem 1.5rem 0.2rem 1.5rem;
 }
 
-.Post-Card>a {
-    color: var(--secondary-color);
+.Post-Card > a {
+	color: var(--secondary-color);
 }
 
 .Post-Card__Left {
-    margin-right: 1rem;
+	margin-right: 1rem;
 }
 
 .Post-Card .Post-Card__Center {
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+	text-align: left;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
 }
 
 .Post-Card .Post-Card__Center .Post-Card__Body {
-    display: flex;
-    flex-direction: column;
-    font-size: 14px;
+	display: flex;
+	flex-direction: column;
+	font-size: 14px;
 }
 
 .Post-Card__Main {
-    display: flex;
+	display: flex;
 }
 
 .Post-Card .Post-Card__Footer {
-    margin-top: .5rem;
-    display: flex;
-    justify-content: space-evenly;
+	margin-top: 0.5rem;
+	display: flex;
+	justify-content: space-evenly;
 }
 
 .number-of-comments {
-    font-size: smaller;
-    align-items: center;
+	font-size: smaller;
+	align-items: center;
 }
 
 .Post__timestamp {
-    font-size: x-small;
-    font-style: italic;
+	font-size: x-small;
+	font-style: italic;
 }
 
 .event__time {
-    margin-bottom: 0;
+	margin-bottom: 0;
 }
 
 .event__timestamp {
-    font-size: smaller;
-    font-style: italic;
-    padding: 0;
-    margin-left: 1rem;
+	font-size: smaller;
+	font-style: italic;
+	padding: 0;
+	margin-left: 1rem;
 }
 
-.Post-Card>.location {
-    font-size: x-small;
-
+.Post-Card > .location {
+	font-size: x-small;
 }
 
 .Post-Card .MuiSvgIcon-root {
-    margin-bottom: .3rem;
-    margin-right: .5rem;
-    width: .7em;
-    height: .7em;
+	margin-bottom: 0.3rem;
+	margin-right: 0.5rem;
+	width: 0.7em;
+	height: 0.7em;
 }
 
-.Post-Card__Body>.description {
-    margin-bottom: 0;
+.Post-Card__Body > .description {
+	margin-bottom: 0;
 }
 
 .Post-Card .Post-Card__Attachment {
-    width: 100%;
-    margin: 0 auto 1rem auto;
-    max-height: 100px;
-    object-fit: contain;
+	width: 100%;
+	margin: 0 auto 1rem auto;
+	max-height: 100px;
+	object-fit: contain;
 }
 
 #Feed-Add-Post-Btn {
-    position: fixed;
+	position: fixed;
 }
 
 /********************************* */
@@ -131,42 +140,42 @@
 /********************************* */
 
 .PostForm {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .char-count {
-    color: var(--tertiary-color);
-    float: right;
-    font-style: italic;
+	color: var(--tertiary-color);
+	float: right;
+	font-style: italic;
 }
 
 .message__attachments {
-    display: flex;
+	display: flex;
 }
 
 .attachment__label {
-    margin-left: .6rem;
-    margin-top: .2rem;
+	margin-left: 0.6rem;
+	margin-top: 0.2rem;
 }
 
 .attachment__preview {
-    max-height: 100px;
-    margin-top: .6rem;
+	max-height: 100px;
+	margin-top: 0.6rem;
 }
 
 .preview__attachment {
-    position: relative;
-    margin-right: 2.5rem;
+	position: relative;
+	margin-right: 2.5rem;
 }
 
-.preview__attachment>.MuiButtonBase-root.MuiIconButton-root {
-    position: absolute;
-    right: -42px;
-    top: -6px;
+.preview__attachment > .MuiButtonBase-root.MuiIconButton-root {
+	position: absolute;
+	right: -42px;
+	top: -6px;
 }
 
 .message__attachments .preview__attachment .MuiSvgIcon-root.remove__attachment {
-    fill: var(--danger-color);
-    color: var(--danger-color);
+	fill: var(--danger-color);
+	color: var(--danger-color);
 }

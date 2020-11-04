@@ -7,8 +7,9 @@ import PlacesAutocomplete, {
 	getLatLng,
 } from 'react-places-autocomplete';
 
-/** Components */
+/** Components && Helpers */
 import SubmitButton from '../general/SubmitButton';
+import createFbTimestamp from '../../utils/createFbTimestamp';
 
 /** MUI */
 import IconButton from '@material-ui/core/IconButton';
@@ -40,7 +41,8 @@ function PostForm({ save }) {
 		end: null,
 		attachment_preview: '',
 		attachment: '',
-		timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+		timestamp: createFbTimestamp(),
+		last_updated: createFbTimestamp(),
 		num_of_comments: 0,
 	};
 
