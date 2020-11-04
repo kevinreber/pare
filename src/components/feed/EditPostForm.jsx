@@ -1,6 +1,10 @@
 /** Dependencies */
 import React, { useState } from 'react';
 import firebase from 'firebase';
+import PlacesAutocomplete, {
+	geocodeByAddress,
+	getLatLng,
+} from 'react-places-autocomplete';
 
 /** Components */
 import SubmitButton from '../general/SubmitButton';
@@ -16,9 +20,30 @@ import CancelIcon from '@material-ui/icons/Cancel';
 /** Form for user's to create a Post
  *  Feed -> FeedList -> PostCard -> EditPostForm
  */
-function EditPostForm({ save, userId, username, avatar, title, description, location=null, type=null, start=null, end=null, attachment_preview=null, attachment=null, timestamp, comments }) {
+function EditPostForm({
+	save,
+	userId,
+	username,
+	avatar,
+	title,
+	description,
+	location = null,
+	type = null,
+	start = null,
+	end = null,
+	attachment_preview = null,
+	attachment = null,
+	timestamp,
+	comments,
+}) {
 	/** Post Type options */
-	const postTypeOptions = ['Networking','Campus','Opportunities','Marketplace','Events'];
+	const postTypeOptions = [
+		'Networking',
+		'Campus',
+		'Opportunities',
+		'Marketplace',
+		'Events',
+	];
 
 	const INITIAL_STATE = {
 		userId: userId,
@@ -26,18 +51,34 @@ function EditPostForm({ save, userId, username, avatar, title, description, loca
 		avatar: avatar,
 		title: title,
 		description: description,
-		location: location,
 		type: type,
 		start: start,
 		end: end,
 		attachment_preview: attachment_preview,
 		attachment: attachment,
 		timestamp: timestamp,
-		num_of_comments: comments
+		num_of_comments: comments,
 	};
 
 	const [errors, setErrors] = useState('');
 	const [formData, setFormData] = useState(INITIAL_STATE);
+
+	// location data
+	const [address, setAddress] = useState(
+		location.address ? location.address : ''
+	);
+
+	const [coordinates, setCoordinates] = useState({
+		lat: location ? location.coordinates.lat : null,
+		lng: location ? location.coordinates.lng : null,
+	});
+
+	const handleSelect = async (value) => {
+		const results = await geocodeByAddress(value);
+		const latLng = await getLatLng(results[0]);
+		setAddress(value);
+		setCoordinates(latLng);
+	};
 
 	const [confirmDialog, setConfirmDialog] = useState({
 		isOpen: false,
@@ -115,22 +156,25 @@ function EditPostForm({ save, userId, username, avatar, title, description, loca
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (validateFormData()) {
-
 			/** Prompts Modal to edit Post information */
 			setConfirmDialog({
 				isOpen: true,
 				title: 'Save changes?',
-				subtitle: "",
+				subtitle: '',
 				onConfirm: () => {
-					save(formData)
+					formData.location = {
+						address,
+						coordinates,
+					};
+					save(formData);
 				},
 			});
 		}
 	};
-	
+
 	return (
 		<div className="PostForm p-3">
-							<ConfirmDialog
+			<ConfirmDialog
 				confirmDialog={confirmDialog}
 				setConfirmDialog={setConfirmDialog}
 			/>
@@ -183,35 +227,66 @@ function EditPostForm({ save, userId, username, avatar, title, description, loca
 					<label htmlFor="location" className="float-left">
 						Location
 					</label>
-					<input
-						id="location"
-						className="form-control mate-form-input"
-						type="text"
-						onChange={handleChange}
-						name="location"
-						value={formData.location}
-					/>
+					<PlacesAutocomplete
+						value={address}
+						onChange={setAddress}
+						onSelect={handleSelect}>
+						{({
+							getInputProps,
+							suggestions,
+							getSuggestionItemProps,
+							loading,
+						}) => (
+							<div className="Autocomplete-Location">
+								<input
+									{...getInputProps({
+										placeholder: 'Type address',
+										id: 'location',
+										className: 'form-control mate-form-input',
+									})}
+								/>
+								<div className="Autocomplete-Location-List">
+									{loading ? <div>loading...</div> : null}
+
+									{suggestions.map((suggestion, idx) => {
+										const style = {
+											backgroundColor: suggestion.active
+												? '#393e46'
+												: 'rgb(43, 47, 58)',
+										};
+
+										return (
+											<div
+												key={idx}
+												className="Autocomplete-Location-Item"
+												{...getSuggestionItemProps(suggestion, { style })}>
+												{suggestion.description}
+											</div>
+										);
+									})}
+								</div>
+							</div>
+						)}
+					</PlacesAutocomplete>
 				</div>
 				<div className="form-group d-flex justify-content-between align-items-baseline">
-		<label htmlFor="postType" className="float-left mr-4">
-		Type
-	</label>
-		<select
-		id="postType"
-		className="form-control mate-form-input"
-		onChange={handleChange}
-		name="type"
-		value={formData.type}>
-				<option className="option-disabled" value="" disabled>
-					Select Type
-				</option>
-			{postTypeOptions.map(option => (
-			<option key={option}>
-				{option}
-			</option>
-			))}
-			</select>
-			</div>
+					<label htmlFor="postType" className="float-left mr-4">
+						Type
+					</label>
+					<select
+						id="postType"
+						className="form-control mate-form-input"
+						onChange={handleChange}
+						name="type"
+						value={formData.type}>
+						<option className="option-disabled" value="" disabled>
+							Select Type
+						</option>
+						{postTypeOptions.map((option) => (
+							<option key={option}>{option}</option>
+						))}
+					</select>
+				</div>
 				<div className="form-group date-input-group align-items-baseline">
 					<label htmlFor="event-start" className="float-left">
 						Start
@@ -221,10 +296,10 @@ function EditPostForm({ save, userId, username, avatar, title, description, loca
 						type="datetime-local"
 						className="float-right"
 						defaultValue={
-							 formData.start ? 
-							dateAndTimeFormatter(formData.start.toDate())
-							: null
-							}
+							formData.start
+								? dateAndTimeFormatter(formData.start.toDate())
+								: null
+						}
 						name="start"
 						onChange={handleChange}
 						InputLabelProps={{
@@ -241,9 +316,8 @@ function EditPostForm({ save, userId, username, avatar, title, description, loca
 						type="datetime-local"
 						className="float-right"
 						defaultValue={
-							formData.end ? 
-							dateAndTimeFormatter(formData.end.toDate())
-							: null}
+							formData.end ? dateAndTimeFormatter(formData.end.toDate()) : null
+						}
 						name="end"
 						onChange={handleChange}
 						InputLabelProps={{

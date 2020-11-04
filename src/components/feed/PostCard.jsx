@@ -265,7 +265,7 @@ function PostCard({
 							{location && location !== '' ? (
 								<span className="location">
 									<LocationOnIcon />
-									{location.address.formatted_address}
+									{location.address}
 								</span>
 							) : null}
 							<span>{eventTime}</span>

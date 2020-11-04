@@ -49,6 +49,7 @@ function PostForm({ save }) {
 
 	// location data
 	const [address, setAddress] = useState('');
+	// const [addressData, setAddressData] = useState(null);
 	const [coordinates, setCoordinates] = useState({
 		lat: null,
 		lng: null,
@@ -57,7 +58,9 @@ function PostForm({ save }) {
 	const handleSelect = async (value) => {
 		const results = await geocodeByAddress(value);
 		const latLng = await getLatLng(results[0]);
+		console.log(results, value);
 		setAddress(value);
+		// setAddressData(results);
 		setCoordinates(latLng);
 	};
 
@@ -129,10 +132,6 @@ function PostForm({ save }) {
 			setErrors('*Description required');
 			return false;
 		}
-		// setFormData((fData) => ({
-		// 	...fData,
-		// 	location: { address, coordinates },
-		// }));
 		return true;
 	};
 
@@ -144,7 +143,7 @@ function PostForm({ save }) {
 				address,
 				coordinates,
 			};
-			console.log(formData);
+
 			save(formData);
 			// Clear state of form
 			setFormData(INITIAL_STATE);
