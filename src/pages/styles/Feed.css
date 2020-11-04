@@ -11,7 +11,7 @@
 }
 
 .Post-Card__Header {
-	margin-bottom: 0.5rem;
+	margin-bottom: 0.25rem;
 	width: 80%;
 }
 
@@ -33,6 +33,7 @@
 .Post-Card__Sub-Header {
 	display: flex;
 	justify-content: space-between;
+	margin-top: 0.25rem;
 }
 
 .Post-Card__Right.Post__timestamp {

@@ -35,7 +35,6 @@ function EditPostForm({
 	attachment_preview = null,
 	attachment = null,
 	timestamp,
-	last_updated = null,
 	comments,
 }) {
 	/** Post Type options */
