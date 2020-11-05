@@ -1,17 +1,21 @@
 /** Dependencies */
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import firebase from 'firebase';
 import PlacesAutocomplete, {
 	geocodeByAddress,
 	getLatLng,
 } from 'react-places-autocomplete';
-import { postTypeOptions } from '../constants/postTypeOptions';
+import { postTypeOptions, INITIAL_STATE_IMAGE } from '../constants/index';
 
 /** Components && Helpers */
 import SubmitButton from '../../../components/general/SubmitButton';
 import ConfirmDialog from '../../../components/general/ConfirmDialog';
+import ProgressBar from '../../../components/ProgressBar/ProgressBar';
 import dateAndTimeFormatter from '../../../utils/dateAndTimeFormatter';
 import createFbTimestamp from '../../../utils/createFbTimestamp';
+import fileIsImage from '../../../utils/validateImage';
+import { storage } from '../../../config/fbConfig';
 
 /** MUI */
 import IconButton from '@material-ui/core/IconButton';
@@ -38,6 +42,15 @@ function EditPostForm({
 	timestamp,
 	comments,
 }) {
+	/** Get user data */
+	const user = useSelector((state) => {
+		return {
+			userId: state.auth.user.uid,
+			username: state.auth.user.displayName,
+			avatar: state.auth.user.photoURL,
+		};
+	});
+
 	const INITIAL_STATE = {
 		userId: userId,
 		username: username,
@@ -57,11 +70,13 @@ function EditPostForm({
 	const [errors, setErrors] = useState('');
 	const [formData, setFormData] = useState(INITIAL_STATE);
 
+	const [image, setImage] = useState(INITIAL_STATE_IMAGE);
+	const [progressBar, setProgressBar] = useState(0);
+
 	// location data
 	const [address, setAddress] = useState(
 		location.address ? location.address : ''
 	);
-
 	const [coordinates, setCoordinates] = useState({
 		lat: location ? location.coordinates.lat : null,
 		lng: location ? location.coordinates.lng : null,
@@ -88,12 +103,16 @@ function EditPostForm({
 		if (e.target.files) {
 			resetAttachment();
 			const file = e.target.files[0];
-			if (validateAttachment(file)) {
-				setFormData((fData) => ({
-					...fData,
+
+			/** Validates attachment and prompts error */
+			if (fileIsImage(file, setErrors)) {
+				setImage((data) => ({
+					...data,
 					attachment_preview: URL.createObjectURL(file),
 					attachment: file,
+					name: file.name,
 				}));
+				handleUpload(file);
 			}
 		} else {
 			let { name, value } = e.target;
@@ -110,25 +129,27 @@ function EditPostForm({
 		}
 	};
 
-	/** Validates attachment and prompts error */
-	const validateAttachment = (file) => {
-		if (
-			file.type.indexOf('image') === -1 ||
-			!file.name.match(/.(jpg|jpeg|png|gif)$/i)
-		) {
-			setErrors('*File not supported');
-			return false;
-		}
-		return true;
-	};
+	/** Resets attachment data.
+	 * 	If user is clearing state manually, image URL will be deleted from DB.
+	 */
+	const resetAttachment = (removeUrl = false) => {
+		if (removeUrl) {
+			const storageRef = storage.ref();
+			const storageImage = storageRef.child(
+				`feed/${user.userId}/${image.name}`
+			);
 
-	/** Resets attachment data */
-	const resetAttachment = () => {
-		setFormData((fData) => ({
-			...fData,
-			attachment_preview: '',
-			attachment: '',
-		}));
+			storageImage
+				.delete()
+				.then(() => {
+					console.log('Removed image');
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		}
+		setImage(INITIAL_STATE_IMAGE);
+		setProgressBar(0);
 	};
 
 	/** Validate submitted data */
@@ -166,8 +187,33 @@ function EditPostForm({
 		}
 	};
 
+	// Handles image upload to DB
+	const handleUpload = async (image) => {
+		const storageRef = storage.ref(`feed/${user.userId}/${image.name}`);
+
+		storageRef.put(image).on(
+			'state_changed',
+			(snapshot) => {
+				let progress = Math.round(
+					(snapshot.bytesTransferred / snapshot.totalBytes) * 100
+				);
+				setProgressBar(progress);
+			},
+			(error) => {
+				setErrors(error);
+			},
+			async () => {
+				const url = await storageRef.getDownloadURL();
+				setFormData((fData) => ({
+					...fData,
+					attachment: url,
+				}));
+			}
+		);
+	};
+
 	return (
-		<div className="PostForm p-3">
+		<div className="PostForm">
 			<ConfirmDialog
 				confirmDialog={confirmDialog}
 				setConfirmDialog={setConfirmDialog}
@@ -322,20 +368,21 @@ function EditPostForm({
 				<div className="PostForm__Footer">
 					<div className="message__attachments">
 						<div className="preview__attachment">
-							{formData.attachment_preview ? (
+							{image.attachment_preview ? (
 								<>
 									<img
-										src={formData.attachment_preview}
+										src={image.attachment_preview}
 										alt="preview"
 										className="attachment__preview"
 									/>
-									<IconButton onClick={resetAttachment}>
+									<IconButton onClick={() => resetAttachment(true)}>
 										<CancelIcon className="remove__attachment" />
 									</IconButton>
 								</>
 							) : (
 								''
 							)}
+							<ProgressBar progress={progressBar} />
 						</div>
 						<label htmlFor="attachment" className="attachment__label">
 							<PanoramaOutlinedIcon fontSize="large" />

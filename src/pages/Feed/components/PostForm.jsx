@@ -6,7 +6,7 @@ import PlacesAutocomplete, {
 	geocodeByAddress,
 	getLatLng,
 } from 'react-places-autocomplete';
-import { postTypeOptions } from '../constants/postTypeOptions';
+import { postTypeOptions, INITIAL_STATE_IMAGE } from '../constants/index';
 
 /** Components && Helpers */
 import SubmitButton from '../../../components/general/SubmitButton';
@@ -49,23 +49,14 @@ function PostForm({ save }) {
 		num_of_comments: 0,
 	};
 
-	const INITIAL_STATE_IMAGE = {
-		attachment_preview: '',
-		attachment: '',
-		name: '',
-		url: '',
-	};
-
 	const [errors, setErrors] = useState('');
 	const [formData, setFormData] = useState(INITIAL_STATE);
 
 	const [image, setImage] = useState(INITIAL_STATE_IMAGE);
-
 	const [progressBar, setProgressBar] = useState(0);
 
 	// location data
 	const [address, setAddress] = useState('');
-	// const [addressData, setAddressData] = useState(null);
 	const [coordinates, setCoordinates] = useState({
 		lat: null,
 		lng: null,

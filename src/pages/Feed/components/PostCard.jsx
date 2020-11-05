@@ -12,6 +12,7 @@ import PopoverShareAction from '../../../components/general/PopoverShareAction';
 import NewMessageForm from '../../Notifications/components/NewMessageForm';
 import Modal from '../../../components/general/Modal';
 import { addFlashMessage } from '../../../store/actions/flashMessages';
+import { showModalContent } from '../../../store/actions/modal';
 import createNewMessage from '../../../utils/createNewMessage';
 import dateFromNowFormatter from '../../../utils/dateFromNowFormatter';
 import copyLinkToClipBoard from '../../../utils/copyLinkToClipBoard';
@@ -116,6 +117,14 @@ function PostCard({
 		// close popovers
 		handleClose();
 		handleShareClose();
+
+		/** Close Grade Modal */
+		dispatch(
+			showModalContent({
+				isOpen: false,
+				content: null,
+			})
+		);
 		setShowEditForm((show) => !show);
 	};
 
@@ -149,9 +158,10 @@ function PostCard({
 	};
 
 	if (showEditForm) {
-		return (
-			<Modal
-				content={
+		dispatch(
+			showModalContent({
+				isOpen: true,
+				content: (
 					<EditPostForm
 						save={editPost}
 						userId={userId}
@@ -168,11 +178,34 @@ function PostCard({
 						timestamp={timestamp}
 						comments={comments}
 					/>
-				}
-				closeModal={toggleEditForm}
-				full={true}
-			/>
+				),
+				full: true,
+			})
 		);
+		// return (
+		// 	<Modal
+		// 		content={
+		// 			<EditPostForm
+		// 				save={editPost}
+		// 				userId={userId}
+		// 				username={username}
+		// 				avatar={avatar}
+		// 				title={title}
+		// 				description={description}
+		// 				location={location}
+		// 				type={type}
+		// 				start={start}
+		// 				end={end}
+		// 				attachment_preview={attachment_preview}
+		// 				attachment={attachment}
+		// 				timestamp={timestamp}
+		// 				comments={comments}
+		// 			/>
+		// 		}
+		// 		closeModal={toggleEditForm}
+		// 		full={true}
+		// 	/>
+		// );
 	}
 	/******************************************** */
 
