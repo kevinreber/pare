@@ -32,16 +32,16 @@ function App() {
 	}, [dispatch]);
 
 	const currentUser = useSelector((state) => state.auth.user);
+	const modal = useSelector((state) => state.modal);
 
 	/** if no currentUser is logged in, hide the Header and NavBar */
 	return (
 		<div className="App">
 			{currentUser ? (
 				<>
-					<SubModal />
 					<Header />
 					<Notification />
-					<Routes />
+					{modal.isOpen ? <SubModal /> : <Routes />}
 					<NavBar />
 				</>
 			) : (
