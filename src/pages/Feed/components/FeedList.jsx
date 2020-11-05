@@ -28,6 +28,7 @@ function FeedList({ posts, remove, edit }) {
 			end={post.data.end}
 			attachment_preview={post.data.attachment_preview}
 			attachment={post.data.attachment}
+			attachment_name={post.data.attachment_name}
 			timestamp={post.data.timestamp}
 			last_updated={post.data.last_updated}
 			comments={post.data.num_of_comments}

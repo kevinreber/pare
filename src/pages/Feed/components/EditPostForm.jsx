@@ -37,8 +37,8 @@ function EditPostForm({
 	type = null,
 	start = null,
 	end = null,
-	attachment_preview = null,
 	attachment = null,
+	attachment_name = null,
 	timestamp,
 	comments,
 }) {
@@ -60,17 +60,24 @@ function EditPostForm({
 		type: type,
 		start: start,
 		end: end,
-		attachment_preview: attachment_preview,
 		attachment: attachment,
+		attachment_name: attachment_name,
 		timestamp: timestamp,
 		last_updated: createFbTimestamp(),
 		num_of_comments: comments,
 	};
 
+	const EXISTING_STATE_IMAGE = {
+		attachment_preview: attachment,
+		attachment: attachment,
+		name: attachment_name,
+		url: attachment,
+	};
+
 	const [errors, setErrors] = useState('');
 	const [formData, setFormData] = useState(INITIAL_STATE);
 
-	const [image, setImage] = useState(INITIAL_STATE_IMAGE);
+	const [image, setImage] = useState(EXISTING_STATE_IMAGE);
 	const [progressBar, setProgressBar] = useState(0);
 
 	// location data
@@ -132,11 +139,20 @@ function EditPostForm({
 	/** Resets attachment data.
 	 * 	If user is clearing state manually, image URL will be deleted from DB.
 	 */
-	const resetAttachment = (removeUrl = false) => {
+	const resetAttachment = async (
+		removeUrl = false,
+		replaceOriginalAttachment = false
+	) => {
 		if (removeUrl) {
+			// if attachment is being replaced, we need to remove the previous existing attachment from the DB
+			// else we can remove the current temporary attachment from the DB
+			let imageToRemove = replaceOriginalAttachment
+				? EXISTING_STATE_IMAGE
+				: image;
+			console.log(imageToRemove);
 			const storageRef = storage.ref();
 			const storageImage = storageRef.child(
-				`feed/${user.userId}/${image.name}`
+				`feed/${user.userId}/${imageToRemove.name}`
 			);
 
 			storageImage
@@ -176,11 +192,20 @@ function EditPostForm({
 				isOpen: true,
 				title: 'Save changes?',
 				subtitle: '',
-				onConfirm: () => {
+				onConfirm: async () => {
 					formData.location = {
 						address,
 						coordinates,
 					};
+					if (image.url === '') {
+						formData.attachment = image.url;
+						formData.attachment_name = image.name;
+					}
+					// if attachment is being updated, remove existing attachment url
+					if (image.url !== EXISTING_STATE_IMAGE.url) {
+						await resetAttachment(true, true);
+					} else await resetAttachment(true, false);
+					console.log(formData);
 					save(formData);
 				},
 			});
@@ -204,9 +229,15 @@ function EditPostForm({
 			},
 			async () => {
 				const url = await storageRef.getDownloadURL();
+				setImage((data) => ({
+					...data,
+					url,
+					name: image.name,
+				}));
 				setFormData((fData) => ({
 					...fData,
 					attachment: url,
+					attachment_name: image.name,
 				}));
 			}
 		);
@@ -368,14 +399,14 @@ function EditPostForm({
 				<div className="PostForm__Footer">
 					<div className="message__attachments">
 						<div className="preview__attachment">
-							{image.attachment_preview ? (
+							{image.url ? (
 								<>
 									<img
-										src={image.attachment_preview}
+										src={image.url}
 										alt="preview"
 										className="attachment__preview"
 									/>
-									<IconButton onClick={() => resetAttachment(true)}>
+									<IconButton onClick={() => resetAttachment(false, false)}>
 										<CancelIcon className="remove__attachment" />
 									</IconButton>
 								</>

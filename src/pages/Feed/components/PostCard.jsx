@@ -48,6 +48,7 @@ const HOST_URL = 'localhost:3000';
  * @param {date}		end					Post's event end time.
  * @param {file}		attachment_preview	Preview of post's attachment.
  * @param {string}		attachment			Post's attachment.
+ * @param {string}		attachment_name		Post's attachment file name.
  * @param {object}		timestamp			Firebase object timestamps.
  * @param {object}		last_updated		Firebase object timestamp, stores last update on post.
  * @param {number}		comments			Number of comments post has.
@@ -68,6 +69,7 @@ function PostCard({
 	end = null,
 	attachment_preview = null,
 	attachment = null,
+	attachment_name = null,
 	timestamp,
 	last_updated = null,
 	comments = null,
@@ -141,7 +143,11 @@ function PostCard({
 		) : null;
 
 	const showAttachment = attachment ? (
-		<img className="Post-Card__Attachment" src={attachment} alt="Upload" />
+		<img
+			className="Post-Card__Attachment"
+			src={attachment}
+			alt={attachment_name}
+		/>
 	) : null;
 
 	const deletePost = () => {
@@ -175,6 +181,7 @@ function PostCard({
 						end={end}
 						attachment_preview={attachment_preview}
 						attachment={attachment}
+						attachment_name={attachment_name}
 						timestamp={timestamp}
 						comments={comments}
 					/>
@@ -182,30 +189,6 @@ function PostCard({
 				full: true,
 			})
 		);
-		// return (
-		// 	<Modal
-		// 		content={
-		// 			<EditPostForm
-		// 				save={editPost}
-		// 				userId={userId}
-		// 				username={username}
-		// 				avatar={avatar}
-		// 				title={title}
-		// 				description={description}
-		// 				location={location}
-		// 				type={type}
-		// 				start={start}
-		// 				end={end}
-		// 				attachment_preview={attachment_preview}
-		// 				attachment={attachment}
-		// 				timestamp={timestamp}
-		// 				comments={comments}
-		// 			/>
-		// 		}
-		// 		closeModal={toggleEditForm}
-		// 		full={true}
-		// 	/>
-		// );
 	}
 	/******************************************** */
 
@@ -298,7 +281,7 @@ function PostCard({
 						<div className="Post-Card__Body mate-text-secondary">
 							<p className="description">{description}</p>
 							{showAttachment}
-							{location && location !== '' ? (
+							{location && location.address !== '' ? (
 								<span className="location">
 									<LocationOnIcon />
 									{location.address}
@@ -367,6 +350,8 @@ PostCard.propTypes = {
 	description: PropTypes.string.isRequired,
 	location: PropTypes.object,
 	type: PropTypes.string,
+	attachment: PropTypes.string,
+	attachment_name: PropTypes.string,
 	timestamp: PropTypes.object,
 	last_updated: PropTypes.object,
 	comments: PropTypes.number,

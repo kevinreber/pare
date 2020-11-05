@@ -44,6 +44,7 @@ function PostForm({ save }) {
 		start: null,
 		end: null,
 		attachment: '',
+		attachment_name: '',
 		timestamp: createFbTimestamp(),
 		last_updated: createFbTimestamp(),
 		num_of_comments: 0,
@@ -183,6 +184,7 @@ function PostForm({ save }) {
 				setFormData((fData) => ({
 					...fData,
 					attachment: url,
+					attachment_name: image.name,
 				}));
 			}
 		);
