@@ -132,11 +132,7 @@ function PostCard({
 		) : null;
 
 	const showAttachment = attachment ? (
-		<img
-			className="Post-Card__Attachment"
-			src={attachment}
-			alt="Uploaded Image"
-		/>
+		<img className="Post-Card__Attachment" src={attachment} alt="Upload" />
 	) : null;
 
 	const deletePost = () => {
