@@ -1,0 +1,4 @@
+.Progress-Bar .MuiTypography-colorTextSecondary {
+	color: var(--primary-color);
+	font-weight: 600;
+}

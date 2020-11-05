@@ -10,6 +10,7 @@ import { postTypeOptions } from '../constants/postTypeOptions';
 
 /** Components && Helpers */
 import SubmitButton from '../../../components/general/SubmitButton';
+import ProgressBar from '../../../components/ProgressBar/ProgressBar';
 import createFbTimestamp from '../../../utils/createFbTimestamp';
 import fileIsImage from '../../../utils/validateImage';
 import { storage } from '../../../config/fbConfig';
@@ -137,6 +138,7 @@ function PostForm({ save }) {
 				});
 		}
 		setImage(INITIAL_STATE_IMAGE);
+		setProgressBar(0);
 	};
 
 	/** Validate submitted data */
@@ -355,6 +357,7 @@ function PostForm({ save }) {
 							) : (
 								''
 							)}
+							<ProgressBar progress={progressBar} />
 						</div>
 						<label htmlFor="attachment" className="attachment__label">
 							<PanoramaOutlinedIcon fontSize="large" />
