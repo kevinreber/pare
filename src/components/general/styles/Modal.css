@@ -1,6 +1,7 @@
 .Modal {
 	background-color: var(--bg-color);
 	position: absolute;
+	height: 100vh;
 	left: 0;
 	top: 0;
 	right: 0;
@@ -15,7 +16,7 @@
 
 .mate-btn-submit,
 .mate-btn-reset {
-	position: absolute;
+	position: fixed;
 	width: 350px;
 	left: 50%;
 	margin-left: -175px;

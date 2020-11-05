@@ -11,6 +11,7 @@ import PlacesAutocomplete, {
 import SubmitButton from '../../../components/general/SubmitButton';
 import createFbTimestamp from '../../../utils/createFbTimestamp';
 import fileIsImage from '../../../utils/validateImage';
+import { storage } from '../../../config/fbConfig';
 
 /** MUI */
 import IconButton from '@material-ui/core/IconButton';
@@ -40,15 +41,25 @@ function PostForm({ save }) {
 		type: '',
 		start: null,
 		end: null,
-		attachment_preview: '',
 		attachment: '',
 		timestamp: createFbTimestamp(),
 		last_updated: createFbTimestamp(),
 		num_of_comments: 0,
 	};
 
+	const INITIAL_STATE_IMAGE = {
+		attachment_preview: '',
+		attachment: '',
+		name: '',
+		url: '',
+	};
+
 	const [errors, setErrors] = useState('');
 	const [formData, setFormData] = useState(INITIAL_STATE);
+
+	const [image, setImage] = useState(INITIAL_STATE_IMAGE);
+
+	const [progressBar, setProgressBar] = useState(0);
 
 	// location data
 	const [address, setAddress] = useState('');
@@ -76,11 +87,13 @@ function PostForm({ save }) {
 
 			/** Validates attachment and prompts error */
 			if (fileIsImage(file, setErrors)) {
-				setFormData((fData) => ({
-					...fData,
+				setImage((data) => ({
+					...data,
 					attachment_preview: URL.createObjectURL(file),
 					attachment: file,
+					name: file.name,
 				}));
+				handleUpload(file);
 			}
 		} else {
 			let { name, value } = e.target;
@@ -100,15 +113,29 @@ function PostForm({ save }) {
 	/** Reset all formData */
 	const resetFormData = () => {
 		setFormData(INITIAL_STATE);
+		resetAttachment();
 	};
 
-	/** Resets attachment data */
-	const resetAttachment = () => {
-		setFormData((fData) => ({
-			...fData,
-			attachment_preview: '',
-			attachment: '',
-		}));
+	/** Resets attachment data.
+	 * 	If user is clearing state manually, image URL will be deleted from DB.
+	 */
+	const resetAttachment = (removeUrl = false) => {
+		if (removeUrl) {
+			const storageRef = storage.ref();
+			const storageImage = storageRef.child(
+				`feed/${user.userId}/${image.name}`
+			);
+
+			storageImage
+				.delete()
+				.then(() => {
+					console.log('Removed image');
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		}
+		setImage(INITIAL_STATE_IMAGE);
 	};
 
 	/** Validate submitted data */
@@ -138,11 +165,37 @@ function PostForm({ save }) {
 			save(formData);
 			// Clear state of form
 			setFormData(INITIAL_STATE);
+			resetAttachment();
 		}
 	};
 
+	// Handles image upload to DB
+	const handleUpload = async (image) => {
+		const storageRef = storage.ref(`feed/${user.userId}/${image.name}`);
+
+		storageRef.put(image).on(
+			'state_changed',
+			(snapshot) => {
+				let progress = Math.round(
+					(snapshot.bytesTransferred / snapshot.totalBytes) * 100
+				);
+				setProgressBar(progress);
+			},
+			(error) => {
+				setErrors(error);
+			},
+			async () => {
+				const url = await storageRef.getDownloadURL();
+				setFormData((fData) => ({
+					...fData,
+					attachment: url,
+				}));
+			}
+		);
+	};
+
 	return (
-		<div className="PostForm p-3">
+		<div className="PostForm">
 			<h4>New Event</h4>
 			<form className="container mb-3" onSubmit={handleSubmit}>
 				<div className="form-group">
@@ -289,14 +342,14 @@ function PostForm({ save }) {
 				<div className="PostForm__Footer">
 					<div className="message__attachments">
 						<div className="preview__attachment">
-							{formData.attachment_preview ? (
+							{image.attachment_preview ? (
 								<>
 									<img
-										src={formData.attachment_preview}
+										src={image.attachment_preview}
 										alt="preview"
 										className="attachment__preview"
 									/>
-									<IconButton onClick={resetAttachment}>
+									<IconButton onClick={() => resetAttachment(true)}>
 										<CancelIcon className="remove__attachment" />
 									</IconButton>
 								</>
@@ -324,6 +377,7 @@ function PostForm({ save }) {
 			) : (
 				''
 			)}
+			<div className="Post-Form-Padding"></div>
 		</div>
 	);
 }

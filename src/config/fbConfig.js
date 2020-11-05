@@ -2,6 +2,7 @@
 import firebase from 'firebase';
 import 'firebase/firestore';
 import 'firebase/auth';
+import 'firebase/storage';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -21,8 +22,9 @@ const increment = firebase.firestore.FieldValue.increment(1);
 const decrement = firebase.firestore.FieldValue.increment(-1);
 const auth = firebase.auth();
 const provider = new firebase.auth.GoogleAuthProvider();
+const storage = firebase.storage();
 
-export { auth, provider, increment, decrement };
+export { auth, provider, increment, decrement, storage };
 export default db;
 
 /** 

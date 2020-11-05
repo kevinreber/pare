@@ -143,6 +143,8 @@
 .PostForm {
 	display: flex;
 	flex-direction: column;
+	padding: 3rem 1rem 10rem 1rem;
+	background-color: var(--bg-color);
 }
 
 .char-count {
@@ -161,7 +163,7 @@
 }
 
 .attachment__preview {
-	max-height: 100px;
+	max-height: 200px;
 	margin-top: 0.6rem;
 }
 

@@ -46,7 +46,7 @@ const HOST_URL = 'localhost:3000';
  * @param {date}		start				Post's event start time.
  * @param {date}		end					Post's event end time.
  * @param {file}		attachment_preview	Preview of post's attachment.
- * @param {file}		attachment			Post's attachment.
+ * @param {string}		attachment			Post's attachment.
  * @param {object}		timestamp			Firebase object timestamps.
  * @param {object}		last_updated		Firebase object timestamp, stores last update on post.
  * @param {number}		comments			Number of comments post has.
@@ -134,8 +134,8 @@ function PostCard({
 	const showAttachment = attachment ? (
 		<img
 			className="Post-Card__Attachment"
-			src={attachment_preview}
-			alt={attachment.name}
+			src={attachment}
+			alt="Uploaded Image"
 		/>
 	) : null;
 
