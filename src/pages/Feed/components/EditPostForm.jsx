@@ -5,6 +5,7 @@ import PlacesAutocomplete, {
 	geocodeByAddress,
 	getLatLng,
 } from 'react-places-autocomplete';
+import { postTypeOptions } from '../constants/postTypeOptions';
 
 /** Components && Helpers */
 import SubmitButton from '../../../components/general/SubmitButton';
@@ -37,15 +38,6 @@ function EditPostForm({
 	timestamp,
 	comments,
 }) {
-	/** Post Type options */
-	const postTypeOptions = [
-		'Networking',
-		'Campus',
-		'Opportunities',
-		'Marketplace',
-		'Events',
-	];
-
 	const INITIAL_STATE = {
 		userId: userId,
 		username: username,

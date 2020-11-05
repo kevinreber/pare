@@ -6,6 +6,7 @@ import PlacesAutocomplete, {
 	geocodeByAddress,
 	getLatLng,
 } from 'react-places-autocomplete';
+import { postTypeOptions } from '../constants/postTypeOptions';
 
 /** Components && Helpers */
 import SubmitButton from '../../../components/general/SubmitButton';
@@ -296,15 +297,13 @@ function PostForm({ save }) {
 						className="form-control mate-form-input"
 						onChange={handleChange}
 						name="type"
-						defaultValue={formData.type}>
+						value={formData.type}>
 						<option className="option-disabled" value="" disabled>
 							Select Type
 						</option>
-						<option>Networking</option>
-						<option>Campus</option>
-						<option>Opportunities</option>
-						<option>Marketplace</option>
-						<option>Events</option>
+						{postTypeOptions.map((option) => (
+							<option key={option}>{option}</option>
+						))}
 					</select>
 				</div>
 				<div className="form-group date-input-group align-items-baseline">
