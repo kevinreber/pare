@@ -104,6 +104,7 @@ function Connect() {
 	if (showForm) {
 		return (
 			<Modal
+				isOpen={showForm}
 				content={
 					<StudyGroupForm
 						save={addStudyGroup}

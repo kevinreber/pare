@@ -84,9 +84,9 @@ function Notifications() {
 	if (showForm) {
 		return (
 			<Modal
+				isOpen={showForm}
 				content={<NewMessageForm send={sendMessage} />}
 				closeModal={toggleForm}
-				// full={true}
 			/>
 		);
 	}

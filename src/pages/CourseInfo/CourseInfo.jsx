@@ -101,6 +101,7 @@ function CourseInfo() {
 	if (showForm) {
 		return (
 			<Modal
+				isOpen={showForm}
 				content={
 					<AssignmentForm save={addAssignment} userId={currentUser.uid} />
 				}

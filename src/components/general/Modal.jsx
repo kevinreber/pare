@@ -6,15 +6,16 @@ import './styles/Modal.css';
 
 /** Boilerplate template for any actions that require a Modal
  *
+ * @param {boolean}		isOpen			Boolean if Modal is open or closed.
  * @param {element}		content			React component to display inside of Modal
  * @param {function}	closeModal		Function to close/toggle Modal component.
  * @param {boolean}		full			Boolean that toggles style of Modal display.
  */
-function Modal({ content, closeModal, full = false }) {
+function Modal({ isOpen, content, closeModal, full = false }) {
 	// Modal Height
 	const styles = full ? 'Modal-Full-Content' : 'Modal-Content';
 	return (
-		<div className="Modal">
+		<div className={`Modal ${isOpen ? 'fade-in' : 'fade-out'}`}>
 			<div className="Modal-Close float-left">
 				<IconButton onClick={closeModal}>
 					<CloseIcon />
@@ -26,6 +27,7 @@ function Modal({ content, closeModal, full = false }) {
 }
 
 Modal.propTypes = {
+	isOpen: PropTypes.bool,
 	content: PropTypes.element,
 	closeModal: PropTypes.func,
 	full: PropTypes.bool,

@@ -220,6 +220,7 @@ function PostCard({
 	if (showMessageForm) {
 		return (
 			<Modal
+				isOpen={showMessageForm}
 				content={
 					<NewMessageForm
 						send={sendMessage}

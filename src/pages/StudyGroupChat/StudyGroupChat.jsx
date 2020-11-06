@@ -154,6 +154,7 @@ function StudyGroupChat() {
 	if (showAdmin && groupMembers) {
 		return (
 			<Modal
+				isOpen={showAdmin}
 				content={
 					<StudyGroupChatAdmin
 						studyGroupId={studyGroupId}

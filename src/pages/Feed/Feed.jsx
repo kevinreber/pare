@@ -129,6 +129,7 @@ function Feed() {
 	if (showForm) {
 		return (
 			<Modal
+				isOpen={showForm}
 				content={<PostForm save={addPost} />}
 				closeModal={toggleForm}
 				full={true}

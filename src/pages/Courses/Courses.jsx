@@ -140,6 +140,7 @@ function Courses() {
 	if (showForm) {
 		return (
 			<Modal
+				isOpen={showForm}
 				content={
 					<CourseForm
 						save={addCoursePrompt}

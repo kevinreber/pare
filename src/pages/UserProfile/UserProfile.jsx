@@ -209,6 +209,7 @@ function UserProfile() {
 	if (editProfile) {
 		return (
 			<Modal
+				isOpen={editProfile}
 				content={
 					<UserEditProfileForm
 						bio={user.bio}
