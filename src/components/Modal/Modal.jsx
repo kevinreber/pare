@@ -1,8 +1,8 @@
 import React from 'react';
-import { ReactComponent as CloseIcon } from './icons/close-icon.svg';
+import { ReactComponent as CloseIcon } from '../../icons/close-icon.svg';
 import { IconButton } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
-import './styles/Modal.css';
+import './Modal.css';
 
 /** Boilerplate template for any actions that require a Modal
  *

@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 /** Components & Helpers */
 import Header from './components/layout/Header';
 import NavBar from './components/layout/NavBar';
-import Notification from './components/general/Notification';
-import SubModal from './components/general/SubModal';
+import Notification from './components/Notification/Notification';
+import SubModal from './components/SubModal/SubModal';
 import Routes from './routes/Routes';
 import { setCurrentUser } from './store/actions/auth';
 import { auth } from './config/fbConfig';

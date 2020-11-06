@@ -1,16 +1,16 @@
 /** Dependencies */
 import React, { useState, useEffect, useCallback } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
 
 /** Components & Helpers */
 import StudyGroupChatAdmin from './components/StudyGroupChatAdmin';
 import StudyGroupChatFooter from './components/StudyGroupChatFooter';
-import NoData from '../../components/general/NoData';
-import Modal from '../../components/general/Modal';
+import NoData from '../../components/NoData/NoData';
+import Modal from '../../components/Modal/Modal';
 import Loader from '../../components/layout/Loader/Loader';
-import BackButton from '../../components/general/BackButton';
+import BackButton from '../../components/BackButton/BackButton';
 import createFbTimestamp from '../../utils/createFbTimestamp';
 import { addFlashMessage } from '../../store/actions/flashMessages';
 import { increment } from '../../config/fbConfig';
@@ -26,7 +26,6 @@ import MoreHorizOutlinedIcon from '@material-ui/icons/MoreHorizOutlined';
  */
 function StudyGroupChat() {
 	const { studyGroupId } = useParams();
-	const history = useHistory();
 	const dispatch = useDispatch();
 
 	const currentUser = useSelector((state) => state.auth.user);

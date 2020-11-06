@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 /** Components & Helpers */
 import { addFlashMessage } from '../../store/actions/flashMessages';
-import './styles/Notification.css';
+import './Notification.css';
 
 /** MUI */
 import { Snackbar, makeStyles } from '@material-ui/core';

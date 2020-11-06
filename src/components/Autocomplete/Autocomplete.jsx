@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 
 /** Components & Helpers */
-import './styles/Autocomplete.css';
+import './Autocomplete.css';
 
 /** MUI */
 import SearchIcon from '@material-ui/icons/Search';
@@ -49,13 +49,13 @@ function Autocomplete({
 	let optionList;
 	if (showOptions && value) {
 		optionList = filteredOptions.length ? (
-			<ul className='options'>
+			<ul className="options">
 				{filteredOptions.map((option) => {
 					return (
 						<li
 							id={option.id}
 							key={`${option.abbreviation}-${option.course_number}`}
-							className='option'
+							className="option"
 							data-name={name}
 							data-value={`${option.abbreviation} ${option.course_number}`}
 							onClick={onClick}>
@@ -65,28 +65,28 @@ function Autocomplete({
 				})}
 			</ul>
 		) : (
-			<div className='no-options'>
+			<div className="no-options">
 				<em>No Matches</em>
 			</div>
 		);
 	}
 
 	return (
-		<div className='Autocomplete form-group'>
+		<div className="Autocomplete form-group">
 			{/* <label htmlFor={id} className='float-left'>
 				{label}
 			</label> */}
-			<div className='Search__Icon'>
+			<div className="Search__Icon">
 				<SearchIcon />
 			</div>
 			<input
 				id={id}
-				className='form-control mate-form-input'
-				type='text'
+				className="form-control mate-form-input"
+				type="text"
 				onChange={onSearch}
 				name={name}
 				value={value}
-				autoComplete='off'
+				autoComplete="off"
 				placeholder={placeholder}
 			/>
 			{optionList}

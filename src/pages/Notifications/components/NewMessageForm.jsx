@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { PropTypes } from 'prop-types';
 
 /** Components & Helpers */
-import SubmitButton from '../../../components/general/SubmitButton';
+import SubmitButton from '../../../components/SubmitButton/SubmitButton';
 import createFbTimestamp from '../../../utils/createFbTimestamp';
 import AutocompleteUsers from './AutocompleteUsers';
 import './styles/NewMessageForm.css';

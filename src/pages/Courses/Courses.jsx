@@ -5,10 +5,10 @@ import { useSelector, useDispatch } from 'react-redux';
 /** Components & Helpers */
 import CourseList from './components/CourseList';
 import CourseForm from './components/CourseForm';
-import Modal from '../../components/general/Modal';
+import Modal from '../../components/Modal/Modal';
 import Loader from '../../components/layout/Loader/Loader';
-import NoData from '../../components/general/NoData';
-import CTAButton from '../../components/general/CTAButton';
+import NoData from '../../components/NoData/NoData';
+import CTAButton from '../../components/CTAButton/CTAButton';
 import { addCourseToFB } from '../../store/actions/courses';
 import { fetchCourseCatalog } from '../../store/actions/courseCatalog';
 import { addFlashMessage } from '../../store/actions/flashMessages';

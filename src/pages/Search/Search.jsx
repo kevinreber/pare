@@ -4,10 +4,10 @@ import { useDispatch } from 'react-redux';
 
 /** Components & Helpers */
 import FeedList from '../Feed/components/FeedList';
-import NoData from '../../components/general/NoData';
-import CTAButton from '../../components/general/CTAButton';
-import Searchbar from '../../components/general/SearchBar/Searchbar';
-import ConfirmDialog from '../../components/general/ConfirmDialog';
+import NoData from '../../components/NoData/NoData';
+import CTAButton from '../../components/CTAButton/CTAButton';
+import Searchbar from '../../components/SearchBar/Searchbar';
+import ConfirmDialog from '../../components/ConfirmDialog/ConfirmDialog';
 import Loader from '../../components/layout/Loader/Loader';
 import { deletePostFromFB } from '../../store/actions/posts';
 import { addFlashMessage } from '../../store/actions/flashMessages';

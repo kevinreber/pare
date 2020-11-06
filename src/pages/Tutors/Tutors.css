@@ -198,7 +198,7 @@
 .User-Portfolio-Links,
 .User-Classes {
 	display: flex;
-	justify-content: start;
+	justify-content: flex-start;
 	flex-wrap: wrap;
 }
 

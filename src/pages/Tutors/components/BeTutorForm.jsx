@@ -5,17 +5,15 @@ import { PropTypes } from 'prop-types';
 import firebase from 'firebase';
 
 /** Components & Helpers */
-import CTAButton from '../../../components/general/CTAButton';
 import Loader from '../../../components/layout/Loader/Loader';
-import ConfirmDialog from '../../../components/general/ConfirmDialog';
-import SwitchToggler from '../../../components/general/SwitchToggler/SwitchToggler';
+import ConfirmDialog from '../../../components/ConfirmDialog/ConfirmDialog';
+import SwitchToggler from '../../../components/SwitchToggler/SwitchToggler';
 import createFbTimestamp from '../../../utils/createFbTimestamp';
 import { addFlashMessage } from '../../../store/actions/flashMessages';
 import db from '../../../config/fbConfig';
 
 /** MUI */
 import { IconButton } from '@material-ui/core';
-import AddCircleOutlineRoundedIcon from '@material-ui/icons/AddCircleOutlineRounded';
 import RemoveCircleOutlineSharpIcon from '@material-ui/icons/RemoveCircleOutlineSharp';
 import Chip from '@material-ui/core/Chip';
 import DateFnsUtils from '@date-io/date-fns';

@@ -5,10 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 /** Components & Helpers */
 import FeedList from './components/FeedList';
 import PostForm from './components/PostForm';
-import NoData from '../../components/general/NoData';
-import Modal from '../../components/general/Modal';
+import NoData from '../../components/NoData/NoData';
+import Modal from '../../components/Modal/Modal';
 import Loader from '../../components/layout/Loader/Loader';
-import ConfirmDialog from '../../components/general/ConfirmDialog';
+import ConfirmDialog from '../../components/ConfirmDialog/ConfirmDialog';
 import {
 	addPostToFB,
 	deletePostFromFB,

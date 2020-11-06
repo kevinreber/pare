@@ -1,9 +1,6 @@
 /** Dependencies */
 import React from 'react';
 
-/** Components & Helpers */
-import BackButton from '../../../components/general/BackButton';
-
 /** Header for User Profile */
 function UserProfileHeader({
 	id,

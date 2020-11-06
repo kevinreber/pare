@@ -5,7 +5,7 @@ import { PropTypes } from 'prop-types';
 
 /** Components & Helpers */
 import db from '../../../config/fbConfig';
-import '../../../components/general/styles/Autocomplete.css';
+import '../../../components/Autocomplete/Autocomplete.css';
 
 /** MUI */
 import SearchIcon from '@material-ui/icons/Search';

@@ -23,7 +23,7 @@ import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import PersonIcon from '@material-ui/icons/Person';
 import BookmarkIcon from '@material-ui/icons/Bookmark';
 import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
-import SettingsIcon from '@material-ui/icons/Settings';
+// import SettingsIcon from '@material-ui/icons/Settings';
 import { makeStyles } from '@material-ui/core/styles';
 
 /** Stylesheets */
@@ -66,7 +66,7 @@ function Header() {
 	const SideBar = (anchor) => (
 		<div
 			className={classes.list}
-			role='presentation'
+			role="presentation"
 			onClick={toggleDrawer}
 			onKeyDown={toggleDrawer}>
 			<List>
@@ -74,16 +74,16 @@ function Header() {
 					<ListItemIcon>
 						<Avatar alt={currentUser.displayName} src={currentUser.photoURL} />
 					</ListItemIcon>
-					<ListItemText primary='Tony Stark' />
+					<ListItemText primary="Tony Stark" />
 				</ListItem>
 			</List>
 			<List>
 				<ListItem>
-					<Link to='/following'>
+					<Link to="/following">
 						<ListItemIcon>
 							<GroupAddIcon />
 						</ListItemIcon>
-						<ListItemText primary='Following' />
+						<ListItemText primary="Following" />
 					</Link>
 				</ListItem>
 				<ListItem>
@@ -91,15 +91,15 @@ function Header() {
 						<ListItemIcon>
 							<PersonIcon />
 						</ListItemIcon>
-						<ListItemText primary='Profile' />
+						<ListItemText primary="Profile" />
 					</Link>
 				</ListItem>
 				<ListItem>
-					<Link to='#'>
+					<Link to="#">
 						<ListItemIcon>
 							<BookmarkIcon />
 						</ListItemIcon>
-						<ListItemText primary='Bookmarks' />
+						<ListItemText primary="Bookmarks" />
 					</Link>
 				</ListItem>
 			</List>
@@ -115,8 +115,8 @@ function Header() {
 	);
 
 	return (
-		<div className='Header'>
-			<AppBar position='static' className='Header-Content'>
+		<div className="Header">
+			<AppBar position="static" className="Header-Content">
 				<Toolbar>
 					<IconButton onClick={toggleDrawer}>
 						<Avatar alt={currentUser.displayName} src={currentUser.photoURL} />
@@ -124,11 +124,11 @@ function Header() {
 					<Drawer anchor={'left'} open={drawer} onClose={toggleDrawer}>
 						{SideBar('left')}
 					</Drawer>
-					<div className='Header-Logo'>
-						<img src={Logo} alt='Mate' />
+					<div className="Header-Logo">
+						<img src={Logo} alt="Mate" />
 					</div>
 					<IconButton>
-						<Link to='/notifications'>
+						<Link to="/notifications">
 							{/* <NotifyIcon /> */}
 							<Badge badgeContent={4}>
 								<NotificationsNoneOutlinedIcon style={{ fontSize: 45 }} />

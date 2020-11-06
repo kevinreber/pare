@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 /** Components & Helpers */
-import '../../../components/general/styles/Autocomplete.css';
+import '../../../components/Autocomplete/Autocomplete.css';
 
 /** MUI */
 import SearchIcon from '@material-ui/icons/Search';

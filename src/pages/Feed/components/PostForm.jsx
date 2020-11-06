@@ -9,7 +9,7 @@ import PlacesAutocomplete, {
 import { postTypeOptions, INITIAL_STATE_IMAGE } from '../constants/index';
 
 /** Components && Helpers */
-import SubmitButton from '../../../components/general/SubmitButton';
+import SubmitButton from '../../../components/SubmitButton/SubmitButton';
 import ProgressBar from '../../../components/ProgressBar/ProgressBar';
 import createFbTimestamp from '../../../utils/createFbTimestamp';
 import fileIsImage from '../../../utils/validateImage';

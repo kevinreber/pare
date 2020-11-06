@@ -3,8 +3,8 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 
 /** Components & Helpers */
-import DialogButton from './DialogButton';
-import './styles/ConfirmDialog.css';
+import DialogButton from '../DialogButton/DialogButton';
+import './ConfirmDialog.css';
 
 /** MUI */
 import {

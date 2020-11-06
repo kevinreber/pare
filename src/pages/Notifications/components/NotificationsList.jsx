@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import NotificationCard from './NotificationCard';
-import NoData from '../../../components/general/NoData';
+import NoData from '../../../components/NoData/NoData';
 
 function NotificationsList({ notifications }) {
 	const List = notifications ? (

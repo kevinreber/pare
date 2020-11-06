@@ -7,10 +7,10 @@ import moment from 'moment';
 
 /** Components & Helpers */
 import EditPostForm from './EditPostForm';
-import PopoverActions from '../../../components/general/PopoverActions';
-import PopoverShareAction from '../../../components/general/PopoverShareAction';
+import PopoverActions from '../../../components/PopoverActions/PopoverActions';
+import PopoverShareAction from '../../../components/PopoverShareAction/PopoverShareAction';
 import NewMessageForm from '../../Notifications/components/NewMessageForm';
-import Modal from '../../../components/general/Modal';
+import Modal from '../../../components/Modal/Modal';
 import { addFlashMessage } from '../../../store/actions/flashMessages';
 import { showModalContent } from '../../../store/actions/modal';
 import createNewMessage from '../../../utils/createNewMessage';

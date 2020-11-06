@@ -5,10 +5,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
 
 /** Components & Helpers */
-import NoData from '../../components/general/NoData';
-import PopoverActions from '../../components/general/PopoverActions';
-import BackButton from '../../components/general/BackButton';
-import ConfirmDialog from '../../components/general/ConfirmDialog';
+import NoData from '../../components/NoData/NoData';
+import PopoverActions from '../../components/PopoverActions/PopoverActions';
+import BackButton from '../../components/BackButton/BackButton';
+import ConfirmDialog from '../../components/ConfirmDialog/ConfirmDialog';
 import MessageFooter from './components/MessageFooter';
 import Loader from '../../components/layout/Loader/Loader';
 import createFbTimestamp from '../../utils/createFbTimestamp';

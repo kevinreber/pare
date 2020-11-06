@@ -4,7 +4,7 @@ import { PropTypes } from 'prop-types';
 
 /** Components & Helpers */
 import TutorList from './TutorList';
-import CTAButton from '../../../components/general/CTAButton';
+import CTAButton from '../../../components/CTAButton/CTAButton';
 import capitalizeFirstLetter from '../../../utils/capitalizeFirstLetter';
 
 /** MUI */

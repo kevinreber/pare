@@ -3,9 +3,9 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 /** Components & Helpers */
-import { ReactComponent as CloseIcon } from './icons/close-icon.svg';
+import { ReactComponent as CloseIcon } from '../../icons/close-icon.svg';
 import { showModalContent } from '../../store/actions/modal';
-import './styles/Modal.css';
+import '../Modal/Modal.css';
 
 /** MUI */
 import { IconButton } from '@material-ui/core';

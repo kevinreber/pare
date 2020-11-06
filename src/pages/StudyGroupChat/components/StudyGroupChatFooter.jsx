@@ -12,8 +12,9 @@ import { addFlashMessage } from '../../../store/actions/flashMessages';
 import IconButton from '@material-ui/core/IconButton';
 import SendIcon from '@material-ui/icons/Send';
 import ImageIcon from '@material-ui/icons/Image';
-import CameraAltOutlinedIcon from '@material-ui/icons/CameraAltOutlined';
-import PanoramaOutlinedIcon from '@material-ui/icons/PanoramaOutlined';
+//  ! Test adding images
+// import CameraAltOutlinedIcon from '@material-ui/icons/CameraAltOutlined';
+// import PanoramaOutlinedIcon from '@material-ui/icons/PanoramaOutlined';
 
 /** Displays Study Group's Chat Footer that allows the user to enter a message
  * StudyGroups -> StudyGroupsList -> StudyGroupCard -> StudyGroupChat -> StudyGroupChatFooter

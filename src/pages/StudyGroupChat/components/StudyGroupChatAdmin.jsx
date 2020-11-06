@@ -5,9 +5,9 @@ import { useDispatch } from 'react-redux';
 import { PropTypes } from 'prop-types';
 
 /** Components & Helpers */
-import CTAButton from '../../../components/general/CTAButton';
-import PopoverActions from '../../../components/general/PopoverActions';
-import ConfirmDialog from '../../../components/general/ConfirmDialog';
+import CTAButton from '../../../components/CTAButton/CTAButton';
+import PopoverActions from '../../../components/PopoverActions/PopoverActions';
+import ConfirmDialog from '../../../components/ConfirmDialog/ConfirmDialog';
 import removeUserFromCollection from '../../../utils/removeUserFromCollection';
 import { addFlashMessage } from '../../../store/actions/flashMessages';
 import copyLinkToClipBoard from '../../../utils/copyLinkToClipBoard';

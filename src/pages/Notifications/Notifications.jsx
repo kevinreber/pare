@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import NotificationsList from './components/NotificationsList';
 import MessagesList from './components/MessagesList';
 import NewMessageForm from './components/NewMessageForm';
-import Modal from '../../components/general/Modal';
+import Modal from '../../components/Modal/Modal';
 import db from '../../config/fbConfig';
 import './Notifications.css';
 

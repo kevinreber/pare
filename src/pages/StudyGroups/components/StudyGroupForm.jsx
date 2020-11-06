@@ -5,29 +5,13 @@ import { useDispatch } from 'react-redux';
 import { PropTypes } from 'prop-types';
 
 /** Components & Helpers */
-import SubmitButton from '../../../components/general/SubmitButton';
+import SubmitButton from '../../../components/SubmitButton/SubmitButton';
 import AutocompleteStudyGroups from './AutocompleteStudyGroups';
-import ConfirmDialog from '../../../components/general/ConfirmDialog';
+import ConfirmDialog from '../../../components/ConfirmDialog/ConfirmDialog';
 import createFbTimestamp from '../../../utils/createFbTimestamp';
 import addUserToCollection from '../../../utils/addUserToCollection';
 import { addFlashMessage } from '../../../store/actions/flashMessages';
-import db from '../../../config/fbConfig';
 import './styles/StudyGroupForm.css';
-
-/** MUI */
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import { withStyles } from '@material-ui/core/styles';
-
-const PrivateCheckbox = withStyles({
-	root: {
-		color: 'red',
-		'&$checked': {
-			color: 'red',
-		},
-	},
-	checked: {},
-})((props) => <Checkbox color="var(--primary-color)" {...props} />);
 
 /** Form to add a course.
  * StudyGroups -> 'Join Study Group' Button -> Modal -> StudyGroupForm

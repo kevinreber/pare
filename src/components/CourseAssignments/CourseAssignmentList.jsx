@@ -3,7 +3,7 @@ import React from 'react';
 
 /** Components & Helpers */
 import CourseAssignmentCard from './CourseAssignmentCard';
-import NoData from '../general/NoData';
+import NoData from '../NoData/NoData';
 
 /** Displays List of Assignments
  * Courses -> CourseList -> Course -> CourseInfo -> CourseInfoBody -> CourseAssignmentList -> CourseAssignmentCard

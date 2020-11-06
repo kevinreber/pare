@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
  */
 function CourseCard({ id, department, number, term, title }) {
 	return (
-		<div key={id} className="CourseCard">
+		<div className="CourseCard">
 			<Link to={`/courses/${id}`} className="mate-text-secondary">
 				<table className="mate-table table-hover">
 					<tbody className="Course Course-Card">

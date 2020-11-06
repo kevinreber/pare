@@ -3,8 +3,8 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 
 /** Components & Helpers */
-import NoData from '../../../components/general/NoData';
-import CTAButton from '../../../components/general/CTAButton';
+import NoData from '../../../components/NoData/NoData';
+import CTAButton from '../../../components/CTAButton/CTAButton';
 import MessageCard from './MessageCard';
 
 /** List of Users Private Messages.

@@ -1,11 +1,9 @@
 /** Dependencies */
 import React, { useState } from 'react';
 import './styles/AssignmentForm.css';
-import DatePicker from 'react-datepicker';
 
 /** Components & Helpers */
-import SubmitButton from '../general/SubmitButton';
-import createFbTimestamp from '../../utils/createFbTimestamp';
+import SubmitButton from '../SubmitButton/SubmitButton';
 import 'react-datepicker/dist/react-datepicker.css';
 
 /** MUI */

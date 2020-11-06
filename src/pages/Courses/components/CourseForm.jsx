@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 /** Components & Helpers */
-import ConfirmDialog from '../../../components/general/ConfirmDialog';
-import SubmitButton from '../../../components/general/SubmitButton';
-import Autocomplete from '../../../components/general/Autocomplete';
+import ConfirmDialog from '../../../components/ConfirmDialog/ConfirmDialog';
+import SubmitButton from '../../../components/SubmitButton/SubmitButton';
+import Autocomplete from '../../../components/Autocomplete/Autocomplete';
 
 /** Form to add a course.
  * Courses -> 'Join Class' Button -> Modal -> CourseForm

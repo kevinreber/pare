@@ -5,7 +5,7 @@ import { PropTypes } from 'prop-types';
 
 /** Components & Helpers */
 import Loader from '../../../components/layout/Loader/Loader';
-import NoData from '../../../components/general/NoData';
+import NoData from '../../../components/NoData/NoData';
 
 /** MUI */
 import Chip from '@material-ui/core/Chip';

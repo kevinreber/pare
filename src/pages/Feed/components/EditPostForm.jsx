@@ -9,8 +9,8 @@ import PlacesAutocomplete, {
 import { postTypeOptions, INITIAL_STATE_IMAGE } from '../constants/index';
 
 /** Components && Helpers */
-import SubmitButton from '../../../components/general/SubmitButton';
-import ConfirmDialog from '../../../components/general/ConfirmDialog';
+import SubmitButton from '../../../components/SubmitButton/SubmitButton';
+import ConfirmDialog from '../../../components/ConfirmDialog/ConfirmDialog';
 import ProgressBar from '../../../components/ProgressBar/ProgressBar';
 import dateAndTimeFormatter from '../../../utils/dateAndTimeFormatter';
 import createFbTimestamp from '../../../utils/createFbTimestamp';

@@ -4,17 +4,17 @@ import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 /** Components & Helpers */
-import BackButton from '../../components/general/BackButton';
+import BackButton from '../../components/BackButton/BackButton';
 import PostCard from '../Feed/components/PostCard';
-import ChatFooter from '../../components/general/ChatFooter';
-import NoData from '../../components/general/NoData';
+import ChatFooter from '../../components/ChatFooter/ChatFooter';
+import NoData from '../../components/NoData/NoData';
 import CommentsList from './components/CommentsList';
 import {
 	addCommentToPost,
 	deleteCommentFromPost,
 } from '../../store/actions/posts';
-import Notification from '../../components/general/Notification';
-import ConfirmDialog from '../../components/general/ConfirmDialog';
+import Notification from '../../components/Notification/Notification';
+import ConfirmDialog from '../../components/ConfirmDialog/ConfirmDialog';
 import db from '../../config/fbConfig';
 import './PostInfo.css';
 
