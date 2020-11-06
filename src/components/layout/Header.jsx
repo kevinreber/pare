@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from '../../store/actions/auth';
 
+/** Components */
+import NotificationIcon from '../NotificationIcon/NotificationIcon';
+
 /** Material UI */
 import {
 	Drawer,
@@ -16,9 +19,7 @@ import {
 	Avatar,
 	AppBar,
 	Toolbar,
-	Badge,
 } from '@material-ui/core';
-import NotificationsNoneOutlinedIcon from '@material-ui/icons/NotificationsNoneOutlined';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import PersonIcon from '@material-ui/icons/Person';
 import BookmarkIcon from '@material-ui/icons/Bookmark';
@@ -74,7 +75,7 @@ function Header() {
 					<ListItemIcon>
 						<Avatar alt={currentUser.displayName} src={currentUser.photoURL} />
 					</ListItemIcon>
-					<ListItemText primary="Tony Stark" />
+					<ListItemText primary={currentUser.displayName} />
 				</ListItem>
 			</List>
 			<List>
@@ -115,7 +116,7 @@ function Header() {
 	);
 
 	return (
-		<div className="Header">
+		<div className="Header hide-md">
 			<AppBar position="static" className="Header-Content">
 				<Toolbar>
 					<IconButton onClick={toggleDrawer}>
@@ -127,14 +128,7 @@ function Header() {
 					<div className="Header-Logo">
 						<img src={Logo} alt="Mate" />
 					</div>
-					<IconButton>
-						<Link to="/notifications">
-							{/* <NotifyIcon /> */}
-							<Badge badgeContent={4}>
-								<NotificationsNoneOutlinedIcon style={{ fontSize: 45 }} />
-							</Badge>
-						</Link>
-					</IconButton>
+					<NotificationIcon />
 				</Toolbar>
 			</AppBar>
 		</div>

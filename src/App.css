@@ -368,3 +368,43 @@ span.MuiButtonBase-root.MuiIconButton-root.PrivateSwitchBase-root-9.MuiCheckbox-
 	padding: 0.5rem;
 	color: var(var(--secondary-color));
 }
+
+/********************************* */
+/** Media Queries                  *
+/********************************* */
+
+.hide-sm {
+	display: none;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+	.Feed,
+	.Search,
+	.Courses,
+	.StudyGroups,
+	.Tutors,
+	.Notifications-Page {
+		margin-left: 92px;
+	}
+
+	.hide-sm {
+		display: block;
+	}
+
+	.Header.hide-md {
+		display: none;
+	}
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+}

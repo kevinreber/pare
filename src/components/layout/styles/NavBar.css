@@ -44,3 +44,36 @@ a.nav-link:visited,
 a.nav-link:focus {
 	background-color: var(--bg-color);
 }
+
+/********************************* */
+/** Media Queries                  *
+/********************************* */
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+	.NavBar {
+		border-right: 2px solid var(--tertiary-color);
+		height: 100vh;
+		width: 92px;
+		box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.6);
+	}
+	.fixed-bottom {
+		right: none;
+		top: 0;
+	}
+	.NavBar > .NavBar-List {
+		flex-direction: column;
+	}
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+}

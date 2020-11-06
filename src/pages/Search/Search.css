@@ -1,85 +1,116 @@
 .Search {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .Search-Header {
-    padding: 2rem 2rem 0 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: fixed;
-    border-bottom: 2px solid var(--tertiary-color);
-    cursor: pointer;
-    background-color: var(--bg-color);
-    margin-top: 8.5vh;
-    width: 100%;
-    z-index: 25;
-    box-shadow: 0 20px 20px -20px rgba(0, 0, 0, 0.6);
+	padding: 2rem 2rem 0 2rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	position: fixed;
+	border-bottom: 2px solid var(--tertiary-color);
+	cursor: pointer;
+	background-color: var(--bg-color);
+	margin-top: 8.5vh;
+	width: 100%;
+	z-index: 25;
+	box-shadow: 0 20px 20px -20px rgba(0, 0, 0, 0.6);
 }
 
 .Search__Elements {
-    position: relative;
+	position: relative;
 }
 
-.Search__Elements>input {
-    padding-left: 2.5rem;
+.Search__Elements > input {
+	padding-left: 2.5rem;
 }
 
 input::placeholder {
-    font-style: italic;
-    text-transform: capitalize;
+	font-style: italic;
+	text-transform: capitalize;
 }
 
 .Search__Icon {
-    position: absolute;
-    left: 10px;
-    top: 6px;
-    color: var(--primary-color);
+	position: absolute;
+	left: 10px;
+	top: 6px;
+	color: var(--primary-color);
 }
 
 .Search-Categories {
-    z-index: 50;
-    background-color: var(--bg-color);
-    overflow-x: auto;
-    white-space: nowrap;
+	z-index: 50;
+	background-color: var(--bg-color);
+	overflow-x: auto;
+	white-space: nowrap;
 }
 
 .Search__List {
-    margin-top: 26vh;
-    margin-bottom: 12rem;
+	margin-top: 26vh;
+	margin-bottom: 12rem;
 }
 
 .MuiButtonBase-root.MuiListItem-root.inactive.MuiListItem-gutters.MuiListItem-button {
-    color: var(--tertiary-color);
+	color: var(--tertiary-color);
 }
 
 .MuiList-root.MuiList-padding {
-    margin: 0;
+	margin: 0;
 }
 
-.Search-Categories .MuiButtonBase-root.MuiListItem-root.MuiListItem-gutters.MuiListItem-button {
-    display: inline-block;
-    width: auto;
-    margin-left: 0;
+.Search-Categories
+	.MuiButtonBase-root.MuiListItem-root.MuiListItem-gutters.MuiListItem-button {
+	display: inline-block;
+	width: auto;
+	margin-left: 0;
 }
 
 .Search-Categories .MuiTypography-body1 {
-    font-size: .8rem;
+	font-size: 0.8rem;
 }
 
 .Search-Categories .MuiList-padding {
-    padding-bottom: 0;
+	padding-bottom: 0;
 }
 
 .Search__Footer.disabled-btn button.mate-btn.mate-btn-secondary.mate-btn-cta {
-    color: var(--tertiary-color);
-    border-color: var(--tertiary-color);
+	color: var(--tertiary-color);
+	border-color: var(--tertiary-color);
 }
 
 /* Hides side scroll scrollbar */
 ::-webkit-scrollbar {
-    width: 0px;
-    background: transparent;
-    /* make scrollbar transparent */
+	width: 0px;
+	background: transparent;
+	/* make scrollbar transparent */
+}
+
+/********************************* */
+/** Media Queries                  *
+/********************************* */
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+	.Search-Header {
+		margin-top: 0;
+	}
+	.Search__List {
+		margin-top: 9rem;
+		margin-bottom: 0;
+	}
+	.Search__List > .Post-Card {
+		padding: 2rem 2rem 1rem 2rem;
+	}
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
 }
