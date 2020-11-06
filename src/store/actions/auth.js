@@ -14,7 +14,6 @@ import {
 	LOGIN_FAIL,
 	LOGOUT_USER,
 	LOGOUT_FAIL,
-	DELETE_ACCOUNT,
 } from './types';
 
 /** Checks if user is already in DB
@@ -178,6 +177,7 @@ export function deleteAccount(id) {
 			.delete()
 			.then(() => {
 				console.log('Account successfully deleted!');
+				logOut();
 			})
 			.catch((err) => {
 				console.error('Error removing account: ', err);
