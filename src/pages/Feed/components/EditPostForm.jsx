@@ -37,8 +37,8 @@ function EditPostForm({
 	type = null,
 	start = null,
 	end = null,
-	attachment = null,
-	attachment_name = null,
+	attachment = '',
+	attachment_name = '',
 	timestamp,
 	comments,
 }) {
@@ -399,7 +399,7 @@ function EditPostForm({
 				<div className="PostForm__Footer">
 					<div className="message__attachments">
 						<div className="preview__attachment">
-							{image.url ? (
+							{image.url && image.url !== '' ? (
 								<>
 									<img
 										src={image.url}
