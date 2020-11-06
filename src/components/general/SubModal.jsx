@@ -30,16 +30,14 @@ function SubModal() {
 
 	return (
 		<>
-			{modal.isOpen ? (
-				<div className="Modal">
-					<div className="Modal-Close float-left">
-						<IconButton onClick={handleClose}>
-							<CloseIcon />
-						</IconButton>
-					</div>
-					<div className={styles}>{modal.content}</div>
+			<div className={`Modal ${modal.isOpen ? 'fade-in' : 'fade-out'}`}>
+				<div className="Modal-Close float-left">
+					<IconButton onClick={handleClose}>
+						<CloseIcon />
+					</IconButton>
 				</div>
-			) : null}
+				<div className={styles}>{modal.content}</div>
+			</div>
 		</>
 	);
 }

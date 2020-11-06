@@ -9,6 +9,40 @@
 	z-index: 1100;
 }
 
+.fade-in {
+	animation: fadeIn ease 0.3s;
+	-webkit-animation: fadeIn ease 0.3s;
+	-moz-animation: fadeIn ease 0.3s;
+	-o-animation: fadeIn ease 0.3s;
+	-ms-animation: fadeIn ease 0.3s;
+}
+
+.fade-out {
+	animation: fadeOut ease 0.3s;
+	-webkit-animation: fadeOut ease 0.3s;
+	-moz-animation: fadeOut ease 0.3s;
+	-o-animation: fadeOut ease 0.3s;
+	-ms-animation: fadeOut ease 0.3s;
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeOut {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
 .Modal-Close {
 	position: absolute;
 	top: 2.5%;
