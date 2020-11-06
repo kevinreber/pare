@@ -149,7 +149,7 @@ function EditPostForm({
 			let imageToRemove = replaceOriginalAttachment
 				? EXISTING_STATE_IMAGE
 				: image;
-			console.log(imageToRemove);
+
 			const storageRef = storage.ref();
 			const storageImage = storageRef.child(
 				`feed/${user.userId}/${imageToRemove.name}`

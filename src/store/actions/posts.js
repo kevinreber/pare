@@ -12,7 +12,7 @@ import {
 } from './types';
 
 /** Helpers */
-import { increment, decrement } from '../../config/fbConfig';
+import { increment, decrement, storage } from '../../config/fbConfig';
 import db from '../../config/fbConfig';
 
 export function addPostToFB(post) {
@@ -35,8 +35,16 @@ function addPost(post) {
 	};
 }
 
-export function deletePostFromFB(postId) {
+export function deletePostFromFB(postId, userId, image = '') {
 	return (dispatch) => {
+		if (image && image !== '') {
+			const storageRef = storage.ref();
+			const storageImage = storageRef.child(`feed/${userId}/${image}`);
+
+			storageImage.delete();
+			console.log('Removed image');
+		}
+
 		db.collection('feeds')
 			.doc(postId)
 			.delete()

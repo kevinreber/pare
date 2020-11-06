@@ -1,6 +1,6 @@
 /** Dependencies */
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 /** Components & Helpers */
 import FeedList from './components/FeedList';
@@ -28,6 +28,9 @@ import AddIcon from '@material-ui/icons/Add';
 function Feed() {
 	const dispatch = useDispatch();
 	const [posts, setPosts] = useState([]);
+
+	/** Get user data */
+	const currentUser = useSelector((state) => state.auth.user);
 
 	const [isLoading, setIsLoading] = useState(true);
 	const [confirmDialog, setConfirmDialog] = useState({
@@ -80,24 +83,24 @@ function Feed() {
 	};
 
 	/** Prompts Confirmation Dialog to Delete Post*/
-	const deletePostPrompt = (id) => {
+	const deletePostPrompt = (id, image) => {
 		setConfirmDialog({
 			isOpen: true,
 			title: 'Are you sure you want to remove post?',
 			subtitle: "You can't undo this operation",
 			onConfirm: () => {
-				deletePost(id);
+				deletePost(id, image);
 			},
 		});
 	};
 
 	/** Delete Post */
-	const deletePost = (id) => {
+	const deletePost = (id, image) => {
 		setConfirmDialog({
 			...confirmDialog,
 			isOpen: false,
 		});
-		dispatch(deletePostFromFB(id));
+		dispatch(deletePostFromFB(id, currentUser.uid, image));
 		dispatch(
 			addFlashMessage({
 				isOpen: true,

@@ -151,7 +151,7 @@ function PostCard({
 	) : null;
 
 	const deletePost = () => {
-		remove(id);
+		remove(id, attachment_name);
 	};
 
 	/** Edit Post Form **************************/
