@@ -11,24 +11,24 @@ import './styles/NavBar.css';
 
 function NavBar() {
 	return (
-		<nav className="NavBar fixed-bottom d-flex justify-content-around mate-bg-primary">
-			<ul className="d-flex m-auto">
-				<li className="nav-item mt-auto mb-auto">
+		<nav className="NavBar fixed-bottom mate-bg-primary">
+			<ul className="NavBar-List">
+				<li className="nav-item">
 					<NavLink className="nav-link mate-text-primary" to="/feed">
 						<HomeOutlinedIcon style={{ fontSize: 45 }} />
 					</NavLink>
 				</li>
-				<li className="nav-item mt-auto mb-auto">
+				<li className="nav-item">
 					<NavLink className="nav-link mate-text-primary" to="/search">
 						<SearchOutlinedIcon style={{ fontSize: 45 }} />
 					</NavLink>
 				</li>
-				<li className="nav-item mt-auto mb-auto p-0">
+				<li className="nav-item p-0">
 					<NavLink className="nav-link mate-text-primary" to="/courses">
 						<CoursesIcon />
 					</NavLink>
 				</li>
-				<li className="nav-item mt-auto mb-auto p-0">
+				<li className="nav-item p-0">
 					<NavLink className="nav-link mate-text-primary" to="/study-groups">
 						<img
 							className="study-group-icon"
@@ -37,7 +37,7 @@ function NavBar() {
 						/>
 					</NavLink>
 				</li>
-				<li className="nav-item mt-auto mb-auto p-0">
+				<li className="nav-item p-0">
 					<NavLink className="nav-link mate-text-primary" to="/tutors">
 						<TutorIcon />
 					</NavLink>

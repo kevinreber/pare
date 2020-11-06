@@ -1,51 +1,61 @@
 .Header {
-    position: fixed;
-    width: 100%;
-    height: 10vh;
-    z-index: 20;
+	position: fixed;
+	width: 100%;
+	height: 10vh;
+	z-index: 20;
 }
 
-.Header .MuiPaper-root.MuiAppBar-root.MuiAppBar-positionStatic.MuiAppBar-colorPrimary.Header-Content.MuiPaper-elevation4 {
-    /* padding: 1rem; */
-    border-bottom: 2px solid var(--tertiary-color);
-    height: 10vh;
+.Header
+	.MuiPaper-root.MuiAppBar-root.MuiAppBar-positionStatic.MuiAppBar-colorPrimary.Header-Content.MuiPaper-elevation4 {
+	/* padding: 1rem; */
+	border-bottom: 2px solid var(--tertiary-color);
+	height: 10vh;
 }
 
 /* .MuiPaper-root.MuiAppBar-root.MuiAppBar-positionStatic.MuiAppBar-colorPrimary.Header-Content.MuiPaper-elevation4 */
 .MuiToolbar-root.MuiToolbar-regular.MuiToolbar-gutters {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
-    padding-right: 10px;
-    padding-left: 10px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 100%;
+	padding-right: 10px;
+	padding-left: 10px;
 }
 
 .Header-Logo img {
-    width: 64px;
+	width: 64px;
 }
 
 .Header .MuiAvatar-root {
-    border: 1px solid var(--primary-color);
-    width: 48px;
-    height: 48px;
+	border: 1px solid var(--primary-color);
+	width: 48px;
+	height: 48px;
 }
 
 .makeStyles-list-1 {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    height: 100%;
-    width: 250px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	height: 100%;
+	width: 250px;
 }
 
 .MuiList-root.MuiList-padding {
-    margin-left: 2rem;
-    text-align: left;
+	margin-left: 2rem;
+	text-align: left;
 }
 
 .MuiBadge-root .MuiSvgIcon-root {
-    fill: var(--primary-color);
+	fill: var(--primary-color);
+}
+
+.Header
+	> header
+	.MuiButtonBase-root.MuiIconButton-root
+	> .MuiIconButton-label
+	> a
+	> span.MuiBadge-root:hover {
+	background-color: var(--bg-color);
 }
 
 /*****************************************************/
@@ -53,42 +63,44 @@
 /*****************************************************/
 
 .MuiPaper-root.MuiDrawer-paper.MuiDrawer-paperAnchorLeft.MuiPaper-elevation16 {
-    background-color: var(--bg-color);
-    color: var(--secondary-color);
-    padding-left: .75rem;
+	background-color: var(--bg-color);
+	color: var(--secondary-color);
+	padding-left: 0.75rem;
 }
 
-.MuiPaper-root.MuiDrawer-paper.MuiDrawer-paperAnchorLeft.MuiPaper-elevation16 a {
-    display: flex;
-    color: var(--secondary-color);
+.MuiPaper-root.MuiDrawer-paper.MuiDrawer-paperAnchorLeft.MuiPaper-elevation16
+	a {
+	display: flex;
+	color: var(--secondary-color);
 }
 
-.MuiPaper-root.MuiDrawer-paper.MuiDrawer-paperAnchorLeft.MuiPaper-elevation16 .MuiSvgIcon-root {
-    fill: var(--secondary-color);
+.MuiPaper-root.MuiDrawer-paper.MuiDrawer-paperAnchorLeft.MuiPaper-elevation16
+	.MuiSvgIcon-root {
+	fill: var(--secondary-color);
 }
 
 .MuiButtonBase-root.MuiFab-root {
-    position: absolute;
-    right: 1.5rem;
-    bottom: 7rem;
-    background-color: var(--primary-color);
-    color: var(--bg-color);
+	position: absolute;
+	right: 1.5rem;
+	bottom: 7rem;
+	background-color: var(--primary-color);
+	color: var(--bg-color);
 }
 
 .MuiButtonBase-root.MuiFab-root:hover {
-    background-color: var(--bg-color);
-    color: var(--primary-color);
-    box-shadow: 0 0 5px 3px rgba(117, 243, 231, .8);
+	background-color: var(--bg-color);
+	color: var(--primary-color);
+	box-shadow: 0 0 5px 3px rgba(117, 243, 231, 0.8);
 }
 
 .MuiPaper-root.MuiAppBar-root.MuiAppBar-positionStatic.MuiAppBar-colorPrimary.Header-Content.MuiPaper-elevation4 {
-    background-color: var(--bg-color);
+	background-color: var(--bg-color);
 }
 
 .MuiBadge-badge.MuiBadge-anchorOriginTopRightRectangle {
-    background-color: var(--primary-color);
-    color: var(--bg-color);
-    border: 1px solid var(--bg-color);
-    top: 8px;
-    right: 6px;
+	background-color: var(--primary-color);
+	color: var(--bg-color);
+	border: 1px solid var(--bg-color);
+	top: 8px;
+	right: 6px;
 }

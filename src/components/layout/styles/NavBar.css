@@ -1,28 +1,46 @@
 .NavBar {
-    border-top: 2px solid var(--tertiary-color);
-    height: 92px;
-    box-shadow: 0 0 100px 5px rgba(0, 0, 0, .6);
+	border-top: 2px solid var(--tertiary-color);
+	height: 92px;
+	box-shadow: 0 0 100px 5px rgba(0, 0, 0, 0.6);
+	display: flex;
+}
+
+.NavBar > .NavBar-List {
+	display: flex;
+	margin: auto;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.nav-item {
+	margin-top: auto;
+	margin-bottom: auto;
 }
 
 .nav-link {
-    opacity: .3;
+	opacity: 0.3;
+	transition: all 0.2s;
 }
 
 .nav-link.active {
-    opacity: 1;
+	opacity: 1;
 }
 
 .study-group-icon {
-    width: 56px;
+	width: 56px;
 }
 
-a.nav-link>svg {
-    color: var(--primary-color);
+a.nav-link > svg {
+	color: var(--primary-color);
+}
+
+a.nav-link:hover {
+	opacity: 1;
 }
 
 a.nav-link:active,
 a.nav-link:link,
 a.nav-link:visited,
 a.nav-link:focus {
-    background-color: var(--bg-color);
+	background-color: var(--bg-color);
 }

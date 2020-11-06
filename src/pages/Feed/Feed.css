@@ -58,6 +58,12 @@
 	padding: 1rem 1.5rem 0.2rem 1.5rem;
 }
 
+.Post-Card:hover,
+.Post-Card > .Post-Card__Main > .Post-Card__Center > a:hover {
+	background-color: var(--bg-active-color);
+	transition: all 0.2s;
+}
+
 .Post-Card > a {
 	color: var(--secondary-color);
 }
