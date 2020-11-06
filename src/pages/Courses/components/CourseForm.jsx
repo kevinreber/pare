@@ -6,25 +6,17 @@ import { useSelector } from 'react-redux';
 import ConfirmDialog from '../../../components/ConfirmDialog/ConfirmDialog';
 import SubmitButton from '../../../components/SubmitButton/SubmitButton';
 import Autocomplete from '../../../components/Autocomplete/Autocomplete';
+import { COURSE_FORM_DATA_INITIAL_STATE } from '../constants/index';
 
 /** Form to add a course.
  * Courses -> 'Join Class' Button -> Modal -> CourseForm
  */
 function CourseForm({ save, confirmDialog, setConfirmDialog, courses }) {
-	// Form Data
-	const INITIAL_STATE = {
-		courseName: '',
-		courseSemester: '',
-		courseYear: '',
-		courseId: null,
-	};
-
 	/** Get courseCatalog from redux store */
 	const courseCatalog = useSelector((state) => state.courseCatalog);
 
 	const [errors, setErrors] = useState('');
-
-	const [formData, setFormData] = useState(INITIAL_STATE);
+	const [formData, setFormData] = useState(COURSE_FORM_DATA_INITIAL_STATE);
 
 	/** Update state in formData */
 	const handleChange = (e) => {
@@ -78,7 +70,7 @@ function CourseForm({ save, confirmDialog, setConfirmDialog, courses }) {
 			save(formData);
 
 			// Reset form data
-			setFormData(INITIAL_STATE);
+			setFormData(COURSE_FORM_DATA_INITIAL_STATE);
 		}
 	};
 

@@ -14,6 +14,7 @@ import { fetchCourseCatalog } from '../../store/actions/courseCatalog';
 import { addFlashMessage } from '../../store/actions/flashMessages';
 import db from '../../config/fbConfig';
 import './Courses.css';
+import { CONFIRM_DIALOG_INITIAL_STATE } from './constants/index';
 
 /** Displays a CourseList of user's Current and Past Semester courses. 
     Courses will fetch which courses to display from API and pass courses into CourseList.
@@ -21,12 +22,6 @@ import './Courses.css';
 function Courses() {
 	const dispatch = useDispatch();
 	const currentUser = useSelector((state) => state.auth.user);
-
-	const CONFIRM_DIALOG_INITIAL_STATE = {
-		isOpen: false,
-		title: '',
-		subtitle: '',
-	};
 
 	/** Get courseCatalog from redux store */
 	const courseCatalog = useSelector((state) => state.courseCatalog);
