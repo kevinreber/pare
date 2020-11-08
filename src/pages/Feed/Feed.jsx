@@ -144,6 +144,9 @@ function Feed() {
 				setConfirmDialog={setConfirmDialog}
 				type="error"
 			/>
+			<div className="Feed-Header Body-Header hide-sm">
+				<h5>Feed</h5>
+			</div>
 			<div className="Feed__List">
 				{isLoading ? <Loader /> : null}
 				{posts.length === 0 && !isLoading ? (

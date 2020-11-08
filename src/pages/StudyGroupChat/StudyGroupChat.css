@@ -1,188 +1,201 @@
 .StudyGroupChat {
-    /* flex: 0.65; */
-    display: flex;
-    flex-direction: column;
+	/* flex: 0.65; */
+	display: flex;
+	flex-direction: column;
 }
 
 .StudyGroupChat__Body {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    padding: 30px;
-    overflow: scroll;
-    margin-top: 18vh;
-    margin-bottom: 7rem;
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	padding: 30px;
+	overflow: scroll;
+	margin-top: 18vh;
+	margin-bottom: 7rem;
 }
 
 .StudyGroupChat__Header .StudyGroupChat__Title {
-    margin: auto;
+	margin: auto;
 }
 
-.StudyGroupChat__Header>button.MuiButtonBase-root.MuiIconButton-root {
-    position: absolute;
-    top: 12px;
-    right: 1rem;
+.StudyGroupChat__Header > button.MuiButtonBase-root.MuiIconButton-root {
+	position: absolute;
+	top: 12px;
+	right: 1rem;
 }
 
 .chat__message {
-    position: relative;
-    padding: 8px;
-    font-size: 14px;
-    background-color: var(--tertiary-color);
-    border-radius: 10px;
-    width: fit-content;
-    margin-bottom: 1.25rem;
+	position: relative;
+	padding: 8px;
+	font-size: 14px;
+	background-color: var(--tertiary-color);
+	border-radius: 10px;
+	width: fit-content;
+	margin-bottom: 1.25rem;
 }
 
 .chat__receiver {
-    margin-left: auto;
-    background-color: var(--user-chat-color);
-    color: var(--bg-color);
+	margin-left: auto;
+	background-color: var(--user-chat-color);
+	color: var(--bg-color);
 }
 
 .chat__timestamp {
-    margin-left: 1rem;
-    font-size: xx-small;
+	margin-left: 1rem;
+	font-size: xx-small;
 }
 
 .chat__name {
-    position: absolute;
-    top: -1rem;
-    font-size: x-small;
-    font-weight: 800;
-    color: var(--primary-color);
+	position: absolute;
+	top: -1rem;
+	font-size: x-small;
+	font-weight: 800;
+	color: var(--primary-color);
 }
 
 .StudyGroupChat__Footer {
-    position: fixed;
-    bottom: 100px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding-left: 1.2rem;
-    margin: auto;
-    z-index: 25;
-    /* height: 62px; */
-    /* border-top: 1px solid var(--tertiary-color); */
+	position: fixed;
+	bottom: 100px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	padding-left: 1.2rem;
+	margin: auto;
+	z-index: 25;
+	/* height: 62px; */
+	/* border-top: 1px solid var(--tertiary-color); */
 }
 
-.StudyGroupChat__Footer>form {
-    flex: 1;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.StudyGroupChat__Footer > form {
+	flex: 1;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
-.StudyGroupChat__Footer>form>input {
-    flex: 1;
-    padding: .5rem;
+.StudyGroupChat__Footer > form > input {
+	flex: 1;
+	padding: 0.5rem;
 }
 
-.StudyGroupChat__Footer>form>input::placeholder {
-    color: var(--tertiary-color);
-    font-style: italic;
+.StudyGroupChat__Footer > form > input::placeholder {
+	color: var(--tertiary-color);
+	font-style: italic;
 }
 
-.StudyGroupChat__Footer>form>.MuiButtonBase-root.MuiIconButton-root.Mui-disabled {
-    color: var(--tertiary-color);
+.StudyGroupChat__Footer
+	> form
+	> .MuiButtonBase-root.MuiIconButton-root.Mui-disabled {
+	color: var(--tertiary-color);
 }
 
-.StudyGroupChat__Footer>form>.MuiButtonBase-root.MuiIconButton-root {
-    color: var(--primary-color);
-    /* display: none; */
+.StudyGroupChat__Footer > form > .MuiButtonBase-root.MuiIconButton-root {
+	color: var(--primary-color);
+	/* display: none; */
 }
 
-.message__attachments>i {
-    color: var(--tertiary-color);
-    margin-right: .5rem;
-    /* padding: 1rem; */
+.message__attachments > i {
+	color: var(--tertiary-color);
+	margin-right: 0.5rem;
+	/* padding: 1rem; */
 }
 
-.message__attachments>i:hover {
-    color: var(--primary-color);
+.message__attachments > i:hover {
+	color: var(--primary-color);
 }
 
 /*******************************************************/
 /** StudyGroupChatAdmin                                */
 /*******************************************************/
 .StudyGroupChatAdmin {
-    margin-top: 6rem;
-    display: flex;
-    flex-direction: column;
+	margin-top: 6rem;
+	display: flex;
+	flex-direction: column;
 }
 
-.StudyGroupChatAdmin>.Admin__Header>h5 {
-    font-size: 1.5rem;
+.StudyGroupChatAdmin > .Admin__Header > h5 {
+	font-size: 1.5rem;
 }
 
-.StudyGroupChatAdmin>.Admin__Header {
-    /* border-bottom: 1px solid var(--tertiary-color); */
-    padding: 1rem 2rem;
-    position: relative;
+.StudyGroupChatAdmin > .Admin__Header {
+	/* border-bottom: 1px solid var(--tertiary-color); */
+	padding: 1rem 2rem;
+	position: relative;
 }
 
-.StudyGroupChatAdmin>.Admin__Header>.MuiButtonBase-root.MuiIconButton-root {
-    position: absolute;
-    right: 1.6rem;
-    top: 7px;
+.StudyGroupChatAdmin > .Admin__Header > .MuiButtonBase-root.MuiIconButton-root {
+	position: absolute;
+	right: 1.6rem;
+	top: 7px;
 }
 
-.StudyGroupChatAdmin>.Admin__Body>.Admin-Members__Header {
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem 2rem 0 2rem;
+.StudyGroupChatAdmin > .Admin__Body > .Admin-Members__Header {
+	display: flex;
+	justify-content: space-between;
+	padding: 1rem 2rem 0 2rem;
 }
 
 .Admin-Members__List {
-    padding: 1rem 2rem;
+	padding: 1rem 2rem;
 }
 
-.Admin__Body>.Admin-Members__Add {
-    display: flex;
-    flex-direction: column;
-    padding: 0 1.5rem;
+.Admin__Body > .Admin-Members__Add {
+	display: flex;
+	flex-direction: column;
+	padding: 0 1.5rem;
 }
 
-.Admin__Body>.Admin-Members__Add>.Add__Btn {
-    display: flex;
+.Admin__Body > .Admin-Members__Add > .Add__Btn {
+	display: flex;
 }
 
-.Admin__Body>.Admin-Members__Add>.Add__Btn>p {
-    margin: auto 0;
-    color: var(--tertiary-color);
+.Admin__Body > .Admin-Members__Add > .Add__Btn > p {
+	margin: auto 0;
+	color: var(--tertiary-color);
 }
 
-.Member__Info>a {
-    display: flex;
+.Member__Info > a {
+	display: flex;
 }
 
-.Member__Info>a>p {
-    color: var(--primary-color);
-    margin: auto 1rem;
+.Member__Info > a > p {
+	color: var(--primary-color);
+	margin: auto 1rem;
 }
 
 .member-number {
-    font-style: italic;
-    color: var(--tertiary-color);
-    font-size: smaller;
-    margin: auto 0;
+	font-style: italic;
+	color: var(--tertiary-color);
+	font-size: smaller;
+	margin: auto 0;
 }
 
-.Admin-Members__List>.Member__Card {
-    display: flex;
-    justify-content: space-between;
-    padding: .5rem 0;
+.Admin-Members__List > .Member__Card {
+	display: flex;
+	justify-content: space-between;
+	padding: 0.5rem 0;
 }
 
 .Admin-Members__Add .MuiSvgIcon-root {
-    font-size: 2rem;
+	font-size: 2rem;
 }
-
 
 /*******************************************************/
 /** StudyGroupChatAdmin - Icons                        */
 /*******************************************************/
 .Block-Icon {
-    color: var(--danger-color);
+	color: var(--danger-color);
+}
+
+/********************************* */
+/** Media Queries - MAIN LAYOUT    *
+/********************************* */
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+	.StudyGroupChat__Title {
+		margin-right: auto;
+		margin-left: 5rem;
+	}
 }

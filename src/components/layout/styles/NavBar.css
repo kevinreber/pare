@@ -72,6 +72,24 @@ a.nav-link:focus {
 	.NavBar > .NavBar-List {
 		flex-direction: column;
 	}
+
+	.NavBar-List.NavBar-List__Primary {
+		margin-bottom: 4rem;
+		margin-top: 2rem;
+	}
+
+	.NavBar-List__Logo {
+		margin-bottom: 4rem;
+		margin-top: 2rem;
+	}
+
+	.NavBar-List__Settings {
+		margin-bottom: 2rem;
+	}
+
+	.NavBar > .NavBar-List__Secondary .Header-Logo img {
+		width: 48px;
+	}
 }
 
 /* Medium devices (tablets, 768px and up) */

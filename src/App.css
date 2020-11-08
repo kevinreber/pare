@@ -410,6 +410,31 @@ span.MuiButtonBase-root.MuiIconButton-root.PrivateSwitchBase-root-9.MuiCheckbox-
 		margin-top: 0;
 	}
 
+	.StudyGroups__Header {
+		padding-top: 1rem;
+		height: 16vh;
+	}
+
+	.Notifications__Header,
+	.Courses-Header,
+	.Tutors-Header {
+		margin-top: 0;
+		justify-content: flex-start;
+	}
+
+	.Notifications__Header div:first-child,
+	.Courses-Header div:first-child,
+	.Tutors-Header div:first-child,
+	.Feed > .Feed-Header > h5 {
+		margin-left: 1.5rem;
+	}
+
+	.Notifications__Header div:last-child,
+	.Courses-Header div:last-child,
+	.Tutors-Header div:last-child {
+		margin-left: 8rem;
+	}
+
 	.MessageChat__Header {
 		margin-top: 2rem;
 	}
@@ -417,13 +442,19 @@ span.MuiButtonBase-root.MuiIconButton-root.PrivateSwitchBase-root-9.MuiCheckbox-
 	.PostInfo__Body {
 		margin-top: 5rem;
 	}
-	.UserProfile__Body {
+
+	.UserProfile > .UserProfile__Body {
 		margin-top: 13rem;
 	}
-	.Page__Body,
-	.StudyGroups__Body {
+
+	.Page__Body {
 		margin-top: 6rem;
 	}
+
+	.StudyGroups__Body {
+		margin-top: 7rem;
+	}
+
 	.StudyGroupChat__Body.Page__Body,
 	.CourseInfo__Body,
 	.Tutors__Body {
@@ -438,6 +469,29 @@ span.MuiButtonBase-root.MuiIconButton-root.PrivateSwitchBase-root-9.MuiCheckbox-
 	.Courses__CourseList,
 	.MessageList {
 		margin-top: 4rem;
+	}
+
+	.StudyGroups__Header > h5 {
+		text-align: left;
+	}
+
+	.Feed-Header.Body-Header {
+		display: flex;
+	}
+
+	.Feed-Header.Body-Header,
+	.PostInfo__Header.Body-Header {
+		justify-content: flex-start;
+	}
+
+	.PostInfo > .PostInfo__Header.Body-Header > h5.text-center {
+		margin-left: 4rem;
+	}
+
+	/* Admin Buttons for Message Chat and Study Group Chat */
+	.MessageChat__Header > button.MuiButtonBase-root.MuiIconButton-root,
+	.StudyGroupChat__Header > button.MuiButtonBase-root.MuiIconButton-root {
+		right: 18%;
 	}
 }
 

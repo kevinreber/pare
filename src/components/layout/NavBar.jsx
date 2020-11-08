@@ -1,10 +1,11 @@
 /** Dependencies */
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 /** Components & Helpers */
 import { ReactComponent as CoursesIcon } from './icons/courses-icon.svg';
+import Logo from '../../images/logo/mate-logo.png';
 import StudyGroupIcon from './icons/study-group-icon.png';
 import { ReactComponent as TutorIcon } from './icons/tutor-icon.svg';
 import { logOut } from '../../store/actions/auth';
@@ -29,6 +30,15 @@ function NavBar() {
 
 	return (
 		<nav className="NavBar fixed-bottom mate-bg-primary">
+			<ul className="NavBar-List NavBar-List__Secondary NavBar-List__Logo hide-sm">
+				<li className="nav-item p-0">
+					<div className="Header-Logo">
+						<Link to="/feed">
+							<img src={Logo} alt="Mate" />
+						</Link>
+					</div>
+				</li>
+			</ul>
 			<ul className="NavBar-List NavBar-List__Primary">
 				<li className="nav-item">
 					<NavLink className="nav-link mate-text-primary" to="/feed">
@@ -67,20 +77,16 @@ function NavBar() {
 					</NavLink>
 				</li>
 			</ul>
-			<ul className="NavBar-List NavBar-List__Secondary hide-sm">
+			<ul className="NavBar-List NavBar-List__Secondary NavBar-List__Settings hide-sm">
 				<li className="nav-item p-0">
-					<IconButton
-						onClick={logOutUser}
-						className="nav-link mate-text-primary">
+					<IconButton onClick={logOutUser}>
 						<ExitToAppOutlinedIcon style={{ fontSize: 45 }} />
 					</IconButton>
 				</li>
 				<li className="nav-item p-0 nav-avatar">
-					<NavLink
-						className="nav-link mate-text-primary"
-						to={`/users/${currentUser.uid}`}>
+					<Link to={`/users/${currentUser.uid}`}>
 						<Avatar alt={currentUser.displayName} src={currentUser.photoURL} />
-					</NavLink>
+					</Link>
 				</li>
 			</ul>
 		</nav>

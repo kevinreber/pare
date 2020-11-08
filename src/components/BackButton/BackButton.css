@@ -1,10 +1,29 @@
 .BackButton {
-    position: absolute;
-    padding: 3px;
-    left: 1rem;
-    top: 7px;
+	position: absolute;
+	padding: 3px;
+	left: 1rem;
+	top: 7px;
 }
 
-.BackButton .MuiButtonBase-root.MuiIconButton-root .MuiIconButton-label .MuiSvgIcon-root {
-    color: var(--primary-color);
+.BackButton
+	.MuiButtonBase-root.MuiIconButton-root
+	.MuiIconButton-label
+	.MuiSvgIcon-root {
+	color: var(--primary-color);
+}
+
+/********************************* */
+/** Media Queries - MAIN LAYOUT    *
+/********************************* */
+
+.hide-sm,
+.NavBar > .NavBar-List.hide-sm {
+	display: none;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+	.BackButton {
+		top: 4px;
+	}
 }
