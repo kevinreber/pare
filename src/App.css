@@ -370,10 +370,11 @@ span.MuiButtonBase-root.MuiIconButton-root.PrivateSwitchBase-root-9.MuiCheckbox-
 }
 
 /********************************* */
-/** Media Queries                  *
+/** Media Queries - MAIN LAYOUT    *
 /********************************* */
 
-.hide-sm {
+.hide-sm,
+.NavBar > .NavBar-List.hide-sm {
 	display: none;
 }
 
@@ -383,17 +384,60 @@ span.MuiButtonBase-root.MuiIconButton-root.PrivateSwitchBase-root-9.MuiCheckbox-
 	.Search,
 	.Courses,
 	.StudyGroups,
+	.StudyGroupChat,
 	.Tutors,
-	.Notifications-Page {
+	.Notifications-Page,
+	.MessageChat,
+	.PostInfo,
+	.CourseInfo,
+	.UserProfile {
 		margin-left: 92px;
 	}
 
-	.hide-sm {
+	.hide-sm,
+	.NavBar > .NavBar-List.hide-sm {
 		display: block;
 	}
 
 	.Header.hide-md {
 		display: none;
+	}
+
+	.Body-Header,
+	.StudyGroups__Header,
+	.CourseInfo__Header,
+	.UserProfile__Header {
+		margin-top: 0;
+	}
+
+	.MessageChat__Header {
+		margin-top: 2rem;
+	}
+
+	.PostInfo__Body {
+		margin-top: 5rem;
+	}
+	.UserProfile__Body {
+		margin-top: 13rem;
+	}
+	.Page__Body,
+	.StudyGroups__Body {
+		margin-top: 6rem;
+	}
+	.StudyGroupChat__Body.Page__Body,
+	.CourseInfo__Body,
+	.Tutors__Body {
+		margin-top: 4rem;
+	}
+
+	/* .Body-Header *,
+	.StudyGroups__Header * {
+		margin-top: 2rem;
+	} */
+
+	.Courses__CourseList,
+	.MessageList {
+		margin-top: 4rem;
 	}
 }
 

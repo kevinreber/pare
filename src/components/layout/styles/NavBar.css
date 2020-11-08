@@ -45,6 +45,10 @@ a.nav-link:focus {
 	background-color: var(--bg-color);
 }
 
+.nav-avatar .MuiAvatar-root.MuiAvatar-circle {
+	margin: auto;
+}
+
 /********************************* */
 /** Media Queries                  *
 /********************************* */
@@ -56,11 +60,15 @@ a.nav-link:focus {
 		height: 100vh;
 		width: 92px;
 		box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.6);
+		display: flex;
+		flex-direction: column;
 	}
+
 	.fixed-bottom {
 		right: none;
 		top: 0;
 	}
+
 	.NavBar > .NavBar-List {
 		flex-direction: column;
 	}

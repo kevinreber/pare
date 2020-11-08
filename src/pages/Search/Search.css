@@ -50,6 +50,11 @@ input::placeholder {
 	margin-bottom: 12rem;
 }
 
+.Search__Elements > input,
+.Search-Categories {
+	width: 100%;
+}
+
 .MuiButtonBase-root.MuiListItem-root.inactive.MuiListItem-gutters.MuiListItem-button {
 	color: var(--tertiary-color);
 }
@@ -100,6 +105,10 @@ input::placeholder {
 	}
 	.Search__List > .Post-Card {
 		padding: 2rem 2rem 1rem 2rem;
+	}
+	.Search__Elements > input,
+	.Search-Categories {
+		width: 87%;
 	}
 }
 
