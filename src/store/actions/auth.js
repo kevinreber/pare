@@ -111,19 +111,20 @@ async function updateUserLogin(user) {
 export function googleLogin() {
 	return (dispatch) => {
 		auth
-			.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+			.setPersistence(firebase.auth.Auth.Persistence.SESSION)
 			.then(() => {
-				auth.signInWithPopup(provider).then((result) => {
+				auth.signInWithPopup(provider).then(async (result) => {
 					const token = result.credential.accessToken;
 					console.log(token);
 
-					checkIfUserExists(result.user);
-					// send user data to redux store
+					// Check if user exists - account will be made for new users.
+					await checkIfUserExists(result.user);
+
 					db.collection('users')
 						.doc(result.user.uid)
 						.get()
 						.then((doc) => {
-							dispatch(setCurrUser(doc.data()));
+							return dispatch(setCurrUser(doc.data()));
 						});
 				});
 			})
