@@ -172,12 +172,17 @@ function logOutUser(user) {
 
 export function deleteAccount(id) {
 	return (dispatch) => {
-		db.collection('users')
-			.doc(id)
-			.delete()
+		auth
+			.signOut()
+			.then(() => {
+				console.log('Sign out successful');
+				dispatch(logOutUser(LOGOUT_USER));
+			})
+			.then(() => {
+				db.collection('users').doc(id).delete();
+			})
 			.then(() => {
 				console.log('Account successfully deleted!');
-				logOut();
 			})
 			.catch((err) => {
 				console.error('Error removing account: ', err);
