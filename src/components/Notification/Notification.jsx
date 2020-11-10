@@ -28,7 +28,7 @@ function Notification() {
 	const handleClose = (e, reason) => {
 		dispatch(
 			addFlashMessage({
-				isOpen: !notify.isOpen,
+				isOpen: false,
 			})
 		);
 	};
