@@ -154,6 +154,12 @@ input,
 	border: 1px solid var(--danger-color);
 }
 
+.mate-btn-danger:hover {
+	background-color: var(--danger-color);
+	color: var(--secondary-color);
+	border: 1px solid var(--danger-color);
+}
+
 label,
 input,
 .mate-form-input {

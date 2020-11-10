@@ -211,7 +211,7 @@
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
 	.Feed__List {
-		margin-top: 3.5rem;
+		margin-top: 4rem;
 		margin-bottom: 0;
 	}
 
