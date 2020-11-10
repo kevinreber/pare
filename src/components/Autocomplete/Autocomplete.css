@@ -54,3 +54,14 @@
 .StudyGroupForm .Autocomplete {
 	margin-bottom: 6rem;
 }
+
+/********************************* */
+/** Media Queries                  *
+/********************************* */
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+	.StudyGroupForm .Autocomplete {
+		margin-bottom: 1rem;
+	}
+}

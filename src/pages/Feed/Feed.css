@@ -147,10 +147,18 @@
 /********************************* */
 
 .PostForm {
-	display: flex;
-	flex-direction: column;
 	padding: 3rem 1rem 10rem 1rem;
 	background-color: var(--bg-color);
+}
+
+.PostForm,
+.PostForm form.container {
+	display: flex;
+	flex-direction: column;
+}
+
+.PostForm .PostForm__Footer {
+	margin-left: auto;
 }
 
 .char-count {
@@ -206,6 +214,7 @@
 		margin-top: 3.5rem;
 		margin-bottom: 0;
 	}
+
 	.Feed__List > .Post-Card {
 		padding: 2rem 2rem 1rem 2rem;
 	}
