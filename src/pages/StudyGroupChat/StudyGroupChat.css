@@ -194,8 +194,8 @@
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
-	.StudyGroupChat__Title {
+	.StudyGroupChat__Header .StudyGroupChat__Title {
 		margin-right: auto;
-		margin-left: 5rem;
+		margin-left: 4rem;
 	}
 }

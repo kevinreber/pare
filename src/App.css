@@ -493,6 +493,22 @@ span.MuiButtonBase-root.MuiIconButton-root.PrivateSwitchBase-root-9.MuiCheckbox-
 	.StudyGroupChat__Header > button.MuiButtonBase-root.MuiIconButton-root {
 		right: 18%;
 	}
+
+	.mate-btn-cta {
+		left: unset;
+	}
+
+	.MessageChat__Body.Page__Body,
+	.StudyGroupChat__Body.Page__Body {
+		margin-bottom: 2rem;
+	}
+
+	/* Chat Footers */
+	.StudyGroupChat__Footer,
+	.MessageChat__Footer {
+		width: 85%;
+		bottom: 4vh;
+	}
 }
 
 /* Medium devices (tablets, 768px and up) */
