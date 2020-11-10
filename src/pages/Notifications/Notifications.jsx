@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 /** Components & Helpers */
-import NotificationsList from './components/NotificationsList';
 import MessagesList from './components/MessagesList';
 import NewMessageForm from './components/NewMessageForm';
 import Modal from '../../components/Modal/Modal';
@@ -21,7 +20,7 @@ function Notifications() {
 	const dispatch = useDispatch();
 
 	// State will determine what courses to show in CourseList
-	const [active, setActive] = useState('notifications');
+	const [active, setActive] = useState('messages');
 	const toggleActive = (e) => {
 		setActive(e.target.id);
 	};
@@ -33,7 +32,6 @@ function Notifications() {
 	const [messages, setMessages] = useState([]);
 
 	useEffect(() => {
-		console.log('fetching...');
 		db.collection('messages')
 			.where('users', 'array-contains', currentUser.uid)
 			// .orderBy('lastUpdatedAt')
@@ -49,17 +47,6 @@ function Notifications() {
 				);
 			});
 	}, [currentUser]);
-
-	const PageBody =
-		active === 'notifications' ? (
-			<NotificationsList />
-		) : (
-			<MessagesList
-				messages={messages}
-				userId={currentUser.uid}
-				toggleForm={toggleForm}
-			/>
-		);
 
 	const sendMessage = async (messageData, chatData) => {
 		// store messageId given back
@@ -94,30 +81,22 @@ function Notifications() {
 	return (
 		<div className="Notifications-Page">
 			<div className="Notifications__Header Body-Header">
-				<div className="Notifications">
-					<h5
-						id="notifications"
-						className={
-							active === 'notifications'
-								? 'mate-text-primary'
-								: 'mate-text-active'
-						}
-						onClick={toggleActive}>
-						Notifications
-					</h5>
-				</div>
 				<div className="Messages">
 					<h5
 						id="messages"
-						className={
-							active === 'messages' ? 'mate-text-primary' : 'mate-text-active'
-						}
+						className="mate-text-primary"
 						onClick={toggleActive}>
 						Messages
 					</h5>
 				</div>
 			</div>
-			<div className="Notifications__Body">{PageBody}</div>
+			<div className="Notifications__Body">
+				<MessagesList
+					messages={messages}
+					userId={currentUser.uid}
+					toggleForm={toggleForm}
+				/>
+			</div>
 		</div>
 	);
 }

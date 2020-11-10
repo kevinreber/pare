@@ -15,15 +15,16 @@ import MessageCard from './MessageCard';
  * @param 	{function}	toggleForm		Toggle's form to create new message.
  */
 function MessagesList({ messages, userId, toggleForm }) {
-	const List = messages ? (
-		messages.map((message) => (
-			<li key={message.id}>
-				<MessageCard message={message} userId={userId} />
-			</li>
-		))
-	) : (
-		<NoData text="messages" />
-	);
+	const List =
+		messages.length > 0 ? (
+			messages.map((message) => (
+				<li key={message.id}>
+					<MessageCard message={message} userId={userId} />
+				</li>
+			))
+		) : (
+			<NoData text="messages" added={false} />
+		);
 
 	return (
 		<>
