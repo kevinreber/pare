@@ -19,6 +19,10 @@
 
 .nav-item > .nav-link {
 	opacity: 0.3;
+}
+
+.nav-item > .nav-link,
+.Log-Out {
 	transition: all 0.2s;
 }
 
@@ -98,6 +102,21 @@ a.nav-link:focus {
 	.NavBar > .NavBar-List__Secondary .Header-Logo img {
 		width: 48px;
 	}
+
+	.Log-Out > button > span > h5.hide-lg {
+		color: var(--tertiary-color);
+	}
+
+	.Log-Out > .MuiButtonBase-root.MuiIconButton-root:hover,
+	.Log-Out > button:hover h5.hide-lg {
+		color: var(--secondary-color);
+	}
+
+	.nav-avatar:hover,
+	.Log-Out > .MuiButtonBase-root.MuiIconButton-root:hover,
+	.nav-avatar.nav-item > a {
+		background-color: var(--bg-color);
+	}
 }
 
 /* Medium devices (tablets, 768px and up) */
@@ -110,13 +129,13 @@ a.nav-link:focus {
 		width: 18rem;
 	}
 
-	.NavBar > .NavBar-List > .nav-item > .nav-link {
+	.NavBar > .NavBar-List > .nav-item > .nav-link,
+	.NavBar > .NavBar-List > .nav-item.nav-avatar > a {
 		display: flex;
 		align-items: center;
 	}
 
 	.NavBar > .NavBar-List > .nav-item > .nav-link > svg,
-	/* .NavBar > .NavBar-List > .nav-item > .nav-link > .MuiBadge-root, */
 	.NavBar > .NavBar-List > .nav-item > .nav-link > .MuiBadge-root > svg {
 		width: 80px;
 		text-align: left;
@@ -132,22 +151,15 @@ a.nav-link:focus {
 	}
 
 	.Study-Group-Nav > h5 {
-		margin-left: 3rem;
+		margin-left: 2rem;
 	}
 
 	.hide-lg {
-		margin-left: 2rem;
+		margin-left: 1rem;
 	}
 
 	.NavBar-List.NavBar-List__Secondary.NavBar-List__Settings {
 		display: flex;
-		justify-content: flex-start;
-	}
-
-	.NavBar-List.NavBar-List__Secondary.NavBar-List__Settings > li.nav-item > a {
-		display: flex;
-		flex-direction: row;
-		align-items: center;
 		justify-content: flex-start;
 	}
 
@@ -158,6 +170,12 @@ a.nav-link:focus {
 	}
 
 	.NavBar-List.NavBar-List__Secondary.NavBar-List__Settings
+		> li.nav-item.Log-Out
+		h5 {
+		margin-left: 2rem;
+	}
+
+	.NavBar-List.NavBar-List__Secondary.NavBar-List__Settings
 		> li.nav-item.nav-avatar
 		> a
 		> .MiuAvatar-root.MuiAvatar-circle {
@@ -165,11 +183,14 @@ a.nav-link:focus {
 		margin-right: 0;
 	}
 
-	.NavBar-List.NavBar-List__Secondary.NavBar-List__Settings
-		> li.nav-item.nav-avatar
-		> a
-		> h5.hide-lg {
-		margin-left: 3rem;
+	.nav-item.nav-avatar > a > h5.hide-lg,
+	.nav-item.nav-avatar {
+		margin-left: 2.1rem;
+	}
+
+	.nav-item.nav-avatar > a > .MuiAvatar-root.MuiAvatar-circle {
+		margin-left: 0;
+		margin-right: 0;
 	}
 }
 

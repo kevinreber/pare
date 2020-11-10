@@ -89,6 +89,7 @@ function NavBar() {
 				<li className="nav-item p-0 Log-Out">
 					<IconButton onClick={logOutUser}>
 						<ExitToAppOutlinedIcon style={{ fontSize: 45 }} />
+						<h5 className="hide-lg">Sign Out</h5>
 					</IconButton>
 				</li>
 				<li className="nav-item p-0 nav-avatar">
