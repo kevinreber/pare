@@ -9,23 +9,14 @@ import CTAButton from '../../components/CTAButton/CTAButton';
 import Searchbar from '../../components/SearchBar/Searchbar';
 import ConfirmDialog from '../../components/ConfirmDialog/ConfirmDialog';
 import Loader from '../../components/layout/Loader/Loader';
-import { deletePostFromFB } from '../../store/actions/posts';
+import { deletePostFromFB, editPostInFB } from '../../store/actions/posts';
 import { addFlashMessage } from '../../store/actions/flashMessages';
+import { SearchCategories } from './constants/index';
 import db from '../../config/fbConfig';
 import './Search.css';
 
 /** MUI */
 import { List, ListItem, ListItemText } from '@material-ui/core';
-
-const SearchCategories = [
-	'Alerts',
-	'Today',
-	'Networking',
-	'Campus',
-	'Opportunities',
-	'Marketplace',
-	'Events',
-];
 
 function Search() {
 	const dispatch = useDispatch();
@@ -38,6 +29,7 @@ function Search() {
 
 	const [search, setSearch] = useState('');
 	const [startSearch, setStartSearch] = useState(false);
+	const [errors, setErrors] = useState('');
 
 	const [posts, setPosts] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
@@ -146,15 +138,35 @@ function Search() {
 	};
 
 	/** Prompts Modal to edit Post information */
-	const editPost = (id) => {
-		console.log('editing..', id);
+	const editPost = (id, data) => {
+		dispatch(editPostInFB(id, data));
+		dispatch(
+			addFlashMessage({
+				isOpen: true,
+				message: 'Update Successful!',
+				type: 'success',
+			})
+		);
+		// get most recent posts
+		setIsLoading(true);
+	};
+
+	const validSearch = () => {
+		if (search === '' || search.trim() === '') {
+			setErrors('Search required*');
+			return false;
+		}
+		return true;
 	};
 
 	const handleSubmit = () => {
-		setPosts([]);
-		setQuickSearch('');
-		setIsLoading(true);
-		setStartSearch(true);
+		setErrors('');
+		if (validSearch()) {
+			setPosts([]);
+			setQuickSearch('');
+			setIsLoading(true);
+			setStartSearch(true);
+		}
 	};
 
 	/** Quick Search Category List */
@@ -198,6 +210,7 @@ function Search() {
 					search.length === 0 ? 'disabled-btn' : ''
 				}`}>
 				<CTAButton text="Search" />
+				{errors !== '' ? <div className="alert errors">{errors}</div> : null}
 			</div>
 		</div>
 	);
