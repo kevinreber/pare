@@ -37,6 +37,11 @@
 	box-shadow: 0 20px 20px -20px rgba(0, 0, 0, 0.6);
 }
 
+.UserProfile__Header-Container {
+	display: flex;
+	flex-direction: column;
+}
+
 .Avatar.UserProfile__Avatar {
 	height: 72px;
 	width: 72px;
@@ -117,4 +122,25 @@
 
 .Available-Day {
 	font-weight: 400;
+}
+
+.User-Profile-Header-Footer {
+	position: absolute;
+	right: 0;
+	bottom: 1rem;
+}
+
+/********************************* */
+/** Media Queries - MAIN LAYOUT    *
+/********************************* */
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+	.UserProfile__Header {
+		width: 85vw;
+	}
+
+	.User-Profile-Header-Footer {
+		bottom: 1rem;
+	}
 }

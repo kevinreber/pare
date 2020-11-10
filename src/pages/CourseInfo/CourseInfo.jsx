@@ -113,10 +113,8 @@ function CourseInfo() {
 	const courseInfo =
 		!isLoading && course ? (
 			<div className="CourseInfo">
-				<div className="CourseInfo__BackBtn">
-					<BackButton />
-				</div>
 				<div className="CourseInfo__Header">
+					<BackButton />
 					<CourseInfoHeader
 						course={course}
 						semester={course.semester}

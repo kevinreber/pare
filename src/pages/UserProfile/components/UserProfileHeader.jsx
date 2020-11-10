@@ -40,11 +40,11 @@ function UserProfileHeader({
 						src={avatar}
 						alt={name}
 					/>
+					<p className="User-Profile-School mr-1">
+						<i className="fas fa-map-marker-alt mr-2"></i>
+						{school}
+					</p>
 					<div className="User-Profile-Header-Footer d-flex justify-content-end">
-						<p className="User-Profile-School ml-auto mr-1">
-							<i className="fas fa-map-marker-alt mr-2"></i>
-							{school}
-						</p>
 						<div className="User-Profile-Actions ml-5 mr-3">
 							<i className={bookmarkStatus}></i>
 							<i className={followStatus}></i>

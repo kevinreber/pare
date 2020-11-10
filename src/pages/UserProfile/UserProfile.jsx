@@ -235,10 +235,10 @@ function UserProfile() {
 						confirmDialog={confirmDialog}
 						setConfirmDialog={setConfirmDialog}
 					/>
-					<div className="UserProfile__BackBtn">
-						<BackButton />
-					</div>
+					{/* <div className="UserProfile__BackBtn">
+					</div> */}
 					<div className="UserProfile__Header">
+						<BackButton />
 						<UserProfileHeader
 							id={userId}
 							displayName={user.displayName}
