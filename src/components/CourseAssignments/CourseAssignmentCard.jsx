@@ -92,7 +92,7 @@ function CourseAssignment({ id, title, dueDate, grades, classSubmittals }) {
 	return (
 		<>
 			<AssignmentStatusIcon color={assignmentStatus} />
-			<div>
+			<div className="Assignment-Info">
 				<h5 className="mate-text-primary Assignment-Title text-left">
 					{title}
 				</h5>

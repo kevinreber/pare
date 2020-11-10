@@ -444,7 +444,7 @@ span.MuiButtonBase-root.MuiIconButton-root.PrivateSwitchBase-root-9.MuiCheckbox-
 	}
 
 	.StudyGroups__Body {
-		margin-top: 7rem;
+		margin-top: 8rem;
 	}
 
 	.StudyGroupChat__Body.Page__Body,
@@ -551,6 +551,11 @@ span.MuiButtonBase-root.MuiIconButton-root.PrivateSwitchBase-root-9.MuiCheckbox-
 	.StudyGroupChat__Footer,
 	.MessageChat__Footer {
 		width: 75%;
+	}
+
+	.Modal .mate-btn-primary,
+	.Modal .mate-btn-secondary {
+		margin-left: -25px;
 	}
 }
 

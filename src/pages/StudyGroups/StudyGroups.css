@@ -1,44 +1,51 @@
 .StudyGroups {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .StudyGroups__Header {
-    display: flex;
-    position: fixed;
-    flex-direction: column;
-    padding-top: 1.2rem;
-    padding-bottom: 1.2rem;
-    border-bottom: 2px solid var(--tertiary-color);
-    cursor: pointer;
-    height: 12vh;
-    background-color: var(--bg-color);
-    margin-top: 8vh;
-    width: 100%;
-    z-index: 25;
-    box-shadow: 0 20px 20px -20px rgba(0, 0, 0, 0.6);
-    padding: 0 1.5rem;
+	display: flex;
+	position: fixed;
+	flex-direction: column;
+	padding-top: 1.2rem;
+	padding-bottom: 1.2rem;
+	border-bottom: 2px solid var(--tertiary-color);
+	cursor: pointer;
+	height: 12vh;
+	background-color: var(--bg-color);
+	margin-top: 8vh;
+	width: 100%;
+	z-index: 25;
+	box-shadow: 0 20px 20px -20px rgba(0, 0, 0, 0.6);
+	padding: 0 1.5rem;
 }
 
-.StudyGroups__Header>h5 {
-    margin-top: .5rem;
-    margin-bottom: .75rem;
+.StudyGroups__Header > h5 {
+	margin-top: 0.5rem;
+	margin-bottom: 0.75rem;
 }
 
 .StudyGroups__Body {
-    flex: 1;
-    overflow: scroll;
-    margin-top: 20vh;
-    margin-bottom: 7rem;
+	flex: 1;
+	overflow: scroll;
+	margin-top: 20vh;
+	margin-bottom: 7rem;
 }
 
 .StudyGroups__Card {
-    padding-top: .8rem;
-    padding-bottom: .8rem;
-    width: 100%;
-    border-bottom: 1px solid var(--tertiary-color);
+	padding-top: 0.8rem;
+	padding-bottom: 0.8rem;
+	width: 100%;
+	border-bottom: 1px solid var(--tertiary-color);
 }
 
 .StudyGroups__table {
-    margin-left: 1.25rem;
+	margin-left: 1.25rem;
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+	.StudyGroups__Card {
+		padding: 1rem;
+	}
 }

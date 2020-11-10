@@ -211,3 +211,13 @@
 .Admin-Members__Add .MuiSvgIcon-root {
 	font-size: 2rem;
 }
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+	.MessageList > .MessageCard {
+		padding: 1rem;
+	}
+	.MessageCard > .Container > .MessageCard__Right > p.timestamp {
+		right: 3rem;
+	}
+}

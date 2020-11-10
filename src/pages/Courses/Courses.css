@@ -1,68 +1,99 @@
 .Courses {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .Courses__CourseList {
-    flex: 1;
-    margin-top: 18vh;
-    margin-bottom: 7rem;
-    overflow: scroll;
+	flex: 1;
+	margin-top: 18vh;
+	margin-bottom: 7rem;
+	overflow: scroll;
 }
 
 table .Course.Course-Card {
-    font-size: 14px;
+	font-size: 14px;
 }
 
 table {
-    table-layout: fixed;
+	table-layout: fixed;
 }
 
 table .Course.Course-Card .Course-Card-Term {
-    font-size: 12px;
-    font-style: italic;
+	font-size: 12px;
+	font-style: italic;
 }
 
 .Course.Course-Card tr th,
 .Course.Course-Card tr td {
-    text-align: left;
+	text-align: left;
 }
 
 .Course.Course-Card .Course-Name,
 .Course.Course-Card .Course-Title {
-    padding-top: 1rem;
-    padding-bottom: 1.5rem;
+	padding-top: 1rem;
+	padding-bottom: 1.5rem;
 }
 
 .Course.Course-Card .Course-Name {
-    width: 120px;
-    padding-left: 1.25rem;
+	width: 120px;
+	padding-left: 1.25rem;
 }
 
 .Course.Course-Card .Course-Title {
-    margin: auto;
-    padding-right: 1.25rem;
+	margin: auto;
+	padding-right: 1.25rem;
 }
 
 .Assignment.Assignment-Card {
-    border-bottom: 1px solid var(--tertiary-color);
+	border-bottom: 1px solid var(--tertiary-color);
 }
 
 .mate-table {
-    width: 100%;
-    border-bottom: 1px solid var(--tertiary-color);
+	width: 100%;
+	border-bottom: 1px solid var(--tertiary-color);
 }
 
 .CourseFormSemester {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .CourseFormSemester label {
-    margin-right: auto;
+	margin-right: auto;
 }
 
 .CourseFormSemesterFields {
-    display: flex;
-    justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
+}
+
+/********************************* */
+/** Media Queries                  *
+/********************************* */
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+	.CourseCard,
+	.Assignment.Assignment-Card {
+		font-size: 1rem;
+		padding: 1rem;
+	}
+
+	.Assignment.Assignment-Card .Assignment-Grade {
+		margin-right: 3rem;
+	}
+
+	.Assignment.Assignment-Card > .Assignment-Status {
+		left: 1.75rem;
+	}
+
+	.Assignment .Assignment-Info {
+		margin-left: 2rem;
+	}
+
+	.Assignment.Assignment-Card > .Assignment-Grade > .Change-Grade {
+		font-size: 18px;
+		right: 2.5rem;
+		top: 1.25rem;
+	}
 }
