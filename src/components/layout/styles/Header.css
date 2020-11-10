@@ -91,7 +91,7 @@
 .MuiButtonBase-root.MuiFab-root:hover {
 	background-color: var(--bg-color);
 	color: var(--primary-color);
-	box-shadow: 0 0 5px 3px rgba(117, 243, 231, 0.8);
+	box-shadow: 0 0 5px 3px var(--primary-shadow);
 }
 
 .MuiPaper-root.MuiAppBar-root.MuiAppBar-positionStatic.MuiAppBar-colorPrimary.Header-Content.MuiPaper-elevation4 {

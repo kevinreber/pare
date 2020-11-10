@@ -1,12 +1,14 @@
 :root {
-	--primary-color: #75f3e7;
+	/* --primary-color: #75f3e7; */
+	--primary-color: #fdce22;
+	--primary-shadow: rgba(253, 206, 34, 0.8);
 	--secondary-color: #eeeeee;
-	--tertiary-color: #393e46;
-	--tertiary-color-light: rgb(43, 47, 58);
+	--tertiary-color: #504f4b;
+	--tertiary-color-light: #666561;
 	--danger-color: #e15554;
-	--bg-color: #222831;
-	--bg-active-color: #1c2127;
-	--user-chat-color: #65cac3;
+	--bg-color: #292929;
+	--bg-active-color: #27261c;
+	--user-chat-color: #eccb51;
 }
 
 body {
