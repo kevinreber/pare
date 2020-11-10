@@ -68,8 +68,8 @@ function PostCard({
 	start = null,
 	end = null,
 	attachment_preview = null,
-	attachment = null,
-	attachment_name = null,
+	attachment = '',
+	attachment_name = '',
 	timestamp,
 	last_updated = null,
 	comments = null,
@@ -142,13 +142,14 @@ function PostCard({
 			</>
 		) : null;
 
-	const showAttachment = attachment ? (
-		<img
-			className="Post-Card__Attachment"
-			src={attachment}
-			alt={attachment_name}
-		/>
-	) : null;
+	const showAttachment =
+		attachment !== '' ? (
+			<img
+				className="Post-Card__Attachment"
+				src={attachment}
+				alt={attachment_name}
+			/>
+		) : null;
 
 	const deletePost = () => {
 		remove(id, attachment_name);
