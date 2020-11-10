@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 import './Login.css';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Logo from '../../images/logo/mate-logo.png';
+import Logo from '../../images/logo/pare-logo.png';
 import { googleLogin } from '../../store/actions/auth';
 
 /** User Login Form */

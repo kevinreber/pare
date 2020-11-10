@@ -1,6 +1,6 @@
 /** Dependencies */
 import React, { useState } from 'react';
-import Logo from '../../images/logo/mate-logo.png';
+import Logo from '../../images/logo/pare-logo.png';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from '../../store/actions/auth';

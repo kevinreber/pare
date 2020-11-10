@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 /** Components & Helpers */
 import { ReactComponent as CoursesIcon } from './icons/courses-icon.svg';
-import Logo from '../../images/logo/mate-logo.png';
+import Logo from '../../images/logo/pare-logo.png';
 import StudyGroupIcon from './icons/study-group-icon.png';
 import { ReactComponent as TutorIcon } from './icons/tutor-icon.svg';
 import { logOut } from '../../store/actions/auth';
