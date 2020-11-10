@@ -181,7 +181,7 @@ function UserProfile() {
 		setEditProfile(false);
 		setConfirmDialog({
 			isOpen: true,
-			title: 'Delete account?',
+			title: 'Are you sure you want to delete your account?',
 			subtitle: "You can't undo this operation",
 			onConfirm: () => {
 				deleteUserAccount();
@@ -196,13 +196,6 @@ function UserProfile() {
 		});
 
 		dispatch(deleteAccount(userId));
-		dispatch(
-			addFlashMessage({
-				isOpen: true,
-				message: 'Account Deleted',
-				type: 'error',
-			})
-		);
 	};
 	/****************************************************/
 
