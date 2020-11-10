@@ -118,6 +118,10 @@ input::placeholder {
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
+	.Search__Elements > input,
+	.Search-Categories {
+		width: 75%;
+	}
 }
 
 /* Extra large devices (large desktops, 1200px and up) */

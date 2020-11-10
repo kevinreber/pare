@@ -341,16 +341,6 @@ span.MuiButtonBase-root.MuiIconButton-root.PrivateSwitchBase-root-9.MuiCheckbox-
 	color: var(--primary-color);
 }
 
-@keyframes App-logo-spin {
-	from {
-		transform: rotate(0deg);
-	}
-
-	to {
-		transform: rotate(360deg);
-	}
-}
-
 /********************************* */
 /** Autocomplete Places            *
 /********************************* */
@@ -463,11 +453,6 @@ span.MuiButtonBase-root.MuiIconButton-root.PrivateSwitchBase-root-9.MuiCheckbox-
 		margin-top: 4rem;
 	}
 
-	/* .Body-Header *,
-	.StudyGroups__Header * {
-		margin-top: 2rem;
-	} */
-
 	.Courses__CourseList,
 	.MessageList {
 		margin-top: 4rem;
@@ -506,6 +491,7 @@ span.MuiButtonBase-root.MuiIconButton-root.PrivateSwitchBase-root-9.MuiCheckbox-
 	}
 
 	/* Chat Footers */
+	.PostInfo__Footer,
 	.StudyGroupChat__Footer,
 	.MessageChat__Footer {
 		width: 85%;
@@ -538,6 +524,33 @@ span.MuiButtonBase-root.MuiIconButton-root.PrivateSwitchBase-root-9.MuiCheckbox-
 	.CourseInfo,
 	.UserProfile {
 		margin-left: 18rem;
+	}
+
+	.CourseInfo__Header {
+		justify-content: flex-start;
+	}
+
+	.CourseInfo__Header > h5 {
+		margin-left: 4.5rem;
+	}
+
+	.Notifications__Header div:last-child,
+	.Courses-Header div:last-child,
+	.Tutors-Header div:last-child {
+		margin-left: 12rem;
+	}
+
+	/* Admin Buttons for Message Chat and Study Group Chat */
+	.MessageChat__Header > button.MuiButtonBase-root.MuiIconButton-root,
+	.StudyGroupChat__Header > button.MuiButtonBase-root.MuiIconButton-root {
+		right: 27%;
+	}
+
+	/* Chat Footers */
+	.PostInfo__Footer,
+	.StudyGroupChat__Footer,
+	.MessageChat__Footer {
+		width: 75%;
 	}
 }
 
