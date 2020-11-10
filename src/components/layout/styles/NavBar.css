@@ -77,7 +77,7 @@ a.nav-link:focus {
 	}
 
 	.fixed-bottom {
-		right: none;
+		right: unset;
 		top: 0;
 	}
 
@@ -97,6 +97,22 @@ a.nav-link:focus {
 
 	.NavBar-List__Settings {
 		margin-bottom: 2rem;
+	}
+
+	.NavBar > .NavBar-List__Settings {
+		margin-left: 0.35rem;
+	}
+
+	.NavBar-List > .nav-item {
+		margin-left: auto;
+	}
+
+	.NavBar-List > .nav-item > .Study-Group-Nav {
+		margin-left: 0.5rem;
+	}
+
+	.NavBar > .NavBar-List__Secondary.NavBar-List__Logo > li.nav-item {
+		margin-left: 0.8rem;
 	}
 
 	.NavBar > .NavBar-List__Secondary .Header-Logo img {
@@ -125,6 +141,16 @@ a.nav-link:focus {
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
+	.NavBar > .NavBar-List__Settings,
+	.NavBar-List > .nav-item,
+	.NavBar-List > .nav-item > .Study-Group-Nav {
+		margin-left: 0;
+	}
+
+	.NavBar > .NavBar-List__Secondary.NavBar-List__Logo > li.nav-item {
+		margin-left: 2rem;
+	}
+
 	.NavBar {
 		width: 18rem;
 	}
@@ -192,8 +218,19 @@ a.nav-link:focus {
 		margin-left: 0;
 		margin-right: 0;
 	}
-}
 
-/* Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
+	.NavBar-List.NavBar-List__Secondary.NavBar-List__Logo {
+		margin-bottom: 0.25rem;
+		margin-top: 1.5rem;
+	}
+
+	.NavBar-List__Logo > li.nav-item {
+		display: flex;
+		margin-left: 2.2rem;
+	}
+
+	.NavBar-List.NavBar-List__Secondary.NavBar-List__Settings {
+		margin-top: auto;
+		margin-bottom: 2rem;
+	}
 }
