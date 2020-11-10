@@ -18,7 +18,7 @@ async function removeUserFromCollection(collection, docId, data, users = []) {
 	// Remove user from users array
 	if (data) {
 		// study group DB is stored differently
-		if (collection === 'study-group') {
+		if (collection === 'study-groups') {
 			console.log(data);
 			// look for user in users collection by their userID
 			await db

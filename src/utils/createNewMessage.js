@@ -24,7 +24,7 @@ async function createNewMessage(
 	const newMessage = await db.collection(collection).add(messageData);
 
 	// if 'study-group' collection, add user to 'users' sub-collection
-	if (collection === 'study-group') {
+	if (collection === 'study-groups') {
 		db.collection(collection).doc(newMessage.id).set(messageData);
 
 		const addUser = {

@@ -17,7 +17,7 @@ async function addUserToCollection(collection, docId, field, data) {
 
 	// Add data to collection group's array of users
 	if (data) {
-		if (collection === 'study-group') {
+		if (collection === 'study-groups') {
 			console.log(docId, field, data);
 			db.collection(collection)
 				.doc(docId)

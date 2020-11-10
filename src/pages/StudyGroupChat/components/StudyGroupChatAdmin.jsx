@@ -90,7 +90,7 @@ function StudyGroupChatAdmin({
 
 	// Remove user, using userID as reference
 	const removeUser = (user) => {
-		removeUserFromCollection('study-group', studyGroupId, user);
+		removeUserFromCollection('study-groups', studyGroupId, user);
 
 		dispatch(
 			addFlashMessage({
@@ -125,7 +125,7 @@ function StudyGroupChatAdmin({
 	 */
 	const leaveGroup = () => {
 		removeUserFromCollection(
-			'study-group',
+			'study-groups',
 			studyGroupId,
 			currentUser.uid,
 			members
@@ -279,9 +279,9 @@ function StudyGroupChatAdmin({
 					/>
 					{showEdit ? (
 						<>
-							<p onClick={saveEdit}>
+							<div onClick={saveEdit}>
 								<CTAButton text="Save Changes" danger={false} />
-							</p>
+							</div>
 						</>
 					) : (
 						<>

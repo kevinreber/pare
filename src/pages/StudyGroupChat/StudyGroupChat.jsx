@@ -52,12 +52,12 @@ function StudyGroupChat() {
 	useEffect(() => {
 		function getData() {
 			/** Get Study Group Info */
-			db.collection('study-group')
+			db.collection('study-groups')
 				.doc(studyGroupId)
 				.onSnapshot((snapshot) => setStudyGroup(snapshot.data()));
 
 			/** Get Study Group Members */
-			db.collection('study-group')
+			db.collection('study-groups')
 				.doc(studyGroupId)
 				.collection('users')
 				.onSnapshot((snapshot) =>
@@ -72,7 +72,7 @@ function StudyGroupChat() {
 				);
 
 			/** Get Study Group Messages */
-			db.collection('study-group')
+			db.collection('study-groups')
 				.doc(studyGroupId)
 				.collection('messages')
 				.orderBy('createdAt', 'asc')
@@ -132,7 +132,7 @@ function StudyGroupChat() {
 
 	const updateStudyGroupTitle = () => {
 		/** update DB and make change */
-		db.collection('study-group').doc(studyGroupId).update({
+		db.collection('study-groups').doc(studyGroupId).update({
 			title: studyGroupForm.title,
 			lastUpdatedAt: createFbTimestamp(),
 		});
@@ -172,11 +172,11 @@ function StudyGroupChat() {
 
 	const sendMessage = (message) => {
 		try {
-			db.collection('study-group')
+			db.collection('study-groups')
 				.doc(studyGroupId)
 				.collection('messages')
 				.add(message);
-			db.collection('study-group').doc(studyGroupId).update({
+			db.collection('study-groups').doc(studyGroupId).update({
 				count: increment,
 				lastUpdatedAt: createFbTimestamp(),
 			});

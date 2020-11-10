@@ -25,6 +25,7 @@ function Connect() {
 
 	const currentUser = useSelector((state) => state.auth.user);
 
+	const [getUserStudyGroups, setGetUserStudyGroups] = useState(false);
 	const [userStudyGroups, setUserStudyGroups] = useState([]);
 	const [allStudyGroups, setAllStudyGroups] = useState([]);
 	const [filter, setFilter] = useState('');
@@ -34,35 +35,41 @@ function Connect() {
 	const toggleForm = () => setShowForm((show) => !show);
 
 	useEffect(() => {
-		const getData = () => {
-			db.collection('study-group').onSnapshot((snapshot) =>
-				setAllStudyGroups(
-					snapshot.docs.map((doc) => ({
-						id: doc.id,
-						data: doc.data(),
-					}))
-				)
-			);
+		const getData = async () => {
+			await db
+				.collection('study-groups')
+				.get()
+				.then((data) => {
+					setAllStudyGroups(
+						data.docs.map((doc) => ({
+							id: doc.id,
+							data: doc.data(),
+						}))
+					);
+				})
+				.then(() => setGetUserStudyGroups(true))
+				.catch((err) => console.log(err));
 		};
 		if (isLoading) {
 			getData();
 		}
-	}, [isLoading]);
+	}, [allStudyGroups, currentUser.uid, isLoading]);
 
 	useEffect(() => {
-		if (allStudyGroups.length > 0 && isLoading) {
+		if (getUserStudyGroups) {
 			// Filter which Study Groups user is currently in
-			const studyGroups = allStudyGroups.filter((studyGroup) =>
-				studyGroup.data.usersList.includes(currentUser.uid)
-			);
+			const studyGroups = allStudyGroups.filter((studyGroup) => {
+				return studyGroup.data.usersList.includes(currentUser.uid);
+			});
 			setUserStudyGroups(studyGroups);
+			setGetUserStudyGroups(false);
 			setIsLoading(false);
 		}
-	}, [allStudyGroups, currentUser.uid, isLoading]);
+	}, [allStudyGroups, getUserStudyGroups, currentUser.uid]);
 
 	let List;
 
-	if (filter !== '' && userStudyGroups && userStudyGroups.length !== 0) {
+	if (filter !== '' && !isLoading && !getUserStudyGroups) {
 		// filter study groups to display
 		const filteredGroups = userStudyGroups.filter(
 			(studyGroup) =>
@@ -76,14 +83,20 @@ function Connect() {
 			) : (
 				<NoData text={'matches'} added={false} />
 			);
-	} else if (userStudyGroups && userStudyGroups.length !== 0 && !isLoading) {
-		List = <StudyGroupList studyGroups={userStudyGroups} />;
+	}
+	if (filter === '' && !isLoading && !getUserStudyGroups) {
+		List =
+			userStudyGroups.length > 0 ? (
+				<StudyGroupList studyGroups={userStudyGroups} />
+			) : (
+				<NoData text={'matches'} added={false} />
+			);
 	}
 
 	const addStudyGroup = async (data) => {
 		// store studyGroupId given back
 		const newStudyGroupId = await createNewMessage(
-			'study-group',
+			'study-groups',
 			data,
 			null,
 			null,

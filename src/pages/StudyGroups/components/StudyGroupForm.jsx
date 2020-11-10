@@ -107,7 +107,7 @@ function StudyGroupForm({ save, studyGroups, user }) {
 					photoURL,
 					admin: false,
 				};
-				addUserToCollection('study-group', id, uid, userData);
+				addUserToCollection('study-groups', id, uid, userData);
 
 				history.push(`/study-groups/${id}`);
 				dispatch(
