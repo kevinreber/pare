@@ -374,6 +374,8 @@ span.MuiButtonBase-root.MuiIconButton-root.PrivateSwitchBase-root-9.MuiCheckbox-
 /********************************* */
 
 .hide-sm,
+.hide-md,
+.hide-lg,
 .NavBar > .NavBar-List.hide-sm {
 	display: none;
 }
@@ -513,10 +515,30 @@ span.MuiButtonBase-root.MuiIconButton-root.PrivateSwitchBase-root-9.MuiCheckbox-
 
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
+	.hide-md {
+		display: block;
+	}
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
+	.hide-lg {
+		display: block;
+	}
+
+	.Feed,
+	.Search,
+	.Courses,
+	.StudyGroups,
+	.StudyGroupChat,
+	.Tutors,
+	.Notifications-Page,
+	.MessageChat,
+	.PostInfo,
+	.CourseInfo,
+	.UserProfile {
+		margin-left: 18rem;
+	}
 }
 
 /* Extra large devices (large desktops, 1200px and up) */

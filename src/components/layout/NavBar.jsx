@@ -43,30 +43,37 @@ function NavBar() {
 				<li className="nav-item">
 					<NavLink className="nav-link mate-text-primary" to="/feed">
 						<HomeOutlinedIcon style={{ fontSize: 45 }} />
+						<h5 className="hide-lg">Home</h5>
 					</NavLink>
 				</li>
 				<li className="nav-item">
 					<NavLink className="nav-link mate-text-primary" to="/search">
 						<SearchOutlinedIcon style={{ fontSize: 45 }} />
+						<h5 className="hide-lg">Search</h5>
 					</NavLink>
 				</li>
 				<li className="nav-item p-0">
 					<NavLink className="nav-link mate-text-primary" to="/courses">
 						<CoursesIcon />
+						<h5 className="hide-lg">Courses</h5>
 					</NavLink>
 				</li>
 				<li className="nav-item p-0">
-					<NavLink className="nav-link mate-text-primary" to="/study-groups">
+					<NavLink
+						className="nav-link mate-text-primary Study-Group-Nav"
+						to="/study-groups">
 						<img
 							className="study-group-icon"
 							src={StudyGroupIcon}
 							alt="Study Group"
 						/>
+						<h5 className="hide-lg">Study Groups</h5>
 					</NavLink>
 				</li>
 				<li className="nav-item p-0">
 					<NavLink className="nav-link mate-text-primary" to="/tutors">
 						<TutorIcon />
+						<h5 className="hide-lg">Tutors</h5>
 					</NavLink>
 				</li>
 				<li className="nav-item p-0 hide-sm">
@@ -74,11 +81,12 @@ function NavBar() {
 						<Badge badgeContent={4}>
 							<NotificationsNoneOutlinedIcon style={{ fontSize: 45 }} />
 						</Badge>
+						<h5 className="hide-lg">Messages</h5>
 					</NavLink>
 				</li>
 			</ul>
 			<ul className="NavBar-List NavBar-List__Secondary NavBar-List__Settings hide-sm">
-				<li className="nav-item p-0">
+				<li className="nav-item p-0 Log-Out">
 					<IconButton onClick={logOutUser}>
 						<ExitToAppOutlinedIcon style={{ fontSize: 45 }} />
 					</IconButton>
@@ -86,6 +94,7 @@ function NavBar() {
 				<li className="nav-item p-0 nav-avatar">
 					<Link to={`/users/${currentUser.uid}`}>
 						<Avatar alt={currentUser.displayName} src={currentUser.photoURL} />
+						<h5 className="hide-lg">{currentUser.displayName}</h5>
 					</Link>
 				</li>
 			</ul>

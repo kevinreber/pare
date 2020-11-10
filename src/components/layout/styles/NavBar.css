@@ -17,13 +17,21 @@
 	margin-bottom: auto;
 }
 
-.nav-link {
+.nav-item > .nav-link {
 	opacity: 0.3;
 	transition: all 0.2s;
 }
 
+.nav-item > .nav-link > h5 {
+	color: var(--secondary-color);
+}
+
 .nav-link.active {
 	opacity: 1;
+}
+
+.nav-item > .nav-link.active > h5 {
+	color: var(--primary-color);
 }
 
 .study-group-icon {
@@ -98,6 +106,71 @@ a.nav-link:focus {
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
+	.NavBar {
+		width: 18rem;
+	}
+
+	.NavBar > .NavBar-List > .nav-item > .nav-link {
+		display: flex;
+		align-items: center;
+	}
+
+	.NavBar > .NavBar-List > .nav-item > .nav-link > svg,
+	/* .NavBar > .NavBar-List > .nav-item > .nav-link > .MuiBadge-root, */
+	.NavBar > .NavBar-List > .nav-item > .nav-link > .MuiBadge-root > svg {
+		width: 80px;
+		text-align: left;
+	}
+
+	.NavBar > .NavBar-List > .nav-item > .nav-link > .study-group-icon {
+		width: 48px;
+		margin-left: 1rem;
+	}
+
+	.Study-Group-Nav {
+		align-items: center;
+	}
+
+	.Study-Group-Nav > h5 {
+		margin-left: 3rem;
+	}
+
+	.hide-lg {
+		margin-left: 2rem;
+	}
+
+	.NavBar-List.NavBar-List__Secondary.NavBar-List__Settings {
+		display: flex;
+		justify-content: flex-start;
+	}
+
+	.NavBar-List.NavBar-List__Secondary.NavBar-List__Settings > li.nav-item > a {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: flex-start;
+	}
+
+	.NavBar-List.NavBar-List__Secondary.NavBar-List__Settings
+		> li.nav-item.Log-Out {
+		text-align: start;
+		margin-left: 1.25rem;
+	}
+
+	.NavBar-List.NavBar-List__Secondary.NavBar-List__Settings
+		> li.nav-item.nav-avatar
+		> a
+		> .MiuAvatar-root.MuiAvatar-circle {
+		margin-left: 2.1rem;
+		margin-right: 0;
+	}
+
+	.NavBar-List.NavBar-List__Secondary.NavBar-List__Settings
+		> li.nav-item.nav-avatar
+		> a
+		> h5.hide-lg {
+		margin-left: 3rem;
+	}
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
