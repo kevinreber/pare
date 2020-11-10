@@ -88,6 +88,11 @@
 	.Modal .Modal-Content {
 		margin-top: 20%;
 	}
+
+	.Modal .Modal-Content > *,
+	.Modal .Modal-Full-Content > * {
+		width: 75%;
+	}
 }
 
 /* Large devices (desktops, 992px and up) */

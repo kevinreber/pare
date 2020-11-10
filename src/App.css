@@ -376,6 +376,10 @@ span.MuiButtonBase-root.MuiIconButton-root.PrivateSwitchBase-root-9.MuiCheckbox-
 	display: none;
 }
 
+.Header.hide-md {
+	display: block;
+}
+
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
 	.Feed,
@@ -427,7 +431,6 @@ span.MuiButtonBase-root.MuiIconButton-root.PrivateSwitchBase-root-9.MuiCheckbox-
 		margin-left: 1.5rem;
 	}
 
-	.Notifications__Header div:last-child,
 	.Courses-Header div:last-child,
 	.Tutors-Header div:last-child {
 		margin-left: 8rem;
@@ -540,7 +543,6 @@ span.MuiButtonBase-root.MuiIconButton-root.PrivateSwitchBase-root-9.MuiCheckbox-
 		margin-left: 4.5rem;
 	}
 
-	.Notifications__Header div:last-child,
 	.Courses-Header div:last-child,
 	.Tutors-Header div:last-child {
 		margin-left: 12rem;
