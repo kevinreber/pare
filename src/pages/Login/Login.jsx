@@ -26,7 +26,8 @@ function Login() {
 	/** if user signs in using Google, store their data to redux store
 	 * and redirect to home page feed
 	 */
-	const googleSignIn = () => {
+	const googleSignIn = (e) => {
+		e.preventDefault();
 		dispatch(googleLogin());
 		history.push('/feed');
 	};
@@ -41,7 +42,7 @@ function Login() {
 					<img src={Logo} alt="Mate" />
 				</div>
 			</div>
-			<form className="Login__form mb-3">
+			<form className="Login__form mb-3" onSubmit={googleSignIn}>
 				{/* <div className='form-group'>
 					<label htmlFor='email' className='mate-text-primary float-left'>
 						Email
@@ -72,10 +73,7 @@ function Login() {
 					</Link>
 				</div> */}
 				<div className="Login__buttons">
-					<button id="Login-Google__btn" onClick={googleSignIn}>
-						Sign In With Google
-					</button>
-					<p>*.edu email required</p>
+					<button id="Login-Google__btn">Sign In With Google</button>
 				</div>
 			</form>
 			{/* <div className='Login-Footer'>
