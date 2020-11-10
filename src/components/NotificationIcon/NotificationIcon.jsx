@@ -3,17 +3,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 /** Material UI */
-import { IconButton, Badge } from '@material-ui/core';
-import NotificationsNoneOutlinedIcon from '@material-ui/icons/NotificationsNoneOutlined';
+import { IconButton } from '@material-ui/core';
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
 
 function NotificationIcon() {
 	return (
 		<IconButton>
-			<Link to="/notifications">
-				{/* <NotifyIcon /> */}
-				<Badge badgeContent={4}>
-					<NotificationsNoneOutlinedIcon style={{ fontSize: 45 }} />
-				</Badge>
+			<Link to="/messages">
+				<MailOutlineIcon style={{ fontSize: 45 }} />
 			</Link>
 		</IconButton>
 	);

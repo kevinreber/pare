@@ -256,12 +256,12 @@ function StudyGroupChatAdmin({
 				</div>
 				{userAdminStatus ? (
 					<div className="Admin-Members__Add">
-						<div className="Add__Btn">
+						{/* <div className="Add__Btn">
 							<IconButton>
 								<AddCircleOutlineRoundedIcon />
 							</IconButton>
 							<p>Add Members</p>
-						</div>
+						</div> */}
 						<div className="Add__Btn">
 							<IconButton onClick={shareLink}>
 								<LinkRoundedIcon />

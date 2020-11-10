@@ -80,14 +80,6 @@ function Header() {
 			</List>
 			<List>
 				<ListItem>
-					<Link to="/following">
-						<ListItemIcon>
-							<GroupAddIcon />
-						</ListItemIcon>
-						<ListItemText primary="Following" />
-					</Link>
-				</ListItem>
-				<ListItem>
 					<Link to={`/users/${currentUser.uid}`}>
 						<ListItemIcon>
 							<PersonIcon />
@@ -95,16 +87,6 @@ function Header() {
 						<ListItemText primary="Profile" />
 					</Link>
 				</ListItem>
-				<ListItem>
-					<Link to="#">
-						<ListItemIcon>
-							<BookmarkIcon />
-						</ListItemIcon>
-						<ListItemText primary="Bookmarks" />
-					</Link>
-				</ListItem>
-			</List>
-			<List>
 				<ListItem>
 					<ListItemIcon>
 						<ExitToAppOutlinedIcon />

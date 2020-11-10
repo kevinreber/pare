@@ -45,8 +45,9 @@
 	text-align: left;
 }
 
-.MuiBadge-root .MuiSvgIcon-root {
+.Header .MuiSvgIcon-root {
 	fill: var(--primary-color);
+	color: var(--primary-color);
 }
 
 .Header
@@ -54,7 +55,7 @@
 	.MuiButtonBase-root.MuiIconButton-root
 	> .MuiIconButton-label
 	> a
-	> span.MuiBadge-root:hover {
+	> span.MuiSvgIcon-root:hover {
 	background-color: var(--bg-color);
 }
 

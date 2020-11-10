@@ -15,8 +15,6 @@ import { IconButton, Avatar } from '@material-ui/core';
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
-import { Badge } from '@material-ui/core';
-import NotificationsNoneOutlinedIcon from '@material-ui/icons/NotificationsNoneOutlined';
 import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
 
 import './styles/NavBar.css';
@@ -78,7 +76,7 @@ function NavBar() {
 					</NavLink>
 				</li>
 				<li className="nav-item p-0 hide-sm">
-					<NavLink className="nav-link mate-text-primary" to="/notifications">
+					<NavLink className="nav-link mate-text-primary" to="/messages">
 						<MailOutlineIcon style={{ fontSize: 45 }} />
 						<h5 className="hide-lg">Messages</h5>
 					</NavLink>
