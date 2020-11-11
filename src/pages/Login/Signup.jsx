@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import LoginHeader from './components/LoginHeader';
+import LoginHeader from './components/LoginHeader/LoginHeader';
 import useFields from '../../hooks/useFields';
 import { Button } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';

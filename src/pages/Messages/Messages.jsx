@@ -9,7 +9,7 @@ import NoData from '../../components/NoData/NoData';
 import PopoverActions from '../../components/PopoverActions/PopoverActions';
 import BackButton from '../../components/BackButton/BackButton';
 import ConfirmDialog from '../../components/ConfirmDialog/ConfirmDialog';
-import MessageFooter from './components/MessageFooter';
+import MessageFooter from './components/MessageFooter/MessageFooter';
 import Loader from '../../components/layout/Loader/Loader';
 import createFbTimestamp from '../../utils/createFbTimestamp';
 import { increment } from '../../config/fbConfig';

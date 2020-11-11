@@ -2,8 +2,8 @@
 import React from 'react';
 
 /** Components & Helpers */
-import useFields from '../../../hooks/useFields';
-import createFbTimestamp from '../../../utils/createFbTimestamp';
+import useFields from '../../../../hooks/useFields';
+import createFbTimestamp from '../../../../utils/createFbTimestamp';
 
 /** MUI */
 import IconButton from '@material-ui/core/IconButton';

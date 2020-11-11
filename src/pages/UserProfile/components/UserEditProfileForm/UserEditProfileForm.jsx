@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { PropTypes } from 'prop-types';
 
 /** Components */
-import SubmitButton from '../../../components/SubmitButton/SubmitButton';
+import SubmitButton from '../../../../components/SubmitButton/SubmitButton';
 
 /** Form to edit User's Profile.
  * UserProfile -> UserProfileBody -> UserEditProfileForm

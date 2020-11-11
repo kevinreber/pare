@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import { PropTypes } from 'prop-types';
 
 /** Components & Helpers */
-import TutorList from './TutorList';
-import CTAButton from '../../../components/CTAButton/CTAButton';
-import capitalizeFirstLetter from '../../../utils/capitalizeFirstLetter';
+import TutorList from '../TutorList/TutorList';
+import CTAButton from '../../../../components/CTAButton/CTAButton';
+import capitalizeFirstLetter from '../../../../utils/capitalizeFirstLetter';
 
 /** MUI */
 import FormControlLabel from '@material-ui/core/FormControlLabel';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 // import { Link, useHistory } from 'react-router-dom';
-// import LoginHeader from './components/LoginHeader';
+// import LoginHeader from './components/LoginHeader/LoginHeader';
 // import useFields from '../../hooks/useFields';
 // import { Button } from '@material-ui/core';
 import './Login.css';
@@ -36,7 +36,7 @@ function Login() {
 		<div className="Login__container">
 			<div className="Signup-Header">
 				<h3 className="mate-text-primary font-italic m-auto">
-					Stay connected with your College Mates!
+					Meet your Pares!
 				</h3>
 				<div className="Mate-Logo">
 					<img src={Logo} alt="Mate" />

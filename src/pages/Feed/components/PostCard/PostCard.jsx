@@ -6,16 +6,16 @@ import { PropTypes } from 'prop-types';
 import moment from 'moment';
 
 /** Components & Helpers */
-import EditPostForm from './EditPostForm';
-import PopoverActions from '../../../components/PopoverActions/PopoverActions';
-import PopoverShareAction from '../../../components/PopoverShareAction/PopoverShareAction';
-import NewMessageForm from '../../Notifications/components/NewMessageForm';
-import Modal from '../../../components/Modal/Modal';
-import { addFlashMessage } from '../../../store/actions/flashMessages';
-import { showModalContent } from '../../../store/actions/modal';
-import createNewMessage from '../../../utils/createNewMessage';
-import dateFromNowFormatter from '../../../utils/dateFromNowFormatter';
-import copyLinkToClipBoard from '../../../utils/copyLinkToClipBoard';
+import EditPostForm from '../EditPostForm/EditPostForm';
+import PopoverActions from '../../../../components/PopoverActions/PopoverActions';
+import PopoverShareAction from '../../../../components/PopoverShareAction/PopoverShareAction';
+import NewMessageForm from '../../../Notifications/components/NewMessageForm/NewMessageForm';
+import Modal from '../../../../components/Modal/Modal';
+import { addFlashMessage } from '../../../../store/actions/flashMessages';
+import { showModalContent } from '../../../../store/actions/modal';
+import createNewMessage from '../../../../utils/createNewMessage';
+import dateFromNowFormatter from '../../../../utils/dateFromNowFormatter';
+import copyLinkToClipBoard from '../../../../utils/copyLinkToClipBoard';
 
 /** MUI */
 import IconButton from '@material-ui/core/IconButton';

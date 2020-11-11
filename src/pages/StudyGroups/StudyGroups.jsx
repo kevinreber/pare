@@ -9,8 +9,8 @@ import Searchbar from '../../components/SearchBar/Searchbar';
 import Modal from '../../components/Modal/Modal';
 import Loader from '../../components/layout/Loader/Loader';
 import NoData from '../../components/NoData/NoData';
-import StudyGroupList from './components/StudyGroupList';
-import StudyGroupForm from './components/StudyGroupForm';
+import StudyGroupList from './components/StudyGroupList/StudyGroupList';
+import StudyGroupForm from './components/StudyGroupForm/StudyGroupForm';
 
 /** Helpers */
 import { addFlashMessage } from '../../store/actions/flashMessages';

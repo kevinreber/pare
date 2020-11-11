@@ -6,16 +6,14 @@ import PlacesAutocomplete, {
 	geocodeByAddress,
 	getLatLng,
 } from 'react-places-autocomplete';
-import { postTypeOptions, INITIAL_STATE_IMAGE } from '../constants/index';
+import { postTypeOptions, INITIAL_STATE_IMAGE } from '../../constants/index';
 
 /** Components && Helpers */
-import SubmitButton from '../../../components/SubmitButton/SubmitButton';
-import ConfirmDialog from '../../../components/ConfirmDialog/ConfirmDialog';
-import ProgressBar from '../../../components/ProgressBar/ProgressBar';
-import dateAndTimeFormatter from '../../../utils/dateAndTimeFormatter';
-import createFbTimestamp from '../../../utils/createFbTimestamp';
-import fileIsImage from '../../../utils/validateImage';
-import { storage } from '../../../config/fbConfig';
+import SubmitButton from '../../../../components/SubmitButton/SubmitButton';
+import ProgressBar from '../../../../components/ProgressBar/ProgressBar';
+import createFbTimestamp from '../../../../utils/createFbTimestamp';
+import fileIsImage from '../../../../utils/validateImage';
+import { storage } from '../../../../config/fbConfig';
 
 /** MUI */
 import IconButton from '@material-ui/core/IconButton';
@@ -24,24 +22,9 @@ import PanoramaOutlinedIcon from '@material-ui/icons/PanoramaOutlined';
 import CancelIcon from '@material-ui/icons/Cancel';
 
 /** Form for user's to create a Post
- *  Feed -> FeedList -> PostCard -> EditPostForm
+ *  Feed -> PostForm
  */
-function EditPostForm({
-	save,
-	userId,
-	username,
-	avatar,
-	title,
-	description,
-	location = null,
-	type = null,
-	start = null,
-	end = null,
-	attachment = '',
-	attachment_name = '',
-	timestamp,
-	comments,
-}) {
+function PostForm({ save }) {
 	/** Get user data */
 	const user = useSelector((state) => {
 		return {
@@ -52,41 +35,32 @@ function EditPostForm({
 	});
 
 	const INITIAL_STATE = {
-		userId: userId,
-		username: username,
-		avatar: avatar,
-		title: title,
-		description: description,
-		type: type,
-		start: start,
-		end: end,
-		attachment: attachment,
-		attachment_name: attachment_name,
-		timestamp: timestamp,
+		userId: user.userId,
+		username: user.username,
+		avatar: user.avatar,
+		title: '',
+		description: '',
+		type: '',
+		start: null,
+		end: null,
+		attachment: '',
+		attachment_name: '',
+		timestamp: createFbTimestamp(),
 		last_updated: createFbTimestamp(),
-		num_of_comments: comments,
-	};
-
-	const EXISTING_STATE_IMAGE = {
-		attachment_preview: attachment,
-		attachment: attachment,
-		name: attachment_name,
-		url: attachment,
+		num_of_comments: 0,
 	};
 
 	const [errors, setErrors] = useState('');
 	const [formData, setFormData] = useState(INITIAL_STATE);
 
-	const [image, setImage] = useState(EXISTING_STATE_IMAGE);
+	const [image, setImage] = useState(INITIAL_STATE_IMAGE);
 	const [progressBar, setProgressBar] = useState(0);
 
 	// location data
-	const [address, setAddress] = useState(
-		location.address ? location.address : ''
-	);
+	const [address, setAddress] = useState('');
 	const [coordinates, setCoordinates] = useState({
-		lat: location ? location.coordinates.lat : null,
-		lng: location ? location.coordinates.lng : null,
+		lat: null,
+		lng: null,
 	});
 
 	const handleSelect = async (value) => {
@@ -95,12 +69,6 @@ function EditPostForm({
 		setAddress(value);
 		setCoordinates(latLng);
 	};
-
-	const [confirmDialog, setConfirmDialog] = useState({
-		isOpen: false,
-		title: '',
-		subtitle: '',
-	});
 
 	/** Update state in formData */
 	const handleChange = (e) => {
@@ -136,23 +104,20 @@ function EditPostForm({
 		}
 	};
 
+	/** Reset all formData */
+	const resetFormData = () => {
+		setFormData(INITIAL_STATE);
+		resetAttachment();
+	};
+
 	/** Resets attachment data.
 	 * 	If user is clearing state manually, image URL will be deleted from DB.
 	 */
-	const resetAttachment = async (
-		removeUrl = false,
-		replaceOriginalAttachment = false
-	) => {
+	const resetAttachment = (removeUrl = false) => {
 		if (removeUrl) {
-			// if attachment is being replaced, we need to remove the previous existing attachment from the DB
-			// else we can remove the current temporary attachment from the DB
-			let imageToRemove = replaceOriginalAttachment
-				? EXISTING_STATE_IMAGE
-				: image;
-
 			const storageRef = storage.ref();
 			const storageImage = storageRef.child(
-				`feed/${user.userId}/${imageToRemove.name}`
+				`feed/${user.userId}/${image.name}`
 			);
 
 			storageImage
@@ -187,28 +152,15 @@ function EditPostForm({
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (validateFormData()) {
-			/** Prompts Modal to edit Post information */
-			setConfirmDialog({
-				isOpen: true,
-				title: 'Save changes?',
-				subtitle: '',
-				onConfirm: async () => {
-					formData.location = {
-						address,
-						coordinates,
-					};
-					if (image.url === '') {
-						formData.attachment = image.url;
-						formData.attachment_name = image.name;
-					}
-					// if attachment is being updated, remove existing attachment url
-					if (image.url !== EXISTING_STATE_IMAGE.url) {
-						await resetAttachment(true, true);
-					} else await resetAttachment(true, false);
-					console.log(formData);
-					save(formData);
-				},
-			});
+			formData.location = {
+				address,
+				coordinates,
+			};
+
+			save(formData);
+			// Clear state of form
+			setFormData(INITIAL_STATE);
+			resetAttachment();
 		}
 	};
 
@@ -229,11 +181,6 @@ function EditPostForm({
 			},
 			async () => {
 				const url = await storageRef.getDownloadURL();
-				setImage((data) => ({
-					...data,
-					url,
-					name: image.name,
-				}));
 				setFormData((fData) => ({
 					...fData,
 					attachment: url,
@@ -245,11 +192,7 @@ function EditPostForm({
 
 	return (
 		<div className="PostForm">
-			<ConfirmDialog
-				confirmDialog={confirmDialog}
-				setConfirmDialog={setConfirmDialog}
-			/>
-			<h4>Edit Post</h4>
+			<h4>New Event</h4>
 			<form className="container mb-3" onSubmit={handleSubmit}>
 				<div className="form-group">
 					<label htmlFor="title" className="float-left">
@@ -341,7 +284,7 @@ function EditPostForm({
 					</PlacesAutocomplete>
 				</div>
 				<div className="form-group d-flex justify-content-between align-items-baseline">
-					<label htmlFor="postType" className="float-left mr-4">
+					<label htmlFor="type" className="float-left mr-4">
 						Type
 					</label>
 					<select
@@ -359,18 +302,14 @@ function EditPostForm({
 					</select>
 				</div>
 				<div className="form-group date-input-group align-items-baseline">
-					<label htmlFor="event-start" className="float-left">
+					<label htmlFor="event-start mb-3" className="float-left">
 						Start
 					</label>
 					<TextField
 						id="event-start"
 						type="datetime-local"
 						className="float-right"
-						defaultValue={
-							formData.start
-								? dateAndTimeFormatter(formData.start.toDate())
-								: null
-						}
+						defaultValue={formData.start}
 						name="start"
 						onChange={handleChange}
 						InputLabelProps={{
@@ -386,9 +325,7 @@ function EditPostForm({
 						id="event-end"
 						type="datetime-local"
 						className="float-right"
-						defaultValue={
-							formData.end ? dateAndTimeFormatter(formData.end.toDate()) : null
-						}
+						defaultValue={formData.end}
 						name="end"
 						onChange={handleChange}
 						InputLabelProps={{
@@ -399,14 +336,14 @@ function EditPostForm({
 				<div className="PostForm__Footer">
 					<div className="message__attachments">
 						<div className="preview__attachment">
-							{image.url && image.url !== '' ? (
+							{image.attachment_preview ? (
 								<>
 									<img
-										src={image.url}
+										src={image.attachment_preview}
 										alt="preview"
 										className="attachment__preview"
 									/>
-									<IconButton onClick={() => resetAttachment(false, false)}>
+									<IconButton onClick={() => resetAttachment(true)}>
 										<CancelIcon className="remove__attachment" />
 									</IconButton>
 								</>
@@ -426,7 +363,7 @@ function EditPostForm({
 						/>
 					</div>
 				</div>
-				<SubmitButton text="Save Changes" />
+				<SubmitButton text="Post" reset={true} resetForm={resetFormData} />
 			</form>
 			{errors ? (
 				<div className="Form__Errors">
@@ -435,8 +372,9 @@ function EditPostForm({
 			) : (
 				''
 			)}
+			<div className="Post-Form-Padding"></div>
 		</div>
 	);
 }
 
-export default EditPostForm;
+export default PostForm;

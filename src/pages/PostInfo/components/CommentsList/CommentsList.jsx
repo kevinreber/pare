@@ -3,7 +3,7 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 
 /** Components & Helpers */
-import CommentCard from './CommentCard';
+import CommentCard from '../CommentCard/CommentCard';
 
 /** Creates List of Comments
  * Feed -> FeedList -> PostCard -> CommentList -> CommentCard

@@ -5,12 +5,12 @@ import { PropTypes } from 'prop-types';
 import firebase from 'firebase';
 
 /** Components & Helpers */
-import Loader from '../../../components/layout/Loader/Loader';
-import ConfirmDialog from '../../../components/ConfirmDialog/ConfirmDialog';
-import SwitchToggler from '../../../components/SwitchToggler/SwitchToggler';
-import createFbTimestamp from '../../../utils/createFbTimestamp';
-import { addFlashMessage } from '../../../store/actions/flashMessages';
-import db from '../../../config/fbConfig';
+import Loader from '../../../../components/layout/Loader/Loader';
+import ConfirmDialog from '../../../../components/ConfirmDialog/ConfirmDialog';
+import SwitchToggler from '../../../../components/SwitchToggler/SwitchToggler';
+import createFbTimestamp from '../../../../utils/createFbTimestamp';
+import { addFlashMessage } from '../../../../store/actions/flashMessages';
+import db from '../../../../config/fbConfig';
 
 /** MUI */
 import { IconButton } from '@material-ui/core';

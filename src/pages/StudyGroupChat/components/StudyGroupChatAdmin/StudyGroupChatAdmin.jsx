@@ -5,19 +5,19 @@ import { useDispatch } from 'react-redux';
 import { PropTypes } from 'prop-types';
 
 /** Components & Helpers */
-import CTAButton from '../../../components/CTAButton/CTAButton';
-import PopoverActions from '../../../components/PopoverActions/PopoverActions';
-import ConfirmDialog from '../../../components/ConfirmDialog/ConfirmDialog';
-import removeUserFromCollection from '../../../utils/removeUserFromCollection';
-import { addFlashMessage } from '../../../store/actions/flashMessages';
-import copyLinkToClipBoard from '../../../utils/copyLinkToClipBoard';
+import CTAButton from '../../../../components/CTAButton/CTAButton';
+import PopoverActions from '../../../../components/PopoverActions/PopoverActions';
+import ConfirmDialog from '../../../../components/ConfirmDialog/ConfirmDialog';
+import removeUserFromCollection from '../../../../utils/removeUserFromCollection';
+import { addFlashMessage } from '../../../../store/actions/flashMessages';
+import copyLinkToClipBoard from '../../../../utils/copyLinkToClipBoard';
 
 /** MUI */
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import Avatar from '@material-ui/core/Avatar';
 import MoreHorizOutlinedIcon from '@material-ui/icons/MoreHorizOutlined';
-import AddCircleOutlineRoundedIcon from '@material-ui/icons/AddCircleOutlineRounded';
+// import AddCircleOutlineRoundedIcon from '@material-ui/icons/AddCircleOutlineRounded';
 import BlockIcon from '@material-ui/icons/Block';
 import LinkRoundedIcon from '@material-ui/icons/LinkRounded';
 

@@ -4,8 +4,7 @@ import { useSelector } from 'react-redux';
 import { PropTypes } from 'prop-types';
 
 /** Components & Helpers */
-import db from '../../../config/fbConfig';
-import '../../../components/Autocomplete/Autocomplete.css';
+import db from '../../../../config/fbConfig';
 
 /** MUI */
 import SearchIcon from '@material-ui/icons/Search';

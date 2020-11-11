@@ -4,9 +4,9 @@ import { useSelector } from 'react-redux';
 import { PropTypes } from 'prop-types';
 
 /** Components & Helpers */
-import SubmitButton from '../../../components/SubmitButton/SubmitButton';
-import createFbTimestamp from '../../../utils/createFbTimestamp';
-import AutocompleteUsers from './AutocompleteUsers';
+import SubmitButton from '../../../../components/SubmitButton/SubmitButton';
+import createFbTimestamp from '../../../../utils/createFbTimestamp';
+import AutocompleteUsers from '../AutocompleteUsers/AutocompleteUsers';
 import './styles/NewMessageForm.css';
 
 /** Form for user to create New Message.

@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 /** Components & Helpers */
-import FindTutors from './components/FindTutors';
-import BeTutorForm from './components/BeTutorForm';
+import FindTutors from './components/FindTutors/FindTutors';
+import BeTutorForm from './components/BeTutorForm/BeTutorForm';
 import db from '../../config/fbConfig';
 import './Tutors.css';
 

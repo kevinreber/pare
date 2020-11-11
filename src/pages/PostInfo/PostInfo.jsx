@@ -5,10 +5,10 @@ import { useDispatch } from 'react-redux';
 
 /** Components & Helpers */
 import BackButton from '../../components/BackButton/BackButton';
-import PostCard from '../Feed/components/PostCard';
+import PostCard from '../Feed/components/PostCard/PostCard';
 import ChatFooter from '../../components/ChatFooter/ChatFooter';
 import NoData from '../../components/NoData/NoData';
-import CommentsList from './components/CommentsList';
+import CommentsList from './components/CommentsList/CommentsList';
 import {
 	addCommentToPost,
 	deleteCommentFromPost,

@@ -4,7 +4,7 @@ import moment from 'moment';
 import { PropTypes } from 'prop-types';
 
 /** Helpers */
-import capitalizeFirstLetter from '../../../utils/capitalizeFirstLetter';
+import capitalizeFirstLetter from '../../../../utils/capitalizeFirstLetter';
 
 /** Builds an input field of User Field data.
  * UserProfile -> UserProfileBody => UserFields

@@ -6,7 +6,7 @@ import moment from 'moment';
 import { PropTypes } from 'prop-types';
 
 /** Components & Helpers */
-import PopoverActions from '../../../components/PopoverActions/PopoverActions';
+import PopoverActions from '../../../../components/PopoverActions/PopoverActions';
 
 /** MUI */
 import Avatar from '@material-ui/core/Avatar';

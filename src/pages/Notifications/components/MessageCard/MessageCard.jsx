@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 
 /** Components & Helpers */
-import dateFromNowFormatter from '../../../utils/dateFromNowFormatter';
-import db from '../../../config/fbConfig';
+import dateFromNowFormatter from '../../../../utils/dateFromNowFormatter';
+import db from '../../../../config/fbConfig';
 
 /** MUI */
 import Avatar from '@material-ui/core/Avatar';

@@ -3,7 +3,7 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 
 /** Components & Helpers */
-import PostCard from './PostCard';
+import PostCard from '../PostCard/PostCard';
 
 /** FeedList of Posts.
  *  Feed -> FeedList -> PostCard

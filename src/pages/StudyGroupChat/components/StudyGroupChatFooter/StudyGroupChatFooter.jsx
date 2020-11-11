@@ -4,14 +4,14 @@ import { useDispatch } from 'react-redux';
 import { PropTypes } from 'prop-types';
 
 /** Components & Helpers */
-import useFields from '../../../hooks/useFields';
-import createFbTimestamp from '../../../utils/createFbTimestamp';
-import { addFlashMessage } from '../../../store/actions/flashMessages';
+import useFields from '../../../../hooks/useFields';
+import createFbTimestamp from '../../../../utils/createFbTimestamp';
+import { addFlashMessage } from '../../../../store/actions/flashMessages';
 
 /** MUI */
 import IconButton from '@material-ui/core/IconButton';
 import SendIcon from '@material-ui/icons/Send';
-import ImageIcon from '@material-ui/icons/Image';
+// import ImageIcon from '@material-ui/icons/Image';
 //  ! Test adding images
 // import CameraAltOutlinedIcon from '@material-ui/icons/CameraAltOutlined';
 // import PanoramaOutlinedIcon from '@material-ui/icons/PanoramaOutlined';
@@ -63,19 +63,11 @@ function StudyGroupChatFooter({ send, user }) {
 					type="text"
 					placeholder="Type message here..."
 				/>
-				<div className="message__attachments">
-					{/* <i className='fas fa-camera fa-2x'></i>
-					<i className='fas fa-image fa-2x'></i> */}
-					{/* <IconButton>
-						<CameraAltOutlinedIcon fontSize='large' />
-					</IconButton>
-					<IconButton>
-						<PanoramaOutlinedIcon fontSize='large' />
-					</IconButton> */}
-					<IconButton>
+				{/* <div className="message__attachments"> */}
+				{/* <IconButton>
 						<ImageIcon fontSize="large" />
 					</IconButton>
-				</div>
+				</div> */}
 				<IconButton
 					type="submit"
 					disabled={!formData.message}

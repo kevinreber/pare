@@ -2,9 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-/** Components & Helpers */
-import '../../../components/Autocomplete/Autocomplete.css';
-
 /** MUI */
 import SearchIcon from '@material-ui/icons/Search';
 import Avatar from '@material-ui/core/Avatar';

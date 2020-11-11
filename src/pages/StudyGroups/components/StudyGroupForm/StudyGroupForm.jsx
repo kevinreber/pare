@@ -5,12 +5,12 @@ import { useDispatch } from 'react-redux';
 import { PropTypes } from 'prop-types';
 
 /** Components & Helpers */
-import SubmitButton from '../../../components/SubmitButton/SubmitButton';
-import AutocompleteStudyGroups from './AutocompleteStudyGroups';
-import ConfirmDialog from '../../../components/ConfirmDialog/ConfirmDialog';
-import createFbTimestamp from '../../../utils/createFbTimestamp';
-import addUserToCollection from '../../../utils/addUserToCollection';
-import { addFlashMessage } from '../../../store/actions/flashMessages';
+import SubmitButton from '../../../../components/SubmitButton/SubmitButton';
+import AutocompleteStudyGroups from '../AutocompleteStudyGroups/AutocompleteStudyGroups';
+import ConfirmDialog from '../../../../components/ConfirmDialog/ConfirmDialog';
+import createFbTimestamp from '../../../../utils/createFbTimestamp';
+import addUserToCollection from '../../../../utils/addUserToCollection';
+import { addFlashMessage } from '../../../../store/actions/flashMessages';
 import './styles/StudyGroupForm.css';
 
 /** Form to add a course.
