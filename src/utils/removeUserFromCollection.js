@@ -13,7 +13,7 @@ import db from '../config/fbConfig';
  */
 async function removeUserFromCollection(collection, docId, data, users = []) {
 	// Get Document information
-	const ref = await db.collection(collection).doc(docId);
+	const ref = db.collection(collection).doc(docId);
 
 	// Remove user from users array
 	if (data) {
@@ -34,14 +34,16 @@ async function removeUserFromCollection(collection, docId, data, users = []) {
 			});
 			console.log('success');
 		} else {
-			ref.update({ users: firebase.firestore.FieldValue.arrayRemove(data) });
+			await ref.update({
+				users: firebase.firestore.FieldValue.arrayRemove(data),
+			});
 			console.log('success');
 		}
 	}
 
 	// if last user left, delete Study Group
 	if (users.length === 1) {
-		ref.delete();
+		await ref.delete();
 		console.log('deleted empty document');
 	}
 }
