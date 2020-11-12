@@ -72,7 +72,7 @@ function UserProfile() {
 						)
 					);
 
-				db.collection('class')
+				db.collection('courses')
 					.where('users', 'array-contains', userId)
 					.onSnapshot((snapshot) =>
 						setUserCourses(
