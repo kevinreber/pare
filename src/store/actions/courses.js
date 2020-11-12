@@ -1,6 +1,5 @@
 import {
 	FETCH_COURSES,
-	FETCH_COURSE,
 	ADD_COURSE,
 	REMOVE_COURSE,
 	ADD_ASSIGNMENT,
@@ -10,9 +9,36 @@ import db from '../../config/fbConfig';
 import firebase from 'firebase';
 
 export function fetchCoursesfromFB(courses) {
-	return (dispatch, { getFirebase, getFirestore }) => {
+	return (dispatch) => {
 		const response = courses;
+		// for (let courseData of response.data.courses) {
+		// ! To load all courses onto DB
+		// ! Last courses added was { abbreviation: TURKISH, course_number: 15A, id : 10897 }
+		// 	try {
+		// 		const response = await axios.get(
+		// 			`${BASE_URL}/api/catalog/catalog_json/course_box/?course_id=${courseData.id}`
+		// 		);
+		// 		const course = response.data;
+		// 		// append semester
+		// 		course.semester = '';
 
+		// 		// Add first user into to class
+		// 		course.users = [];
+
+		// 		// store course ID as document ID
+		// 		db.collection('courses')
+		// 			.doc(course.course.id.toString())
+		// 			.set(course)
+		// 			.then(() => {
+		// 				console.log('added course...', courseData);
+		// 			})
+		// 			.catch((err) => {
+		// 				dispatch(dispatchError('ADD_COURSE_ERROR', err));
+		// 			});
+		// 	} catch (err) {
+		// 		console.log(err);
+		// 	}
+		// }
 		// make async call to DB
 		return dispatch(getCourses(response));
 	};
@@ -26,29 +52,6 @@ function getCourses(courses) {
 	};
 }
 
-export function fetchCoursefromFB(courses) {
-	return (dispatch, getState, { getFirebase, getFirestore }) => {
-		const firestore = getFirebase().firestore();
-
-		firestore
-			.get({ collection: 'class', where: ['id', '==', 355] })
-			.then((resp) => {
-				dispatch(getCourse(resp));
-			})
-			.catch((err) => {
-				dispatch(dispatchError('GET_COURSE_ERROR', err));
-			});
-	};
-}
-
-/** Formats action data to input to dispatch */
-function getCourse(course) {
-	return {
-		type: FETCH_COURSE,
-		course,
-	};
-}
-
 /** If Course is not yet loaded into Firebase DB */
 export function addCourseToFB(
 	{ courseName, courseSemester, courseYear, courseId },
@@ -56,15 +59,15 @@ export function addCourseToFB(
 ) {
 	return async (dispatch) => {
 		const BASE_URL = 'https://www.berkeleytime.com';
-		const ref = db.collection('class').doc(courseId);
+		const ref = db.collection('courses').doc(courseId);
 
-		ref.get().then( async (doc) => {
-
+		ref.get().then(async (doc) => {
 			// check if course exists in Firebase DB
 			// if course exists, append userId into users list
-			if(doc.exists){
-				 await ref.update({
+			if (doc.exists) {
+				await ref.update({
 					users: firebase.firestore.FieldValue.arrayUnion(userId),
+					semester: `${courseSemester} ${courseYear}`,
 				});
 			} else {
 				try {
@@ -74,12 +77,12 @@ export function addCourseToFB(
 					const course = response.data;
 					// append semester
 					course.semester = `${courseSemester} ${courseYear}`;
-		
+
 					// Add first user into to class
 					course.users = [userId];
-		
+
 					// store course ID as document ID
-					db.collection('class')
+					db.collection('courses')
 						.doc(course.course.id.toString())
 						.set(course)
 						.then(() => {
@@ -93,9 +96,7 @@ export function addCourseToFB(
 					console.log(err);
 				}
 			}
-
-		})
-
+		});
 	};
 }
 
