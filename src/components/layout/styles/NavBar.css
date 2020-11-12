@@ -111,6 +111,10 @@ a.nav-link:focus {
 		width: 48px;
 	}
 
+	.NavBar > .NavBar-List__Secondary .Header-Logo img:hover {
+		background-color: var(--bg-color);
+	}
+
 	.Log-Out > button > span > h5.hide-lg {
 		color: var(--tertiary-color);
 	}
@@ -120,15 +124,9 @@ a.nav-link:focus {
 		color: var(--secondary-color);
 	}
 
-	.nav-avatar:hover,
-	.Log-Out > .MuiButtonBase-root.MuiIconButton-root:hover,
-	.nav-avatar.nav-item > a {
+	.Log-Out > .MuiButtonBase-root.MuiIconButton-root:hover {
 		background-color: var(--bg-color);
 	}
-}
-
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {
 }
 
 /* Large devices (desktops, 992px and up) */
