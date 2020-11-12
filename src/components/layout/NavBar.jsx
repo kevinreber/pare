@@ -4,10 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 /** Components & Helpers */
-import { ReactComponent as CoursesIcon } from './icons/courses-icon.svg';
 import Logo from '../../images/logo/pare-logo.png';
-import StudyGroupIcon from './icons/study-group-icon.png';
-import { ReactComponent as TutorIcon } from './icons/tutor-icon.svg';
 import { logOut } from '../../store/actions/auth';
 
 /** MUI */
@@ -16,6 +13,9 @@ import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
+import GroupWorkIcon from '@material-ui/icons/GroupWork';
+import GroupAddIcon from '@material-ui/icons/GroupAdd';
+import SchoolIcon from '@material-ui/icons/School';
 
 import './styles/NavBar.css';
 
@@ -51,27 +51,23 @@ function NavBar() {
 						<h5 className="hide-lg">Search</h5>
 					</NavLink>
 				</li>
-				<li className="nav-item p-0">
+				<li className="nav-item">
 					<NavLink className="nav-link mate-text-primary" to="/courses">
-						<CoursesIcon />
+						<SchoolIcon style={{ fontSize: 45 }} />
 						<h5 className="hide-lg">Courses</h5>
 					</NavLink>
 				</li>
-				<li className="nav-item p-0">
+				<li className="nav-item">
 					<NavLink
 						className="nav-link mate-text-primary Study-Group-Nav"
 						to="/study-groups">
-						<img
-							className="study-group-icon"
-							src={StudyGroupIcon}
-							alt="Study Group"
-						/>
+						<GroupWorkIcon style={{ fontSize: 45 }} />
 						<h5 className="hide-lg">Study Groups</h5>
 					</NavLink>
 				</li>
-				<li className="nav-item p-0">
+				<li className="nav-item">
 					<NavLink className="nav-link mate-text-primary" to="/tutors">
-						<TutorIcon />
+						<GroupAddIcon style={{ fontSize: 45 }} />
 						<h5 className="hide-lg">Tutors</h5>
 					</NavLink>
 				</li>
