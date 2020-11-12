@@ -50,3 +50,28 @@
 	margin-left: auto;
 	max-width: 350px;
 }
+
+.fade-in-logo {
+	animation: fadeInLogin ease 2s;
+	-webkit-animation: fadeInLogin ease 2s;
+	-moz-animation: fadeInLogin ease 2s;
+	-o-animation: fadeInLogin ease 2s;
+	-ms-animation: fadeInLogin ease 2s;
+}
+
+.fade-in-delay {
+	animation: fadeInLogin ease 3s;
+	-webkit-animation: fadeInLogin ease 3s;
+	-moz-animation: fadeInLogin ease 3s;
+	-o-animation: fadeInLogin ease 3s;
+	-ms-animation: fadeInLogin ease 3s;
+}
+
+@keyframes fadeInLogin {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}

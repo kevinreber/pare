@@ -34,9 +34,9 @@ function Login() {
 
 	return (
 		<div className="Login__container">
-			<div className="Signup-Header">
+			<div className="Signup-Header fade-in-logo">
 				<h3 className="mate-text-primary font-italic m-auto">
-					Meet your Pares!
+					Meet your Pare!
 				</h3>
 				<div className="Mate-Logo">
 					<img src={Logo} alt="Mate" />
@@ -72,7 +72,7 @@ function Login() {
 						Forgot Password?
 					</Link>
 				</div> */}
-				<div className="Login__buttons">
+				<div className="Login__buttons fade-in-delay">
 					<button id="Login-Google__btn">Sign In With Google</button>
 				</div>
 			</form>
