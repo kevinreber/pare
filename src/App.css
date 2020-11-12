@@ -352,6 +352,7 @@ span.MuiButtonBase-root.MuiIconButton-root.PrivateSwitchBase-root-9.MuiCheckbox-
 /********************************* */
 /** Autocomplete Places            *
 /********************************* */
+
 .Autocomplete-Location {
 	position: relative;
 }
@@ -365,6 +366,58 @@ span.MuiButtonBase-root.MuiIconButton-root.PrivateSwitchBase-root-9.MuiCheckbox-
 .Autocomplete-Location-Item {
 	padding: 0.5rem;
 	color: var(var(--secondary-color));
+}
+
+/********************************* */
+/** Chips                          *
+/********************************* */
+
+li .MuiChip-root,
+li .MuiChip-root,
+li .MuiChip-root {
+	background-color: var(--bg-color);
+	border: 1px solid var(--tertiary-color);
+	color: var(--secondary-color);
+	margin-right: 0.5rem;
+	margin-bottom: 0.5rem;
+}
+
+li .MuiChip-root svg,
+li .MuiChip-root svg,
+li .MuiChip-root svg {
+	color: var(--tertiary-color);
+}
+
+li .MuiChip-root svg:hover,
+li .MuiChip-root svg:hover,
+li .MuiChip-root svg:hover {
+	color: var(--primary-color);
+}
+
+/***********************************/
+/** User Tutor Info Page Chips     */
+/***********************************/
+
+.User-Keywords > li .MuiChip-root,
+.User-Portfolio-Links > li .MuiChip-root,
+.User-Classes > li .MuiChip-root {
+	background-color: var(--bg-color);
+	border: 1px solid var(--tertiary-color);
+	color: var(--secondary-color);
+	margin-right: 0.5rem;
+	margin-bottom: 0.5rem;
+}
+
+.User-Keywords > li .MuiChip-root svg,
+.User-Portfolio-Links > li .MuiChip-root svg,
+.User-Classes > li .MuiChip-root svg {
+	color: var(--tertiary-color);
+}
+
+.User-Keywords > li .MuiChip-root svg:hover,
+.User-Portfolio-Links > li .MuiChip-root svg:hover,
+.User-Classes > li .MuiChip-root svg:hover {
+	color: var(--primary-color);
 }
 
 /********************************* */
@@ -489,7 +542,7 @@ span.MuiButtonBase-root.MuiIconButton-root.PrivateSwitchBase-root-9.MuiCheckbox-
 	/* Admin Buttons for Message Chat and Study Group Chat */
 	.MessageChat__Header > button.MuiButtonBase-root.MuiIconButton-root,
 	.StudyGroupChat__Header > button.MuiButtonBase-root.MuiIconButton-root {
-		right: 18%;
+		right: 7rem;
 	}
 
 	.mate-btn-cta {
@@ -553,14 +606,14 @@ span.MuiButtonBase-root.MuiIconButton-root.PrivateSwitchBase-root-9.MuiCheckbox-
 	/* Admin Buttons for Message Chat and Study Group Chat */
 	.MessageChat__Header > button.MuiButtonBase-root.MuiIconButton-root,
 	.StudyGroupChat__Header > button.MuiButtonBase-root.MuiIconButton-root {
-		right: 27%;
+		right: 19rem;
 	}
 
 	/* Chat Footers */
 	.PostInfo__Footer,
 	.StudyGroupChat__Footer,
 	.MessageChat__Footer {
-		width: 75%;
+		width: 70%;
 	}
 
 	.Modal .mate-btn-primary,
