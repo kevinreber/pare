@@ -110,8 +110,7 @@ function AssignmentForm({ save, userId }) {
 					<label htmlFor="dueDate" className="float-left Assignment-Due-Date">
 						Due Date
 					</label>
-				</div>
-				{/* <DatePicker
+					{/* <DatePicker
 					name="dueDate"
 					selected={formData.dueDate}
 					onChange={handleDate}
@@ -120,18 +119,19 @@ function AssignmentForm({ save, userId }) {
 					showTimeInput
 				/> */}
 
-				<TextField
-					required
-					id="assignmentDueDate"
-					type="datetime-local"
-					className="float-right"
-					defaultValue={formData.dueDate}
-					name="dueDate"
-					onChange={handleDate}
-					InputLabelProps={{
-						shrink: true,
-					}}
-				/>
+					<TextField
+						required
+						id="assignmentDueDate"
+						type="datetime-local"
+						className="float-right"
+						defaultValue={formData.dueDate}
+						name="dueDate"
+						onChange={handleDate}
+						InputLabelProps={{
+							shrink: true,
+						}}
+					/>
+				</div>
 				<SubmitButton text="Add" />
 			</form>
 			<div className="alert errors">{errors}</div>

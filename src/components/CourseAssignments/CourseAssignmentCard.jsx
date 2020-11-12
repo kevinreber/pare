@@ -31,7 +31,7 @@ function CourseAssignment({ id, title, dueDate, grades, classSubmittals }) {
 
 	const saveGrade = (data) => {
 		/** update DB and make change */
-		db.collection('class')
+		db.collection('courses')
 			.doc(courseId)
 			.collection('assignments')
 			.doc(id)

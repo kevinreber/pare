@@ -78,22 +78,4 @@ table .Course.Course-Card .Course-Card-Term {
 		font-size: 1rem;
 		padding: 1rem;
 	}
-
-	.Assignment.Assignment-Card .Assignment-Grade {
-		margin-right: 3rem;
-	}
-
-	.Assignment.Assignment-Card > .Assignment-Status {
-		left: 1.75rem;
-	}
-
-	.Assignment .Assignment-Info {
-		margin-left: 2rem;
-	}
-
-	.Assignment.Assignment-Card > .Assignment-Grade > .Change-Grade {
-		font-size: 18px;
-		right: 2.5rem;
-		top: 1.25rem;
-	}
 }

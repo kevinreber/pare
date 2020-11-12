@@ -176,3 +176,45 @@
 	color: var(--secondary-color);
 	background-color: var(--danger-color);
 }
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+	.Assignment.Assignment-Card {
+		padding: 1.5rem 3rem 0.5rem 3rem;
+	}
+
+	.Assignment .Change-Grade {
+		right: 1.5rem;
+	}
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+	.Assignment.Assignment-Card {
+		padding: 1.5rem 5rem 0.5rem 5rem;
+	}
+
+	.Assignment.Assignment-Card > .Assignment-Status {
+		left: 2rem;
+	}
+
+	.Assignment.Assignment-Card > .Assignment-Grade > .Change-Grade {
+		font-size: 18px;
+		right: 3rem;
+	}
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+	.Assignment.Assignment-Card {
+		padding: 1.5rem 7rem 0.5rem 4.5rem;
+	}
+
+	.Assignment.Assignment-Card > .Assignment-Status {
+		left: 1.75rem;
+	}
+
+	.Assignment.Assignment-Card > .Assignment-Grade > .Change-Grade {
+		right: 5rem;
+	}
+}
