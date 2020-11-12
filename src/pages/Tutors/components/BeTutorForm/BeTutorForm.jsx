@@ -96,7 +96,7 @@ function BeTutorForm({ uid, user }) {
 			setIsLoading(false);
 		};
 
-		if (uid) {
+		if (uid && isLoading) {
 			getData();
 		}
 	}, [uid, setIsLoading]);
