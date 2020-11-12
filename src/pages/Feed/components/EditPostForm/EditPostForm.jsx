@@ -29,6 +29,7 @@ import CancelIcon from '@material-ui/icons/Cancel';
 function EditPostForm({
 	save,
 	userId,
+	postId,
 	username,
 	avatar,
 	title,
@@ -108,7 +109,7 @@ function EditPostForm({
 		setErrors('');
 		// if uploading media file, update formData
 		if (e.target.files) {
-			resetAttachment();
+			resetAttachment(false, false);
 			const file = e.target.files[0];
 
 			/** Validates attachment and prompts error */
@@ -152,10 +153,10 @@ function EditPostForm({
 
 			const storageRef = storage.ref();
 			const storageImage = storageRef.child(
-				`feed/${user.userId}/${imageToRemove.name}`
+				`feeds/${user.userId}/${imageToRemove.name}`
 			);
 
-			storageImage
+			await storageImage
 				.delete()
 				.then(() => {
 					console.log('Removed image');
@@ -197,16 +198,22 @@ function EditPostForm({
 						address,
 						coordinates,
 					};
+					// if image is removed from post
 					if (image.url === '') {
-						formData.attachment = image.url;
-						formData.attachment_name = image.name;
+						formData.attachment = '';
+						formData.attachment_name = '';
 					}
 					// if attachment is being updated, remove existing attachment url
-					if (image.url !== EXISTING_STATE_IMAGE.url) {
+					if (image.url !== EXISTING_STATE_IMAGE.url && image.url !== '') {
+						formData.attachment = image.url;
+						formData.attachment_name = image.name;
+
 						await resetAttachment(true, true);
-					} else await resetAttachment(true, false);
-					console.log(formData);
-					save(formData);
+						save(postId, formData);
+					} else {
+						await resetAttachment(true, false);
+						save(postId, formData);
+					}
 				},
 			});
 		}
@@ -214,7 +221,7 @@ function EditPostForm({
 
 	// Handles image upload to DB
 	const handleUpload = async (image) => {
-		const storageRef = storage.ref(`feed/${user.userId}/${image.name}`);
+		const storageRef = storage.ref(`feeds/${user.userId}/${image.name}`);
 
 		storageRef.put(image).on(
 			'state_changed',
@@ -234,11 +241,11 @@ function EditPostForm({
 					url,
 					name: image.name,
 				}));
-				setFormData((fData) => ({
-					...fData,
-					attachment: url,
-					attachment_name: image.name,
-				}));
+				// setFormData((fData) => ({
+				// 	...fData,
+				// 	attachment: url,
+				// 	attachment_name: image.name,
+				// }));
 			}
 		);
 	};

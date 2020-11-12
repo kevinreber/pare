@@ -21,10 +21,10 @@ import copyLinkToClipBoard from '../../../../utils/copyLinkToClipBoard';
 import IconButton from '@material-ui/core/IconButton';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import ModeCommentOutlinedIcon from '@material-ui/icons/ModeCommentOutlined';
-import CalendarTodayOutlinedIcon from '@material-ui/icons/CalendarTodayOutlined';
-import BookmarkBorderOutlinedIcon from '@material-ui/icons/BookmarkBorderOutlined';
+// import CalendarTodayOutlinedIcon from '@material-ui/icons/CalendarTodayOutlined';
+// import BookmarkBorderOutlinedIcon from '@material-ui/icons/BookmarkBorderOutlined';
+// import BookmarkIcon from '@material-ui/icons/Bookmark';
 import MoreHorizOutlinedIcon from '@material-ui/icons/MoreHorizOutlined';
-import BookmarkIcon from '@material-ui/icons/Bookmark';
 import ShareIcon from '@material-ui/icons/Share';
 import SendIcon from '@material-ui/icons/Send';
 import Avatar from '@material-ui/core/Avatar';
@@ -84,11 +84,11 @@ function PostCard({
 	const [showEditForm, setShowEditForm] = useState(false);
 	const [showMessageForm, setShowMessageForm] = useState(false);
 
-	const BookmarkStatus = !isBookmarked ? (
-		<BookmarkBorderOutlinedIcon />
-	) : (
-		<BookmarkIcon />
-	);
+	// const BookmarkStatus = !isBookmarked ? (
+	// 	<BookmarkBorderOutlinedIcon />
+	// ) : (
+	// 	<BookmarkIcon />
+	// );
 
 	/** PopoverActions Props for Admin ***************/
 	const [anchorEl, setAnchorEl] = useState(null);
@@ -158,7 +158,7 @@ function PostCard({
 	/** Edit Post Form **************************/
 
 	// Updates edited post's data
-	const editPost = (data) => {
+	const editPost = (id, data) => {
 		edit(id, data);
 		// close popover and edit form
 		toggleEditForm();
@@ -172,6 +172,7 @@ function PostCard({
 					<EditPostForm
 						save={editPost}
 						userId={userId}
+						postId={id}
 						username={username}
 						avatar={avatar}
 						title={title}
