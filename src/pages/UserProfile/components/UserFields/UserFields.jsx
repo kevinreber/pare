@@ -6,6 +6,9 @@ import { PropTypes } from 'prop-types';
 /** Helpers */
 import capitalizeFirstLetter from '../../../../utils/capitalizeFirstLetter';
 
+/** MUI */
+import Chip from '@material-ui/core/Chip';
+
 /** Builds an input field of User Field data.
  * UserProfile -> UserProfileBody => UserFields
  *
@@ -13,7 +16,7 @@ import capitalizeFirstLetter from '../../../../utils/capitalizeFirstLetter';
  * @param {string}	content		String of content for input.
  * @param {array}	content		If type of content is an array, array of content for input.
  */
-function UserFields({ label, content = '-' }) {
+function UserFields({ label, content = '-', chips = false, field = '' }) {
 	const formatArray = (arr) => arr.join(', ');
 
 	// format handler for availability
@@ -53,32 +56,39 @@ function UserFields({ label, content = '-' }) {
 		return list;
 	};
 
-	// Format Courses
-	const formatCourses = (courses) => {
-		const list = (
-			<ul className="User-Course-List">
-				{courses.length > 0 ? (
+	// Build list of elements for User Keywords and User Portfolio Links
+	const fieldList = (field, arrayOfData) => {
+		let list;
+
+		// Format Courses
+		if (field === 'Classes Taken') {
+			list = arrayOfData.map((course, index) => {
+				const title = `${course.data.course.abbreviation} ${course.data.course.course_number}`;
+				return (
 					<>
-						{courses.map((course) => {
-							const title = `${course.data.course.abbreviation} ${course.data.course.course_number}`;
-							return <li key={course.id}>{title}</li>;
-						})}
+						<li data-name={course.id} key={index}>
+							<Chip label={title} size={'small'} />
+						</li>
 					</>
-				) : (
-					<li>-</li>
-				)}
-			</ul>
-		);
+				);
+			});
+		} else {
+			list = arrayOfData.map((data, index) => (
+				<li data-name={field} key={index}>
+					<Chip label={data} size={'small'} />
+				</li>
+			));
+		}
 
 		return list;
 	};
 
 	let inputField;
 
-	if (label === 'Availability') {
+	if (chips) {
+		inputField = <ul className={field}>{fieldList(label, content)}</ul>;
+	} else if (label === 'Availability') {
 		inputField = formatAvailability(content);
-	} else if (label === 'Classes Taken') {
-		inputField = formatCourses(content);
 	} else if (label === 'About') {
 		inputField = <p>{content}</p>;
 	} else if (Array.isArray(content)) {

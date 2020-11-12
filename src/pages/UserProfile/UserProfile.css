@@ -93,6 +93,20 @@
 	margin-left: 0.5rem;
 }
 
+.UserProfile
+	.UserProfile__Body
+	.UserProfile__Body-Field
+	.UserProfile__Body-Input
+	> .keywords,
+.UserProfile
+	.UserProfile__Body
+	.UserProfile__Body-Field
+	.UserProfile__Body-Input
+	> .courses {
+	display: flex;
+	margin-bottom: 0;
+}
+
 .User-Availability-List > li {
 	display: flex;
 	justify-content: space-between;

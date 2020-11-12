@@ -33,7 +33,12 @@ function UserProfileBody({
 }) {
 	const showTutorFields = isTutor ? (
 		<>
-			<UserFields label={'I can help in...'} content={keywords} />
+			<UserFields
+				label={'I can help in...'}
+				content={keywords}
+				chips={true}
+				field="keywords"
+			/>
 			<UserFields label={'Portfolio'} content={portfolio} />
 			<UserFields label={'Availability'} content={availability} />
 		</>
@@ -43,7 +48,14 @@ function UserProfileBody({
 		<div className="UserProfile__Body">
 			<UserFields label={'About'} content={bio} />
 			{/* <UserFields label={'Organizations'} content={organizations} /> */}
-			<UserFields label={'Classes Taken'} content={classes} />
+			{classes.length > 0 ? (
+				<UserFields
+					label={'Classes Taken'}
+					content={classes}
+					chips={true}
+					field="courses"
+				/>
+			) : null}
 			{showTutorFields}
 		</div>
 	);
