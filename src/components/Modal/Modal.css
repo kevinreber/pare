@@ -44,7 +44,7 @@
 }
 
 .Modal-Close {
-	position: absolute;
+	position: fixed;
 	top: 2.5%;
 }
 
@@ -106,7 +106,7 @@
 	}
 
 	.Modal {
-		left: 26vw;
+		left: 29vw;
 	}
 
 	.AssignmentForm {
