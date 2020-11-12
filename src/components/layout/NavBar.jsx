@@ -58,9 +58,7 @@ function NavBar() {
 					</NavLink>
 				</li>
 				<li className="nav-item">
-					<NavLink
-						className="nav-link mate-text-primary Study-Group-Nav"
-						to="/study-groups">
+					<NavLink className="nav-link mate-text-primary" to="/study-groups">
 						<GroupWorkIcon style={{ fontSize: 45 }} />
 						<h5 className="hide-lg">Study Groups</h5>
 					</NavLink>

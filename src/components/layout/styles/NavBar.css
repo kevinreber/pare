@@ -38,10 +38,6 @@
 	color: var(--primary-color);
 }
 
-.study-group-icon {
-	width: 56px;
-}
-
 a.nav-link > svg {
 	color: var(--primary-color);
 }
@@ -107,10 +103,6 @@ a.nav-link:focus {
 		margin-left: auto;
 	}
 
-	.NavBar-List > .nav-item > .Study-Group-Nav {
-		margin-left: 0.5rem;
-	}
-
 	.NavBar > .NavBar-List__Secondary.NavBar-List__Logo > li.nav-item {
 		margin-left: 0.8rem;
 	}
@@ -142,8 +134,7 @@ a.nav-link:focus {
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
 	.NavBar > .NavBar-List__Settings,
-	.NavBar-List > .nav-item,
-	.NavBar-List > .nav-item > .Study-Group-Nav {
+	.NavBar-List > .nav-item {
 		margin-left: 0;
 	}
 
@@ -165,19 +156,6 @@ a.nav-link:focus {
 	.NavBar > .NavBar-List > .nav-item > .nav-link > .MuiBadge-root > svg {
 		width: 80px;
 		text-align: left;
-	}
-
-	.NavBar > .NavBar-List > .nav-item > .nav-link > .study-group-icon {
-		width: 48px;
-		margin-left: 1rem;
-	}
-
-	.Study-Group-Nav {
-		align-items: center;
-	}
-
-	.Study-Group-Nav > h5 {
-		margin-left: 2rem;
 	}
 
 	.hide-lg {
