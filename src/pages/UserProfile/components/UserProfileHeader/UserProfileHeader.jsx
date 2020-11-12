@@ -44,13 +44,13 @@ function UserProfileHeader({
 						<i className="fas fa-map-marker-alt mr-2"></i>
 						{school}
 					</p>
-					<div className="User-Profile-Header-Footer d-flex justify-content-end">
+					{/* <div className="User-Profile-Header-Footer d-flex justify-content-end">
 						<div className="User-Profile-Actions ml-5 mr-3">
 							<i className={bookmarkStatus}></i>
 							<i className={followStatus}></i>
 							<i className="fas fa-share-alt"></i>
 						</div>
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</>

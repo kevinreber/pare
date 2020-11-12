@@ -136,8 +136,8 @@
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
-	.UserProfile__Header {
-		width: 85vw;
+	.UserProfile__Header-Container {
+		margin-right: 10%;
 	}
 
 	.User-Profile-Header-Footer {
@@ -148,7 +148,7 @@
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
-	.UserProfile__Header {
-		width: 75vw;
+	.UserProfile__Header-Container {
+		margin-right: 23%;
 	}
 }
