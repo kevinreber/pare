@@ -115,7 +115,6 @@ export function googleLogin() {
 			.then(() => {
 				auth.signInWithPopup(provider).then(async (result) => {
 					const token = result.credential.accessToken;
-					console.log(token);
 
 					// Check if user exists - account will be made for new users.
 					await checkIfUserExists(result.user);
