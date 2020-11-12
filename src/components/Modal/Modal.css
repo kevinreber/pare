@@ -65,7 +65,7 @@
 }
 
 .Modal .Modal-Content {
-	margin-top: 50%;
+	margin-top: 40%;
 }
 
 .Modal .Modal-Full-Content {
@@ -86,12 +86,16 @@
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
 	.Modal .Modal-Content {
-		margin-top: 20%;
+		margin-top: 10rem;
 	}
 
 	.Modal .Modal-Content > *,
 	.Modal .Modal-Full-Content > * {
 		width: 75%;
+	}
+
+	.AssignmentForm {
+		margin-top: 0;
 	}
 }
 
@@ -107,10 +111,6 @@
 
 	.Modal {
 		left: 29vw;
-	}
-
-	.AssignmentForm {
-		margin-top: 0;
 	}
 
 	.Modal-Close {

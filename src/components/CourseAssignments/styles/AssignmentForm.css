@@ -1,53 +1,52 @@
 .react-datepicker {
-    background-color: var(--tertiary-color);
-    border: solid 1px var(--primary-color);
-    font-family: 'Rubik', sans-serif;
+	background-color: var(--tertiary-color);
+	border: solid 1px var(--primary-color);
+	font-family: 'Rubik', sans-serif;
 }
 
 .react-datepicker-wrapper {
-    display: flex;
-    margin-left: auto;
+	display: flex;
+	margin-left: auto;
 }
 
 .Assignment-Due-Date {
-    margin-right: .6rem;
-}
-
-.AssignmentForm {
-    margin-top: 40%;
+	margin-right: 0.6rem;
 }
 
 .react-datepicker__header {
-    background-color: var(--tertiary-color);
+	background-color: var(--tertiary-color);
 }
 
 .react-datepicker__current-month {
-    color: var(--primary-color);
+	color: var(--primary-color);
 }
 
 .react-datepicker,
 .react-datepicker__day-names .react-datepicker__day-name,
 .react-datepicker__day {
-    color: var(--secondary-color);
+	color: var(--secondary-color);
 }
 
 .react-datepicker__day--selected {
-    color: var(--bg-color);
-    background-color: var(--primary-color);
+	color: var(--bg-color);
+	background-color: var(--primary-color);
 }
 
-.react-datepicker__input-time-container .react-datepicker-time__input-container .react-datepicker-time__input input {
-    width: 120px;
-    padding: .5rem;
-    font-size: .8rem;
+.react-datepicker__input-time-container
+	.react-datepicker-time__input-container
+	.react-datepicker-time__input
+	input {
+	width: 120px;
+	padding: 0.5rem;
+	font-size: 0.8rem;
 }
 
-.react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle {
-    border-bottom-color: var(--primary-color);
+.react-datepicker-popper[data-placement^='bottom'] .react-datepicker__triangle {
+	border-bottom-color: var(--primary-color);
 }
 
 .Mate-Form-Select {
-    color: var(--secondary-color);
-    background-color: var(--bg-color);
-    border: 1px solid var(--tertiary-color);
+	color: var(--secondary-color);
+	background-color: var(--bg-color);
+	border: 1px solid var(--tertiary-color);
 }
