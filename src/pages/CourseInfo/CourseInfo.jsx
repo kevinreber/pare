@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import firebase from 'firebase';
 
 /** Components & Helpers */
-import CourseInfoHeader from './components/CourseInfoHeader';
+import CourseInfoHeader from './components/CourseInfoHeader/CourseInfoHeader';
 import CourseAssignmentList from '../../components/CourseAssignments/CourseAssignmentList';
 import AssignmentForm from '../../components/CourseAssignments/AssignmentForm';
 import BackButton from '../../components/BackButton/BackButton';
@@ -35,7 +35,7 @@ function CourseInfo() {
 	const currentUser = useSelector((state) => state.auth.user);
 
 	const addAssignment = (assignmentData) => {
-		db.collection('class')
+		db.collection('courses')
 			.doc(courseId)
 			.collection('assignments')
 			.add(assignmentData);
@@ -53,7 +53,7 @@ function CourseInfo() {
 
 	/** Remove user from course users list */
 	const removeCourse = () => {
-		db.collection('class')
+		db.collection('courses')
 			.doc(courseId)
 			.update({
 				users: firebase.firestore.FieldValue.arrayRemove(currentUser.uid),
@@ -74,13 +74,13 @@ function CourseInfo() {
 	// get course assignments
 	useEffect(() => {
 		if (courseId && isLoading) {
-			db.collection('class')
+			db.collection('courses')
 				.doc(courseId)
 				.onSnapshot((snapshot) => setCourse(snapshot.data()));
 		}
 
 		if (course && isLoading) {
-			db.collection('class')
+			db.collection('courses')
 				.doc(courseId)
 				.collection('assignments')
 				.orderBy('dueDate', 'asc')

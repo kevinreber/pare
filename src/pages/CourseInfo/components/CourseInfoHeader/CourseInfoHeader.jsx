@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import CourseDetails from './CourseDetails';
+import CourseDetails from '../CourseDetails/CourseDetails';
 
 /** Displays Header information of Course Info Page
  * Courses -> CourseList -> Course -> CourseInfo -> CourseInfoHeader -> CourseDetails && CourseOverallGrades

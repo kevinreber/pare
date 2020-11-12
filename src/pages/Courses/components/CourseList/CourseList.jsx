@@ -3,7 +3,7 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 
 /** Components & Helpers */
-import CourseCard from './CourseCard';
+import CourseCard from '../CourseCard/CourseCard';
 
 /** Creates a List of User's Courses
  * Courses -> CourseList -> CourseCard -> CourseInfo

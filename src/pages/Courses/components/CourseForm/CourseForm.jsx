@@ -3,17 +3,17 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 /** Components & Helpers */
-import ConfirmDialog from '../../../components/ConfirmDialog/ConfirmDialog';
-import SubmitButton from '../../../components/SubmitButton/SubmitButton';
-import Autocomplete from '../../../components/Autocomplete/Autocomplete';
-import { COURSE_FORM_DATA_INITIAL_STATE } from '../constants/index';
+import ConfirmDialog from '../../../../components/ConfirmDialog/ConfirmDialog';
+import SubmitButton from '../../../../components/SubmitButton/SubmitButton';
+import Autocomplete from '../../../../components/Autocomplete/Autocomplete';
+import { COURSE_FORM_DATA_INITIAL_STATE } from '../../constants/index';
 
 /** Form to add a course.
  * Courses -> 'Join Class' Button -> Modal -> CourseForm
  */
 function CourseForm({ save, confirmDialog, setConfirmDialog, courses }) {
 	/** Get courseCatalog from redux store */
-	const courseCatalog = useSelector((state) => state.courseCatalog);
+	const courseCatalog = useSelector((state) => state.courseCatalog.courses);
 
 	const [errors, setErrors] = useState('');
 	const [formData, setFormData] = useState(COURSE_FORM_DATA_INITIAL_STATE);
@@ -88,7 +88,7 @@ function CourseForm({ save, confirmDialog, setConfirmDialog, courses }) {
 					onChange={handleChange}
 					value={formData.courseName}
 					label={'Search'}
-					options={courseCatalog.courses}
+					options={courseCatalog}
 					type={'courses'}
 					setId={setId}
 					placeholder={'ex: COMPSCI 61A'}

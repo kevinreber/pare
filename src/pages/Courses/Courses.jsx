@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 /** Components & Helpers */
-import CourseList from './components/CourseList';
-import CourseForm from './components/CourseForm';
+import CourseList from './components/CourseList/CourseList';
+import CourseForm from './components/CourseForm/CourseForm';
 import Modal from '../../components/Modal/Modal';
 import Loader from '../../components/layout/Loader/Loader';
 import NoData from '../../components/NoData/NoData';
@@ -87,7 +87,7 @@ function Courses() {
 
 	useEffect(() => {
 		const getData = () => {
-			db.collection('class')
+			db.collection('courses')
 				.where('users', 'array-contains', currentUser.uid)
 				.onSnapshot((snapshot) =>
 					setCourses(
