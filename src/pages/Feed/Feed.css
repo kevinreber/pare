@@ -10,6 +10,10 @@
 	margin-bottom: 10rem;
 }
 
+/********************************* */
+/** Post Card                      *
+/********************************* */
+
 .Post-Card__Header {
 	margin-bottom: 0.25rem;
 	width: 80%;
@@ -92,7 +96,16 @@
 .Post-Card .Post-Card__Footer {
 	margin-top: 0.5rem;
 	display: flex;
-	justify-content: space-evenly;
+	justify-content: flex-end;
+}
+
+.Post-Card > .Post-Card__Footer > button > span > a:hover {
+	color: var(--primary-color);
+	background-color: var(--bg-active-color);
+}
+
+.Post-Card > .Post-Card__Footer > button {
+	margin-right: 1rem;
 }
 
 .number-of-comments {
@@ -137,6 +150,10 @@
 	max-height: 100px;
 	object-fit: contain;
 }
+
+/********************************* */
+/** Add Post Button                *
+/********************************* */
 
 #Feed-Add-Post-Btn {
 	position: fixed;

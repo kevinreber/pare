@@ -303,10 +303,10 @@ function PostCard({
 						) : null}
 					</Link>
 				</IconButton>
-				<IconButton>
+				{/* <IconButton>
 					<CalendarTodayOutlinedIcon />
 				</IconButton>
-				<IconButton>{BookmarkStatus}</IconButton>
+				<IconButton>{BookmarkStatus}</IconButton> */}
 				<IconButton onClick={toggleMessageForm}>
 					<SendIcon />
 				</IconButton>
