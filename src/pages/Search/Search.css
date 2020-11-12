@@ -116,6 +116,6 @@ input::placeholder {
 @media (min-width: 992px) {
 	.Search__Elements > input,
 	.Search-Categories {
-		width: 75%;
+		width: 70%;
 	}
 }
