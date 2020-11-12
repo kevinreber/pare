@@ -190,9 +190,9 @@
 	color: var(--tertiary-color);
 }
 
-/*************************************************/
-/** User Info Chips                              */
-/*************************************************/
+/************************************************/
+/** User Info Chips                             */
+/************************************************/
 
 .User-Keywords,
 .User-Portfolio-Links,
@@ -200,28 +200,6 @@
 	display: flex;
 	justify-content: flex-start;
 	flex-wrap: wrap;
-}
-
-.User-Keywords > li .MuiChip-root,
-.User-Portfolio-Links > li .MuiChip-root,
-.User-Classes > li .MuiChip-root {
-	background-color: var(--bg-color);
-	border: 1px solid var(--tertiary-color);
-	color: var(--secondary-color);
-	margin-right: 0.5rem;
-	margin-bottom: 0.5rem;
-}
-
-.User-Keywords > li .MuiChip-root svg,
-.User-Portfolio-Links > li .MuiChip-root svg,
-.User-Classes > li .MuiChip-root svg {
-	color: var(--tertiary-color);
-}
-
-.User-Keywords > li .MuiChip-root svg:hover,
-.User-Portfolio-Links > li .MuiChip-root svg:hover,
-.User-Classes > li .MuiChip-root svg:hover {
-	color: var(--primary-color);
 }
 
 /*************************************************/
