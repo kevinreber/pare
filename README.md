@@ -1,21 +1,21 @@
 <div align='center'>
-<img style="width:100px;" src="./src/images/logo/pare-logo.png" alt="Pare"/>
+<img width="100" src="./src/images/logo/pare-logo.png" alt="Pare"/>
 </div>
 <h1 align="center">Pare</h1>
 <h2 align="center">Find your <a href="https://pare-afb7e.web.app/">Pare</a>!</h2>
 
 <div align='center'>
 <h3 align="center">Learn about campus events!</h3>
-<img style="width:300px;" src="./gifs/pare-1.gif" alt="Pare-1"/>
+<img width="300" src="./gifs/pare-1.gif" alt="Pare-1"/>
 
 <h3 align="center">Keep track of your classes and coursework!</h3>
-<img style="width:300px;" src="./gifs/pare-2.gif" alt="Pare-2"/>
+<img width="300" src="./gifs/pare-2.gif" alt="Pare-2"/>
 
 <h3 align="center">Form Study Groups to connect and engage with classmates!</h3>
-<img style="width:300px;" src="./gifs/pare-3.gif" alt="Pare-3"/>
+<img width="300" src="./gifs/pare-3.gif" alt="Pare-3"/>
 
 <h3 align="center">Need some extra help? Find a Pare!</h3>
-<img style="width:300px;" src="./gifs/pare-4.gif" alt="Pare-4"/>
+<img width="300" src="./gifs/pare-4.gif" alt="Pare-4"/>
 </div>
 
 ## Setup
