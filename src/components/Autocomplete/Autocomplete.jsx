@@ -32,7 +32,7 @@ function Autocomplete({
 					course.course_number
 				}`;
 				return search.indexOf(value.toLowerCase()) > -1;
-			}
+			} else return null;
 		});
 
 		setFilteredOptions(opts);
