@@ -52,19 +52,19 @@
 }
 
 .fade-in-logo {
-	animation: fadeInLogin ease 2s;
-	-webkit-animation: fadeInLogin ease 2s;
-	-moz-animation: fadeInLogin ease 2s;
-	-o-animation: fadeInLogin ease 2s;
-	-ms-animation: fadeInLogin ease 2s;
+	animation: fadeInLogin ease 1.8s;
+	-webkit-animation: fadeInLogin ease 1.8s;
+	-moz-animation: fadeInLogin ease 1.8s;
+	-o-animation: fadeInLogin ease 1.8s;
+	-ms-animation: fadeInLogin ease 1.8s;
 }
 
 .fade-in-delay {
-	animation: fadeInLogin ease 3s;
-	-webkit-animation: fadeInLogin ease 3s;
-	-moz-animation: fadeInLogin ease 3s;
-	-o-animation: fadeInLogin ease 3s;
-	-ms-animation: fadeInLogin ease 3s;
+	animation: fadeInLogin ease 2.5s;
+	-webkit-animation: fadeInLogin ease 2.5s;
+	-moz-animation: fadeInLogin ease 2.5s;
+	-o-animation: fadeInLogin ease 2.5s;
+	-ms-animation: fadeInLogin ease 2.5s;
 }
 
 @keyframes fadeInLogin {
