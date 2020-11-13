@@ -265,8 +265,9 @@ function PostForm({ save }) {
 									{suggestions.map((suggestion, idx) => {
 										const style = {
 											backgroundColor: suggestion.active
-												? '#393e46'
-												: 'rgb(43, 47, 58)',
+												? '#ddb72c'
+												: '#3a3938',
+											color: suggestion.active ? '#3a3938' : '',
 										};
 
 										return (
