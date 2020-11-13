@@ -55,6 +55,7 @@ a.nav-link:focus {
 
 .nav-avatar .MuiAvatar-root.MuiAvatar-circle {
 	margin: auto;
+	border: 1px solid var(--primary-color);
 }
 
 /********************************* */
@@ -93,18 +94,6 @@ a.nav-link:focus {
 
 	.NavBar-List__Settings {
 		margin-bottom: 2rem;
-	}
-
-	.NavBar > .NavBar-List__Settings {
-		margin-left: 0.35rem;
-	}
-
-	.NavBar-List > .nav-item {
-		margin-left: auto;
-	}
-
-	.NavBar > .NavBar-List__Secondary.NavBar-List__Logo > li.nav-item {
-		margin-left: 0.8rem;
 	}
 
 	.NavBar > .NavBar-List__Secondary .Header-Logo img {
