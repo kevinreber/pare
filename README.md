@@ -40,8 +40,7 @@ npm install
 npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view project in the browser.<br/>
-May see warnings if not using placeholder data.
+Open [http://localhost:3000](http://localhost:3000) to view project in the browser.
 
 ---
 
