@@ -28,9 +28,10 @@ import MoreHorizOutlinedIcon from '@material-ui/icons/MoreHorizOutlined';
 import ShareIcon from '@material-ui/icons/Share';
 import SendIcon from '@material-ui/icons/Send';
 import Avatar from '@material-ui/core/Avatar';
+import { HOST_URL } from '../../../../constants/index';
 
 /** ! TEMP URL */
-const HOST_URL = 'localhost:3000';
+// const HOST_URL = 'localhost:3000';
 
 /** PostCard
  *  If user created Post, they will see an option to delete the Post
@@ -239,7 +240,7 @@ function PostCard({
 	// Copies link of post to browser clipboard
 	const shareLink = () => {
 		try {
-			copyLinkToClipBoard(`/post/${id}`);
+			copyLinkToClipBoard(`${HOST_URL}/post/${id}`);
 			/** Prompt change made */
 			dispatch(
 				addFlashMessage({

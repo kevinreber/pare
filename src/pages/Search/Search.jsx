@@ -93,7 +93,12 @@ function Search() {
 				.get()
 				.then((data) => {
 					data.docs.forEach((doc) => {
-						if (doc.data().description.includes(search)) {
+						if (
+							doc
+								.data()
+								.description.toLowerCase()
+								.includes(search.toLowerCase())
+						) {
 							setPosts((posts) => [...posts, { id: doc.id, data: doc.data() }]);
 						}
 					});
