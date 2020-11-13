@@ -3,8 +3,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 /** Components & Helpers */
-import Header from './components/layout/Header';
-import NavBar from './components/layout/NavBar';
+import Header from './components/layout/Header/Header';
+import NavBar from './components/layout/NavBar/NavBar';
 import Notification from './components/Notification/Notification';
 import SubModal from './components/SubModal/SubModal';
 import Routes from './routes/Routes';

@@ -4,8 +4,8 @@ import { Link, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 /** Components & Helpers */
-import Logo from '../../images/logo/pare-logo.png';
-import { logOut } from '../../store/actions/auth';
+import Logo from '../../../images/logo/pare-logo.png';
+import { logOut } from '../../../store/actions/auth';
 
 /** MUI */
 import { IconButton, Avatar } from '@material-ui/core';
@@ -17,7 +17,7 @@ import GroupWorkIcon from '@material-ui/icons/GroupWork';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import SchoolIcon from '@material-ui/icons/School';
 
-import './styles/NavBar.css';
+import './NavBar.css';
 
 function NavBar() {
 	const dispatch = useDispatch();

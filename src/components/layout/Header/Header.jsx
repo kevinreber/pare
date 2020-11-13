@@ -1,12 +1,12 @@
 /** Dependencies */
 import React, { useState } from 'react';
-import Logo from '../../images/logo/pare-logo.png';
+import Logo from '../../../images/logo/pare-logo.png';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { logOut } from '../../store/actions/auth';
+import { logOut } from '../../../store/actions/auth';
 
 /** Components */
-import NotificationIcon from '../NotificationIcon/NotificationIcon';
+import NotificationIcon from '../../NotificationIcon/NotificationIcon';
 
 /** Material UI */
 import {
@@ -25,7 +25,7 @@ import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
 import { makeStyles } from '@material-ui/core/styles';
 
 /** Stylesheets */
-import './styles/Header.css';
+import './Header.css';
 
 /** Styles for SideBar Drawer */
 const useStyles = makeStyles({
