@@ -141,7 +141,7 @@
 }
 
 .Post-Card__Body > .description {
-	margin-bottom: 0;
+	margin-bottom: 1rem;
 }
 
 .Post-Card .Post-Card__Attachment {

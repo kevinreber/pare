@@ -104,6 +104,8 @@
 	.UserProfile__Body-Input
 	> .courses {
 	display: flex;
+	flex-wrap: wrap;
+	width: 80%;
 	margin-bottom: 0;
 }
 
