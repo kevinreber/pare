@@ -615,11 +615,6 @@ li .MuiChip-root svg:hover {
 	.MessageChat__Footer {
 		width: 70%;
 	}
-
-	.Modal .mate-btn-primary,
-	.Modal .mate-btn-secondary {
-		margin-left: -25px;
-	}
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
@@ -754,5 +749,9 @@ li .MuiChip-root svg:hover {
 	.StudyGroupChat__Footer,
 	.MessageChat__Footer {
 		width: 55%;
+	}
+
+	.CourseForm .mate-btn.mate-btn-cta.mate-btn-secondary {
+		left: 52rem;
 	}
 }
