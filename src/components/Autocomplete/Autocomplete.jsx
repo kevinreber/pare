@@ -35,7 +35,8 @@ function Autocomplete({
 			} else return null;
 		});
 
-		setFilteredOptions(opts);
+		const firstTenMatches = opts.slice(0, 10);
+		setFilteredOptions(firstTenMatches);
 	}
 
 	function onClick(e) {
@@ -48,27 +49,28 @@ function Autocomplete({
 	/** Build list of autofill options */
 	let optionList;
 	if (showOptions && value) {
-		optionList = filteredOptions.length ? (
-			<ul className="options">
-				{filteredOptions.map((option) => {
-					return (
-						<li
-							id={option.id}
-							key={`${option.abbreviation}-${option.course_number}`}
-							className="option"
-							data-name={name}
-							data-value={`${option.abbreviation} ${option.course_number}`}
-							onClick={onClick}>
-							{`${option.abbreviation} ${option.course_number}`}
-						</li>
-					);
-				})}
-			</ul>
-		) : (
-			<div className="no-options">
-				<em>No Matches</em>
-			</div>
-		);
+		optionList =
+			filteredOptions.length > 0 ? (
+				<ul className="options">
+					{filteredOptions.map((option) => {
+						return (
+							<li
+								id={option.id}
+								key={`${option.abbreviation}-${option.course_number}`}
+								className="option"
+								data-name={name}
+								data-value={`${option.abbreviation} ${option.course_number}`}
+								onClick={onClick}>
+								{`${option.abbreviation} ${option.course_number}`}
+							</li>
+						);
+					})}
+				</ul>
+			) : (
+				<div className="no-options">
+					<em>No Matches</em>
+				</div>
+			);
 	}
 
 	return (
