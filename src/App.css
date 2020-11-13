@@ -624,4 +624,135 @@ li .MuiChip-root svg:hover {
 
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
+	.Feed,
+	.Search,
+	.Courses,
+	.StudyGroups,
+	.StudyGroupChat,
+	.Tutors,
+	.Notifications-Page,
+	.MessageChat,
+	.PostInfo,
+	.CourseInfo,
+	.UserProfile {
+		margin-left: 30rem;
+		margin-right: 18rem;
+		width: 100%;
+	}
+
+	.Feed,
+	.Search,
+	/* .Courses, */
+	/* .StudyGroupChat, */
+	/* .Tutors, */
+	/* .Notifications-Page, */
+	/* .MessageChat, */
+	/* .CourseInfo, */
+	.UserProfile,
+	.Body-Header,
+	.PostInfo__Header,
+	.StudyGroups__Header,
+	.StudyGroupChat__Header,
+	.CourseInfo__Header,
+	.UserProfile__Header,
+	.Notifications__Header,
+	.Courses-Header,
+	.Tutors-Header,
+	.MessageChat__Header,
+	.Search-Header,
+	.MessageCard,
+	.StudyGroups__Card,
+	.Post-Card,
+	.Course-Card,
+	.Assignment-Card,
+	.Comment-Card,
+	.Tutor-Card {
+		border-right: 1px solid var(--tertiary-color);
+	}
+
+	.MessageChat__Header {
+		margin-top: 0.2rem;
+	}
+
+	.MessageChat__Body {
+		margin-top: 3.5rem;
+	}
+
+	.Feed,
+	.Search,
+	.Courses,
+	.StudyGroups,
+	.StudyGroupChat,
+	.Tutors,
+	.Notifications-Page,
+	.MessageChat,
+	.PostInfo,
+	.CourseInfo,
+	.UserProfile,
+	.PostInfo__Footer,
+	.StudyGroupChat__Footer,
+	.MessageChat__Footer,
+	.Body-Header,
+	.StudyGroups__Header,
+	.CourseInfo__Header,
+	.UserProfile__Header,
+	.Notifications__Header,
+	.Courses-Header,
+	.Tutors-Header,
+	.MessageChat__Header,
+	.Search-Header {
+		max-width: 700px;
+	}
+
+	.MessageCard__Right {
+		position: relative;
+		width: 20%;
+	}
+
+	.MessageCard > .Container > .MessageCard__Right > p.timestamp {
+		right: 1rem;
+	}
+
+	.Tutor.Tutor-Card {
+		padding: 1rem 2rem;
+	}
+
+	#Feed-Add-Post-Btn {
+		right: 20rem;
+	}
+
+	.StudyGroups__Body {
+		margin-top: 7rem;
+	}
+
+	.PostInfo__Body {
+		margin-top: 4rem;
+	}
+
+	.Find-Tutors {
+		margin-top: 0;
+	}
+
+	/* Admin Buttons for Message Chat and Study Group Chat */
+	.MessageChat__Header > button.MuiButtonBase-root.MuiIconButton-root,
+	.StudyGroupChat__Header > button.MuiButtonBase-root.MuiIconButton-root {
+		right: 1rem;
+	}
+
+	.Search__Elements > input,
+	.Search-Categories {
+		max-width: 650px;
+		width: 100%;
+	}
+
+	.UserProfile__Header-Container {
+		margin: auto;
+	}
+
+	/* Chat Footers */
+	.PostInfo__Footer,
+	.StudyGroupChat__Footer,
+	.MessageChat__Footer {
+		width: 55%;
+	}
 }

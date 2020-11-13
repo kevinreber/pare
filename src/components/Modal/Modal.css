@@ -117,3 +117,17 @@
 		top: 2rem;
 	}
 }
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+	.Modal {
+		left: 30rem;
+		margin-right: 18rem;
+		border-right: 1px solid var(--tertiary-color);
+	}
+
+	.Modal .mate-btn-primary,
+	.Modal .mate-btn-secondary {
+		margin-left: -85px;
+	}
+}

@@ -198,4 +198,19 @@ a.nav-link:focus {
 		margin-top: auto;
 		margin-bottom: 2rem;
 	}
+
+	.NavBar > .NavBar-List > .nav-item {
+		width: fit-content;
+	}
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+	.NavBar {
+		width: 30rem;
+	}
+
+	.NavBar > .NavBar-List {
+		margin-left: 10rem;
+	}
 }

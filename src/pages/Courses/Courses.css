@@ -1,6 +1,7 @@
 .Courses {
 	display: flex;
 	flex-direction: column;
+	text-align: left;
 }
 
 .Courses__CourseList {
@@ -10,15 +11,12 @@
 	overflow: scroll;
 }
 
-table .Course.Course-Card {
+.Course.Course-Card {
 	font-size: 14px;
+	display: flex;
 }
 
-table {
-	table-layout: fixed;
-}
-
-table .Course.Course-Card .Course-Card-Term {
+.Course.Course-Card .Course-Card-Term {
 	font-size: 12px;
 	font-style: italic;
 }
@@ -35,7 +33,7 @@ table .Course.Course-Card .Course-Card-Term {
 }
 
 .Course.Course-Card .Course-Name {
-	width: 120px;
+	width: 150px;
 	padding-left: 1.25rem;
 }
 
@@ -73,9 +71,18 @@ table .Course.Course-Card .Course-Card-Term {
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
-	.CourseCard,
 	.Assignment.Assignment-Card {
 		font-size: 1rem;
 		padding: 1rem;
+	}
+	.Course.Course-Card .Course-Title {
+		margin-left: 4rem;
+	}
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+	.Course.Course-Card .Course-Title {
+		margin-left: 4rem;
 	}
 }
