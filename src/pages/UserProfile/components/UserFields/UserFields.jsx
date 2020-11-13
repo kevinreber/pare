@@ -66,7 +66,7 @@ function UserFields({ label, content = '-', chips = false, field = '' }) {
 				const title = `${course.data.course.abbreviation} ${course.data.course.course_number}`;
 				return (
 					<>
-						<li data-name={course.id} key={index}>
+						<li data-name={course.id} key={course.id}>
 							<Chip label={title} size={'small'} />
 						</li>
 					</>

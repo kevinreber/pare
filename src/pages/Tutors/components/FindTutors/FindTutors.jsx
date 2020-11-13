@@ -64,7 +64,7 @@ function FindTutors({ tutors, isLoading, setLoadTutorData }) {
 				);
 				if (result) {
 					return tutor;
-				}
+				} else return null;
 			});
 		}
 

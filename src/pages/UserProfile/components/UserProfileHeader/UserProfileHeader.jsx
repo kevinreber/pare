@@ -22,8 +22,8 @@ function UserProfileHeader({
 	/**
 	 * ! Will check user.id if profile page is bookmarked or being followed
 	 * */
-	const bookmarkStatus = id ? 'fas fa-bookmark mr-3' : 'far fa-bookmark mr-3';
-	const followStatus = id ? 'fas fa-user-plus mr-2' : 'fas fa-user-minus mr-2';
+	// const bookmarkStatus = id ? 'fas fa-bookmark mr-3' : 'far fa-bookmark mr-3';
+	// const followStatus = id ? 'fas fa-user-plus mr-2' : 'fas fa-user-minus mr-2';
 
 	return (
 		<>

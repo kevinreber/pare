@@ -19,12 +19,6 @@ function Notifications() {
 	const currentUser = useSelector((state) => state.auth.user);
 	const dispatch = useDispatch();
 
-	// State will determine what courses to show in CourseList
-	const [active, setActive] = useState('messages');
-	const toggleActive = (e) => {
-		setActive(e.target.id);
-	};
-
 	/** New Message Form */
 	const [showForm, setShowForm] = useState(false);
 	const toggleForm = () => setShowForm((show) => !show);
@@ -82,10 +76,7 @@ function Notifications() {
 		<div className="Notifications-Page">
 			<div className="Notifications__Header Body-Header">
 				<div className="Messages">
-					<h5
-						id="messages"
-						className="mate-text-primary"
-						onClick={toggleActive}>
+					<h5 id="messages" className="mate-text-primary">
 						Messages
 					</h5>
 				</div>

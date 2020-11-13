@@ -99,7 +99,7 @@ function BeTutorForm({ uid, user }) {
 		if (uid && isLoading) {
 			getData();
 		}
-	}, [uid, setIsLoading]);
+	}, [uid, isLoading]);
 
 	/** Handles general fields in form */
 	const handleChange = (e) => {
