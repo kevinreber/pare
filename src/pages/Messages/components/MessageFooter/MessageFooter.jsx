@@ -8,7 +8,7 @@ import createFbTimestamp from '../../../../utils/createFbTimestamp';
 /** MUI */
 import IconButton from '@material-ui/core/IconButton';
 import SendIcon from '@material-ui/icons/Send';
-import ImageIcon from '@material-ui/icons/Image';
+// import ImageIcon from '@material-ui/icons/Image';
 
 /** Displays Messages Chat Footer that allows the user to enter a message
  * Notifications -> MessagesList -> MessageCard -> Message -> MessageFooter
@@ -43,11 +43,11 @@ function MessageFooter({ send, uid }) {
 					type="text"
 					placeholder="Type message here..."
 				/>
-				<div className="message__attachments">
+				{/* <div className="message__attachments">
 					<IconButton>
 						<ImageIcon fontSize="large" />
 					</IconButton>
-				</div>
+				</div> */}
 				<IconButton
 					type="submit"
 					disabled={!formData.content}
