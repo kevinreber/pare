@@ -212,6 +212,10 @@
 	font-size: 2rem;
 }
 
+.MessageChat__Title > a:hover {
+	background-color: var(--bg-color);
+}
+
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
 	.MessageList > .MessageCard {
