@@ -54,14 +54,19 @@ function StudyGroupChat() {
 			/** Get Study Group Info */
 			db.collection('study-groups')
 				.doc(studyGroupId)
-				.onSnapshot((snapshot) => setStudyGroup(snapshot.data()));
+				.get()
+				.then((doc) => {
+					setStudyGroup(doc.data());
+				})
+				.catch((err) => console.log(err));
 
-			/** Get Study Group Members */
+			/** Get Study Group Messages */
 			db.collection('study-groups')
 				.doc(studyGroupId)
-				.collection('users')
+				.collection('messages')
+				.orderBy('createdAt', 'asc')
 				.onSnapshot((snapshot) =>
-					setGroupMembers(
+					setMessages(
 						snapshot.docs.map((doc) => {
 							return {
 								id: doc.id,
@@ -71,13 +76,12 @@ function StudyGroupChat() {
 					)
 				);
 
-			/** Get Study Group Messages */
+			/** Get Study Group Members */
 			db.collection('study-groups')
 				.doc(studyGroupId)
-				.collection('messages')
-				.orderBy('createdAt', 'asc')
+				.collection('users')
 				.onSnapshot((snapshot) =>
-					setMessages(
+					setGroupMembers(
 						snapshot.docs.map((doc) => {
 							return {
 								id: doc.id,
@@ -116,7 +120,7 @@ function StudyGroupChat() {
 				setIsLoading(false);
 			}
 		}
-		if (studyGroupId) {
+		if (studyGroupId && isLoading) {
 			getData();
 		}
 	}, [studyGroupId, studyGroup, isLoading, groupMembers, setGroupMembers]);
