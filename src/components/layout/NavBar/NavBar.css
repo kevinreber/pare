@@ -212,5 +212,6 @@ a.nav-link:focus {
 
 	.NavBar > .NavBar-List {
 		margin-left: 10rem;
+		width: auto;
 	}
 }
