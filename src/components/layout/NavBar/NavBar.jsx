@@ -84,10 +84,10 @@ function NavBar() {
 					</IconButton>
 				</li>
 				<li className="nav-item p-0 nav-avatar">
-					<Link to={`/users/${currentUser.uid}`}>
+					<NavLink to={`/users/${currentUser.uid}`}>
 						<Avatar alt={currentUser.displayName} src={currentUser.photoURL} />
 						<h5 className="hide-lg">{currentUser.displayName}</h5>
-					</Link>
+					</NavLink>
 				</li>
 			</ul>
 		</nav>
