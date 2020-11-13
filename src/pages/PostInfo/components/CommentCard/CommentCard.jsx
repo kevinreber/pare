@@ -41,7 +41,7 @@ function CommentCard({
 	const currentUser = useSelector((state) => state.auth.user);
 
 	const deleteComment = () => remove(id);
-	const editComment = () => edit(id);
+	// const editComment = () => edit(id);
 
 	/** PopoverActions Props ***************/
 	const [anchorEl, setAnchorEl] = useState(null);
@@ -77,7 +77,8 @@ function CommentCard({
 						</IconButton>
 						<PopoverActions
 							remove={deleteComment}
-							edit={editComment}
+							// edit={editComment}
+							editBtn={false}
 							id={popoverId}
 							open={open}
 							anchorEl={anchorEl}
