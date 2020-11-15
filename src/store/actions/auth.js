@@ -1,6 +1,7 @@
 /** Helpers */
 import { auth, provider } from '../../config/fbConfig';
 import createFbTimestamp from '../../utils/createFbTimestamp';
+import { isMobile } from 'react-device-detect';
 import db from '../../config/fbConfig';
 
 // import firebase from 'firebase/app';
@@ -109,25 +110,45 @@ async function updateUserLogin(user) {
 }
 
 export function googleLogin() {
-	return (dispatch) => {
-		auth
-			.setPersistence(firebase.auth.Auth.Persistence.SESSION)
-			.then(() => {
-				auth.signInWithPopup(provider).then(async (result) => {
-					// Check if user exists - account will be made for new users.
-					await checkIfUserExists(result.user);
+	if (isMobile) {
+		return (dispatch) => {
+			auth
+				.setPersistence(firebase.auth.Auth.Persistence.SESSION)
+				.then(() => {
+					auth.signInWithRedirect(provider).then(async (result) => {
+						// Check if user exists - account will be made for new users.
+						await checkIfUserExists(result.user);
 
-					db.collection('users')
-						.doc(result.user.uid)
-						.get()
-						.then((doc) => {
-							return dispatch(setCurrUser(doc.data()));
-						});
-				});
-			})
-			// .then((result) => console.log('Login successful!', result.auth.email))
-			.catch((err) => dispatch(dispatchError(LOGIN_FAIL, err)));
-	};
+						db.collection('users')
+							.doc(result.user.uid)
+							.get()
+							.then((doc) => {
+								return dispatch(setCurrUser(doc.data()));
+							});
+					});
+				})
+				.catch((err) => dispatch(dispatchError(LOGIN_FAIL, err)));
+		};
+	} else {
+		return (dispatch) => {
+			auth
+				.setPersistence(firebase.auth.Auth.Persistence.SESSION)
+				.then(() => {
+					auth.signInWithPopup(provider).then(async (result) => {
+						// Check if user exists - account will be made for new users.
+						await checkIfUserExists(result.user);
+
+						db.collection('users')
+							.doc(result.user.uid)
+							.get()
+							.then((doc) => {
+								return dispatch(setCurrUser(doc.data()));
+							});
+					});
+				})
+				.catch((err) => dispatch(dispatchError(LOGIN_FAIL, err)));
+		};
+	}
 }
 
 export function setCurrentUser(user) {
