@@ -15,6 +15,8 @@ import Chip from '@material-ui/core/Chip';
  * @param {string}	label		Label of input.
  * @param {string}	content		String of content for input.
  * @param {array}	content		If type of content is an array, array of content for input.
+ * @param {boolean} chips		Displays content as chips or text.
+ * @param {string}	field		Field name.
  */
 function UserFields({ label, content = '-', chips = false, field = '' }) {
 	const formatArray = (arr) => arr.join(', ');
@@ -106,6 +108,8 @@ function UserFields({ label, content = '-', chips = false, field = '' }) {
 UserFields.propTypes = {
 	label: PropTypes.string,
 	content: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+	chips: PropTypes.bool,
+	field: PropTypes.string,
 };
 
 export default UserFields;
