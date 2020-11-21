@@ -46,6 +46,6 @@
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
 	.StudyGroups__Card {
-		padding: 1rem;
+		padding: 1.5rem;
 	}
 }
