@@ -98,6 +98,11 @@ function Login() {
 				</p>
 			</div> */}
 			</div>
+			<footer className="Login__Footer">
+				<p className="font-italic">
+					Built with 💛 by <a href="https://www.kevinreber.dev/">Kevin Reber</a>
+				</p>
+			</footer>
 		</div>
 	);
 }
