@@ -35,12 +35,12 @@ function Login() {
 
 	return (
 		<div className="Login__container">
-			<div className="Login-Content">
+			<div className="Login-Content fade-in-logo">
 				<div className="Login__Gif hide-sm">
 					<img className="Pare-Gif" src={PareGif} alt="Pare" />
 				</div>
 				<div className="Login-Form-Container">
-					<div className="Signup-Header fade-in-logo">
+					<div className="Signup-Header">
 						<h3 className="Login-Header mate-text-primary font-italic">
 							Welcome to Pare!
 						</h3>
