@@ -8,6 +8,7 @@ import './Login.css';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Logo from '../../images/logo/pare-logo.png';
+import PareGif from '../../images/gif/pare-gif.gif';
 import { googleLogin } from '../../store/actions/auth';
 
 /** User Login Form */
@@ -34,16 +35,27 @@ function Login() {
 
 	return (
 		<div className="Login__container">
-			<div className="Signup-Header fade-in-logo">
-				<h3 className="mate-text-primary font-italic m-auto">
-					Meet your Pare!
-				</h3>
-				<div className="Mate-Logo">
-					<img src={Logo} alt="Mate" />
+			<div className="Login-Content">
+				<div className="Login__Gif hide-sm">
+					<img className="Pare-Gif" src={PareGif} alt="Pare" />
 				</div>
-			</div>
-			<form className="Login__form mb-3" onSubmit={googleSignIn}>
-				{/* <div className='form-group'>
+				<div className="Login-Form-Container">
+					<div className="Signup-Header fade-in-logo">
+						<h3 className="Login-Header mate-text-primary font-italic">
+							Welcome to Pare!
+						</h3>
+						<p className="Login-intro font-italic">
+							Helping students connect academically and socially!
+						</p>
+						<div className="Pare-Logo">
+							<img src={Logo} alt="Pare" />
+						</div>
+					</div>
+					<div className="Login__Gif hide-md">
+						<img className="Pare-Gif" src={PareGif} alt="Pare" />
+					</div>
+					<form className="Login__form mb-3" onSubmit={googleSignIn}>
+						{/* <div className='form-group'>
 					<label htmlFor='email' className='mate-text-primary float-left'>
 						Email
 					</label>
@@ -72,11 +84,12 @@ function Login() {
 						Forgot Password?
 					</Link>
 				</div> */}
-				<div className="Login__buttons fade-in-delay">
-					<button id="Login-Google__btn">Sign In With Google</button>
+						<div className="Login__buttons fade-in-delay">
+							<button id="Login-Google__btn">Sign In With Google</button>
+						</div>
+					</form>
 				</div>
-			</form>
-			{/* <div className='Login-Footer'>
+				{/* <div className='Login-Footer'>
 				<p>
 					Don't have an account?
 					<Link className='mate-text-primary ml-2' to='/signup'>
@@ -84,6 +97,7 @@ function Login() {
 					</Link>
 				</p>
 			</div> */}
+			</div>
 		</div>
 	);
 }

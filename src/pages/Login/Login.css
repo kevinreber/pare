@@ -6,7 +6,19 @@
 	justify-content: space-evenly;
 }
 
-.Login__container > .Login__form > .Login__buttons > button {
+.Login__container > .Login-Content {
+	display: flex;
+	justify-content: space-evenly;
+	margin: auto;
+	width: 80%;
+}
+
+.Login__container
+	> .Login-Content
+	> .Login-Form-Container
+	> .Login__form
+	> .Login__buttons
+	> button {
 	text-transform: inherit !important;
 	color: var(--bg-color);
 	background-color: var(--primary-color);
@@ -18,12 +30,27 @@
 	margin-bottom: 1rem;
 }
 
-.Login__container > .Login__form > .Login__buttons > button:hover {
+.Login__container
+	> .Login-Content
+	> .Login-Form-Container
+	> .Login__form
+	> .Login__buttons
+	> button:hover {
 	color: var(--bg-color);
 	background-color: var(--primary-color) !important;
 }
 
-.Login__container > .Login__form > .Login__buttons {
+.Login__container > .Login-Content > .Login-Form-Container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
+
+.Login__container
+	> .Login-Content
+	> .Login-Form-Container
+	> .Login__form
+	> .Login__buttons {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
@@ -34,15 +61,49 @@
 	font-style: italic;
 }
 
+.Login-Header {
+	margin-bottom: 1rem;
+}
+
+.Login-intro {
+	max-width: 200px;
+	margin: 0 auto 1rem auto;
+}
+
+.Signup-Header {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 2rem;
+}
+
 #Login__btn {
 	color: var(--bg-color);
 	background-color: var(--primary-color) !important;
 	/* border: 1px solid var(--primary-color); */
 }
 
-.Mate-Logo > img {
-	margin-top: 3rem;
+.Login__Gif.hide-sm {
+	display: none;
+}
+
+.Login__Gif.hide-md {
+	display: block;
+	margin-bottom: 2rem;
+}
+
+.Login__Gif.hide-md > img {
+	max-height: 400px;
+}
+
+.Pare-Logo > img {
+	/* margin-top: 3rem; */
 	width: 96px;
+}
+
+.Login__Gif > .Pare-Gif {
+	max-height: 600px;
+	border-radius: 12px;
+	box-shadow: 0px 0px 12px 0px var(--primary-shadow);
 }
 
 #Login-Google__btn {
@@ -74,4 +135,36 @@
 	100% {
 		opacity: 1;
 	}
+}
+
+/********************************* */
+/** Media Queries                  *
+/********************************* */
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+	.Login__Gif.hide-sm {
+		display: block;
+		margin-right: 3rem;
+	}
+
+	.Login__Gif.hide-md {
+		display: none;
+	}
+
+	.Signup-Header {
+		margin-bottom: 13rem;
+	}
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+	.Login__container > .Login-Content {
+		justify-content: space-evenly;
+		width: 80%;
+	}
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
 }

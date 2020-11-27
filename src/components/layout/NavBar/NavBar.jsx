@@ -33,7 +33,7 @@ function NavBar() {
 				<li className="nav-item p-0">
 					<div className="Header-Logo">
 						<Link to="/feed">
-							<img src={Logo} alt="Mate" />
+							<img src={Logo} alt="Pare" />
 						</Link>
 					</div>
 				</li>
