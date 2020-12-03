@@ -676,8 +676,15 @@ li .MuiChip-root svg:hover {
 	.Course-Card,
 	.Assignment-Card,
 	.Comment-Card,
-	.Tutor-Card {
+	.Tutor-Card,
+	.StudyGroupChat,
+	.MessageChat {
 		border-right: 1px solid var(--tertiary-color);
+	}
+
+	.MessageChat,
+	.StudyGroupChat {
+		height: 100vh;
 	}
 
 	.MessageChat__Header {
