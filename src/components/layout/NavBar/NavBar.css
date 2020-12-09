@@ -70,6 +70,7 @@ a.nav-link:focus,
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
 	.NavBar {
+		border-top: none;
 		border-right: 2px solid var(--tertiary-color);
 		height: 100vh;
 		width: 92px;
