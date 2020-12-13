@@ -15,6 +15,7 @@ import {
 	editPostInFB,
 } from '../../store/actions/posts';
 import { addFlashMessage } from '../../store/actions/flashMessages';
+import { FB } from './constants/index';
 import db from '../../config/fbConfig';
 import './Feed.css';
 
@@ -43,8 +44,8 @@ function Feed() {
 		// get data from 'feed' collection
 		const getData = async () => {
 			await db
-				.collection('feeds')
-				.orderBy('timestamp', 'desc')
+				.collection(FB.collection)
+				.orderBy(FB.orderBy, FB.order)
 				.get()
 				.then((data) => {
 					setPosts(
@@ -54,9 +55,8 @@ function Feed() {
 						}))
 					);
 				})
-				.catch((err) => console.log(err));
-
-			setIsLoading(false);
+				.catch((err) => console.log(err))
+				.finally(() => setIsLoading(false));
 		};
 
 		if (isLoading) {

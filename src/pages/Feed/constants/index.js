@@ -14,3 +14,9 @@ export const postTypeOptions = [
 	'Marketplace',
 	'Events',
 ];
+
+export const FB = {
+	collection: 'feeds',
+	orderBy: 'timestamp',
+	order: 'desc',
+};
