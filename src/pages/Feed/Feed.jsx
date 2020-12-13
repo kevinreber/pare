@@ -15,7 +15,7 @@ import {
 	editPostInFB,
 } from '../../store/actions/posts';
 import { addFlashMessage } from '../../store/actions/flashMessages';
-import { FB } from './constants/index';
+import { FB, MESSAGE, CONFIRM } from './constants/index';
 import db from '../../config/fbConfig';
 import './Feed.css';
 
@@ -74,8 +74,8 @@ function Feed() {
 		dispatch(
 			addFlashMessage({
 				isOpen: true,
-				message: 'Post Successful!',
-				type: 'success',
+				message: MESSAGE.addPost,
+				type: MESSAGE.success,
 			})
 		);
 		// get most recent posts
@@ -86,8 +86,8 @@ function Feed() {
 	const deletePostPrompt = (id, image) => {
 		setConfirmDialog({
 			isOpen: true,
-			title: 'Are you sure you want to remove post?',
-			subtitle: "You can't undo this operation",
+			title: CONFIRM.title,
+			subtitle: CONFIRM.subtitle,
 			onConfirm: () => {
 				deletePost(id, image);
 			},
@@ -104,8 +104,8 @@ function Feed() {
 		dispatch(
 			addFlashMessage({
 				isOpen: true,
-				message: 'Removed Post',
-				type: 'error',
+				message: MESSAGE.deletePost,
+				type: MESSAGE.error,
 			})
 		);
 		// get most recent posts
@@ -118,8 +118,8 @@ function Feed() {
 		dispatch(
 			addFlashMessage({
 				isOpen: true,
-				message: 'Update Successful!',
-				type: 'success',
+				message: MESSAGE.updatePost,
+				type: MESSAGE.success,
 			})
 		);
 		// get most recent posts
