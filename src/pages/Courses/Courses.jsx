@@ -12,6 +12,7 @@ import CTAButton from '../../components/CTAButton/CTAButton';
 import { addCourseToFB } from '../../store/actions/courses';
 import { fetchCourseCatalog } from '../../store/actions/courseCatalog';
 import { addFlashMessage } from '../../store/actions/flashMessages';
+import { FB, MESSAGE } from './constants/index';
 import db from '../../config/fbConfig';
 import './Courses.css';
 import { CONFIRM_DIALOG_INITIAL_STATE } from './constants/index';
@@ -79,16 +80,16 @@ function Courses() {
 		dispatch(
 			addFlashMessage({
 				isOpen: true,
-				message: 'Course Added',
-				type: 'success',
+				message: MESSAGE.addCourse,
+				type: MESSAGE.success,
 			})
 		);
 	};
 
 	useEffect(() => {
 		const getData = () => {
-			db.collection('courses')
-				.where('users', 'array-contains', currentUser.uid)
+			db.collection(FB.collection)
+				.where(FB.field, FB.filter, currentUser.uid)
 				.onSnapshot((snapshot) =>
 					setCourses(
 						snapshot.docs.map((doc) => ({
