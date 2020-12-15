@@ -14,6 +14,7 @@ import BackButton from '../../components/BackButton/BackButton';
 import createFbTimestamp from '../../utils/createFbTimestamp';
 import { addFlashMessage } from '../../store/actions/flashMessages';
 import { increment } from '../../config/fbConfig';
+import { FB, MESSAGE, INITIAL_STATE } from './constants/index';
 import db from '../../config/fbConfig';
 import './StudyGroupChat.css';
 
@@ -30,10 +31,6 @@ function StudyGroupChat() {
 
 	const currentUser = useSelector((state) => state.auth.user);
 
-	const INITIAL_STATE = {
-		title: '',
-		members: [],
-	};
 	const [studyGroup, setStudyGroup] = useState({});
 	const [studyGroupForm, setStudyGroupForm] = useState(INITIAL_STATE);
 	const [groupMembers, setGroupMembers] = useState(null);
@@ -52,7 +49,7 @@ function StudyGroupChat() {
 	useEffect(() => {
 		function getData() {
 			/** Get Study Group Info */
-			db.collection('study-groups')
+			db.collection(FB.collection)
 				.doc(studyGroupId)
 				.get()
 				.then((doc) => {
@@ -61,10 +58,10 @@ function StudyGroupChat() {
 				.catch((err) => console.log(err));
 
 			/** Get Study Group Messages */
-			db.collection('study-groups')
+			db.collection(FB.collection)
 				.doc(studyGroupId)
-				.collection('messages')
-				.orderBy('createdAt', 'asc')
+				.collection(FB.messages)
+				.orderBy(FB.orderBy, FB.order)
 				.onSnapshot((snapshot) =>
 					setMessages(
 						snapshot.docs.map((doc) => {
@@ -77,9 +74,9 @@ function StudyGroupChat() {
 				);
 
 			/** Get Study Group Members */
-			db.collection('study-groups')
+			db.collection(FB.collection)
 				.doc(studyGroupId)
-				.collection('users')
+				.collection(FB.users)
 				.onSnapshot((snapshot) =>
 					setGroupMembers(
 						snapshot.docs.map((doc) => {
@@ -136,7 +133,7 @@ function StudyGroupChat() {
 
 	const updateStudyGroupTitle = () => {
 		/** update DB and make change */
-		db.collection('study-groups').doc(studyGroupId).update({
+		db.collection(FB.collection).doc(studyGroupId).update({
 			title: studyGroupForm.title,
 			lastUpdatedAt: createFbTimestamp(),
 		});
@@ -144,8 +141,8 @@ function StudyGroupChat() {
 		dispatch(
 			addFlashMessage({
 				isOpen: true,
-				message: 'Changes Saved',
-				type: 'success',
+				message: MESSAGE.saveChanges,
+				type: MESSAGE.success,
 			})
 		);
 	};
@@ -176,11 +173,11 @@ function StudyGroupChat() {
 
 	const sendMessage = (message) => {
 		try {
-			db.collection('study-groups')
+			db.collection(FB.collection)
 				.doc(studyGroupId)
-				.collection('messages')
+				.collection(FB.messages)
 				.add(message);
-			db.collection('study-groups').doc(studyGroupId).update({
+			db.collection(FB.collection).doc(studyGroupId).update({
 				count: increment,
 				lastUpdatedAt: createFbTimestamp(),
 			});
