@@ -12,10 +12,9 @@ import CTAButton from '../../components/CTAButton/CTAButton';
 import { addCourseToFB } from '../../store/actions/courses';
 import { fetchCourseCatalog } from '../../store/actions/courseCatalog';
 import { addFlashMessage } from '../../store/actions/flashMessages';
-import { FB, MESSAGE } from './constants/index';
+import { CONFIRM_DIALOG_INITIAL_STATE, FB, MESSAGE } from './constants/index';
 import db from '../../config/fbConfig';
 import './Courses.css';
-import { CONFIRM_DIALOG_INITIAL_STATE } from './constants/index';
 
 /** Displays a CourseList of user's Current and Past Semester courses. 
     Courses will fetch which courses to display from API and pass courses into CourseList.
