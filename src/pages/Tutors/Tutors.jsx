@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 /** Components & Helpers */
 import FindTutors from './components/FindTutors/FindTutors';
 import BeTutorForm from './components/BeTutorForm/BeTutorForm';
+import { FB } from './constants/index';
 import db from '../../config/fbConfig';
 import './Tutors.css';
 
@@ -22,8 +23,8 @@ function Tutor() {
 		// Gets all available tutors data
 		async function getTutors() {
 			await db
-				.collection('users')
-				.where('isTutor', '==', true)
+				.collection(FB.collection)
+				.where(FB.isTutor, '==', true)
 				.get()
 				.then((data) => {
 					setTutors(
@@ -50,10 +51,10 @@ function Tutor() {
 			tutors.forEach(async (tutor, idx) => {
 				// Set tutor's availability
 				const availability = await db
-					.collection('users')
+					.collection(FB.collection)
 					.doc(tutorsCopy[idx].id)
-					.collection('availability')
-					.orderBy('day')
+					.collection(FB.availability)
+					.orderBy(FB.day)
 					.get()
 					.then((data) => {
 						let userAvailability = data.docs.map((doc) => {
@@ -78,7 +79,7 @@ function Tutor() {
 
 	useEffect(() => {
 		function getUserTutorInfo() {
-			db.collection('users')
+			db.collection(FB.collection)
 				.doc(currentUser.uid)
 				.onSnapshot((snapshot) => setUser(snapshot.data()));
 		}

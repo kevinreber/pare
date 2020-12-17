@@ -6,22 +6,12 @@ import { PropTypes } from 'prop-types';
 import TutorList from '../TutorList/TutorList';
 import CTAButton from '../../../../components/CTAButton/CTAButton';
 import capitalizeFirstLetter from '../../../../utils/capitalizeFirstLetter';
+import { DAYS } from '../../constants/index';
 
 /** MUI */
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import SearchIcon from '@material-ui/icons/Search';
-
-/** Days of the week */
-const DAYS = [
-	'monday',
-	'tuesday',
-	'wednesday',
-	'thursday',
-	'friday',
-	'saturday',
-	'sunday',
-];
 
 /**
  * Search bar that filters tutors.
