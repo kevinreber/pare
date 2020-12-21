@@ -16,6 +16,7 @@ import createFbTimestamp from '../../utils/createFbTimestamp';
 import { addFlashMessage } from '../../store/actions/flashMessages';
 import { deleteAccount } from '../../store/actions/auth';
 import createNewMessage from '../../utils/createNewMessage';
+import { FB, MESSAGE, CONFIRM } from './constants/index';
 import './UserProfile.css';
 import db from '../../config/fbConfig';
 
@@ -40,7 +41,7 @@ function UserProfile() {
 
 	useEffect(() => {
 		async function getUserData() {
-			const doc = await db.collection('users').doc(userId).get();
+			const doc = await db.collection(FB.users).doc(userId).get();
 
 			/** if user doesn't exist, redirect user to '/feed' */
 			if (!doc.exists) {
@@ -48,19 +49,19 @@ function UserProfile() {
 				dispatch(
 					addFlashMessage({
 						isOpen: true,
-						message: 'User does not exist',
-						type: 'error',
+						message: MESSAGE.noUser,
+						type: MESSAGE.error,
 					})
 				);
 			} else {
-				db.collection('users')
+				db.collection(FB.users)
 					.doc(userId)
 					.onSnapshot((snapshot) => setUser(snapshot.data()));
 
-				db.collection('users')
+				db.collection(FB.users)
 					.doc(userId)
-					.collection('availability')
-					.orderBy('day')
+					.collection(FB.availability)
+					.orderBy(FB.day)
 					.onSnapshot((snapshot) =>
 						setUserAvailability(
 							snapshot.docs.map((doc) => {
@@ -72,8 +73,8 @@ function UserProfile() {
 						)
 					);
 
-				db.collection('courses')
-					.where('users', 'array-contains', userId)
+				db.collection(FB.courses)
+					.where(FB.users, 'array-contains', userId)
 					.onSnapshot((snapshot) =>
 						setUserCourses(
 							snapshot.docs.map((doc) => ({
@@ -83,7 +84,7 @@ function UserProfile() {
 						)
 					);
 
-				db.collection('feeds')
+				db.collection(FB.feeds)
 					// firebase does not allow you to use 'where'
 					// and 'orderby' on different fields
 					.where('userId', '==', userId)
@@ -122,7 +123,7 @@ function UserProfile() {
 	const sendMessagePrompt = () => {
 		setConfirmDialog({
 			isOpen: true,
-			title: 'Message user?',
+			title: MESSAGE.sendMessage,
 			subtitle: '',
 			onConfirm: () => {
 				sendMessage();
@@ -139,8 +140,8 @@ function UserProfile() {
 		dispatch(
 			addFlashMessage({
 				isOpen: true,
-				message: 'Message Created!',
-				type: 'success',
+				message: MESSAGE.sentMessage,
+				type: MESSAGE.success,
 			})
 		);
 	};
@@ -159,7 +160,7 @@ function UserProfile() {
 		);
 
 	const updateUserData = (data) => {
-		db.collection('users').doc(userId).update({
+		db.collection(FB.users).doc(userId).update({
 			bio: data.bio,
 		});
 	};
@@ -169,8 +170,8 @@ function UserProfile() {
 		dispatch(
 			addFlashMessage({
 				isOpen: true,
-				message: 'Changes Saved!',
-				type: 'success',
+				message: MESSAGE.updateAccount,
+				type: MESSAGE.success,
 			})
 		);
 		toggleEditProfile();
@@ -181,8 +182,8 @@ function UserProfile() {
 		setEditProfile(false);
 		setConfirmDialog({
 			isOpen: true,
-			title: 'Are you sure you want to delete your account?',
-			subtitle: "You can't undo this operation",
+			title: CONFIRM.title,
+			subtitle: CONFIRM.subtitle,
 			onConfirm: () => {
 				deleteUserAccount();
 			},
@@ -228,8 +229,6 @@ function UserProfile() {
 						confirmDialog={confirmDialog}
 						setConfirmDialog={setConfirmDialog}
 					/>
-					{/* <div className="UserProfile__BackBtn">
-					</div> */}
 					<div className="UserProfile__Header">
 						<BackButton />
 						<UserProfileHeader
