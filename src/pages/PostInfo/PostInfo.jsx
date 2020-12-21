@@ -15,6 +15,13 @@ import {
 } from '../../store/actions/posts';
 import Notification from '../../components/Notification/Notification';
 import ConfirmDialog from '../../components/ConfirmDialog/ConfirmDialog';
+import {
+	INITIAL_STATE_NOTIFY,
+	INITIAL_STATE_CONFIRM_DIALOG,
+	FB,
+	MESSAGE,
+	CONFIRM,
+} from './constants/index';
 import db from '../../config/fbConfig';
 import './PostInfo.css';
 
@@ -29,29 +36,23 @@ function PostInfo() {
 	const [post, setPost] = useState(null);
 	const [comments, setComments] = useState([]);
 
-	const [notify, setNotify] = useState({
-		isOpen: false,
-		message: '',
-		type: '',
-	});
-	const [confirmDialog, setConfirmDialog] = useState({
-		isOpen: false,
-		title: '',
-		subtitle: '',
-	});
+	const [notify, setNotify] = useState(INITIAL_STATE_NOTIFY);
+	const [confirmDialog, setConfirmDialog] = useState(
+		INITIAL_STATE_CONFIRM_DIALOG
+	);
 
 	useEffect(() => {
 		/** Get Post Info */
 		if (postId) {
-			db.collection('feeds')
+			db.collection(FB.collection)
 				.doc(postId)
 				.onSnapshot((snapshot) => setPost(snapshot.data()));
 
 			/** Get Post Comments */
-			db.collection('feeds')
+			db.collection(FB.collection)
 				.doc(postId)
-				.collection('comments')
-				.orderBy('createdAt', 'desc')
+				.collection(FB.subCollection)
+				.orderBy(FB.orderBy, FB.order)
 				.onSnapshot((snapshot) =>
 					setComments(
 						snapshot.docs.map((doc) => {
@@ -79,8 +80,8 @@ function PostInfo() {
 	const deleteCommentPrompt = (id) => {
 		setConfirmDialog({
 			isOpen: true,
-			title: 'Are you sure you want to remove this comment?',
-			subtitle: "You can't undo this operation",
+			title: CONFIRM.title,
+			subtitle: CONFIRM.subtitle,
 			onConfirm: () => {
 				deleteComment(id);
 			},
@@ -94,7 +95,11 @@ function PostInfo() {
 			isOpen: false,
 		});
 		dispatch(deleteCommentFromPost(postId, id));
-		setNotify({ isOpen: true, message: 'Removed Comment', type: 'error' });
+		setNotify({
+			isOpen: true,
+			message: MESSAGE.deleteComment,
+			type: MESSAGE.error,
+		});
 	};
 
 	const editComment = (id) => {
