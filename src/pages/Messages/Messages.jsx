@@ -15,6 +15,7 @@ import createFbTimestamp from '../../utils/createFbTimestamp';
 import { increment } from '../../config/fbConfig';
 import { deleteMessageFromFB } from '../../store/actions/messages';
 import { addFlashMessage } from '../../store/actions/flashMessages';
+import { FB, MESSAGE, CONFIRM } from './constants';
 import db from '../../config/fbConfig';
 import './Messages.css';
 
@@ -66,15 +67,15 @@ function MessageChat() {
 		const getData = () => {
 			if (messageId) {
 				/** Get Message Info */
-				db.collection('messages')
+				db.collection(FB.messages)
 					.doc(messageId)
 					.onSnapshot((snapshot) => setMessageData(snapshot.data()));
 
 				/** Get Chat Messages */
-				db.collection('messages')
+				db.collection(FB.messages)
 					.doc(messageId)
-					.collection('chats')
-					.orderBy('createdAt', 'asc')
+					.collection(FB.chats)
+					.orderBy(FB.orderBy, FB.order)
 					.onSnapshot((snapshot) =>
 						setChats(
 							snapshot.docs.map((doc) => {
@@ -108,7 +109,7 @@ function MessageChat() {
 	// get Receiver's data
 	useEffect(() => {
 		if (receiverId && isLoading) {
-			db.collection('users')
+			db.collection(FB.users)
 				.doc(receiverId[0])
 				.onSnapshot((snapshot) => setReceiver(snapshot.data()));
 
@@ -130,16 +131,19 @@ function MessageChat() {
 		dispatch(
 			addFlashMessage({
 				isOpen: true,
-				message: 'Message Deleted',
-				type: 'error',
+				message: MESSAGE.deleteMessage,
+				type: MESSAGE.error,
 			})
 		);
 	};
 
 	const sendMessage = (message) => {
 		try {
-			db.collection('messages').doc(messageId).collection('chats').add(message);
-			db.collection('messages').doc(messageId).update({
+			db.collection(FB.messages)
+				.doc(messageId)
+				.collection(FB.chats)
+				.add(message);
+			db.collection(FB.messages).doc(messageId).update({
 				count: increment,
 				lastUpdatedAt: createFbTimestamp(),
 			});
@@ -153,7 +157,7 @@ function MessageChat() {
 		setConfirmDialog({
 			isOpen: true,
 			title: `Remove message with ${receiver.displayName}`,
-			subtitle: "You can't undo this operation",
+			subtitle: CONFIRM.subtitle,
 			onConfirm: () => {
 				deleteMessage();
 			},
