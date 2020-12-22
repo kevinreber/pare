@@ -25,6 +25,7 @@ function Courses() {
 
 	/** Get courseCatalog from redux store */
 	const courseCatalog = useSelector((state) => state.courseCatalog);
+	const [getCatalog, setGetCatalog] = useState(true);
 
 	const [courses, setCourses] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
@@ -108,11 +109,12 @@ function Courses() {
 		/** get course catalog on page load */
 		async function getCourseCatalog() {
 			await dispatch(fetchCourseCatalog());
+			setGetCatalog(false);
 		}
-		if (!courseCatalog.courses) {
+		if (!courseCatalog.courses && getCatalog) {
 			getCourseCatalog();
 		}
-	}, [dispatch, courseCatalog]);
+	}, [dispatch, courseCatalog, getCatalog]);
 
 	// build list of courses, if no courses exist return 'No courses added'
 	let courseList;
