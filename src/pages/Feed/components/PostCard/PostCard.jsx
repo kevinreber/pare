@@ -236,7 +236,6 @@ function PostCard({
 		);
 	}
 	/******************************************** */
-
 	// Copies link of post to browser clipboard
 	const shareLink = () => {
 		try {
@@ -278,7 +277,7 @@ function PostCard({
 							<div className="Post-Card__Sub-Header">
 								<span className="mate-text-secondary username">{username}</span>
 								<span className="mate-text-secondary edited">
-									{last_updated && timestamp !== last_updated ? '(Edited)' : ''}
+									{!timestamp.isEqual(last_updated) ? '(Edited)' : ''}
 								</span>
 							</div>
 						</div>
