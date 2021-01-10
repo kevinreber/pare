@@ -28,7 +28,7 @@ import './PostInfo.css';
 /** Displays PostInfo
  *  Feed -> PostInfo
  */
-function PostInfo() {
+export function PostInfo() {
 	const dispatch = useDispatch();
 	const { postId } = useParams();
 	// const currentUser = useSelector((state) => state.auth.user);
@@ -162,5 +162,3 @@ function PostInfo() {
 		</div>
 	);
 }
-
-export default PostInfo;

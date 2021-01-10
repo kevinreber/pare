@@ -19,7 +19,7 @@ import db from '../../config/fbConfig';
 import './StudyGroups.css';
 
 /** Page that displays a list of user's Study Groups */
-function Connect() {
+export function StudyGroups() {
 	const history = useHistory();
 	const dispatch = useDispatch();
 
@@ -148,5 +148,3 @@ function Connect() {
 		</div>
 	);
 }
-
-export default Connect;

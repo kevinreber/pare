@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { googleLogin } from '../../store/actions/auth';
 
 /** User Signup Form */
-function Signup() {
+export function Signup() {
 	const dispatch = useDispatch();
 
 	/** Use history to redirect after user logs in/signs up */
@@ -130,5 +130,3 @@ function Signup() {
 		</div>
 	);
 }
-
-export default Signup;

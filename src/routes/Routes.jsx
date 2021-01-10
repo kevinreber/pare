@@ -3,19 +3,19 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
 /** Component Pages */
-import Login from '../pages/Login/Login';
-import Signup from '../pages/Login/Signup';
-import Notifications from '../pages/Notifications/Notifications';
-import Messages from '../pages/Messages/Messages';
-import Feed from '../pages/Feed/Feed';
-import PostInfo from '../pages/PostInfo/PostInfo';
-import Search from '../pages/Search/Search';
-import Courses from '../pages/Courses/Courses';
-import CourseInfo from '../pages/CourseInfo/CourseInfo';
-import StudyGroups from '../pages/StudyGroups/StudyGroups';
-import StudyGroupChat from '../pages/StudyGroupChat/StudyGroupChat';
-import Tutors from '../pages/Tutors/Tutors';
-import UserProfile from '../pages/UserProfile/UserProfile';
+import { Login } from '../pages/Login';
+import { Signup } from '../pages/Login';
+import { Notifications } from '../pages/Notifications';
+import { Messages } from '../pages/Messages';
+import { Feed } from '../pages/Feed';
+import { PostInfo } from '../pages/PostInfo';
+import { Search } from '../pages/Search';
+import { Courses } from '../pages/Courses';
+import { CourseInfo } from '../pages/CourseInfo';
+import { StudyGroups } from '../pages/StudyGroups';
+import { StudyGroupChat } from '../pages/StudyGroupChat';
+import { Tutors } from '../pages/Tutors';
+import { UserProfile } from '../pages/UserProfile';
 
 /** Helpers */
 import PrivateRoute from '../auth/PrivateRoute';

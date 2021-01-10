@@ -21,7 +21,7 @@ import './UserProfile.css';
 import db from '../../config/fbConfig';
 
 /** User Profile component */
-function UserProfile() {
+export function UserProfile() {
 	const { userId } = useParams();
 	const history = useHistory();
 	const dispatch = useDispatch();
@@ -259,5 +259,3 @@ function UserProfile() {
 		</div>
 	);
 }
-
-export default UserProfile;

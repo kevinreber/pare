@@ -25,7 +25,7 @@ import MoreHorizOutlinedIcon from '@material-ui/icons/MoreHorizOutlined';
 /** Displays Study Group's Chat
  * StudyGroups -> StudyGroupsList -> StudyGroupCard -> StudyGroupChat
  */
-function StudyGroupChat() {
+export function StudyGroupChat() {
 	const { studyGroupId } = useParams();
 	const dispatch = useDispatch();
 
@@ -239,5 +239,3 @@ function StudyGroupChat() {
 		</div>
 	);
 }
-
-export default StudyGroupChat;

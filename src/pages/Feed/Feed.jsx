@@ -26,7 +26,7 @@ import AddIcon from '@material-ui/icons/Add';
 /** Feed displays a list of latest Posts
  *  Feed -> FeedList -> PostCard
  */
-function Feed() {
+export function Feed() {
 	const dispatch = useDispatch();
 	const [posts, setPosts] = useState([]);
 
@@ -161,5 +161,3 @@ function Feed() {
 		</div>
 	);
 }
-
-export default Feed;

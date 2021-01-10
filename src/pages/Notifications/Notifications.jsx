@@ -14,7 +14,7 @@ import { addFlashMessage } from '../../store/actions/flashMessages';
 import createNewMessage from '../../utils/createNewMessage';
 
 /** User can see notifications and messages */
-function Notifications() {
+export function Notifications() {
 	const history = useHistory();
 	const currentUser = useSelector((state) => state.auth.user);
 	const dispatch = useDispatch();
@@ -91,5 +91,3 @@ function Notifications() {
 		</div>
 	);
 }
-
-export default Notifications;

@@ -19,7 +19,7 @@ import './CourseInfo.css';
 /** Displays Course Information such as assignments and discussion boards
  * Courses -> CourseList -> Course -> CourseInfo
  */
-function CourseInfo() {
+export function CourseInfo() {
 	const { courseId } = useParams();
 	const history = useHistory();
 	const dispatch = useDispatch();
@@ -138,5 +138,3 @@ function CourseInfo() {
 
 	return <>{courseInfo}</>;
 }
-
-export default CourseInfo;
