@@ -158,7 +158,8 @@ export function setCurrentUser(user) {
 			.get()
 			.then((doc) => {
 				dispatch(setCurrUser(doc.data()));
-			});
+			})
+			.catch((err) => console.log(err));
 	};
 }
 

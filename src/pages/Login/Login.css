@@ -106,10 +106,21 @@
 	box-shadow: 0px 0px 12px 0px var(--primary-shadow);
 }
 
-#Login-Google__btn {
+#Login-Google__btn,
+#Demo__btn {
 	margin-right: auto;
 	margin-left: auto;
 	max-width: 350px;
+}
+
+#Demo__btn {
+	transition: all ease 0.2s;
+	background-color: var(--bg-color);
+	color: var(--primary-color);
+}
+
+#Demo__btn:hover {
+	color: var(--bg-color);
 }
 
 .fade-in-logo {

@@ -1,15 +1,13 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-// import { Link, useHistory } from 'react-router-dom';
-// import LoginHeader from './components/LoginHeader/LoginHeader';
-// import useFields from '../../hooks/useFields';
-// import { Button } from '@material-ui/core';
 import './Login.css';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Logo from '../../images/logo/pare-logo.png';
 import PareGif from '../../images/gif/pare-gif.gif';
-import { googleLogin } from '../../store/actions/auth';
+import { addFlashMessage } from '../../store/actions/flashMessages';
+import { googleLogin, setCurrentUser } from '../../store/actions/auth';
+import { getRandomID } from './constants/index';
 
 /** User Login Form */
 export function Login() {
@@ -31,6 +29,21 @@ export function Login() {
 		e.preventDefault();
 		dispatch(googleLogin());
 		history.push('/feed');
+	};
+
+	const demoLogin = () => {
+		const user = {
+			uid: getRandomID(),
+		};
+		dispatch(setCurrentUser(user));
+		dispatch(
+			addFlashMessage({
+				isOpen: true,
+				message: 'This is a demo account',
+				type: 'success',
+			})
+		);
+		console.log(user.uid, 'This is a demo');
 	};
 
 	return (
@@ -55,48 +68,14 @@ export function Login() {
 						<img className="Pare-Gif" src={PareGif} alt="Pare" />
 					</div>
 					<form className="Login__form mb-3" onSubmit={googleSignIn}>
-						{/* <div className='form-group'>
-					<label htmlFor='email' className='mate-text-primary float-left'>
-						Email
-					</label>
-					<input
-						id='email'
-						className='form-control mate-form-input'
-						type='text'
-						name='email'
-					/>
-				</div>
-				<div className='form-group'>
-					<label htmlFor='password' className='mate-text-primary float-left'>
-						Password
-					</label>
-					<input
-						id='password'
-						className='form-control mate-form-input'
-						type='text'
-						name='password'
-					/>
-				</div>
-				<div className='form-group'>
-					<Link
-						to='#'
-						className='mate-text-secondary mb-3 text-sm float-right font-italic'>
-						Forgot Password?
-					</Link>
-				</div> */}
 						<div className="Login__buttons fade-in-delay">
 							<button id="Login-Google__btn">Sign In With Google</button>
+							<button id="Demo__btn" type="button" onClick={demoLogin}>
+								Try Demo
+							</button>
 						</div>
 					</form>
 				</div>
-				{/* <div className='Login-Footer'>
-				<p>
-					Don't have an account?
-					<Link className='mate-text-primary ml-2' to='/signup'>
-						Sign Up
-					</Link>
-				</p>
-			</div> */}
 			</div>
 			<footer className="Login__Footer">
 				<p className="font-italic">
