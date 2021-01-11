@@ -38,7 +38,6 @@ export function PostInfo() {
 
 	const [post, setPost] = useState(null);
 	const [comments, setComments] = useState([]);
-	const [isLoading, setIsLoading] = useState(true);
 
 	const [notify, setNotify] = useState(INITIAL_STATE_NOTIFY);
 	const [confirmDialog, setConfirmDialog] = useState(
@@ -64,7 +63,6 @@ export function PostInfo() {
 						})
 					)
 				);
-			// setIsLoading(false);
 		};
 		if (postId) {
 			getData();
@@ -140,8 +138,6 @@ export function PostInfo() {
 				type: MESSAGE.error,
 			})
 		);
-		// get most recent posts
-		// setIsLoading(true);
 	};
 
 	/** Updates Post */
@@ -154,8 +150,6 @@ export function PostInfo() {
 				type: MESSAGE.success,
 			})
 		);
-		// get most recent posts
-		// setIsLoading(true);
 	};
 
 	return (
