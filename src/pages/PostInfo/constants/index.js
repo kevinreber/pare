@@ -24,12 +24,20 @@ export const FB = {
 export const MESSAGE = {
 	error: 'error',
 	success: 'success',
-	addPost: 'Post Successful!',
+	addComment: 'Comment Successful!',
 	deleteComment: 'Removed Comment',
+	deletePost: 'Removed Post',
+	updatePost: 'Update Successful!',
 };
 
 /** Confirm Dialog prompts */
 export const CONFIRM = {
 	title: 'Are you sure you want to remove this comment?',
+	subtitle: "You can't undo this operation",
+};
+
+/** Confirm Dialog prompts */
+export const CONFIRM_POST = {
+	title: 'Are you sure you want to remove post?',
 	subtitle: "You can't undo this operation",
 };

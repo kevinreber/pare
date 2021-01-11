@@ -24,6 +24,7 @@ import {
 	FB,
 	MESSAGE,
 	CONFIRM,
+	CONFIRM_POST,
 } from './constants/index';
 import db from '../../config/fbConfig';
 import './PostInfo.css';
@@ -116,8 +117,8 @@ export function PostInfo() {
 	const deletePostPrompt = (id, image) => {
 		setConfirmDialog({
 			isOpen: true,
-			title: CONFIRM.title,
-			subtitle: CONFIRM.subtitle,
+			title: CONFIRM_POST.title,
+			subtitle: CONFIRM_POST.subtitle,
 			onConfirm: () => {
 				deletePost(id, image);
 			},
