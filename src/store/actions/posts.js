@@ -69,7 +69,7 @@ export function editPostInFB(id, data) {
 	return (dispatch) => {
 		db.collection('feeds')
 			.doc(id)
-			.set(data)
+			.update(data)
 			.then(() => {
 				console.log('Post updated');
 				dispatch(editPost(id, data));

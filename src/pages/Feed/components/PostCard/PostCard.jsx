@@ -277,7 +277,11 @@ function PostCard({
 							<div className="Post-Card__Sub-Header">
 								<span className="mate-text-secondary username">{username}</span>
 								<span className="mate-text-secondary edited">
-									{!timestamp.isEqual(last_updated) ? '(Edited)' : ''}
+									{timestamp && last_updated
+										? !timestamp?.isEqual(last_updated)
+										: null
+										? '(Edited)'
+										: ''}
 								</span>
 							</div>
 						</div>

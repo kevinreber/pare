@@ -43,6 +43,7 @@ function EditPostForm({
 	timestamp,
 	comments,
 }) {
+	console.log(timestamp);
 	/** Get user data */
 	const user = useSelector((state) => {
 		return {

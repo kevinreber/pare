@@ -1,7 +1,7 @@
 /** Dependencies */
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 /** Components & Helpers */
 import BackButton from '../../components/BackButton/BackButton';
@@ -12,7 +12,10 @@ import CommentsList from './components/CommentsList/CommentsList';
 import {
 	addCommentToPost,
 	deleteCommentFromPost,
+	deletePostFromFB,
+	editPostInFB,
 } from '../../store/actions/posts';
+import { addFlashMessage } from '../../store/actions/flashMessages';
 import Notification from '../../components/Notification/Notification';
 import ConfirmDialog from '../../components/ConfirmDialog/ConfirmDialog';
 import {
@@ -31,10 +34,11 @@ import './PostInfo.css';
 export function PostInfo() {
 	const dispatch = useDispatch();
 	const { postId } = useParams();
-	// const currentUser = useSelector((state) => state.auth.user);
+	const currentUser = useSelector((state) => state.auth.user);
 
 	const [post, setPost] = useState(null);
 	const [comments, setComments] = useState([]);
+	const [isLoading, setIsLoading] = useState(true);
 
 	const [notify, setNotify] = useState(INITIAL_STATE_NOTIFY);
 	const [confirmDialog, setConfirmDialog] = useState(
@@ -43,7 +47,7 @@ export function PostInfo() {
 
 	useEffect(() => {
 		/** Get Post Info */
-		if (postId) {
+		const getData = () => {
 			db.collection(FB.collection)
 				.doc(postId)
 				.onSnapshot((snapshot) => setPost(snapshot.data()));
@@ -60,6 +64,10 @@ export function PostInfo() {
 						})
 					)
 				);
+			// setIsLoading(false);
+		};
+		if (postId) {
+			getData();
 		}
 	}, [postId]);
 
@@ -106,6 +114,50 @@ export function PostInfo() {
 		console.log('editing...', postId, id);
 	};
 
+	/** Prompts Confirmation Dialog to Delete Post*/
+	const deletePostPrompt = (id, image) => {
+		setConfirmDialog({
+			isOpen: true,
+			title: CONFIRM.title,
+			subtitle: CONFIRM.subtitle,
+			onConfirm: () => {
+				deletePost(id, image);
+			},
+		});
+	};
+
+	/** Delete Post */
+	const deletePost = (id, image) => {
+		setConfirmDialog({
+			...confirmDialog,
+			isOpen: false,
+		});
+		dispatch(deletePostFromFB(id, currentUser.uid, image));
+		dispatch(
+			addFlashMessage({
+				isOpen: true,
+				message: MESSAGE.deletePost,
+				type: MESSAGE.error,
+			})
+		);
+		// get most recent posts
+		// setIsLoading(true);
+	};
+
+	/** Updates Post */
+	const editPost = (id, data) => {
+		dispatch(editPostInFB(id, data));
+		dispatch(
+			addFlashMessage({
+				isOpen: true,
+				message: MESSAGE.updatePost,
+				type: MESSAGE.success,
+			})
+		);
+		// get most recent posts
+		// setIsLoading(true);
+	};
+
 	return (
 		<div className="PostInfo">
 			<Notification notify={notify} setNotify={setNotify} />
@@ -116,9 +168,9 @@ export function PostInfo() {
 			<div className="PostInfo__Header bottom-border-header Body-Header">
 				<BackButton />
 				<h5 className="text-center">
-					{post.type
-						? post.type.charAt(0).toUpperCase() + post.type.slice(1)
-						: 'Post'}
+					{post.type === ''
+						? 'Post'
+						: post.type.charAt(0).toUpperCase() + post.type.slice(1)}
 				</h5>
 			</div>
 			<div className="PostInfo__Body">
@@ -141,6 +193,8 @@ export function PostInfo() {
 						last_updated={post.last_updated}
 						comments={post.num_of_comments}
 						isBookmarked={false}
+						remove={deletePostPrompt}
+						edit={editPost}
 					/>
 				</div>
 				<div id="PostInfo__CommentList" className="PostInfo__CommentList">
