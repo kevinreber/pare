@@ -138,6 +138,7 @@ export function PostInfo() {
 						attachment_preview={post.attachment_preview}
 						attachment={post.attachment}
 						timestamp={post.timestamp}
+						last_updated={post.last_updated}
 						comments={post.num_of_comments}
 						isBookmarked={false}
 					/>
