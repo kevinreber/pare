@@ -327,8 +327,8 @@ function PostCard({
 				/>
 			</div>
 			<div className="Post-Card__Right Post__timestamp">
-				<p>{timestamp ? dateFromNowFormatter(timestamp) : null}</p>
-				{currentUser.uid === userId ? (
+				<p>{timestamp && dateFromNowFormatter(timestamp)}</p>
+				{currentUser.uid === userId && (
 					<>
 						<IconButton onClick={togglePopover}>
 							<MoreHorizOutlinedIcon />
@@ -342,7 +342,7 @@ function PostCard({
 							close={handleClose}
 						/>
 					</>
-				) : null}
+				)}
 			</div>
 		</div>
 	);
