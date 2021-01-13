@@ -6,7 +6,7 @@ interface NoDataProps {
 }
 
 /** Returns a message if user has not added any data */
-function NoData({ text, added = true }: NoDataProps) {
+function NoData({ text, added = true }: NoDataProps): JSX.Element {
 	return (
 		<p className="font-italic p-3">
 			No {text} {added ? 'added' : ''}

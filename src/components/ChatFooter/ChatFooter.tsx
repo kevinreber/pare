@@ -8,11 +8,24 @@ import IconButton from '@material-ui/core/IconButton';
 import SendIcon from '@material-ui/icons/Send';
 import ImageIcon from '@material-ui/icons/Image';
 
-/** Re-usable Chat Footer for any features that involves submitting a message/comment */
-function ChatFooter({ send, type = 'message' }) {
-	const currentUser = useSelector((state) => state.auth.user);
+interface ChatFooterProps {
+	send: any;
+	type?: string;
+}
 
-	const INITIAL_STATE = useMemo(
+interface IState {
+	message: string;
+	createdAt: any;
+	username: string;
+	userId: string;
+	avatar: string;
+}
+
+/** Re-usable Chat Footer for any features that involves submitting a message/comment */
+function ChatFooter({ send, type = 'message' }: ChatFooterProps): JSX.Element {
+	const currentUser = useSelector((state: any) => state.auth.user);
+
+	const INITIAL_STATE: IState = useMemo(
 		() => ({
 			message: '',
 			createdAt: firebase.firestore.FieldValue.serverTimestamp(),
@@ -54,10 +67,7 @@ function ChatFooter({ send, type = 'message' }) {
 						<ImageIcon fontSize="large" />
 					</IconButton>
 				</div>
-				<IconButton
-					type="submit"
-					disabled={!formData.message}
-					variant="contained">
+				<IconButton type="submit" disabled={!formData.message}>
 					<SendIcon />
 				</IconButton>
 			</form>
