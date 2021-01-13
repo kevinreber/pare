@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import './Login.css';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -79,7 +79,15 @@ export function Login() {
 			</div>
 			<footer className="Login__Footer">
 				<p className="font-italic">
-					Built with 💛 by <a href="https://www.kevinreber.dev/">Kevin Reber</a>
+					Built with{' '}
+					<span role="img" aria-label="heart">
+						{`\u{1F49B}`}
+					</span>{' '}
+					&{' '}
+					<span role="img" aria-label="coffee">
+						{`\u{2615}`}
+					</span>{' '}
+					by <Link to="https://www.kevinreber.dev/">Kevin Reber</Link>
 				</p>
 			</footer>
 		</div>
