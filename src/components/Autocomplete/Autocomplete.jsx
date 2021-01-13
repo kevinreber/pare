@@ -13,7 +13,7 @@ function Autocomplete({
 	name,
 	value,
 	label,
-	options,
+	options = [],
 	type,
 	placeholder,
 	setId,
