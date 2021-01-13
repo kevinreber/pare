@@ -47,15 +47,14 @@ function UserProfileBody({
 	return (
 		<div className="UserProfile__Body">
 			<UserFields label={'About'} content={bio} />
-			{/* <UserFields label={'Organizations'} content={organizations} /> */}
-			{classes.length > 0 ? (
+			{classes.length > 0 && (
 				<UserFields
 					label={'Classes Taken'}
 					content={classes}
 					chips={true}
 					field="courses"
 				/>
-			) : null}
+			)}
 			{showTutorFields}
 		</div>
 	);
