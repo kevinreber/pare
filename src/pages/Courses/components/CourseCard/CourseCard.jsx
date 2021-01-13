@@ -25,7 +25,7 @@ function CourseCard({ id, department, number, term, title }) {
 }
 
 CourseCard.propTypes = {
-	id: PropTypes.number.isRequired,
+	id: PropTypes.string.isRequired,
 	department: PropTypes.string.isRequired,
 	number: PropTypes.string.isRequired,
 	term: PropTypes.string.isRequired,
