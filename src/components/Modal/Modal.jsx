@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { ReactComponent as CloseIcon } from '../../icons/close-icon.svg';
 import { IconButton } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
@@ -33,4 +33,4 @@ Modal.propTypes = {
 	full: PropTypes.bool,
 };
 
-export default Modal;
+export default memo(Modal);

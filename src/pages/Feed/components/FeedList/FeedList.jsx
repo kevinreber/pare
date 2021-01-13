@@ -1,5 +1,5 @@
 /** Dependencies */
-import React from 'react';
+import React, { memo } from 'react';
 import { PropTypes } from 'prop-types';
 
 /** Components & Helpers */
@@ -47,4 +47,4 @@ FeedList.propTypes = {
 	edit: PropTypes.func,
 };
 
-export default FeedList;
+export default memo(FeedList);

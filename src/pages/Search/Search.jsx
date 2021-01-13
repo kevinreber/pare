@@ -1,5 +1,5 @@
 /** Dependencies */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 /** Components & Helpers */
@@ -21,11 +21,11 @@ import { List, ListItem, ListItemText } from '@material-ui/core';
 export function Search() {
 	const dispatch = useDispatch();
 	const [quickSearch, setQuickSearch] = useState('Today');
-	const toggleQuickSearch = (e) => {
+	const toggleQuickSearch = useCallback((e) => {
 		setIsLoading(true);
 		setPosts([]);
 		setQuickSearch(e.target.innerText);
-	};
+	}, []);
 
 	const [search, setSearch] = useState('');
 	const [startSearch, setStartSearch] = useState(false);
@@ -114,57 +114,66 @@ export function Search() {
 		}
 	}, [isLoading, startSearch, search]);
 
-	/** Prompts Confirmation Dialog to Delete Post*/
-	const deletePostPrompt = (id) => {
-		setConfirmDialog({
-			isOpen: true,
-			title: 'Are you sure you want to remove this post?',
-			subtitle: "You can't undo this operation",
-			onConfirm: () => {
-				deletePost(id);
-			},
-		});
-	};
-
 	/** Delete Post */
-	const deletePost = (id) => {
-		setConfirmDialog({
-			...confirmDialog,
-			isOpen: false,
-		});
-		dispatch(deletePostFromFB(id));
-		dispatch(
-			addFlashMessage({
+	const deletePost = useCallback(
+		(id) => {
+			setConfirmDialog({
+				...confirmDialog,
+				isOpen: false,
+			});
+			dispatch(deletePostFromFB(id));
+			dispatch(
+				addFlashMessage({
+					isOpen: true,
+					message: 'Removed Post',
+					type: 'error',
+				})
+			);
+		},
+		[dispatch, deletePostFromFB, addFlashMessage]
+	);
+
+	/** Prompts Confirmation Dialog to Delete Post*/
+	const deletePostPrompt = useCallback(
+		(id) => {
+			setConfirmDialog({
 				isOpen: true,
-				message: 'Removed Post',
-				type: 'error',
-			})
-		);
-	};
+				title: 'Are you sure you want to remove this post?',
+				subtitle: "You can't undo this operation",
+				onConfirm: () => {
+					deletePost(id);
+				},
+			});
+		},
+		[deletePost]
+	);
 
 	/** Prompts Modal to edit Post information */
-	const editPost = (id, data) => {
-		dispatch(editPostInFB(id, data));
-		dispatch(
-			addFlashMessage({
-				isOpen: true,
-				message: 'Update Successful!',
-				type: 'success',
-			})
-		);
-		// get most recent posts
-		setIsLoading(true);
-	};
+	const editPost = useCallback(
+		(id, data) => {
+			dispatch(editPostInFB(id, data));
+			dispatch(
+				addFlashMessage({
+					isOpen: true,
+					message: 'Update Successful!',
+					type: 'success',
+				})
+			);
+			// get most recent posts
+			setIsLoading(true);
+		},
+		[dispatch, editPostInFB, addFlashMessage]
+	);
 
-	const validSearch = () => {
+	const validSearch = useCallback(() => {
 		if (search === '' || search.trim() === '') {
 			setErrors('Search required*');
 			return false;
 		}
 		return true;
-	};
+	}, []);
 
-	const handleSubmit = () => {
+	const handleSubmit = useCallback(() => {
 		setErrors('');
 		if (validSearch()) {
 			setPosts([]);
@@ -172,7 +181,7 @@ export function Search() {
 			setIsLoading(true);
 			setStartSearch(true);
 		}
-	};
+	}, [validSearch]);
 
 	/** Quick Search Category List */
 	const SearchCategoryList = SearchCategories.map((category, index) => (
@@ -215,7 +224,7 @@ export function Search() {
 					search.length === 0 ? 'disabled-btn' : ''
 				}`}>
 				<CTAButton text="Search" />
-				{errors !== '' ? <div className="alert errors">{errors}</div> : null}
+				{errors !== '' && <div className="alert errors">{errors}</div>}
 			</div>
 		</div>
 	);
