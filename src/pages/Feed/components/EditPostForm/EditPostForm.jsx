@@ -104,6 +104,67 @@ const EditPostForm = memo(
 			subtitle: '',
 		});
 
+		// Handles image upload to DB
+		const handleUpload = useCallback(
+			async (image) => {
+				const storageRef = storage.ref(`feeds/${user.userId}/${image.name}`);
+
+				storageRef.put(image).on(
+					'state_changed',
+					(snapshot) => {
+						let progress = Math.round(
+							(snapshot.bytesTransferred / snapshot.totalBytes) * 100
+						);
+						setProgressBar(progress);
+					},
+					(error) => {
+						setErrors(error);
+					},
+					async () => {
+						const url = await storageRef.getDownloadURL();
+						setImage((data) => ({
+							...data,
+							url,
+							name: image.name,
+						}));
+					}
+				);
+			},
+			[user]
+		);
+
+		/** Resets attachment data.
+		 * 	If user is clearing state manually, image URL will be deleted from DB.
+		 */
+		const resetAttachment = useCallback(
+			async (removeUrl = false, replaceOriginalAttachment = false) => {
+				if (removeUrl) {
+					// if attachment is being replaced, we need to remove the previous existing attachment from the DB
+					// else we can remove the current temporary attachment from the DB
+					let imageToRemove = replaceOriginalAttachment
+						? EXISTING_STATE_IMAGE
+						: image;
+
+					const storageRef = storage.ref();
+					const storageImage = storageRef.child(
+						`feeds/${user.userId}/${imageToRemove.name}`
+					);
+
+					await storageImage
+						.delete()
+						.then(() => {
+							console.log('Removed image');
+						})
+						.catch((err) => {
+							console.log(err);
+						});
+				}
+				setImage(INITIAL_STATE_IMAGE);
+				setProgressBar(0);
+			},
+			[EXISTING_STATE_IMAGE, image, user]
+		);
+
 		/** Update state in formData */
 		const handleChange = useCallback(
 			(e) => {
@@ -138,39 +199,7 @@ const EditPostForm = memo(
 					}));
 				}
 			},
-			[formData, image]
-		);
-
-		/** Resets attachment data.
-		 * 	If user is clearing state manually, image URL will be deleted from DB.
-		 */
-		const resetAttachment = useCallback(
-			async (removeUrl = false, replaceOriginalAttachment = false) => {
-				if (removeUrl) {
-					// if attachment is being replaced, we need to remove the previous existing attachment from the DB
-					// else we can remove the current temporary attachment from the DB
-					let imageToRemove = replaceOriginalAttachment
-						? EXISTING_STATE_IMAGE
-						: image;
-
-					const storageRef = storage.ref();
-					const storageImage = storageRef.child(
-						`feeds/${user.userId}/${imageToRemove.name}`
-					);
-
-					await storageImage
-						.delete()
-						.then(() => {
-							console.log('Removed image');
-						})
-						.catch((err) => {
-							console.log(err);
-						});
-				}
-				setImage(INITIAL_STATE_IMAGE);
-				setProgressBar(0);
-			},
-			[EXISTING_STATE_IMAGE, image]
+			[resetAttachment, handleUpload]
 		);
 
 		/** Validate submitted data */
@@ -223,39 +252,18 @@ const EditPostForm = memo(
 					});
 				}
 			},
-			[formData, image]
+			[
+				formData,
+				image,
+				EXISTING_STATE_IMAGE,
+				address,
+				coordinates,
+				postId,
+				resetAttachment,
+				save,
+				validateFormData,
+			]
 		);
-
-		// Handles image upload to DB
-		const handleUpload = async (image) => {
-			const storageRef = storage.ref(`feeds/${user.userId}/${image.name}`);
-
-			storageRef.put(image).on(
-				'state_changed',
-				(snapshot) => {
-					let progress = Math.round(
-						(snapshot.bytesTransferred / snapshot.totalBytes) * 100
-					);
-					setProgressBar(progress);
-				},
-				(error) => {
-					setErrors(error);
-				},
-				async () => {
-					const url = await storageRef.getDownloadURL();
-					setImage((data) => ({
-						...data,
-						url,
-						name: image.name,
-					}));
-					// setFormData((fData) => ({
-					// 	...fData,
-					// 	attachment: url,
-					// 	attachment_name: image.name,
-					// }));
-				}
-			);
-		};
 
 		return (
 			<div className="PostForm">
