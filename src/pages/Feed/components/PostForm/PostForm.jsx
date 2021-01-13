@@ -2,10 +2,9 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import firebase from 'firebase';
-import PlacesAutocomplete, {
-	geocodeByAddress,
-	getLatLng,
-} from 'react-places-autocomplete';
+import PlacesAutocomplete from // geocodeByAddress,
+// getLatLng,
+'react-places-autocomplete';
 import { postTypeOptions, INITIAL_STATE_IMAGE } from '../../constants/index';
 
 /** Components && Helpers */
@@ -58,10 +57,11 @@ function PostForm({ save }) {
 
 	// location data
 	const [address, setAddress] = useState('');
-	const [coordinates, setCoordinates] = useState({
-		lat: null,
-		lng: null,
-	});
+	// ! TEMP: DO NOT USE TO AVOID API CHARGES
+	// const [coordinates, setCoordinates] = useState({
+	// 	lat: null,
+	// 	lng: null,
+	// });
 
 	const handleSelect = async (value) => {
 		// const results = await geocodeByAddress(value);
@@ -154,7 +154,7 @@ function PostForm({ save }) {
 		if (validateFormData()) {
 			formData.location = {
 				address,
-				coordinates,
+				// coordinates,
 			};
 
 			save(formData);
