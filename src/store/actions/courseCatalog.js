@@ -1,7 +1,7 @@
 import { FETCH_CATALOG, FETCH_CATALOG_ERROR } from './types';
-import axios from 'axios';
+// import axios from 'axios';
 
-const BASE_URL = 'https://www.berkeleytime.com';
+// const BASE_URL = 'https://www.berkeleytime.com';
 
 /** fetch all courses in catalog from berkeleytime API */
 export function fetchCourseCatalog() {
