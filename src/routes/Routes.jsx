@@ -4,7 +4,6 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 
 /** Component Pages */
 import { Login } from '../pages/Login';
-import { Signup } from '../pages/Login';
 import { Notifications } from '../pages/Notifications';
 import { Messages } from '../pages/Messages';
 import { Feed } from '../pages/Feed';
@@ -40,7 +39,6 @@ function Routes() {
 				<PrivateRoute exact path="/tutors" component={Tutors} />
 				<PrivateRoute exact path="/users/:userId" component={UserProfile} />
 				<Route exact path="/login" component={Login} />
-				<Route exact path="/signup" component={Signup} />
 				<Redirect to="/login" />
 			</Switch>
 		</>
