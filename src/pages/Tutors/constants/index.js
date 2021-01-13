@@ -14,5 +14,5 @@ export const FB = {
 	collection: 'users',
 	availability: 'availability',
 	isTutor: 'isTutor',
-	orderBy: 'day',
+	day: 'day',
 };
