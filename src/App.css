@@ -652,6 +652,19 @@ li .MuiChip-root svg:hover {
 
 	.Feed,
 	.Search,
+	.Courses,
+	.StudyGroups,
+	.StudyGroupChat,
+	.Notifications-Page,
+	.MessageChat,
+	.PostInfo,
+	.CourseInfo,
+	.UserProfile {
+		height: 100vh;
+	}
+
+	/* .Feed, */
+	.Search,
 	/* .Courses, */
 	/* .StudyGroupChat, */
 	/* .Tutors, */
