@@ -26,7 +26,7 @@ function UserFields({ label, content = '-', chips = false, field = '' }) {
 		return (
 			<ul className="User-Availability-List">
 				{data.map((day) => (
-					<li key={day.id}>
+					<li key={day.id.toString()}>
 						<p className="Available-Day">{capitalizeFirstLetter(day.id)}:</p>
 						<div className="Available-Time">
 							{buildValues(day.data['0'].start, day.data['0'].end)}
@@ -64,11 +64,11 @@ function UserFields({ label, content = '-', chips = false, field = '' }) {
 
 		// Format Courses
 		if (field === 'Classes Taken') {
-			list = arrayOfData.map((course, index) => {
+			list = arrayOfData.map((course) => {
 				const title = `${course.data.course.abbreviation} ${course.data.course.course_number}`;
 				return (
 					<>
-						<li data-name={course.id} key={course.id}>
+						<li key={course.id.toString()} data-name={course.id}>
 							<Chip label={title} size={'small'} />
 						</li>
 					</>
@@ -76,7 +76,7 @@ function UserFields({ label, content = '-', chips = false, field = '' }) {
 			});
 		} else {
 			list = arrayOfData.map((data, index) => (
-				<li data-name={field} key={index}>
+				<li key={index.toString()} data-name={field}>
 					<Chip label={data} size={'small'} />
 				</li>
 			));
