@@ -66,6 +66,7 @@ function AutocompleteStudyGroups({
 					return (
 						<li
 							id={option.id}
+							key={options.id}
 							className="option User-option"
 							data-name={name}
 							data-value={option.data.title}
