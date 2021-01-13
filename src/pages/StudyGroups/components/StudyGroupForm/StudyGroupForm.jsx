@@ -34,7 +34,7 @@ function StudyGroupForm({ save, studyGroups, user }) {
 		admin: [uid],
 		usersList: [uid],
 		count: 0,
-		maxUsers: null,
+		maxUsers: 0,
 		title: '',
 		createdAt: createFbTimestamp(),
 		lastUpdatedAt: createFbTimestamp(),
