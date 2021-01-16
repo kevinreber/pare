@@ -1,6 +1,6 @@
 /** Dependencies */
-import React from 'react';
-import { PropTypes } from 'prop-types';
+import React, { memo } from 'react';
+import * as PropTypes from 'prop-types';
 
 /** MUI */
 import IconButton from '@material-ui/core/IconButton';
@@ -8,6 +8,18 @@ import Popover from '@material-ui/core/Popover';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import BlockIcon from '@material-ui/icons/Block';
+
+interface PopoverActionsProps {
+	remove: Function;
+	edit: Function;
+	id: string;
+	open: boolean;
+	anchorEl: any;
+	close: any;
+	deleteBtn: boolean;
+	editBtn: Boolean;
+	block: Boolean;
+}
 
 /** Popover with basic CRUD actions
  *
@@ -21,7 +33,7 @@ import BlockIcon from '@material-ui/icons/Block';
  * @param {boolean}		editBtn		Boolean to show Edit Button.
  * @param {boolean}		block		Boolean to show Block Button.
  */
-function PopoverActions({
+const PopoverActions = ({
 	remove,
 	edit,
 	id,
@@ -31,7 +43,7 @@ function PopoverActions({
 	deleteBtn = true,
 	editBtn = true,
 	block = false,
-}) {
+}: PopoverActionsProps): JSX.Element => {
 	return (
 		<>
 			<Popover
@@ -60,7 +72,7 @@ function PopoverActions({
 			</Popover>
 		</>
 	);
-}
+};
 
 PopoverActions.propTypes = {
 	remove: PropTypes.func,
@@ -74,4 +86,4 @@ PopoverActions.propTypes = {
 	block: PropTypes.bool,
 };
 
-export default PopoverActions;
+export default memo(PopoverActions);
