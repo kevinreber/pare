@@ -49,7 +49,7 @@ function ChatFooter({ send, type = 'message' }: ChatFooterProps): JSX.Element {
 				console.log('error');
 			}
 		},
-		[formData, send]
+		[formData, send, resetFormData]
 	);
 
 	return (

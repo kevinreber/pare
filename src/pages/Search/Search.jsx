@@ -130,7 +130,7 @@ export function Search() {
 				})
 			);
 		},
-		[dispatch, deletePostFromFB, addFlashMessage]
+		[dispatch, confirmDialog]
 	);
 
 	/** Prompts Confirmation Dialog to Delete Post*/
@@ -162,7 +162,7 @@ export function Search() {
 			// get most recent posts
 			setIsLoading(true);
 		},
-		[dispatch, editPostInFB, addFlashMessage]
+		[dispatch]
 	);
 
 	const validSearch = useCallback(() => {
@@ -171,7 +171,7 @@ export function Search() {
 			return false;
 		}
 		return true;
-	}, []);
+	}, [search]);
 
 	const handleSubmit = useCallback(() => {
 		setErrors('');
