@@ -1,5 +1,5 @@
 /** Dependencies */
-import React from 'react';
+import React, { FormEvent } from 'react';
 
 /** Components & Helpers */
 import useFields from '../../../../hooks/useFields';
@@ -10,10 +10,15 @@ import IconButton from '@material-ui/core/IconButton';
 import SendIcon from '@material-ui/icons/Send';
 // import ImageIcon from '@material-ui/icons/Image';
 
+interface MessageFooterProps {
+	send: Function;
+	uid: string;
+}
+
 /** Displays Messages Chat Footer that allows the user to enter a message
  * Notifications -> MessagesList -> MessageCard -> Message -> MessageFooter
  */
-function MessageFooter({ send, uid }) {
+function MessageFooter({ send, uid }: MessageFooterProps): JSX.Element {
 	const INITIAL_STATE = {
 		content: '',
 		createdAt: createFbTimestamp(),
@@ -22,7 +27,7 @@ function MessageFooter({ send, uid }) {
 
 	const [formData, handleChange, resetFormData] = useFields(INITIAL_STATE);
 
-	const handleSubmit = (e) => {
+	const handleSubmit = (e: FormEvent): void => {
 		e.preventDefault();
 		// Check if field is empty or white space
 		if (formData.content && formData.content.trim() !== '') {
@@ -48,6 +53,7 @@ function MessageFooter({ send, uid }) {
 						<ImageIcon fontSize="large" />
 					</IconButton>
 				</div> */}
+				{/* @ts-ignore */}
 				<IconButton
 					type="submit"
 					disabled={!formData.content}
