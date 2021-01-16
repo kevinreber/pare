@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 /** Components & Helpers */
 import ConfirmDialog from '../../../../components/ConfirmDialog/ConfirmDialog';
 import SubmitButton from '../../../../components/SubmitButton/SubmitButton';
-import Autocomplete from '../../../../components/Autocomplete/Autocomplete';
+import AutocompleteCourses from '../../../../components/AutocompleteCourses/AutocompleteCourses';
 import { COURSE_FORM_DATA_INITIAL_STATE } from '../../constants/index';
 
 /** Form to add a course.
@@ -82,7 +82,7 @@ function CourseForm({ save, confirmDialog, setConfirmDialog, courses }) {
 			/>
 			<h4>Join Class</h4>
 			<form className="container mb-3" onSubmit={handleSubmit}>
-				<Autocomplete
+				<AutocompleteCourses
 					id={'courseName'}
 					name="courseName"
 					onChange={handleChange}

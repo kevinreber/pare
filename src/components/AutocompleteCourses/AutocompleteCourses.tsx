@@ -1,5 +1,5 @@
 /** Dependencies */
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 
 /** Components & Helpers */
 import './Autocomplete.css';
@@ -7,7 +7,19 @@ import './Autocomplete.css';
 /** MUI */
 import SearchIcon from '@material-ui/icons/Search';
 
-function Autocomplete({
+interface AutocompleteProps {
+	id: string;
+	onChange: Function;
+	name: string;
+	value: string;
+	label: string;
+	options: any;
+	type: string;
+	placeholder: string;
+	setId: Function;
+}
+
+const AutocompleteCourses = ({
 	id,
 	onChange,
 	name,
@@ -17,15 +29,15 @@ function Autocomplete({
 	type,
 	placeholder,
 	setId,
-}) {
+}: AutocompleteProps): JSX.Element => {
 	const [filteredOptions, setFilteredOptions] = useState([]);
 	const [showOptions, setShowOptions] = useState(false);
 
 	/** Commit onChange changes and filter through options */
-	function onSearch(e) {
+	function onSearch(e: any) {
 		onChange(e);
 		setShowOptions(true);
-		const opts = options.filter((course) => {
+		const opts = options.filter((course: any) => {
 			/** if filtering course through catalog */
 			if (type === 'courses') {
 				const search = `${course.abbreviation.toLowerCase()} ${
@@ -39,12 +51,15 @@ function Autocomplete({
 		setFilteredOptions(firstTenMatches);
 	}
 
-	function onClick(e) {
-		setFilteredOptions([]);
-		setShowOptions(false);
-		onChange(e);
-		setId(e);
-	}
+	const handleClick = useCallback(
+		(e: any) => {
+			setFilteredOptions([]);
+			setShowOptions(false);
+			onChange(e);
+			setId(e);
+		},
+		[setFilteredOptions, setShowOptions, onChange, setId]
+	);
 
 	/** Build list of autofill options */
 	let optionList;
@@ -52,7 +67,7 @@ function Autocomplete({
 		optionList =
 			filteredOptions.length > 0 ? (
 				<ul className="options">
-					{filteredOptions.map((option) => {
+					{filteredOptions.map((option: any) => {
 						return (
 							<li
 								id={option.id}
@@ -60,7 +75,7 @@ function Autocomplete({
 								className="option"
 								data-name={name}
 								data-value={`${option.abbreviation} ${option.course_number}`}
-								onClick={onClick}>
+								onClick={handleClick}>
 								{`${option.abbreviation} ${option.course_number}`}
 							</li>
 						);
@@ -94,6 +109,6 @@ function Autocomplete({
 			{optionList}
 		</div>
 	);
-}
+};
 
-export default Autocomplete;
+export default AutocompleteCourses;
