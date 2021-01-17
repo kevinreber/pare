@@ -1,6 +1,6 @@
 /** Dependencies */
-import React from 'react';
-import { PropTypes } from 'prop-types';
+import React, { memo } from 'react';
+import * as PropTypes from 'prop-types';
 
 /** Components & Helpers */
 import DialogButton from '../DialogButton/DialogButton';
@@ -50,6 +50,20 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
+interface ConfirmProps {
+	title: string;
+	subtitle: string;
+	isOpen: boolean;
+	onConfirm: Function;
+}
+
+interface Props {
+	color: string;
+	confirmDialog: ConfirmProps;
+	setConfirmDialog: Function;
+	type: string;
+}
+
 /** Confirmation Dialog to verify user wants to perform action.
  *
  * @param {object}		confirmDialog		Object of strings to display in dialog.
@@ -61,7 +75,7 @@ function ConfirmDialog({
 	confirmDialog,
 	setConfirmDialog,
 	type = 'success',
-}) {
+}: Props): JSX.Element {
 	const classes = useStyles();
 	return (
 		<Dialog open={confirmDialog.isOpen} classes={{ paper: classes.dialog }}>
@@ -81,12 +95,12 @@ function ConfirmDialog({
 			</DialogContent>
 			<DialogActions className={classes.dialogAction}>
 				<DialogButton
-					className={classes.primaryDialogButton}
+					className={classes.primaryDialogBtn}
 					text="No"
 					onClick={() => setConfirmDialog({ ...confirmDialog, isOpen: false })}
 				/>
 				<DialogButton
-					className={`${classes.primaryDialogButton} ${
+					className={`${classes.primaryDialogBtn} ${
 						type === 'success' ? 'Dialog-Success' : 'Dialog-Error'
 					}`}
 					text="Yes"
@@ -103,4 +117,4 @@ ConfirmDialog.propTypes = {
 	type: PropTypes.string,
 };
 
-export default ConfirmDialog;
+export default memo(ConfirmDialog);
