@@ -2,10 +2,9 @@
 import React, { useState, useCallback, memo } from 'react';
 import { useSelector } from 'react-redux';
 import firebase from 'firebase';
-import PlacesAutocomplete, {
-	geocodeByAddress,
-	getLatLng,
-} from 'react-places-autocomplete';
+import PlacesAutocomplete from // geocodeByAddress,
+// getLatLng,
+'react-places-autocomplete';
 import { postTypeOptions, INITIAL_STATE_IMAGE } from '../../constants/index';
 
 /** Components && Helpers */
