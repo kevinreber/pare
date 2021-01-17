@@ -97,14 +97,18 @@ function ConfirmDialog({
 				<DialogButton
 					className={classes.primaryDialogBtn}
 					text="No"
+					// @ts-ignore
 					onClick={() => setConfirmDialog({ ...confirmDialog, isOpen: false })}
+					type="default"
 				/>
 				<DialogButton
 					className={`${classes.primaryDialogBtn} ${
 						type === 'success' ? 'Dialog-Success' : 'Dialog-Error'
 					}`}
 					text="Yes"
+					// @ts-ignore
 					onClick={confirmDialog.onConfirm}
+					type={type}
 				/>
 			</DialogActions>
 		</Dialog>
