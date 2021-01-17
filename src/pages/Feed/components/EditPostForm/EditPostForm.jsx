@@ -86,16 +86,17 @@ const EditPostForm = memo(
 		const [address, setAddress] = useState(
 			location.address ? location.address : ''
 		);
-		const [coordinates, setCoordinates] = useState({
-			lat: location ? location.coordinates.lat : null,
-			lng: location ? location.coordinates.lng : null,
-		});
+		// ! TEMP: DO NOT USE TO AVOID API CHARGES
+		// const [coordinates, setCoordinates] = useState({
+		// 	lat: location ? location.coordinates.lat : null,
+		// 	lng: location ? location.coordinates.lng : null,
+		// });
 
 		const handleSelect = async (value) => {
-			const results = await geocodeByAddress(value);
-			const latLng = await getLatLng(results[0]);
+			// const results = await geocodeByAddress(value);
+			// const latLng = await getLatLng(results[0]);
 			setAddress(value);
-			setCoordinates(latLng);
+			// setCoordinates(latLng);
 		};
 
 		const [confirmDialog, setConfirmDialog] = useState({
@@ -230,7 +231,7 @@ const EditPostForm = memo(
 						onConfirm: async () => {
 							formData.location = {
 								address,
-								coordinates,
+								// coordinates,
 							};
 							// if image is removed from post
 							if (image.url === '') {
@@ -257,7 +258,7 @@ const EditPostForm = memo(
 				image,
 				EXISTING_STATE_IMAGE,
 				address,
-				coordinates,
+				// coordinates,
 				postId,
 				resetAttachment,
 				save,
