@@ -44,9 +44,22 @@ export function Tutors() {
 		if (isLoadingTutors) {
 			getTutors();
 		}
+	}, [isLoadingTutors, tutors]);
 
+	useEffect(() => {
+		function getUserTutorInfo() {
+			db.collection(FB.collection)
+				.doc(currentUser.uid)
+				.onSnapshot((snapshot) => setUser(snapshot.data()));
+		}
+		if (currentUser) {
+			getUserTutorInfo();
+		}
+	}, [currentUser]);
+
+	useEffect(() => {
 		// Gets tutor's availability
-		if (loadTutorsAvailabilities) {
+		const getTutors = () => {
 			const tutorsCopy = [...tutors];
 			tutors.forEach(async (tutor, idx) => {
 				// Set tutor's availability
@@ -72,21 +85,14 @@ export function Tutors() {
 					availability,
 				};
 			});
+
 			setTutors(tutorsCopy);
 			setLoadTutorsAvailabilities(false);
+		};
+		if (loadTutorsAvailabilities) {
+			getTutors();
 		}
-	}, [isLoadingTutors, tutors, loadTutorsAvailabilities]);
-
-	useEffect(() => {
-		function getUserTutorInfo() {
-			db.collection(FB.collection)
-				.doc(currentUser.uid)
-				.onSnapshot((snapshot) => setUser(snapshot.data()));
-		}
-		if (currentUser) {
-			getUserTutorInfo();
-		}
-	}, [currentUser]);
+	}, [tutors, loadTutorsAvailabilities]);
 
 	// State will determine what courses to show in CourseList
 	const [active, setActive] = useState('findTutor');
