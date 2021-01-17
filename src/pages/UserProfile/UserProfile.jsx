@@ -228,6 +228,7 @@ export function UserProfile() {
 					<ConfirmDialog
 						confirmDialog={confirmDialog}
 						setConfirmDialog={setConfirmDialog}
+						type="success"
 					/>
 					<div className="UserProfile__Header">
 						<BackButton />

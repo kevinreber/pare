@@ -1,12 +1,17 @@
 /** Dependencies */
 import React from 'react';
-import { PropTypes } from 'prop-types';
+import * as PropTypes from 'prop-types';
+
+interface Props {
+	text: string;
+	danger: boolean;
+}
 
 /** Call To Action Button
  * @param {string}	 text	 Text to display inside CTA Button.
  * @param {boolean}	 danger	 Boolean to change color of CTA Button.
  */
-function CTAButton({ text, danger = false }) {
+function CTAButton({ text, danger = false }: Props): JSX.Element {
 	return (
 		<div className="container w-75">
 			<button
