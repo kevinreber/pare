@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { memo } from 'react';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { IconButton } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import './BackButton.css';
 
 /** Back Button */
-function BackButton() {
+const BackButton = (): JSX.Element => {
 	const history = useHistory();
-	const goBack = () => {
+
+	const goBack = (): void => {
 		history.goBack();
 	};
 
@@ -18,6 +19,6 @@ function BackButton() {
 			</IconButton>
 		</div>
 	);
-}
+};
 
-export default BackButton;
+export default memo(BackButton);

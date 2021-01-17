@@ -1,5 +1,5 @@
 /** Dependencies */
-import React, { useState } from 'react';
+import React, { useState, memo, MouseEvent, ChangeEvent } from 'react';
 import './styles/AssignmentForm.css';
 
 /** Components & Helpers */
@@ -9,8 +9,18 @@ import 'react-datepicker/dist/react-datepicker.css';
 /** MUI */
 import TextField from '@material-ui/core/TextField';
 
+interface Props {
+	save: Function;
+	userId: string;
+}
+
+interface NewAssignmentProps {
+	title: string;
+	type: string;
+}
+
 /** Form to add a assignment. */
-function AssignmentForm({ save, userId }) {
+const AssignmentForm = ({ save, userId }: Props): JSX.Element => {
 	// Form Data
 	const INITIAL_STATE = {
 		title: '',
@@ -23,14 +33,14 @@ function AssignmentForm({ save, userId }) {
 	const [errors, setErrors] = useState('');
 
 	/** Handles general fields in form */
-	const handleChange = (e) => {
+	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setErrors('');
 		const { name, value } = e.target;
 		setFormData((fData) => ({ ...fData, [name]: value }));
 	};
 
 	/** Handles 'dueDate' field */
-	const handleDate = (e) => {
+	const handleDate = (e: ChangeEvent<HTMLInputElement>) => {
 		setErrors('');
 		const { name, value } = e.target;
 		const date = new Date(value);
@@ -39,7 +49,7 @@ function AssignmentForm({ save, userId }) {
 	};
 
 	/** Validates form has no empty fields */
-	const validateData = (data) => {
+	const validateData = (data: NewAssignmentProps) => {
 		if (
 			data.title === '' ||
 			data.title.trim() === '' ||
@@ -51,7 +61,7 @@ function AssignmentForm({ save, userId }) {
 		return true;
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = (e: MouseEvent) => {
 		e.preventDefault();
 		if (validateData(formData)) {
 			save(formData);
@@ -65,6 +75,7 @@ function AssignmentForm({ save, userId }) {
 	return (
 		<div className="AssignmentForm p-3">
 			<h4>Add Assignment</h4>
+			{/* @ts-ignore */}
 			<form className="container mb-3" onSubmit={handleSubmit}>
 				<div className="form-group">
 					<label htmlFor="title" className="float-left">
@@ -74,10 +85,11 @@ function AssignmentForm({ save, userId }) {
 						id="title"
 						className="form-control mate-form-input"
 						type="text"
+						// @ts-ignore
 						onChange={handleChange}
 						name="title"
 						value={formData.title}
-						maxLength="30"
+						maxLength={30}
 						required
 					/>
 					<small
@@ -93,6 +105,7 @@ function AssignmentForm({ save, userId }) {
 					</label>
 					<select
 						required
+						// @ts-ignore
 						onChange={handleChange}
 						name="type"
 						className="Assignment-Form-Type Mate-Form-Select mate-form-input form-control"
@@ -126,6 +139,7 @@ function AssignmentForm({ save, userId }) {
 						className="float-right"
 						defaultValue={formData.dueDate}
 						name="dueDate"
+						// @ts-ignore
 						onChange={handleDate}
 						InputLabelProps={{
 							shrink: true,
@@ -137,6 +151,6 @@ function AssignmentForm({ save, userId }) {
 			<div className="alert errors">{errors}</div>
 		</div>
 	);
-}
+};
 
-export default AssignmentForm;
+export default memo(AssignmentForm);

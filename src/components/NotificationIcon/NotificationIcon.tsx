@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { IconButton } from '@material-ui/core';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 
-function NotificationIcon() {
+const NotificationIcon = (): JSX.Element => {
 	return (
 		<IconButton>
 			<Link to="/messages">
@@ -14,6 +14,6 @@ function NotificationIcon() {
 			</Link>
 		</IconButton>
 	);
-}
+};
 
 export default NotificationIcon;

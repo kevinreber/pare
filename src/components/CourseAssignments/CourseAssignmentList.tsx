@@ -1,18 +1,23 @@
 /** Dependencies */
-import React from 'react';
+import React, { memo } from 'react';
 
 /** Components & Helpers */
 import CourseAssignmentCard from './CourseAssignmentCard';
 import NoData from '../NoData/NoData';
 
+/** Interfaces */
+import { AssignmentProps, AssignmentsProps } from './interface';
+
 /** Displays List of Assignments
  * Courses -> CourseList -> Course -> CourseInfo -> CourseInfoBody -> CourseAssignmentList -> CourseAssignmentCard
  */
-function CourseAssignmentList({ assignments }) {
+const CourseAssignmentList = ({
+	assignments,
+}: AssignmentsProps): JSX.Element => {
 	// build list of courses, if no courses exist return 'No courses added'
 	const AssignmentList =
 		assignments && assignments.length !== 0 ? (
-			assignments.map((assignment) => (
+			assignments.map((assignment: AssignmentProps) => (
 				<li
 					key={assignment.id}
 					id={assignment.id}
@@ -35,6 +40,6 @@ function CourseAssignmentList({ assignments }) {
 			<ul className="Course-Info-Body-List">{AssignmentList}</ul>
 		</>
 	);
-}
+};
 
-export default CourseAssignmentList;
+export default memo(CourseAssignmentList);

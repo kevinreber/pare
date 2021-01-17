@@ -6,6 +6,12 @@ const INITIAL_STATE = {
 	type: '',
 };
 
+// interface NotifyProps {
+// 	isOpen: boolean;
+// 	message: string;
+// 	type: string;
+// }
+
 const flashMessageReducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
 		case ADD_FLASH_MESSAGE:

@@ -1,14 +1,28 @@
 /** Dependencies */
-import React from 'react';
-import { PropTypes } from 'prop-types';
+import React, { memo } from 'react';
+import * as PropTypes from 'prop-types';
 
 /** MUI */
 import IconButton from '@material-ui/core/IconButton';
 import Popover from '@material-ui/core/Popover';
 import LinkIcon from '@material-ui/icons/Link';
 
+interface PopoverShareProps {
+	id: string;
+	open: boolean;
+	anchorEl: any;
+	close: any;
+	shareLink: Function;
+}
+
 /** Popover with shareLink action */
-function PopoverShareAction({ id, open, anchorEl, close, shareLink }) {
+function PopoverShareAction({
+	id,
+	open,
+	anchorEl,
+	close,
+	shareLink,
+}: PopoverShareProps): JSX.Element {
 	return (
 		<>
 			<Popover
@@ -24,7 +38,7 @@ function PopoverShareAction({ id, open, anchorEl, close, shareLink }) {
 					vertical: 'bottom',
 					horizontal: 'center',
 				}}>
-				<IconButton className="Share__Btn" onClick={shareLink}>
+				<IconButton className="Share__Btn" onClick={() => shareLink}>
 					<LinkIcon />
 					<small>share</small>
 				</IconButton>
@@ -40,4 +54,4 @@ PopoverShareAction.propTypes = {
 	shareLink: PropTypes.func,
 };
 
-export default PopoverShareAction;
+export default memo(PopoverShareAction);

@@ -1,5 +1,5 @@
 /** Dependencies */
-import React from 'react';
+import React, { memo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 /** Components & Helpers */
@@ -17,15 +17,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 /** Notification that pops up after every user CRUD action */
-function Notification() {
+const Notification = (): JSX.Element => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 
 	/** get status of flashMessages  in store*/
+	// @ts-ignore
 	let notify = useSelector((state) => state.flashMessages);
 
 	/** Close Notification */
-	const handleClose = (e, reason) => {
+	const handleClose = (): void => {
 		dispatch(
 			addFlashMessage({
 				isOpen: false,
@@ -45,6 +46,6 @@ function Notification() {
 			</Alert>
 		</Snackbar>
 	);
-}
+};
 
-export default Notification;
+export default memo(Notification);
