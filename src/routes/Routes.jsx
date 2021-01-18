@@ -1,6 +1,6 @@
 /** Dependencies */
 import React from 'react';
-import { Switch } from 'react-router-dom';
+import { Switch, Redirect } from 'react-router-dom';
 
 /** Component Pages */
 import { Notifications } from '../pages/Notifications';
@@ -37,6 +37,7 @@ function Routes() {
 				/>
 				<PrivateRoute exact path="/tutors" component={Tutors} />
 				<PrivateRoute exact path="/users/:userId" component={UserProfile} />
+				<Redirect to="/feed" />
 			</Switch>
 		</>
 	);
