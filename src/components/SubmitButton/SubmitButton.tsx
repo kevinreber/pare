@@ -1,14 +1,22 @@
-import React from 'react';
-import { PropTypes } from 'prop-types';
+import React, { memo } from 'react';
+import * as PropTypes from 'prop-types';
+
+interface Props {
+	text: string;
+	reset?: boolean;
+	resetText?: string;
+	resetForm?: Function;
+	danger?: boolean;
+}
 
 /** Submit Button for forms */
-function SubmitButton({
+const SubmitButton = ({
 	text,
 	reset = false,
 	resetText = 'Clear',
 	resetForm,
 	danger = false,
-}) {
+}: Props): JSX.Element => {
 	return (
 		<div className="container w-75">
 			<button className="btn mate-btn mate-btn-primary mate-btn-submit">
@@ -18,7 +26,7 @@ function SubmitButton({
 				<>
 					<button
 						type="button"
-						onClick={resetForm}
+						onClick={() => resetForm}
 						className={`btn mate-btn mate-btn-reset 
 						${danger ? 'mate-btn-danger' : 'mate-btn-secondary'}`}>
 						{resetText}
@@ -27,7 +35,7 @@ function SubmitButton({
 			) : null}
 		</div>
 	);
-}
+};
 
 SubmitButton.propTypes = {
 	text: PropTypes.string,
@@ -37,4 +45,4 @@ SubmitButton.propTypes = {
 	danger: PropTypes.bool,
 };
 
-export default SubmitButton;
+export default memo(SubmitButton);

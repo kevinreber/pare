@@ -1,15 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { memo } from 'react';
+import * as PropTypes from 'prop-types';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import './ProgressBar.css';
 
+interface Props {
+	progress: number;
+}
+
 /** Progress Bar to display progress of upload.
  *
  * @param {number} progress Percentage of progress completion.
  */
-function CircularProgressWithLabel({ progress }) {
+function CircularProgressWithLabel({ progress }: Props): JSX.Element {
 	return (
 		<div
 			className={`Progress-Bar ${
@@ -40,4 +44,4 @@ CircularProgressWithLabel.propTypes = {
 	progress: PropTypes.number,
 };
 
-export default CircularProgressWithLabel;
+export default memo(CircularProgressWithLabel);

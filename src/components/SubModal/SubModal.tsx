@@ -1,5 +1,5 @@
 /** Dependencies */
-import React from 'react';
+import React, { memo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 /** Components & Helpers */
@@ -12,9 +12,10 @@ import { IconButton } from '@material-ui/core';
 
 /** Boilerplate template for any actions that require a Modal.
  */
-function SubModal() {
+const SubModal = (): JSX.Element => {
 	const dispatch = useDispatch();
 
+	// @ts-ignore
 	const modal = useSelector((state) => state.modal);
 
 	const handleClose = () => {
@@ -40,6 +41,6 @@ function SubModal() {
 			</div>
 		</>
 	);
-}
+};
 
-export default SubModal;
+export default memo(SubModal);

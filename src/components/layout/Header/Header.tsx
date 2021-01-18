@@ -1,5 +1,5 @@
 /** Dependencies */
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import Logo from '../../../images/logo/pare-logo.png';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -34,13 +34,14 @@ const useStyles = makeStyles({
 	},
 });
 
-function Header() {
+const Header = (): JSX.Element => {
 	const dispatch = useDispatch();
 
 	const logOutUser = () => {
 		dispatch(logOut());
 	};
 
+	// @ts-ignore
 	const currentUser = useSelector((state) => state.auth.user);
 
 	/** Initialize useStyles */
@@ -48,7 +49,7 @@ function Header() {
 	const [drawer, setDrawer] = useState(false);
 
 	/** Toggles SideBar Drawer */
-	const toggleDrawer = (event) => {
+	const toggleDrawer = (event: any) => {
 		if (
 			event.type === 'keydown' &&
 			(event.key === 'Tab' || event.key === 'Shift')
@@ -61,7 +62,7 @@ function Header() {
 	/** SideBar Drawer
 	 * must leave 'anchor' or else SideBar breaks
 	 */
-	const SideBar = (anchor) => (
+	const SideBar = (anchor: any) => (
 		<div
 			className={classes.list}
 			role="presentation"
@@ -112,6 +113,6 @@ function Header() {
 			</AppBar>
 		</div>
 	);
-}
+};
 
-export default Header;
+export default memo(Header);

@@ -1,11 +1,16 @@
 /** Dependencies */
-import React from 'react';
-import { PropTypes } from 'prop-types';
+import React, { memo } from 'react';
+import * as PropTypes from 'prop-types';
 
 /** MUI */
 import SearchIcon from '@material-ui/icons/Search';
 
-function Searchbar({ value, setValue }) {
+interface Props {
+	value: string;
+	setValue: Function;
+}
+
+function Searchbar({ value, setValue }: Props): JSX.Element {
 	return (
 		<div className="Search__Elements">
 			<div className="Search__Icon">
@@ -18,7 +23,7 @@ function Searchbar({ value, setValue }) {
 				onChange={(e) => setValue(e.target.value)}
 				name="search"
 				value={value}
-				maxLength="30"
+				maxLength={30}
 				placeholder="Search..."
 			/>
 		</div>
@@ -30,4 +35,4 @@ Searchbar.propTypes = {
 	setValue: PropTypes.func,
 };
 
-export default Searchbar;
+export default memo(Searchbar);
