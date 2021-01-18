@@ -8,6 +8,7 @@ import NavBar from './components/layout/NavBar/NavBar';
 import Notification from './components/Notification/Notification';
 import SubModal from './components/SubModal/SubModal';
 import Routes from './routes/Routes';
+import { Login } from './pages/Login';
 import { setCurrentUser } from './store/actions/auth';
 import { auth } from './config/fbConfig';
 import './App.css';
@@ -43,7 +44,7 @@ function App() {
 					<NavBar />
 				</>
 			) : (
-				<Routes />
+				<Login />
 			)}
 		</div>
 	);

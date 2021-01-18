@@ -43,6 +43,7 @@ export function Login() {
 				type: 'success',
 			})
 		);
+		history.push('/feed');
 		console.log(user.uid, 'This is a demo');
 	};
 

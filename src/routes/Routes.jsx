@@ -1,9 +1,8 @@
 /** Dependencies */
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 
 /** Component Pages */
-import { Login } from '../pages/Login';
 import { Notifications } from '../pages/Notifications';
 import { Messages } from '../pages/Messages';
 import { Feed } from '../pages/Feed';
@@ -23,9 +22,9 @@ function Routes() {
 	return (
 		<>
 			<Switch>
+				<PrivateRoute exact path="/feed" component={Feed} />
 				<PrivateRoute exact path="/messages" component={Notifications} />
 				<PrivateRoute exact path="/messages/:messageId" component={Messages} />
-				<PrivateRoute exact path="/feed" component={Feed} />
 				<PrivateRoute exact path="/post/:postId" component={PostInfo} />
 				<PrivateRoute exact path="/search" component={Search} />
 				<PrivateRoute exact path="/courses" component={Courses} />
@@ -38,8 +37,6 @@ function Routes() {
 				/>
 				<PrivateRoute exact path="/tutors" component={Tutors} />
 				<PrivateRoute exact path="/users/:userId" component={UserProfile} />
-				<Route exact path="/login" component={Login} />
-				<Redirect to="/login" />
 			</Switch>
 		</>
 	);
