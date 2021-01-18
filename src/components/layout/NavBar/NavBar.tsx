@@ -19,8 +19,10 @@ import SchoolIcon from '@material-ui/icons/School';
 
 import './NavBar.css';
 
-function NavBar() {
+const NavBar = () => {
 	const dispatch = useDispatch();
+
+	// @ts-ignore
 	const currentUser = useSelector((state) => state.auth.user);
 
 	const logOutUser = () => {
@@ -92,6 +94,6 @@ function NavBar() {
 			</ul>
 		</nav>
 	);
-}
+};
 
 export default NavBar;
