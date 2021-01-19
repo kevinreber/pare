@@ -1,7 +1,7 @@
-import React, { MouseEvent, memo } from 'react';
+import React, { memo } from 'react';
 
 interface Props {
-	enterGrade: MouseEvent<HTMLButtonElement>;
+	enterGrade: Function;
 }
 
 /** If grade for assignment is missing, user will see this 'EnterGradeBtn' */
@@ -9,7 +9,7 @@ const EnterGradeBtn = ({ enterGrade }: Props): JSX.Element => {
 	return (
 		<>
 			<button
-				onClick={() => enterGrade}
+				onClick={() => enterGrade()}
 				className="btn Enter-Grade-Btn text-light"
 				type="button">
 				Enter Grade<i className="fas fa-edit ml-1"></i>

@@ -81,8 +81,7 @@ const CourseAssignment = ({
 			</div>
 		</div>
 	) : (
-		// @ts-ignore
-		<EnterGradeBtn enterGrade={() => editToggle()} />
+		<EnterGradeBtn enterGrade={editToggle} />
 	);
 
 	// if editing grade, show Edit Grade Form for user to input grade
