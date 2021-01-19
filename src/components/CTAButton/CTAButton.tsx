@@ -4,7 +4,7 @@ import * as PropTypes from 'prop-types';
 
 interface Props {
 	text: string;
-	danger: boolean;
+	danger?: boolean;
 }
 
 /** Call To Action Button
