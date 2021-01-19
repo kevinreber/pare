@@ -1,10 +1,11 @@
 /** Dependencies */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import { useSelector } from 'react-redux';
-import { PropTypes } from 'prop-types';
+import * as PropTypes from 'prop-types';
 
 /** Components & Helpers */
 import db from '../../../../config/fbConfig';
+import { AutoCompleteUsersProps } from '../../interface';
 
 /** MUI */
 import SearchIcon from '@material-ui/icons/Search';
@@ -17,7 +18,6 @@ import Chip from '@material-ui/core/Chip';
  * @param 	{function} 	onChange 		Handle's changes on input state values.
  * @param 	{string} 	name 			Name for input element.
  * @param 	{string} 	value 			Input value of user receiving message.
- * @param 	{array} 	options 		Array of objects to display and filter options.
  * @param 	{string} 	placeholder 	Placeholder text for input element.
  * @param 	{function} 	setId 			Function to store state of receiving user's Id.
  * @param 	{boolean} 	showOptions 	Boolean to show autocomplete list of optional users.
@@ -27,12 +27,11 @@ import Chip from '@material-ui/core/Chip';
  * @param	{function}	clearData		Clears state of receiving user.
  * @param 	{boolean}	allUsers		Boolean to show all users or filter users to be displayed.
  */
-function AutocompleteUsers({
+const AutocompleteUsers = ({
 	id,
 	onChange,
 	name,
 	value,
-	options,
 	placeholder,
 	setId,
 	showOptions,
@@ -41,19 +40,20 @@ function AutocompleteUsers({
 	receiverChosen,
 	clearData,
 	allUsers = false,
-}) {
+}: AutoCompleteUsersProps): JSX.Element => {
+	// @ts-ignore
 	const currentUser = useSelector((state) => state.auth.user);
 
 	const [users, setUsers] = useState([]);
-	const [messagedUsers, setMessagedUsers] = useState([]);
+	const [messagedUsers, setMessagedUsers] = useState<any[]>([]);
 	const [usersList, setUsersList] = useState([]);
 	const [filteredOptions, setFilteredOptions] = useState([]);
 
 	/** Get Users */
 	useEffect(() => {
-		db.collection('users').onSnapshot((snapshot) =>
+		db.collection('users').onSnapshot((snapshot: any) =>
 			setUsers(
-				snapshot.docs.map((doc) => ({
+				snapshot.docs.map((doc: any) => ({
 					id: doc.id,
 					data: doc.data(),
 				}))
@@ -68,8 +68,8 @@ function AutocompleteUsers({
 				.where('users', 'array-contains', currentUser.uid)
 				// .orderBy('lastUpdatedAt')
 				.get()
-				.then((snapshot) => {
-					setMessagedUsers(snapshot.docs.map((doc) => doc.data()));
+				.then((snapshot: any) => {
+					setMessagedUsers(snapshot.docs.map((doc: any) => doc.data()));
 				});
 		}
 	}, [users, currentUser, allUsers]);
@@ -81,27 +81,27 @@ function AutocompleteUsers({
 			const set = new Set();
 
 			for (let user of messagedUsers) {
-				user.users.map((uid) => set.add(uid));
+				user.users.map((uid: string) => set.add(uid));
 			}
 
-			let options = users.filter((user) => !set.has(user.id));
+			let options = users.filter((user: { id: string }) => !set.has(user.id));
 			setUsersList(options);
 		} else if (allUsers) setUsersList(users);
 	}, [messagedUsers, users, allUsers]);
 
 	/** Commit onChange changes and filter through options */
-	function onSearch(e) {
-		onChange(e);
+	function onSearch(e: ChangeEvent<HTMLInputElement>) {
+		onChange(e, null);
 		toggleOptions(true);
 		let opts = usersList.filter(
-			(user) =>
+			(user: any) =>
 				user.data.displayName.toLowerCase().indexOf(value.toLowerCase()) > -1
 		);
 
 		setFilteredOptions(opts);
 	}
 
-	function handleClick(id, displayName, photoURL) {
+	function handleClick(id: string, displayName: string, photoURL: string) {
 		setFilteredOptions([]);
 		toggleOptions(false);
 		const data = {
@@ -117,32 +117,37 @@ function AutocompleteUsers({
 	if (showOptions && value) {
 		optionList = filteredOptions.length ? (
 			<ul className="options">
-				{filteredOptions.map((option) => {
-					return (
-						<li
-							key={option.id}
-							id={option.id}
-							className="option User-option"
-							data-name={name}
-							data-value={option.data.displayName}
-							onClick={() =>
-								handleClick(
-									option.id,
-									option.data.displayName,
-									option.data.photoURL
-								)
-							}>
-							<Avatar
-								src={option.data.photoURL}
-								alt={option.data.displayName}
+				{filteredOptions.map(
+					(option: {
+						id: string;
+						data: { displayName: string; photoURL: string };
+					}) => {
+						return (
+							<li
+								key={option.id}
 								id={option.id}
-							/>
-							<div className="username" id={option.id}>
-								<p>{option.data.displayName}</p>
-							</div>
-						</li>
-					);
-				})}
+								className="option User-option"
+								data-name={name}
+								data-value={option.data.displayName}
+								onClick={() =>
+									handleClick(
+										option.id,
+										option.data.displayName,
+										option.data.photoURL
+									)
+								}>
+								<Avatar
+									src={option.data.photoURL}
+									alt={option.data.displayName}
+									id={option.id}
+								/>
+								<div className="username" id={option.id}>
+									<p>{option.data.displayName}</p>
+								</div>
+							</li>
+						);
+					}
+				)}
 			</ul>
 		) : (
 			<div className="no-options">
@@ -171,13 +176,14 @@ function AutocompleteUsers({
 				<Chip
 					avatar={<Avatar src={receiver.photoURL} />}
 					label={receiver.displayName}
+					// @ts-ignore
 					onDelete={clearData}
 				/>
 			) : null}
 			{optionList}
 		</div>
 	);
-}
+};
 
 AutocompleteUsers.propTypes = {
 	id: PropTypes.string,

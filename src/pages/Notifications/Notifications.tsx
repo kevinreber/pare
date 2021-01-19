@@ -9,13 +9,16 @@ import NewMessageForm from './components/NewMessageForm/NewMessageForm';
 import Modal from '../../components/Modal/Modal';
 import db from '../../config/fbConfig';
 import './Notifications.css';
+import { NewMessage, NewChat } from './interface';
 
 import { addFlashMessage } from '../../store/actions/flashMessages';
 import createNewMessage from '../../utils/createNewMessage';
 
 /** User can see notifications and messages */
-export function Notifications() {
+export const Notifications = (): JSX.Element => {
 	const history = useHistory();
+
+	// @ts-ignore
 	const currentUser = useSelector((state) => state.auth.user);
 	const dispatch = useDispatch();
 
@@ -30,9 +33,9 @@ export function Notifications() {
 			.where('users', 'array-contains', currentUser.uid)
 			// .orderBy('lastUpdatedAt')
 			.get()
-			.then((snapshot) => {
+			.then((snapshot: any) => {
 				setMessages(
-					snapshot.docs.map((doc) => {
+					snapshot.docs.map((doc: any) => {
 						return {
 							id: doc.id,
 							data: doc.data(),
@@ -42,7 +45,7 @@ export function Notifications() {
 			});
 	}, [currentUser]);
 
-	const sendMessage = async (messageData, chatData) => {
+	const sendMessage = async (messageData: NewMessage, chatData: NewChat) => {
 		// store messageId given back
 		const messageId = await createNewMessage(
 			'messages',
@@ -90,4 +93,4 @@ export function Notifications() {
 			</div>
 		</div>
 	);
-}
+};

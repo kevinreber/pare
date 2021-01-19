@@ -8,7 +8,7 @@ interface ModalProps {
 	isOpen: boolean;
 	content: any;
 	closeModal: Function;
-	full: boolean;
+	full?: boolean;
 }
 
 /** Boilerplate template for any actions that require a Modal

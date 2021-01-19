@@ -1,13 +1,14 @@
 /** Dependencies */
-import React, { useState } from 'react';
+import React, { useState, memo, ChangeEvent, FormEvent } from 'react';
 import { useSelector } from 'react-redux';
-import { PropTypes } from 'prop-types';
+import * as PropTypes from 'prop-types';
 
 /** Components & Helpers */
 import SubmitButton from '../../../../components/SubmitButton/SubmitButton';
 import createFbTimestamp from '../../../../utils/createFbTimestamp';
 import AutocompleteUsers from '../AutocompleteUsers/AutocompleteUsers';
 import './styles/NewMessageForm.css';
+import { NewMessageFormProps } from '../../interface';
 
 /** Form for user to create New Message.
  *  Notifications[Messages] -> NewMessageForm
@@ -17,12 +18,13 @@ import './styles/NewMessageForm.css';
  * @param 	{string}	content			Content for message to be sent.
  * @param 	{boolean}	showAllUsers	Boolean to show all users or filter users to be displayed.
  */
-function NewMessageForm({
+const NewMessageForm = ({
 	send,
 	receiverId = null,
 	content = '',
 	showAllUsers = false,
-}) {
+}: NewMessageFormProps): JSX.Element => {
+	// @ts-ignore
 	const userId = useSelector((state) => state.auth.user.uid);
 
 	const FORM_INITIAL_STATE = {
@@ -78,7 +80,7 @@ function NewMessageForm({
 	};
 
 	/** if user clicks outside of options, showOptions will be set to false */
-	function toggleShowOptions(e) {
+	function toggleShowOptions(e: any) {
 		if (
 			e.target.tagName !== 'LI' ||
 			e.target.tagName !== 'UL' ||
@@ -89,7 +91,7 @@ function NewMessageForm({
 	}
 
 	/** Toggles options display */
-	function toggleOptions(status) {
+	function toggleOptions(status: boolean) {
 		setShowOptions(status);
 	}
 
@@ -103,7 +105,7 @@ function NewMessageForm({
 		setReceiverUser(RECEIVER_INITIAL_STATE);
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = (e: FormEvent) => {
 		e.preventDefault();
 		resetErrors();
 
@@ -124,7 +126,7 @@ function NewMessageForm({
 	};
 
 	/** Stores receiving user's Id in state */
-	const setId = (id) => {
+	const setId = (id: string) => {
 		setReceiverUser((fData) => ({
 			...fData,
 			uid: id,
@@ -134,7 +136,10 @@ function NewMessageForm({
 	};
 
 	/** Stores receiving user's displayName in state */
-	const handleReceiver = (e = null, data = null) => {
+	const handleReceiver = (
+		e: ChangeEvent<HTMLInputElement> | undefined,
+		data: { displayName: string; photoURL: string } | undefined
+	): void => {
 		resetErrors();
 		if (data) {
 			let { displayName, photoURL } = data;
@@ -150,13 +155,14 @@ function NewMessageForm({
 				: e.target.dataset;
 			setReceiverUser((fData) => ({
 				...fData,
+				// @ts-ignore
 				[name]: value,
 			}));
 		}
 	};
 
 	/** Stores state of Chat */
-	const handleChatChange = (e) => {
+	const handleChatChange = (e: ChangeEvent<HTMLTextAreaElement>): void => {
 		resetErrors();
 		const { name, value } = e.target;
 		setChatData((fData) => ({ ...fData, [name]: value }));
@@ -187,11 +193,12 @@ function NewMessageForm({
 
 				<div className="form-group">
 					<textarea
-						rows="3"
+						rows={3}
 						id="content"
 						className="form-control mate-form-input"
+						onChange={(e) => handleChatChange(e)}
+						// @ts-ignore
 						type="text"
-						onChange={handleChatChange}
 						name="content"
 						value={chatData.content}
 						required
@@ -206,7 +213,7 @@ function NewMessageForm({
 			</form>
 		</div>
 	);
-}
+};
 
 NewMessageForm.propTypes = {
 	send: PropTypes.func,
@@ -215,4 +222,4 @@ NewMessageForm.propTypes = {
 	showAllUsers: PropTypes.bool,
 };
 
-export default NewMessageForm;
+export default memo(NewMessageForm);
