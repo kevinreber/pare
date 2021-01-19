@@ -15,6 +15,6 @@ const demoIDs = [
 	'aw987e7yooq7y24bwbobkgbasgdfasooa44',
 ];
 
-export const getRandomID = () => {
+export const getRandomID = (): string => {
 	return demoIDs[Math.floor(Math.random() * demoIDs.length)];
 };

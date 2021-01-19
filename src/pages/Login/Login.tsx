@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FormEvent } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import './Login.css';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,6 +16,7 @@ export function Login() {
 	/** Use history to redirect after user logs in/signs up */
 	const history = useHistory();
 
+	// @ts-ignore
 	const currentUser = useSelector((state) => state.auth.user);
 
 	if (currentUser) {
@@ -25,7 +26,7 @@ export function Login() {
 	/** if user signs in using Google, store their data to redux store
 	 * and redirect to home page feed
 	 */
-	const googleSignIn = (e) => {
+	const googleSignIn = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		dispatch(googleLogin());
 		history.push('/feed');
@@ -68,7 +69,7 @@ export function Login() {
 					<div className="Login__Gif hide-md">
 						<img className="Pare-Gif" src={PareGif} alt="Pare" />
 					</div>
-					<form className="Login__form mb-3" onSubmit={googleSignIn}>
+					<form className="Login__form mb-3" onSubmit={(e) => googleSignIn(e)}>
 						<div className="Login__buttons fade-in-delay">
 							<button id="Login-Google__btn">Sign In With Google</button>
 							<button id="Demo__btn" type="button" onClick={demoLogin}>
