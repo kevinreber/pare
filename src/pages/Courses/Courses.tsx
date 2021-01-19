@@ -1,5 +1,5 @@
 /** Dependencies */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, MouseEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 /** Components & Helpers */
@@ -14,20 +14,23 @@ import { fetchCourseCatalog } from '../../store/actions/courseCatalog';
 import { addFlashMessage } from '../../store/actions/flashMessages';
 import { CONFIRM_DIALOG_INITIAL_STATE, FB, MESSAGE } from './constants/index';
 import db from '../../config/fbConfig';
+import { FormDataProps } from './interface';
 import './Courses.css';
 
 /** Displays a CourseList of user's Current and Past Semester courses. 
     Courses will fetch which courses to display from API and pass courses into CourseList.
 */
-export function Courses() {
+export const Courses = (): JSX.Element => {
 	const dispatch = useDispatch();
+	// @ts-ignore
 	const currentUser = useSelector((state) => state.auth.user);
 
 	/** Get courseCatalog from redux store */
+	// @ts-ignore
 	const courseCatalog = useSelector((state) => state.courseCatalog);
 	const [getCatalog, setGetCatalog] = useState(true);
 
-	const [courses, setCourses] = useState(null);
+	const [courses, setCourses] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 
 	const [confirmDialog, setConfirmDialog] = useState(
@@ -36,24 +39,25 @@ export function Courses() {
 
 	/** Current Semester courses */
 	const currentCourses =
-		!isLoading && courses
+		!isLoading && courses.length > 0
 			? courses.filter(
-					(course) => course.data.semester.toLowerCase() === 'fall 2020'
+					(course: any) => course.data.semester.toLowerCase() === 'fall 2020'
 			  )
-			: null;
+			: [];
 
 	/** Past Semester Courses */
 	const pastCourses =
-		!isLoading && courses
+		!isLoading && courses.length > 0
 			? courses.filter(
-					(course) => course.data.semester.toLowerCase() !== 'fall 2020'
+					(course: any) => course.data.semester.toLowerCase() !== 'fall 2020'
 			  )
-			: null;
+			: [];
 
 	// State will determine what courses to show in CourseList
 	const [active, setActive] = useState('current');
-	const toggleCourses = (e) => {
-		setActive(e.target.id);
+	const toggleCourses = (e: MouseEvent<HTMLHeadingElement>) => {
+		const { id } = e.target as Element;
+		setActive(id);
 	};
 
 	// Toggle form for User to Add Course
@@ -61,18 +65,19 @@ export function Courses() {
 	const toggleForm = () => setShowForm((show) => !show);
 
 	/** Prompts Confirmation Dialog to Delete Post ********/
-	const addCoursePrompt = (courseData) => {
+	const addCoursePrompt = (courseData: FormDataProps) => {
 		setConfirmDialog({
 			isOpen: true,
 			title: `Add ${courseData.courseName}?`,
 			subtitle: '',
+			// @ts-ignore
 			onConfirm: () => {
 				addCourse(courseData);
 			},
 		});
 	};
 
-	const addCourse = (courseData) => {
+	const addCourse = (courseData: FormDataProps) => {
 		dispatch(addCourseToFB(courseData, currentUser.uid));
 		setShowForm(false);
 		setConfirmDialog(CONFIRM_DIALOG_INITIAL_STATE);
@@ -89,10 +94,11 @@ export function Courses() {
 	useEffect(() => {
 		const getData = () => {
 			db.collection(FB.collection)
+				// @ts-ignore
 				.where(FB.field, FB.filter, currentUser.uid)
-				.onSnapshot((snapshot) =>
+				.onSnapshot((snapshot: any) =>
 					setCourses(
-						snapshot.docs.map((doc) => ({
+						snapshot.docs.map((doc: any) => ({
 							id: doc.id,
 							data: doc.data(),
 						}))
@@ -122,7 +128,6 @@ export function Courses() {
 		courseList = <Loader />;
 	} else if (!isLoading) {
 		courseList =
-			!courses ||
 			courses.length === 0 ||
 			(active === 'current' && currentCourses.length === 0) ||
 			(active === 'past' && pastCourses.length === 0) ? (
@@ -141,6 +146,7 @@ export function Courses() {
 				content={
 					<CourseForm
 						save={addCoursePrompt}
+						// @ts-ignore
 						confirmDialog={confirmDialog}
 						setConfirmDialog={setConfirmDialog}
 						courses={courses}
@@ -183,4 +189,4 @@ export function Courses() {
 			</div>
 		</div>
 	);
-}
+};

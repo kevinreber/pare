@@ -7,26 +7,7 @@ import ConfirmDialog from '../../../../components/ConfirmDialog/ConfirmDialog';
 import SubmitButton from '../../../../components/SubmitButton/SubmitButton';
 import AutocompleteCourses from '../../../../components/AutocompleteCourses/AutocompleteCourses';
 import { COURSE_FORM_DATA_INITIAL_STATE } from '../../constants/index';
-
-interface ConfirmDialogProps {
-	iOpen: boolean;
-	title?: string;
-	subtitle?: string;
-}
-
-interface FormDataProps {
-	courseName: string;
-	courseSemester: string;
-	courseYear: string;
-	courseId: string | null;
-}
-
-interface FormProps {
-	save: Function;
-	confirmDialog: ConfirmDialogProps;
-	setConfirmDialog: Function;
-	courses: any[];
-}
+import { FormDataProps, FormProps } from '../../interface';
 
 /** Form to add a course.
  * Courses -> 'Join Class' Button -> Modal -> CourseForm
