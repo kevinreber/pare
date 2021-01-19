@@ -1,12 +1,26 @@
 /** Dependencies */
-import React from 'react';
+import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
-import { PropTypes } from 'prop-types';
+import * as PropTypes from 'prop-types';
+
+interface Props {
+	id: string;
+	department: string;
+	number: string;
+	term: string;
+	title: string;
+}
 
 /** Card displaying course information
  * Courses -> CourseList -> CourseCard -> CourseInfo
  */
-function CourseCard({ id, department, number, term, title }) {
+const CourseCard = ({
+	id,
+	department,
+	number,
+	term,
+	title,
+}: Props): JSX.Element => {
 	return (
 		<div className="CourseCard">
 			<Link to={`/courses/${id}`} className="mate-text-secondary table-hover">
@@ -22,7 +36,7 @@ function CourseCard({ id, department, number, term, title }) {
 			</Link>
 		</div>
 	);
-}
+};
 
 CourseCard.propTypes = {
 	id: PropTypes.string.isRequired,
@@ -32,4 +46,4 @@ CourseCard.propTypes = {
 	title: PropTypes.string.isRequired,
 };
 
-export default CourseCard;
+export default memo(CourseCard);

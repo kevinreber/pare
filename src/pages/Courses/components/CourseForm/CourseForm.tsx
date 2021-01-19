@@ -1,5 +1,5 @@
 /** Dependencies */
-import React, { useState } from 'react';
+import React, { useState, memo, FormEvent, ChangeEventHandler } from 'react';
 import { useSelector } from 'react-redux';
 
 /** Components & Helpers */
@@ -8,28 +8,59 @@ import SubmitButton from '../../../../components/SubmitButton/SubmitButton';
 import AutocompleteCourses from '../../../../components/AutocompleteCourses/AutocompleteCourses';
 import { COURSE_FORM_DATA_INITIAL_STATE } from '../../constants/index';
 
+interface ConfirmDialogProps {
+	iOpen: boolean;
+	title?: string;
+	subtitle?: string;
+}
+
+interface FormDataProps {
+	courseName: string;
+	courseSemester: string;
+	courseYear: string;
+	courseId: string | null;
+}
+
+interface FormProps {
+	save: Function;
+	confirmDialog: ConfirmDialogProps;
+	setConfirmDialog: Function;
+	courses: any[];
+}
+
 /** Form to add a course.
  * Courses -> 'Join Class' Button -> Modal -> CourseForm
  */
-function CourseForm({ save, confirmDialog, setConfirmDialog, courses }) {
+const CourseForm = ({
+	save,
+	confirmDialog,
+	setConfirmDialog,
+	courses,
+}: FormProps): JSX.Element => {
 	/** Get courseCatalog from redux store */
+	// @ts-ignore
 	const courseCatalog = useSelector((state) => state.courseCatalog.courses);
 
 	const [errors, setErrors] = useState('');
-	const [formData, setFormData] = useState(COURSE_FORM_DATA_INITIAL_STATE);
+	const [formData, setFormData] = useState<FormDataProps>(
+		COURSE_FORM_DATA_INITIAL_STATE
+	);
 
 	/** Update state in formData */
-	const handleChange = (e) => {
+	const handleChange: ChangeEventHandler<
+		HTMLInputElement | HTMLSelectElement
+	> = (e) => {
 		let { name, value } = !e.target.dataset.name ? e.target : e.target.dataset;
 
 		setFormData((fData) => ({
 			...fData,
+			// @ts-ignore
 			[name]: value,
 		}));
 	};
 
 	/** Stores courseId in state */
-	const setId = (e) => {
+	const setId: ChangeEventHandler = (e) => {
 		let { id } = e.target;
 
 		setFormData((fData) => ({
@@ -64,7 +95,7 @@ function CourseForm({ save, confirmDialog, setConfirmDialog, courses }) {
 		return true;
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = (e: FormEvent) => {
 		e.preventDefault();
 		if (validateFormData()) {
 			save(formData);
@@ -77,6 +108,7 @@ function CourseForm({ save, confirmDialog, setConfirmDialog, courses }) {
 	return (
 		<div className="CourseForm p-3">
 			<ConfirmDialog
+				// @ts-ignore
 				confirmDialog={confirmDialog}
 				setConfirmDialog={setConfirmDialog}
 			/>
@@ -128,6 +160,6 @@ function CourseForm({ save, confirmDialog, setConfirmDialog, courses }) {
 			</form>
 		</div>
 	);
-}
+};
 
-export default CourseForm;
+export default memo(CourseForm);

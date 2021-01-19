@@ -1,16 +1,20 @@
 /** Dependencies */
-import React from 'react';
-import { PropTypes } from 'prop-types';
+import React, { memo } from 'react';
+import * as PropTypes from 'prop-types';
 
 /** Components & Helpers */
 import CourseCard from '../CourseCard/CourseCard';
+
+interface Props {
+	courses: any[];
+}
 
 /** Creates a List of User's Courses
  * Courses -> CourseList -> CourseCard -> CourseInfo
  *
  * @param {array}	 courses	 Array of objects containing course data.
  */
-function CourseList({ courses = [] }) {
+function CourseList({ courses = [] }: Props): JSX.Element {
 	const List = courses.map((course) => (
 		<>
 			<li key={course.id}>
@@ -32,4 +36,4 @@ CourseList.propTypes = {
 	courses: PropTypes.array,
 };
 
-export default CourseList;
+export default memo(CourseList);
