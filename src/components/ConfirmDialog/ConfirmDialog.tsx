@@ -52,16 +52,16 @@ const useStyles = makeStyles((theme) => ({
 
 interface ConfirmProps {
 	title: string;
-	subtitle: string;
+	subtitle?: string;
 	isOpen: boolean;
 	onConfirm: Function;
 }
 
 interface Props {
-	color: string;
+	color?: string;
 	confirmDialog: ConfirmProps;
 	setConfirmDialog: Function;
-	type: string;
+	type?: string;
 }
 
 /** Confirmation Dialog to verify user wants to perform action.
