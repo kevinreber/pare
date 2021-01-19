@@ -1,10 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import CourseDetails from '../CourseDetails/CourseDetails';
+
+interface Props {
+	course: any;
+	semester: string;
+	sections: any;
+	title: string;
+	removeCourse: Function;
+}
 
 /** Displays Header information of Course Info Page
  * Courses -> CourseList -> Course -> CourseInfo -> CourseInfoHeader -> CourseDetails && CourseOverallGrades
  */
-function CourseInfoHeader({ course, semester, sections, title, removeCourse }) {
+const CourseInfoHeader = ({
+	course,
+	semester,
+	sections,
+	title,
+	removeCourse,
+}: Props): JSX.Element => {
 	const [showCourseDetails, setShowCourseDetails] = useState(false);
 
 	const toggleShowCourseDetails = () => setShowCourseDetails((show) => !show);
@@ -30,6 +44,6 @@ function CourseInfoHeader({ course, semester, sections, title, removeCourse }) {
 				className="mate-more-info fas fa-info-circle"></i>
 		</>
 	);
-}
+};
 
-export default CourseInfoHeader;
+export default memo(CourseInfoHeader);

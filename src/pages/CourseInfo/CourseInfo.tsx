@@ -16,11 +16,22 @@ import { addFlashMessage } from '../../store/actions/flashMessages';
 import db from '../../config/fbConfig';
 import './CourseInfo.css';
 
+interface ParamTypes {
+	courseId: string;
+}
+
+interface AssignmentTypes {
+	title: string;
+	type: string;
+	dueDate: Date | undefined | null;
+	grades: string[];
+}
+
 /** Displays Course Information such as assignments and discussion boards
  * Courses -> CourseList -> Course -> CourseInfo
  */
-export function CourseInfo() {
-	const { courseId } = useParams();
+export const CourseInfo = () => {
+	const { courseId } = useParams<ParamTypes>();
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const [isLoading, setIsLoading] = useState(true);
@@ -32,9 +43,10 @@ export function CourseInfo() {
 	const [showForm, setShowForm] = useState(false);
 	const toggleForm = () => setShowForm((show) => !show);
 
+	// @ts-ignore
 	const currentUser = useSelector((state) => state.auth.user);
 
-	const addAssignment = (assignmentData) => {
+	const addAssignment = (assignmentData: AssignmentTypes) => {
 		db.collection('courses')
 			.doc(courseId)
 			.collection('assignments')
@@ -76,7 +88,7 @@ export function CourseInfo() {
 		if (courseId && isLoading) {
 			db.collection('courses')
 				.doc(courseId)
-				.onSnapshot((snapshot) => setCourse(snapshot.data()));
+				.onSnapshot((snapshot: any) => setCourse(snapshot.data()));
 		}
 
 		if (course && isLoading) {
@@ -84,9 +96,9 @@ export function CourseInfo() {
 				.doc(courseId)
 				.collection('assignments')
 				.orderBy('dueDate', 'asc')
-				.onSnapshot((snapshot) =>
+				.onSnapshot((snapshot: any) =>
 					setAssignments(
-						snapshot.docs.map((doc) => {
+						snapshot.docs.map((doc: any) => {
 							return {
 								id: doc.id,
 								data: doc.data(),
@@ -117,8 +129,11 @@ export function CourseInfo() {
 					<BackButton />
 					<CourseInfoHeader
 						course={course}
+						//  @ts-ignore
 						semester={course.semester}
+						// @ts-ignore
 						sections={course.sections}
+						// @ts-ignore
 						title={`${course.course.abbreviation} ${course.course.course_number}`}
 						removeCourse={removeCourse}
 					/>
@@ -137,4 +152,4 @@ export function CourseInfo() {
 		);
 
 	return <>{courseInfo}</>;
-}
+};
