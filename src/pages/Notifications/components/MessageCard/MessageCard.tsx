@@ -1,10 +1,11 @@
 /** Dependencies */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { Link } from 'react-router-dom';
-import { PropTypes } from 'prop-types';
+import * as PropTypes from 'prop-types';
 
 /** Components & Helpers */
 import dateFromNowFormatter from '../../../../utils/dateFromNowFormatter';
+import { ChatReceiver, ChatsProps, MessageCardProps } from '../../interface';
 import db from '../../../../config/fbConfig';
 
 /** MUI */
@@ -16,42 +17,44 @@ import Avatar from '@material-ui/core/Avatar';
  * @param 	{object}	message		Objects of message's data.
  * @param 	{string}	userId		String of current user's Id.
  */
-function MessageCard({ message, userId }) {
+const MessageCard = ({ message, userId }: MessageCardProps): JSX.Element => {
 	const [receiverId, setReceiverId] = useState(null);
-	const [chats, setChats] = useState([]);
+	const [chats, setChats] = useState<ChatsProps[]>([]);
 
 	useEffect(() => {
 		// get Receiver's ID
-		function getReceiver() {
-			const id = message.data.users.filter((uid) => uid !== userId);
+		const getReceiver = () => {
+			const id = message.data.users.filter((uid: string) => uid !== userId);
 			setReceiverId(id);
-		}
+		};
 
 		/** Get Chat Messages */
-		function getChat() {
+		const getChat = () => {
 			db.collection('messages')
 				.doc(message.id)
 				.collection('chats')
 				.orderBy('createdAt', 'desc')
 				.limit(1)
-				.onSnapshot((snapshot) => {
-					setChats(snapshot.docs.map((doc) => doc.data()));
+				.onSnapshot((snapshot: any) => {
+					setChats(snapshot.docs.map((doc: any) => doc.data()));
 				});
-		}
+		};
 
 		if (message) {
 			getReceiver();
 			getChat();
 		}
 	}, [message, userId]);
-
-	const [receiver, setReceiver] = useState({});
+	// @ts-ignore
+	const [receiver, setReceiver] = useState<ChatReceiver>({});
 	useEffect(() => {
 		// get Receiver's data
 		if (receiverId) {
 			db.collection('users')
+				// @ts-ignore
+
 				.doc(receiverId[0])
-				.onSnapshot((snapshot) => setReceiver(snapshot.data()));
+				.onSnapshot((snapshot: any) => setReceiver(snapshot.data()));
 		}
 	}, [receiverId]);
 
@@ -59,9 +62,12 @@ function MessageCard({ message, userId }) {
 	let contentPreview = null;
 	if (chats.length > 0) {
 		contentPreview =
+			// @ts-ignore
 			chats[0].content.length > 30
-				? chats[0].content.substr(0, 30) + '...'
-				: chats[0].content;
+				? // @ts-ignore
+				  chats[0].content.substr(0, 30) + '...'
+				: // @ts-ignore
+				  chats[0].content;
 	}
 
 	return (
@@ -86,11 +92,11 @@ function MessageCard({ message, userId }) {
 			</div>
 		</div>
 	);
-}
+};
 
 MessageCard.propTypes = {
 	message: PropTypes.object,
 	userId: PropTypes.string,
 };
 
-export default MessageCard;
+export default memo(MessageCard);
