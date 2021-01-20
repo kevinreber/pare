@@ -68,16 +68,20 @@ export function Feed() {
 	const [showForm, setShowForm] = useState(false);
 	const toggleForm = () => setShowForm((show) => !show);
 
-	const addPost = (postData) => {
-		dispatch(addPostToFB(postData));
-		setShowForm(false);
+	const setFlashMessages = (message, type) => {
 		dispatch(
 			addFlashMessage({
 				isOpen: true,
-				message: MESSAGE.addPost,
-				type: MESSAGE.success,
+				message,
+				type,
 			})
 		);
+	};
+
+	const addPost = (postData) => {
+		dispatch(addPostToFB(postData));
+		setShowForm(false);
+		setFlashMessages(MESSAGE.addPost, MESSAGE.success);
 		// get most recent posts
 		setIsLoading(true);
 	};
@@ -101,13 +105,7 @@ export function Feed() {
 			isOpen: false,
 		});
 		dispatch(deletePostFromFB(id, currentUser.uid, image));
-		dispatch(
-			addFlashMessage({
-				isOpen: true,
-				message: MESSAGE.deletePost,
-				type: MESSAGE.error,
-			})
-		);
+		setFlashMessages(MESSAGE.deletePost, MESSAGE.error);
 		// get most recent posts
 		setIsLoading(true);
 	};
@@ -115,13 +113,7 @@ export function Feed() {
 	/** Updates Post */
 	const editPost = (id, data) => {
 		dispatch(editPostInFB(id, data));
-		dispatch(
-			addFlashMessage({
-				isOpen: true,
-				message: MESSAGE.updatePost,
-				type: MESSAGE.success,
-			})
-		);
+		setFlashMessages(MESSAGE.updatePost, MESSAGE.success);
 		// get most recent posts
 		setIsLoading(true);
 	};
