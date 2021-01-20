@@ -1,5 +1,5 @@
 /** Dependencies */
-import React from 'react';
+import React, { memo } from 'react';
 import { useDispatch } from 'react-redux';
 import { PropTypes } from 'prop-types';
 
@@ -23,7 +23,7 @@ import SendIcon from '@material-ui/icons/Send';
  * @param {object}	 	user	Object of current user's data.
  *
  */
-function StudyGroupChatFooter({ send, user }) {
+const StudyGroupChatFooter = ({ send, user }) => {
 	const dispatch = useDispatch();
 
 	const INITIAL_STATE = {
@@ -77,11 +77,11 @@ function StudyGroupChatFooter({ send, user }) {
 			</form>
 		</>
 	);
-}
+};
 
 StudyGroupChatFooter.propTypes = {
 	send: PropTypes.func,
 	user: PropTypes.object,
 };
 
-export default StudyGroupChatFooter;
+export default memo(StudyGroupChatFooter);

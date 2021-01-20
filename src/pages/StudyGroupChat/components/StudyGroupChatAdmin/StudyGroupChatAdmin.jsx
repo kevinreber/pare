@@ -1,5 +1,5 @@
 /** Dependencies */
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { PropTypes } from 'prop-types';
@@ -32,14 +32,14 @@ import LinkRoundedIcon from '@material-ui/icons/LinkRounded';
  * @param {function}	handleChange	Handles changes by updating state.
  * @param {function}	saveChanges		Saves changes made to Study Group.
  */
-function StudyGroupChatAdmin({
+const StudyGroupChatAdmin = ({
 	studyGroupId,
 	title,
 	members,
 	currentUser,
 	handleChange,
 	saveChanges,
-}) {
+}) => {
 	const history = useHistory();
 	const dispatch = useDispatch();
 
@@ -76,6 +76,16 @@ function StudyGroupChatAdmin({
 		(member) => member.id === currentUser.uid
 	)[0].data.admin;
 
+	const setFlashMessage = (message, type) => {
+		dispatch(
+			addFlashMessage({
+				isOpen: true,
+				message,
+				type,
+			})
+		);
+	};
+
 	// Prompt to remove user
 	const removeUserPrompt = (user) => {
 		setConfirmDialog({
@@ -91,14 +101,7 @@ function StudyGroupChatAdmin({
 	// Remove user, using userID as reference
 	const removeUser = (user) => {
 		removeUserFromCollection('study-groups', studyGroupId, user);
-
-		dispatch(
-			addFlashMessage({
-				isOpen: true,
-				message: 'Removed user from study group',
-				type: 'error',
-			})
-		);
+		setFlashMessage('Removed user from study group', 'error');
 
 		// Reset UI state
 		setConfirmDialog({
@@ -134,13 +137,7 @@ function StudyGroupChatAdmin({
 
 		// redirect user to study-groups
 		history.push(`/study-groups`);
-		dispatch(
-			addFlashMessage({
-				isOpen: true,
-				message: 'Left Study Group',
-				type: 'error',
-			})
-		);
+		setFlashMessage('Left Study Group', 'error');
 	};
 
 	const saveEdit = () => {
@@ -158,22 +155,10 @@ function StudyGroupChatAdmin({
 		try {
 			copyLinkToClipBoard(`/study-groups/${studyGroupId}`);
 			/** Prompt change made */
-			dispatch(
-				addFlashMessage({
-					isOpen: true,
-					message: 'Copied to Clipboard!',
-					type: 'success',
-				})
-			);
+			setFlashMessage('Copied to Clipboard!', 'success');
 		} catch (err) {
 			/** Prompt change made */
-			dispatch(
-				addFlashMessage({
-					isOpen: true,
-					message: 'Error!',
-					type: 'danger',
-				})
-			);
+			setFlashMessage('Error!', 'danger');
 		}
 	};
 
@@ -254,7 +239,7 @@ function StudyGroupChatAdmin({
 					<h6 className="mate-text-primary">Group Members</h6>
 					<p className="member-number">{members.length} Members</p>
 				</div>
-				{userAdminStatus ? (
+				{userAdminStatus && (
 					<div className="Admin-Members__Add">
 						{/* <div className="Add__Btn">
 							<IconButton>
@@ -269,7 +254,7 @@ function StudyGroupChatAdmin({
 							<p>Share Link</p>
 						</div>
 					</div>
-				) : null}
+				)}
 				<div className="Admin-Members__List">{MembersList}</div>
 				<div className="Admin-Members__Footer">
 					<ConfirmDialog
@@ -295,7 +280,7 @@ function StudyGroupChatAdmin({
 			<div className="alert errors">{errors}</div>
 		</div>
 	);
-}
+};
 
 StudyGroupChatAdmin.propTypes = {
 	studyGroupId: PropTypes.string,
@@ -306,4 +291,4 @@ StudyGroupChatAdmin.propTypes = {
 	saveChanges: PropTypes.func,
 };
 
-export default StudyGroupChatAdmin;
+export default memo(StudyGroupChatAdmin);

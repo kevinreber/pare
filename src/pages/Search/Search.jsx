@@ -18,7 +18,7 @@ import './Search.css';
 /** MUI */
 import { List, ListItem, ListItemText } from '@material-ui/core';
 
-export function Search() {
+export const Search = () => {
 	const dispatch = useDispatch();
 	const [quickSearch, setQuickSearch] = useState('Today');
 	const toggleQuickSearch = useCallback((e) => {
@@ -228,4 +228,4 @@ export function Search() {
 			</div>
 		</div>
 	);
-}
+};
