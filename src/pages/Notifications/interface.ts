@@ -51,3 +51,23 @@ export interface AutoCompleteUsersProps {
 	clearData: Function;
 	allUsers: boolean;
 }
+
+export interface MessageListProps {
+	messages: any[];
+	userId: string;
+	toggleForm: Function;
+}
+
+export interface MessageCardProps {
+	message: any;
+	userId: string;
+}
+
+interface ChatProps {
+	content: string;
+	createdAt: Date;
+	uid: string;
+}
+export interface ChatsProps {
+	chats: ChatProps[];
+}
