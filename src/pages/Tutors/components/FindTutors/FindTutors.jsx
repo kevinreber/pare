@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { PropTypes } from 'prop-types';
 
 /** Components & Helpers */
-import TutorList from '../TutorList/TutorList';
+import TutorList from '../List/TutorList';
 import CTAButton from '../../../../components/CTAButton/CTAButton';
 import capitalizeFirstLetter from '../../../../utils/capitalizeFirstLetter';
 import { DAYS } from '../../constants/index';

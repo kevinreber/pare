@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import firebase from 'firebase';
 
 /** Components & Helpers */
-import CourseInfoHeader from './components/CourseInfoHeader/CourseInfoHeader';
+import CourseInfoHeader from './components/Header/CourseInfoHeader';
 import CourseAssignmentList from '../../components/CourseAssignments/CourseAssignmentList';
 import AssignmentForm from '../../components/CourseAssignments/AssignmentForm';
 import BackButton from '../../components/BackButton/BackButton';

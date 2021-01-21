@@ -5,8 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
 
 /** Components & Helpers */
-import StudyGroupChatAdmin from './components/StudyGroupChatAdmin/StudyGroupChatAdmin';
-import StudyGroupChatFooter from './components/StudyGroupChatFooter/StudyGroupChatFooter';
+import StudyGroupChatAdmin from './components/AdminPopup/StudyGroupChatAdmin';
+import StudyGroupChatFooter from './components/ChatFooter/StudyGroupChatFooter';
 import NoData from '../../components/NoData/NoData';
 import Modal from '../../components/Modal/Modal';
 import Loader from '../../components/layout/Loader/Loader';

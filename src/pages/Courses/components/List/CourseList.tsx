@@ -3,7 +3,7 @@ import React, { memo } from 'react';
 import * as PropTypes from 'prop-types';
 
 /** Components & Helpers */
-import CourseCard from '../CourseCard/CourseCard';
+import CourseCard from '../Card/CourseCard';
 
 interface Props {
 	courses: any[];

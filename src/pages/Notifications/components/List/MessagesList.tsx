@@ -5,7 +5,7 @@ import * as PropTypes from 'prop-types';
 /** Components & Helpers */
 import NoData from '../../../../components/NoData/NoData';
 import CTAButton from '../../../../components/CTAButton/CTAButton';
-import MessageCard from '../MessageCard/MessageCard';
+import MessageCard from '../Card/MessageCard';
 import { MessageListProps } from '../../interface';
 
 /** List of Users Private Messages.

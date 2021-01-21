@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 /** Components & Helpers */
 import FindTutors from './components/FindTutors/FindTutors';
-import BeTutorForm from './components/BeTutorForm/BeTutorForm';
+import BeTutorForm from './components/TutorForm/BeTutorForm';
 import { FB } from './constants/index';
 import db from '../../config/fbConfig';
 import './Tutors.css';

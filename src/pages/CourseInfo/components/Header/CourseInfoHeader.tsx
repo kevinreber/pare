@@ -1,5 +1,5 @@
 import React, { useState, memo } from 'react';
-import CourseDetails from '../CourseDetails/CourseDetails';
+import CourseDetails from '../Details/CourseDetails';
 
 interface Props {
 	course: any;

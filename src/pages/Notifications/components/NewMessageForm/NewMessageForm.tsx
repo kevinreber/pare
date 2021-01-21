@@ -6,7 +6,7 @@ import * as PropTypes from 'prop-types';
 /** Components & Helpers */
 import SubmitButton from '../../../../components/SubmitButton/SubmitButton';
 import createFbTimestamp from '../../../../utils/createFbTimestamp';
-import AutocompleteUsers from '../AutocompleteUsers/AutocompleteUsers';
+import AutocompleteUsers from '../Autocomplete/AutocompleteUsers';
 import './styles/NewMessageForm.css';
 import { NewMessageFormProps } from '../../interface';
 

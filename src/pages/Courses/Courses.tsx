@@ -3,8 +3,8 @@ import React, { useState, useEffect, MouseEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 /** Components & Helpers */
-import CourseList from './components/CourseList/CourseList';
-import CourseForm from './components/CourseForm/CourseForm';
+import CourseList from './components/List/CourseList';
+import CourseForm from './components/Form/CourseForm';
 import Modal from '../../components/Modal/Modal';
 import Loader from '../../components/layout/Loader/Loader';
 import NoData from '../../components/NoData/NoData';

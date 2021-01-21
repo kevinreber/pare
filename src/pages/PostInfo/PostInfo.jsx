@@ -8,7 +8,7 @@ import BackButton from '../../components/BackButton/BackButton';
 import PostCard from '../Feed/components/Card/PostCard';
 import ChatFooter from '../../components/ChatFooter/ChatFooter';
 import NoData from '../../components/NoData/NoData';
-import CommentsList from './components/CommentsList/CommentsList';
+import CommentsList from './components/List/CommentsList';
 import {
 	addCommentToPost,
 	deleteCommentFromPost,
