@@ -12,7 +12,7 @@ export interface PostDataTypes {
 	userId: string;
 	avatar: string;
 	description: string;
-	location?: string;
+	location?: { address: string } | null;
 	type?: string;
 	start?: Date;
 	end?: Date;
@@ -21,7 +21,7 @@ export interface PostDataTypes {
 	attachment_name?: string;
 	timestamp: Date;
 	last_updated: Date;
-	num_of_comments: number | undefined;
+	num_of_comments: number | null;
 }
 
 export interface PostTypes {
