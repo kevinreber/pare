@@ -243,7 +243,6 @@ export const Messages = memo(
 							</IconButton>
 							<PopoverActions
 								remove={deleteMessagePrompt}
-								// @ts-ignore
 								id={popoverId}
 								open={open}
 								anchorEl={anchorEl}
