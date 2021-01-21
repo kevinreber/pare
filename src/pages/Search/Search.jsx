@@ -3,7 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 /** Components & Helpers */
-import FeedList from '../Feed/components/FeedList/FeedList';
+import FeedList from '../Feed/components/List/FeedList';
 import NoData from '../../components/NoData/NoData';
 import CTAButton from '../../components/CTAButton/CTAButton';
 import Searchbar from '../../components/SearchBar/Searchbar';
