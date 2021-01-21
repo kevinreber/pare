@@ -8,7 +8,7 @@ import Popover from '@material-ui/core/Popover';
 import LinkIcon from '@material-ui/icons/Link';
 
 interface PopoverShareProps {
-	id: string;
+	id: string | undefined;
 	open: boolean;
 	anchorEl: any;
 	close: any;

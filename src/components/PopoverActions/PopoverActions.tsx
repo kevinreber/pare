@@ -11,14 +11,14 @@ import BlockIcon from '@material-ui/icons/Block';
 
 interface PopoverActionsProps {
 	remove: Function;
-	edit: Function;
-	id: string;
+	edit?: Function | undefined;
+	id: string | undefined;
 	open: boolean;
 	anchorEl: any;
 	close: any;
-	deleteBtn: boolean;
-	editBtn: Boolean;
-	block: Boolean;
+	deleteBtn?: boolean;
+	editBtn?: Boolean;
+	block?: Boolean;
 }
 
 /** Popover with basic CRUD actions
@@ -59,16 +59,16 @@ const PopoverActions = ({
 					vertical: 'top',
 					horizontal: 'center',
 				}}>
-				{deleteBtn ? (
+				{deleteBtn && (
 					<IconButton className="Delete__Btn" onClick={() => remove()}>
 						{block ? <BlockIcon /> : <DeleteIcon />}
 					</IconButton>
-				) : null}
-				{editBtn ? (
+				)}
+				{editBtn && edit && (
 					<IconButton className="Edit__Btn" onClick={() => edit()}>
 						<EditIcon />
 					</IconButton>
-				) : null}
+				)}
 			</Popover>
 		</>
 	);
