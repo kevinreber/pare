@@ -1,8 +1,8 @@
 /** Dependencies */
-import React, { useState } from 'react';
+import React, { useState, ChangeEventHandler } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { PropTypes } from 'prop-types';
+import * as PropTypes from 'prop-types';
 import moment from 'moment';
 
 /** Components & Helpers */
@@ -16,6 +16,12 @@ import { showModalContent } from '../../../../store/actions/modal';
 import createNewMessage from '../../../../utils/createNewMessage';
 import dateFromNowFormatter from '../../../../utils/dateFromNowFormatter';
 import copyLinkToClipBoard from '../../../../utils/copyLinkToClipBoard';
+import {
+	PostCardTypes,
+	PostDataTypes,
+	ChatTypes,
+	MessageTypes,
+} from '../../interface';
 
 /** MUI */
 import IconButton from '@material-ui/core/IconButton';
@@ -57,7 +63,7 @@ import { HOST_URL } from '../../../../constants/index';
  * @param {function} 	remove				Function to remove post. User will only see if they made post.
  * @param {function} 	edit				Function to edit post. User will only see if they made post.
  */
-function PostCard({
+const PostCard = ({
 	id,
 	title,
 	username,
@@ -77,9 +83,10 @@ function PostCard({
 	isBookmarked = false,
 	remove,
 	edit,
-}) {
+}: PostCardTypes): JSX.Element => {
 	const dispatch = useDispatch();
 	const history = useHistory();
+	// @ts-ignore
 	const currentUser = useSelector((state) => state.auth.user);
 
 	const [showEditForm, setShowEditForm] = useState(false);
@@ -93,7 +100,7 @@ function PostCard({
 
 	/** PopoverActions Props for Admin ***************/
 	const [anchorEl, setAnchorEl] = useState(null);
-	const togglePopover = (e) => {
+	const togglePopover = (e: any) => {
 		setAnchorEl(e.currentTarget);
 	};
 	const handleClose = () => setAnchorEl(null);
@@ -103,7 +110,7 @@ function PostCard({
 
 	/** PopoverActions Props for Share Icon***************/
 	const [shareAnchorEl, setShareAnchorEl] = useState(null);
-	const toggleSharePopover = (e) => {
+	const toggleSharePopover = (e: any) => {
 		setShareAnchorEl(e.currentTarget);
 	};
 	const handleShareClose = () => setShareAnchorEl(null);
@@ -112,7 +119,7 @@ function PostCard({
 	/************************************* */
 
 	/** converts time */
-	const convertTime = (time) => {
+	const convertTime = (time: any) => {
 		return moment(time.toDate()).calendar();
 	};
 
@@ -159,7 +166,7 @@ function PostCard({
 	/** Edit Post Form **************************/
 
 	// Updates edited post's data
-	const editPost = (id, data) => {
+	const editPost = (id: string, data: PostDataTypes) => {
 		edit(id, data);
 		// close popover and edit form
 		toggleEditForm();
@@ -171,6 +178,7 @@ function PostCard({
 				isOpen: true,
 				content: (
 					<EditPostForm
+						// @ts-ignore
 						save={editPost}
 						userId={userId}
 						postId={id}
@@ -200,7 +208,10 @@ function PostCard({
 		setShowMessageForm((show) => !show);
 	};
 
-	const sendMessage = async (messageData, chatData) => {
+	const sendMessage = async (
+		messageData: MessageTypes,
+		chatData: ChatTypes
+	) => {
 		// store messageId given back
 		const messageId = await createNewMessage(
 			'messages',
@@ -278,7 +289,8 @@ function PostCard({
 								<span className="mate-text-secondary username">{username}</span>
 								<span className="mate-text-secondary edited">
 									{timestamp && last_updated
-										? !timestamp?.isEqual(last_updated)
+										? // @ts-ignore
+										  !timestamp?.isEqual(last_updated)
 										: null
 										? '(Edited)'
 										: ''}
@@ -346,7 +358,7 @@ function PostCard({
 			</div>
 		</div>
 	);
-}
+};
 
 PostCard.propTypes = {
 	id: PropTypes.string.isRequired,
