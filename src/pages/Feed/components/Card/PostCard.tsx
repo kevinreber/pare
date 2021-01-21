@@ -1,5 +1,5 @@
 /** Dependencies */
-import React, { useState, ChangeEventHandler } from 'react';
+import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import * as PropTypes from 'prop-types';
