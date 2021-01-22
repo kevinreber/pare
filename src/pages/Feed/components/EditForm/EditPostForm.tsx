@@ -13,6 +13,7 @@ import dateAndTimeFormatter from '../../../../utils/dateAndTimeFormatter';
 import createFbTimestamp from '../../../../utils/createFbTimestamp';
 import fileIsImage from '../../../../utils/validateImage';
 import { storage } from '../../../../config/fbConfig';
+import { EditPostFormTypes, PostInitialFormDataTypes } from '../../interface';
 
 /** MUI */
 import IconButton from '@material-ui/core/IconButton';
@@ -33,35 +34,40 @@ const EditPostForm = memo(
 		title,
 		description,
 		location = null,
-		type = null,
+		type = '',
 		start = null,
 		end = null,
 		attachment = '',
 		attachment_name = '',
 		timestamp,
 		comments,
-	}) => {
+	}: EditPostFormTypes) => {
 		/** Get user data */
 		const user = useSelector((state) => {
 			return {
+				// @ts-ignore
 				userId: state.auth.user.uid,
+				// @ts-ignore
 				username: state.auth.user.displayName,
+				// @ts-ignore
 				avatar: state.auth.user.photoURL,
 			};
 		});
 
-		const INITIAL_STATE = {
+		const INITIAL_STATE: PostInitialFormDataTypes = {
 			userId: userId,
 			username: username,
 			avatar: avatar,
 			title: title,
 			description: description,
+			// @ts-ignore
 			type: type,
 			start: start,
 			end: end,
 			attachment: attachment,
 			attachment_name: attachment_name,
 			timestamp: timestamp,
+			// @ts-ignore
 			last_updated: createFbTimestamp(),
 			num_of_comments: comments,
 		};
@@ -81,10 +87,11 @@ const EditPostForm = memo(
 
 		// location data
 		const [address, setAddress] = useState(
+			// @ts-ignore
 			location.address ? location.address : ''
 		);
 
-		const handleSelect = async (value) => {
+		const handleSelect = async (value: any) => {
 			setAddress(value);
 		};
 
@@ -107,7 +114,7 @@ const EditPostForm = memo(
 						);
 						setProgressBar(progress);
 					},
-					(error) => {
+					(error: any) => {
 						setErrors(error);
 					},
 					async () => {
@@ -217,7 +224,9 @@ const EditPostForm = memo(
 						isOpen: true,
 						title: 'Save changes?',
 						subtitle: '',
+						// @ts-ignore
 						onConfirm: async () => {
+							// @ts-ignore
 							formData.location = {
 								address,
 							};
@@ -256,6 +265,7 @@ const EditPostForm = memo(
 		return (
 			<div className="PostForm">
 				<ConfirmDialog
+					// @ts-ignore
 					confirmDialog={confirmDialog}
 					setConfirmDialog={setConfirmDialog}
 				/>
@@ -272,7 +282,7 @@ const EditPostForm = memo(
 							onChange={handleChange}
 							name="title"
 							value={formData.title}
-							maxLength="30"
+							maxLength={30}
 							required
 						/>
 						<small
@@ -287,14 +297,13 @@ const EditPostForm = memo(
 							Description*
 						</label>
 						<textarea
-							rows="3"
+							rows={3}
 							id="description"
 							className="form-control mate-form-input"
-							type="text"
 							onChange={handleChange}
 							name="description"
 							value={formData.description}
-							maxLength="100"
+							maxLength={100}
 							required
 						/>
 						<small
@@ -338,6 +347,7 @@ const EditPostForm = memo(
 
 											return (
 												<div
+													// @ts-ignore
 													key={idx}
 													className="Autocomplete-Location-Item"
 													{...getSuggestionItemProps(suggestion, { style })}>
@@ -377,9 +387,8 @@ const EditPostForm = memo(
 							type="datetime-local"
 							className="float-right"
 							defaultValue={
-								formData.start
-									? dateAndTimeFormatter(formData.start.toDate())
-									: null
+								// @ts-ignore
+								formData.start && dateAndTimeFormatter(formData.start.toDate())
 							}
 							name="start"
 							onChange={handleChange}
@@ -397,9 +406,8 @@ const EditPostForm = memo(
 							type="datetime-local"
 							className="float-right"
 							defaultValue={
-								formData.end
-									? dateAndTimeFormatter(formData.end.toDate())
-									: null
+								// @ts-ignore
+								formData.end && dateAndTimeFormatter(formData.end.toDate())
 							}
 							name="end"
 							onChange={handleChange}
@@ -440,12 +448,10 @@ const EditPostForm = memo(
 					</div>
 					<SubmitButton text="Save Changes" />
 				</form>
-				{errors ? (
+				{errors && (
 					<div className="Form__Errors">
 						<div className="alert errors">{errors}</div>
 					</div>
-				) : (
-					''
 				)}
 			</div>
 		);

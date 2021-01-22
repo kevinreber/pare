@@ -1,3 +1,5 @@
+import EditPostForm from './components/EditForm/EditPostForm';
+
 interface CommentTypes {
 	avatar: string;
 	createdAt: Date;
@@ -87,4 +89,23 @@ export interface MessageTypes {
 	createdAt: Date;
 	lastUpdatedAt: Date;
 	chats: [];
+}
+
+export interface EditPostFormTypes {
+	save: Function;
+	postId: string;
+	title: string;
+	userId: string;
+	username: string;
+	avatar: string;
+	description: string;
+	location?: { address: string } | null;
+	type?: string | null;
+	start?: Date | null;
+	end?: Date | null;
+	attachment_preview?: string | null;
+	attachment?: string;
+	attachment_name?: string;
+	timestamp: Date;
+	comments: number | null;
 }
