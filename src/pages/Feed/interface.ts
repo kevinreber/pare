@@ -24,6 +24,22 @@ export interface PostDataTypes {
 	num_of_comments: number | null;
 }
 
+export interface PostInitialFormDataTypes {
+	title: string;
+	username: string;
+	userId: string;
+	avatar: string;
+	description: string;
+	type?: string;
+	start?: Date | null;
+	end?: Date | null;
+	attachment?: string;
+	attachment_name?: string;
+	timestamp: Date;
+	last_updated: Date;
+	num_of_comments: number | null;
+}
+
 export interface PostTypes {
 	id: string;
 	title: string;

@@ -1,10 +1,8 @@
 /** Dependencies */
-import React, { useState } from 'react';
+import React, { useState, FormEvent, memo } from 'react';
 import { useSelector } from 'react-redux';
 import firebase from 'firebase';
-import PlacesAutocomplete from // geocodeByAddress,
-// getLatLng,
-'react-places-autocomplete';
+import PlacesAutocomplete from 'react-places-autocomplete';
 import { postTypeOptions, INITIAL_STATE_IMAGE } from '../../constants/index';
 
 /** Components && Helpers */
@@ -13,6 +11,7 @@ import ProgressBar from '../../../../components/ProgressBar/ProgressBar';
 import createFbTimestamp from '../../../../utils/createFbTimestamp';
 import fileIsImage from '../../../../utils/validateImage';
 import { storage } from '../../../../config/fbConfig';
+import { PostInitialFormDataTypes } from '../../interface';
 
 /** MUI */
 import IconButton from '@material-ui/core/IconButton';
@@ -20,20 +19,27 @@ import TextField from '@material-ui/core/TextField';
 import PanoramaOutlinedIcon from '@material-ui/icons/PanoramaOutlined';
 import CancelIcon from '@material-ui/icons/Cancel';
 
+interface Props {
+	save: Function;
+}
+
 /** Form for user's to create a Post
  *  Feed -> PostForm
  */
-function PostForm({ save }) {
+const PostForm = ({ save }: Props): JSX.Element => {
 	/** Get user data */
 	const user = useSelector((state) => {
 		return {
+			// @ts-ignore
 			userId: state.auth.user.uid,
+			// @ts-ignore
 			username: state.auth.user.displayName,
+			// @ts-ignore
 			avatar: state.auth.user.photoURL,
 		};
 	});
 
-	const INITIAL_STATE = {
+	const INITIAL_STATE: PostInitialFormDataTypes = {
 		userId: user.userId,
 		username: user.username,
 		avatar: user.avatar,
@@ -44,7 +50,9 @@ function PostForm({ save }) {
 		end: null,
 		attachment: '',
 		attachment_name: '',
+		// @ts-ignore
 		timestamp: createFbTimestamp(),
+		// @ts-ignore
 		last_updated: createFbTimestamp(),
 		num_of_comments: 0,
 	};
@@ -57,21 +65,13 @@ function PostForm({ save }) {
 
 	// location data
 	const [address, setAddress] = useState('');
-	// ! TEMP: DO NOT USE TO AVOID API CHARGES
-	// const [coordinates, setCoordinates] = useState({
-	// 	lat: null,
-	// 	lng: null,
-	// });
 
-	const handleSelect = async (value) => {
-		// const results = await geocodeByAddress(value);
-		// const latLng = await getLatLng(results[0]);
+	const handleSelect = async (value: any) => {
 		setAddress(value);
-		// setCoordinates(latLng);
 	};
 
 	/** Update state in formData */
-	const handleChange = (e) => {
+	const handleChange = (e: any) => {
 		// Reset errors each change
 		setErrors('');
 		// if uploading media file, update formData
@@ -149,12 +149,12 @@ function PostForm({ save }) {
 	};
 
 	/** Handle's submitted form data */
-	const handleSubmit = (e) => {
+	const handleSubmit = (e: FormEvent) => {
 		e.preventDefault();
 		if (validateFormData()) {
+			// @ts-ignore
 			formData.location = {
 				address,
-				// coordinates,
 			};
 
 			save(formData);
@@ -165,7 +165,7 @@ function PostForm({ save }) {
 	};
 
 	// Handles image upload to DB
-	const handleUpload = async (image) => {
+	const handleUpload = async (image: any) => {
 		const storageRef = storage.ref(`feed/${user.userId}/${image.name}`);
 
 		storageRef.put(image).on(
@@ -176,7 +176,7 @@ function PostForm({ save }) {
 				);
 				setProgressBar(progress);
 			},
-			(error) => {
+			(error: any) => {
 				setErrors(error);
 			},
 			async () => {
@@ -205,7 +205,7 @@ function PostForm({ save }) {
 						onChange={handleChange}
 						name="title"
 						value={formData.title}
-						maxLength="30"
+						maxLength={30}
 						required
 					/>
 					<small
@@ -220,14 +220,14 @@ function PostForm({ save }) {
 						Description*
 					</label>
 					<textarea
-						rows="3"
+						rows={3}
 						id="description"
 						className="form-control mate-form-input"
-						type="text"
+						// type="text"
 						onChange={handleChange}
 						name="description"
 						value={formData.description}
-						maxLength="100"
+						maxLength={100}
 						required
 					/>
 					<small
@@ -250,6 +250,11 @@ function PostForm({ save }) {
 							suggestions,
 							getSuggestionItemProps,
 							loading,
+						}: {
+							getInputProps: any;
+							suggestions: any;
+							getSuggestionItemProps: any;
+							loading: boolean;
 						}) => (
 							<div className="Autocomplete-Location">
 								<input
@@ -262,7 +267,7 @@ function PostForm({ save }) {
 								<div className="Autocomplete-Location-List">
 									{loading ? <div>loading...</div> : null}
 
-									{suggestions.map((suggestion, idx) => {
+									{suggestions.map((suggestion: any, idx: number) => {
 										const style = {
 											backgroundColor: suggestion.active
 												? '#ddb72c'
@@ -366,16 +371,14 @@ function PostForm({ save }) {
 				</div>
 				<SubmitButton text="Post" reset={true} resetForm={resetFormData} />
 			</form>
-			{errors ? (
+			{errors && (
 				<div className="Form__Errors">
 					<div className="alert errors">{errors}</div>
 				</div>
-			) : (
-				''
 			)}
 			<div className="Post-Form-Padding"></div>
 		</div>
 	);
-}
+};
 
-export default PostForm;
+export default memo(PostForm);
