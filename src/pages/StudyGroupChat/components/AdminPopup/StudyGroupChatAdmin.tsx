@@ -2,7 +2,7 @@
 import React, { useState, memo } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { PropTypes } from 'prop-types';
+import * as PropTypes from 'prop-types';
 
 /** Components & Helpers */
 import CTAButton from '../../../../components/CTAButton/CTAButton';
@@ -11,6 +11,7 @@ import ConfirmDialog from '../../../../components/ConfirmDialog/ConfirmDialog';
 import removeUserFromCollection from '../../../../utils/removeUserFromCollection';
 import { addFlashMessage } from '../../../../store/actions/flashMessages';
 import copyLinkToClipBoard from '../../../../utils/copyLinkToClipBoard';
+import { ChatAdminTypes } from '../../interface';
 
 /** MUI */
 import IconButton from '@material-ui/core/IconButton';
@@ -39,13 +40,13 @@ const StudyGroupChatAdmin = ({
 	currentUser,
 	handleChange,
 	saveChanges,
-}) => {
+}: ChatAdminTypes) => {
 	const history = useHistory();
 	const dispatch = useDispatch();
 
 	/** PopoverActions Props ***************/
 	const [anchorEl, setAnchorEl] = useState(null);
-	const togglePopover = (e) => {
+	const togglePopover = (e: any) => {
 		setAnchorEl(e.currentTarget);
 	};
 	const handleClose = () => setAnchorEl(null);
@@ -61,7 +62,7 @@ const StudyGroupChatAdmin = ({
 
 	const [errors, setErrors] = useState('');
 	const [showEdit, setShowEdit] = useState(false);
-	const handleEdit = (e) => {
+	const handleEdit = (e: any) => {
 		setErrors('');
 		setShowEdit((show) => !show);
 		if (showEdit === true) {
@@ -69,14 +70,14 @@ const StudyGroupChatAdmin = ({
 		}
 	};
 	// resets title
-	const reset = (e) => handleChange(e);
+	const reset = (e: any) => handleChange(e);
 
 	// if user is admin, they will see admin settings
 	const userAdminStatus = members.filter(
 		(member) => member.id === currentUser.uid
 	)[0].data.admin;
 
-	const setFlashMessage = (message, type) => {
+	const setFlashMessage = (message: string, type: string) => {
 		dispatch(
 			addFlashMessage({
 				isOpen: true,
@@ -87,11 +88,12 @@ const StudyGroupChatAdmin = ({
 	};
 
 	// Prompt to remove user
-	const removeUserPrompt = (user) => {
+	const removeUserPrompt = (user: any) => {
 		setConfirmDialog({
 			isOpen: true,
 			title: `Remove ${user.data.displayName} from Study Group?`,
 			subtitle: "You can't undo this operation",
+			// @ts-ignore
 			onConfirm: () => {
 				removeUser(user.id);
 			},
@@ -99,7 +101,7 @@ const StudyGroupChatAdmin = ({
 	};
 
 	// Remove user, using userID as reference
-	const removeUser = (user) => {
+	const removeUser = (user: any) => {
 		removeUserFromCollection('study-groups', studyGroupId, user);
 		setFlashMessage('Removed user from study group', 'error');
 
@@ -117,6 +119,7 @@ const StudyGroupChatAdmin = ({
 			isOpen: true,
 			title: 'Are you sure you want to leave the Study Group?',
 			subtitle: "You can't undo this operation",
+			// @ts-ignore
 			onConfirm: () => {
 				leaveGroup();
 			},
@@ -130,6 +133,7 @@ const StudyGroupChatAdmin = ({
 		removeUserFromCollection(
 			'study-groups',
 			studyGroupId,
+			// @ts-ignore
 			currentUser.uid,
 			members
 		);
@@ -198,11 +202,12 @@ const StudyGroupChatAdmin = ({
 							className={`form-control mate-form-input editable-text editable-title ${
 								showEdit ? 'show-editable' : 'hide-editable'
 							}`}
+							// @ts-ignore
 							onChange={handleChange}
 							name={'title'}
 							value={title}
 							type="text"
-							maxLength="30"
+							maxLength={30}
 							required
 						/>
 						<small
@@ -258,6 +263,7 @@ const StudyGroupChatAdmin = ({
 				<div className="Admin-Members__List">{MembersList}</div>
 				<div className="Admin-Members__Footer">
 					<ConfirmDialog
+						// @ts-ignore
 						confirmDialog={confirmDialog}
 						setConfirmDialog={setConfirmDialog}
 						type="error"

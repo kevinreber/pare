@@ -1,12 +1,13 @@
 /** Dependencies */
-import React, { memo } from 'react';
+import React, { memo, FormEvent } from 'react';
 import { useDispatch } from 'react-redux';
-import { PropTypes } from 'prop-types';
+import * as PropTypes from 'prop-types';
 
 /** Components & Helpers */
 import useFields from '../../../../hooks/useFields';
 import createFbTimestamp from '../../../../utils/createFbTimestamp';
 import { addFlashMessage } from '../../../../store/actions/flashMessages';
+import { ChatFooterTypes, FormDataTypes } from '../../interface';
 
 /** MUI */
 import IconButton from '@material-ui/core/IconButton';
@@ -23,11 +24,12 @@ import SendIcon from '@material-ui/icons/Send';
  * @param {object}	 	user	Object of current user's data.
  *
  */
-const StudyGroupChatFooter = ({ send, user }) => {
+const StudyGroupChatFooter = ({ send, user }: ChatFooterTypes) => {
 	const dispatch = useDispatch();
 
-	const INITIAL_STATE = {
+	const INITIAL_STATE: FormDataTypes = {
 		message: '',
+		// @ts-ignore
 		createdAt: createFbTimestamp(),
 		displayName: user.displayName,
 		uid: user.uid,
@@ -35,7 +37,7 @@ const StudyGroupChatFooter = ({ send, user }) => {
 
 	const [formData, handleChange, resetFormData] = useFields(INITIAL_STATE);
 
-	const handleSubmit = (e) => {
+	const handleSubmit = (e: FormEvent) => {
 		e.preventDefault();
 		// Check if field is empty or white space
 		if (formData.message && formData.message.trim() !== '') {
@@ -68,6 +70,7 @@ const StudyGroupChatFooter = ({ send, user }) => {
 						<ImageIcon fontSize="large" />
 					</IconButton>
 				</div> */}
+				{/* @ts-ignore */}
 				<IconButton
 					type="submit"
 					disabled={!formData.message}
