@@ -1,5 +1,3 @@
-import EditPostForm from './components/EditForm/EditPostForm';
-
 interface CommentTypes {
 	avatar: string;
 	createdAt: Date;
