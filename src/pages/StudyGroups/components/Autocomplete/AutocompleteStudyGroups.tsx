@@ -1,12 +1,14 @@
 /** Dependencies */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { useSelector } from 'react-redux';
 
 /** MUI */
 import SearchIcon from '@material-ui/icons/Search';
 import Avatar from '@material-ui/core/Avatar';
 
-function AutocompleteStudyGroups({
+import { AutocompleteTypes, StudyGroupTypes } from '../../interfaces';
+
+const AutocompleteStudyGroups = ({
 	id,
 	onChange,
 	name,
@@ -16,7 +18,8 @@ function AutocompleteStudyGroups({
 	setId,
 	showOptions,
 	toggleOptions,
-}) {
+}: AutocompleteTypes) => {
+	// @ts-ignore
 	const currentUser = useSelector((state) => state.auth.user);
 
 	const [studyGroupChoices, setStudyGroupChoices] = useState([]);
@@ -31,27 +34,31 @@ function AutocompleteStudyGroups({
 
 		// Filter which Study Groups user is not currently in
 		const studyGroupOptions = publicStudyGroups.filter(
-			(studyGroup) => !studyGroup.data.usersList.includes(currentUser.uid)
+			(studyGroup: StudyGroupTypes) =>
+				!studyGroup.data.usersList.includes(currentUser.uid)
 		);
 
+		// @ts-ignore
 		setStudyGroupChoices(studyGroupOptions);
 	}, [options, currentUser]);
 
 	/** Commit onChange changes and filter through options */
-	function onSearch(e) {
+	function onSearch(e: any) {
 		onChange(e);
 
+		// @ts-ignore
 		toggleOptions(true);
 		let opts = studyGroupChoices.filter(
-			(studyGroup) =>
+			(studyGroup: StudyGroupTypes) =>
 				studyGroup.data.title.toLowerCase().indexOf(value.toLowerCase()) > -1
 		);
 
 		setFilteredOptions(opts);
 	}
 
-	function onClick(e) {
+	function onClick(e: any) {
 		setFilteredOptions([]);
+		// @ts-ignore
 		toggleOptions(false);
 		onChange(e);
 		setId(e);
@@ -62,11 +69,11 @@ function AutocompleteStudyGroups({
 	if (showOptions && value) {
 		optionList = filteredOptions.length ? (
 			<ul className="options">
-				{filteredOptions.map((option) => {
+				{filteredOptions.map((option: StudyGroupTypes) => {
 					return (
 						<li
 							id={option.id}
-							key={options.id}
+							key={option.id}
 							className="option User-option"
 							data-name={name}
 							data-value={option.data.title}
@@ -103,6 +110,6 @@ function AutocompleteStudyGroups({
 			{optionList}
 		</div>
 	);
-}
+};
 
-export default AutocompleteStudyGroups;
+export default memo(AutocompleteStudyGroups);
