@@ -205,6 +205,7 @@ function StudyGroupForm({ save, studyGroups, user }: StudyGroupFormTypes) {
 					setId={setId}
 					placeholder={'find study group...'}
 					showOptions={showOptions}
+					// @ts-ignore
 					toggleOptions={toggleOptions}
 				/>
 			</form>
