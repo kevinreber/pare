@@ -16,6 +16,7 @@ import StudyGroupForm from './components/Form/StudyGroupForm';
 import { addFlashMessage } from '../../store/actions/flashMessages';
 import createNewMessage from '../../utils/createNewMessage';
 import db from '../../config/fbConfig';
+import { StudyGroupTypes, FormDataTypes } from './interfaces';
 import './StudyGroups.css';
 
 /** Page that displays a list of user's Study Groups */
@@ -23,6 +24,7 @@ export function StudyGroups() {
 	const history = useHistory();
 	const dispatch = useDispatch();
 
+	// @ts-ignore
 	const currentUser = useSelector((state) => state.auth.user);
 
 	const [getUserStudyGroups, setGetUserStudyGroups] = useState(false);
@@ -39,9 +41,9 @@ export function StudyGroups() {
 			await db
 				.collection('study-groups')
 				.get()
-				.then((data) => {
+				.then((data: any) => {
 					setAllStudyGroups(
-						data.docs.map((doc) => ({
+						data.docs.map((doc: any) => ({
 							id: doc.id,
 							data: doc.data(),
 						}))
@@ -58,9 +60,11 @@ export function StudyGroups() {
 	useEffect(() => {
 		if (getUserStudyGroups) {
 			// Filter which Study Groups user is currently in
-			const studyGroups = allStudyGroups.filter((studyGroup) => {
-				return studyGroup.data.usersList.includes(currentUser.uid);
-			});
+			const studyGroups = allStudyGroups.filter(
+				(studyGroup: StudyGroupTypes) => {
+					return studyGroup.data.usersList.includes(currentUser.uid);
+				}
+			);
 			setUserStudyGroups(studyGroups);
 			setGetUserStudyGroups(false);
 			setIsLoading(false);
@@ -72,7 +76,7 @@ export function StudyGroups() {
 	if (filter !== '' && !isLoading && !getUserStudyGroups) {
 		// filter study groups to display
 		const filteredGroups = userStudyGroups.filter(
-			(studyGroup) =>
+			(studyGroup: StudyGroupTypes) =>
 				studyGroup.data.title.toLowerCase().indexOf(filter.toLowerCase()) > -1
 		);
 
@@ -93,11 +97,12 @@ export function StudyGroups() {
 			);
 	}
 
-	const addStudyGroup = async (data) => {
+	const addStudyGroup = async (data: FormDataTypes) => {
 		// store studyGroupId given back
 		const newStudyGroupId = await createNewMessage(
 			'study-groups',
 			data,
+			// @ts-ignore
 			null,
 			null,
 			currentUser
