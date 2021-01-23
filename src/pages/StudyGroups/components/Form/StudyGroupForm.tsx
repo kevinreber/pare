@@ -1,8 +1,8 @@
 /** Dependencies */
-import React, { useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { PropTypes } from 'prop-types';
+import * as PropTypes from 'prop-types';
 
 /** Components & Helpers */
 import SubmitButton from '../../../../components/SubmitButton/SubmitButton';
@@ -11,6 +11,11 @@ import ConfirmDialog from '../../../../components/ConfirmDialog/ConfirmDialog';
 import createFbTimestamp from '../../../../utils/createFbTimestamp';
 import addUserToCollection from '../../../../utils/addUserToCollection';
 import { addFlashMessage } from '../../../../store/actions/flashMessages';
+import {
+	StudyGroupFormTypes,
+	FormDataTypes,
+	SearchTypes,
+} from '../../interfaces';
 import './styles/StudyGroupForm.css';
 
 /** Form to add a course.
@@ -20,7 +25,7 @@ import './styles/StudyGroupForm.css';
  * @param {array}		studyGroups		Array of objects containing Study Group data.
  * @param {object}	 	user			Object of current user's data.
  */
-function StudyGroupForm({ save, studyGroups, user }) {
+function StudyGroupForm({ save, studyGroups, user }: StudyGroupFormTypes) {
 	const { uid, displayName, photoURL } = user;
 	const history = useHistory();
 	const dispatch = useDispatch();
@@ -28,7 +33,7 @@ function StudyGroupForm({ save, studyGroups, user }) {
 	// ! NEED TO MATCH NEW DB SCHEMA
 	// ! WHEN MAKING NEW STUDY GROUP
 	// Form Data
-	const INITIAL_STATE = {
+	const INITIAL_STATE: FormDataTypes = {
 		active: true,
 		private: false,
 		admin: [uid],
@@ -40,7 +45,7 @@ function StudyGroupForm({ save, studyGroups, user }) {
 		lastUpdatedAt: createFbTimestamp(),
 	};
 
-	const SEARCH_INITIAL_STATE = {
+	const SEARCH_INITIAL_STATE: SearchTypes = {
 		studyGroupId: '',
 		studyGroupTitle: '',
 	};
@@ -56,12 +61,13 @@ function StudyGroupForm({ save, studyGroups, user }) {
 		subtitle: '',
 	});
 
-	const handleSearch = (e) => {
+	const handleSearch = (e: any) => {
+		// @ts-ignore
 		setSearchForm({ studyGroupTitle: e.target.value });
 	};
 
 	/** Update state in formData */
-	const handleChange = (e) => {
+	const handleChange = (e: any) => {
 		// handle checkbox
 		if (e.target.type === 'checkbox') {
 			console.log(formData.private);
@@ -82,7 +88,7 @@ function StudyGroupForm({ save, studyGroups, user }) {
 	};
 
 	/** Stores studyGroupId in state */
-	const setId = (e) => {
+	const setId = (e: any) => {
 		let { id } = e.target;
 		let { name, value } = !e.target.dataset.name ? e.target : e.target.dataset;
 
@@ -95,11 +101,12 @@ function StudyGroupForm({ save, studyGroups, user }) {
 	};
 
 	/** Prompts Confirmation Dialog to Add User to Study Group */
-	const addStudyGroupPrompt = (id, studyGroupName) => {
+	const addStudyGroupPrompt = (id: string, studyGroupName: string) => {
 		setConfirmDialog({
 			isOpen: true,
 			title: `Join ${studyGroupName}?`,
 			subtitle: '',
+			// @ts-ignore
 			onConfirm: () => {
 				const userData = {
 					uid,
@@ -123,7 +130,7 @@ function StudyGroupForm({ save, studyGroups, user }) {
 	/***************************************************** */
 
 	/** if user clicks outside of options, showOptions will be set to false */
-	function toggleShowOptions(e) {
+	const toggleShowOptions = (e: any) => {
 		if (
 			e.target.tagName !== 'LI' ||
 			e.target.tagName !== 'UL' ||
@@ -131,10 +138,10 @@ function StudyGroupForm({ save, studyGroups, user }) {
 		) {
 			setShowOptions(false);
 		}
-	}
+	};
 
 	/** Toggles options display */
-	function toggleOptions(status) {
+	function toggleOptions(status: boolean) {
 		setShowOptions(status);
 	}
 
@@ -172,7 +179,7 @@ function StudyGroupForm({ save, studyGroups, user }) {
 		return true;
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = (e: FormEvent) => {
 		e.preventDefault();
 		if (validateFormData()) {
 			save(formData);
@@ -184,6 +191,7 @@ function StudyGroupForm({ save, studyGroups, user }) {
 	return (
 		<div className="StudyGroupForm p-3" onClick={toggleShowOptions}>
 			<ConfirmDialog
+				// @ts-ignore
 				confirmDialog={confirmDialog}
 				setConfirmDialog={setConfirmDialog}
 			/>
@@ -213,7 +221,7 @@ function StudyGroupForm({ save, studyGroups, user }) {
 						onChange={handleChange}
 						name="title"
 						value={formData.title}
-						maxLength="30"
+						maxLength={30}
 						required
 					/>
 					<small
@@ -245,6 +253,7 @@ function StudyGroupForm({ save, studyGroups, user }) {
 								type="checkbox"
 								onChange={handleChange}
 								name="private"
+								// @ts-ignore
 								value={formData.private}
 							/>
 							{/* <FormControlLabel
