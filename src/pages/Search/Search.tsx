@@ -52,11 +52,13 @@ export const Search = () => {
 				db.collection('feeds')
 					.get()
 					.then((data) => {
-						data.docs.forEach((doc) => {
+						data.docs.forEach((doc: any) => {
 							if (doc.data().timestamp) {
 								const postDate = doc.data().timestamp.toDate().getTime();
+								// @ts-ignore
 								if (nowDate - postDate < 86400000) {
-									setPosts((posts) => [
+									// @ts-ignore
+									setPosts((posts: any) => [
 										...posts,
 										{ id: doc.id, data: doc.data() },
 									]);
@@ -71,7 +73,8 @@ export const Search = () => {
 					.get()
 					.then((data) => {
 						setPosts(
-							data.docs.map((doc) => ({
+							// @ts-ignore
+							data.docs.map((doc: any) => ({
 								id: doc.id,
 								data: doc.data(),
 							}))
@@ -99,6 +102,7 @@ export const Search = () => {
 								.description.toLowerCase()
 								.includes(search.toLowerCase())
 						) {
+							// @ts-ignore
 							setPosts((posts) => [...posts, { id: doc.id, data: doc.data() }]);
 						}
 					});
@@ -140,6 +144,7 @@ export const Search = () => {
 				isOpen: true,
 				title: 'Are you sure you want to remove this post?',
 				subtitle: "You can't undo this operation",
+				// @ts-ignore
 				onConfirm: () => {
 					deletePost(id);
 				},
@@ -205,6 +210,7 @@ export const Search = () => {
 	return (
 		<div className="Search">
 			<ConfirmDialog
+				// @ts-ignore
 				confirmDialog={confirmDialog}
 				setConfirmDialog={setConfirmDialog}
 				type="error"
