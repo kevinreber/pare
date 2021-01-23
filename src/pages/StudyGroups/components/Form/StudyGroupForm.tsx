@@ -201,6 +201,7 @@ function StudyGroupForm({ save, studyGroups, user }: StudyGroupFormTypes) {
 					name="studyGroupTitle"
 					onChange={handleSearch}
 					value={searchForm.studyGroupTitle}
+					// @ts-ignore
 					options={studyGroups}
 					setId={setId}
 					placeholder={'find study group...'}
