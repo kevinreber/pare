@@ -22,7 +22,7 @@ export interface StudyGroupsTypes {
 
 export interface StudyGroupFormTypes {
 	save: Function;
-	studyGroups: [];
+	studyGroups: StudyGroupsTypes[];
 	user: UserTypes;
 }
 
