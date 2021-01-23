@@ -5,16 +5,19 @@ interface UserTypes {
 	admin?: boolean;
 }
 
-interface StudyGroupTypes {
+interface StudyGroupDataTypes {
 	title: string;
 	description: string;
 	usersList: UserTypes[];
 	private: boolean;
 }
+interface StudyGroupTypes {
+	id: string;
+	data: StudyGroupDataTypes;
+}
 
 export interface StudyGroupsTypes {
-	id: string;
-	data: StudyGroupTypes[];
+	studyGroups: StudyGroupTypes[];
 }
 
 export interface StudyGroupFormTypes {
