@@ -11,7 +11,7 @@ interface StudyGroupDataTypes {
 	usersList: UserTypes[];
 	private: boolean;
 }
-interface StudyGroupTypes {
+export interface StudyGroupTypes {
 	id: string;
 	data: StudyGroupDataTypes;
 }
@@ -41,4 +41,16 @@ export interface FormDataTypes {
 export interface SearchTypes {
 	studyGroupId: string;
 	studyGroupTitle: string;
+}
+
+export interface AutocompleteTypes {
+	id: string;
+	onChange: Function;
+	name: string;
+	value: string;
+	options: StudyGroupTypes[];
+	placeholder: string;
+	setId: Function;
+	showOptions: boolean;
+	toggleOptions: boolean;
 }
