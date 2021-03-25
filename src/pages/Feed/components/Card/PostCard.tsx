@@ -5,6 +5,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import * as PropTypes from 'prop-types';
 import moment from 'moment';
 
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
 /** Components & Helpers */
 import EditPostForm from '../EditForm/EditPostForm';
 import PopoverActions from '../../../../components/PopoverActions/PopoverActions';
@@ -152,10 +155,11 @@ const PostCard = ({
 
 	const showAttachment =
 		attachment !== '' ? (
-			<img
+			<LazyLoadImage
 				className="Post-Card__Attachment"
 				src={attachment}
 				alt={attachment_name}
+				effect="blur"
 			/>
 		) : null;
 
