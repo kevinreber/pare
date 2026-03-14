@@ -45,8 +45,6 @@ function ChatFooter({ send, type = 'message' }: ChatFooterProps): JSX.Element {
 			if (formData.message && formData.message.trim() !== '') {
 				send(formData);
 				resetFormData();
-			} else {
-				console.log('error');
 			}
 		},
 		[formData, send, resetFormData]

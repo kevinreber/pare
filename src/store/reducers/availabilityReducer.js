@@ -34,7 +34,6 @@ const userAvailabilityReducer = (state = INITIAL_AVAIL, action) => {
 	switch (action.type) {
 		case UPDATE_AVAILABILITY:
 			const { time, day, type, index } = action.availability;
-			console.log(time, day, type, index);
 			return produce(state, (draft) => {
 				draft[day][index][type] = time;
 			});

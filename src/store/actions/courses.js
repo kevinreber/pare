@@ -93,7 +93,7 @@ export function addCourseToFB(
 							dispatch(dispatchError('ADD_COURSE_ERROR', err));
 						});
 				} catch (err) {
-					console.log(err);
+					dispatch(dispatchError('ADD_COURSE_ERROR', err));
 				}
 			}
 		});

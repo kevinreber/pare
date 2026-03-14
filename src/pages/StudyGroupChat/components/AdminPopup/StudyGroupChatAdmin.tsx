@@ -137,8 +137,6 @@ const StudyGroupChatAdmin = ({
 			currentUser.uid,
 			members
 		);
-		console.log('leaving group...');
-
 		// redirect user to study-groups
 		history.push(`/study-groups`);
 		setFlashMessage('Left Study Group', 'error');

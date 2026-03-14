@@ -47,6 +47,9 @@ export function StudyGroupChat() {
 		}
 	}, []);
 	useEffect(() => {
+		let unsubMessages;
+		let unsubMembers;
+
 		function getData() {
 			/** Get Study Group Info */
 			db.collection(FB.collection)
@@ -54,11 +57,10 @@ export function StudyGroupChat() {
 				.get()
 				.then((doc) => {
 					setStudyGroup(doc.data());
-				})
-				.catch((err) => console.log(err));
+				});
 
 			/** Get Study Group Messages */
-			db.collection(FB.collection)
+			unsubMessages = db.collection(FB.collection)
 				.doc(studyGroupId)
 				.collection(FB.messages)
 				.orderBy(FB.orderBy, FB.order)
@@ -74,7 +76,7 @@ export function StudyGroupChat() {
 				);
 
 			/** Get Study Group Members */
-			db.collection(FB.collection)
+			unsubMembers = db.collection(FB.collection)
 				.doc(studyGroupId)
 				.collection(FB.users)
 				.onSnapshot((snapshot) =>
@@ -120,6 +122,11 @@ export function StudyGroupChat() {
 		if (studyGroupId && isLoading) {
 			getData();
 		}
+
+		return () => {
+			if (unsubMessages) unsubMessages();
+			if (unsubMembers) unsubMembers();
+		};
 	}, [studyGroupId, studyGroup, isLoading, groupMembers, setGroupMembers]);
 
 	const handleChange = (e) => {
@@ -181,9 +188,7 @@ export function StudyGroupChat() {
 				count: increment,
 				lastUpdatedAt: createFbTimestamp(),
 			});
-		} catch (err) {
-			console.log(err);
-		}
+		} catch (err) {}
 	};
 
 	/** Display Study Group's Chat Messages */

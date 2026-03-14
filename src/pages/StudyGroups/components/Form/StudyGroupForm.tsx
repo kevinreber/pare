@@ -70,7 +70,6 @@ function StudyGroupForm({ save, studyGroups, user }: StudyGroupFormTypes) {
 	const handleChange = (e: any) => {
 		// handle checkbox
 		if (e.target.type === 'checkbox') {
-			console.log(formData.private);
 			setFormData((fData) => ({
 				...fData,
 				private: !fData.private,

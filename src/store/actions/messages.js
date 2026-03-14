@@ -11,7 +11,6 @@ export function addNewMessageToFB(data) {
 		try {
 			db.collection('messages')
 				.add(data)
-				.then((res) => console.log(res))
 				.then(() => {
 					// make async call to DB
 					dispatch(addNewMessage(data));
@@ -19,9 +18,7 @@ export function addNewMessageToFB(data) {
 				.catch((err) => {
 					dispatch(dispatchError(ADD_NEW_MESSAGE_ERROR, err));
 				});
-		} catch (err) {
-			console.log(err);
-		}
+		} catch (err) {}
 	};
 }
 
@@ -46,7 +43,6 @@ export function deleteMessageFromFB(messageId) {
 			.doc(messageId)
 			.delete()
 			.then(() => {
-				console.log('Message Deleted');
 				dispatch(deleteMessage(messageId));
 			})
 			.catch((err) => dispatch(dispatchError(DELETE_MESSAGE_FAIL, err)));

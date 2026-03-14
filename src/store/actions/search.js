@@ -6,12 +6,12 @@ export function fetchTodaysEvents(courses) {
 		try {
 			const today = firebase.firestore.FieldValue.serverTimestamp();
 
-			db.collection('feed').catch((err) => {
-				dispatch(dispatchError('SEARCH_ERROR', err));
-			});
-		} catch (err) {
-			console.log(err);
-		}
+			db.collection('feed')
+				.get()
+				.catch((err) => {
+					dispatch(dispatchError('SEARCH_ERROR', err));
+				});
+		} catch (err) {}
 	};
 }
 

@@ -51,7 +51,7 @@ const AutocompleteUsers = ({
 
 	/** Get Users */
 	useEffect(() => {
-		db.collection('users').onSnapshot((snapshot: any) =>
+		const unsubUsers = db.collection('users').onSnapshot((snapshot: any) =>
 			setUsers(
 				snapshot.docs.map((doc: any) => ({
 					id: doc.id,
@@ -59,6 +59,8 @@ const AutocompleteUsers = ({
 				}))
 			)
 		);
+
+		return () => unsubUsers();
 	}, []);
 
 	/** Get Messaged Users */

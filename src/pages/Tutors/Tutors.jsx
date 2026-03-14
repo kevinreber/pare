@@ -36,7 +36,7 @@ export function Tutors() {
 						})
 					);
 				})
-				.catch((err) => console.log(err));
+				.catch(() => {});
 			setIsLoadingTutors(false);
 			setLoadTutorsAvailabilities(true);
 		}
@@ -47,14 +47,20 @@ export function Tutors() {
 	}, [isLoadingTutors, tutors]);
 
 	useEffect(() => {
+		let unsubUser;
+
 		function getUserTutorInfo() {
-			db.collection(FB.collection)
+			unsubUser = db.collection(FB.collection)
 				.doc(currentUser.uid)
 				.onSnapshot((snapshot) => setUser(snapshot.data()));
 		}
 		if (currentUser) {
 			getUserTutorInfo();
 		}
+
+		return () => {
+			if (unsubUser) unsubUser();
+		};
 	}, [currentUser]);
 
 	useEffect(() => {
@@ -78,7 +84,7 @@ export function Tutors() {
 						});
 						return userAvailability;
 					})
-					.catch((err) => console.log(err));
+					.catch(() => {});
 
 				tutorsCopy[idx] = {
 					...tutorsCopy[idx],

@@ -81,15 +81,18 @@ export const Messages = memo(
 		}, []);
 
 		useEffect(() => {
+			let unsubMessage: (() => void) | undefined;
+			let unsubChats: (() => void) | undefined;
+
 			const getData = () => {
 				if (messageId) {
 					/** Get Message Info */
-					db.collection(FB.messages)
+					unsubMessage = db.collection(FB.messages)
 						.doc(messageId)
 						.onSnapshot((snapshot: any) => setMessageData(snapshot.data()));
 
 					/** Get Chat Messages */
-					db.collection(FB.messages)
+					unsubChats = db.collection(FB.messages)
 						.doc(messageId)
 						.collection(FB.chats)
 						// @ts-ignore
@@ -110,6 +113,11 @@ export const Messages = memo(
 			if (isLoading) {
 				getData();
 			}
+
+			return () => {
+				if (unsubMessage) unsubMessage();
+				if (unsubChats) unsubChats();
+			};
 		}, [messageId, isLoading]);
 
 		// get Receiver's ID
@@ -129,14 +137,20 @@ export const Messages = memo(
 
 		// get Receiver's data
 		useEffect(() => {
+			let unsubReceiver: (() => void) | undefined;
+
 			if (receiverId && isLoading) {
-				db.collection(FB.users)
+				unsubReceiver = db.collection(FB.users)
 					// @ts-ignore
 					.doc(receiverId[0])
 					.onSnapshot((snapshot: any) => setReceiver(snapshot.data()));
 
 				setIsLoading(false);
 			}
+
+			return () => {
+				if (unsubReceiver) unsubReceiver();
+			};
 		}, [receiverId, isLoading]);
 
 		/** Delete Message */
@@ -169,9 +183,7 @@ export const Messages = memo(
 					count: increment,
 					lastUpdatedAt: createFbTimestamp(),
 				});
-			} catch (err) {
-				console.log(err);
-			}
+			} catch (err) {}
 		};
 
 		/** Prompts Confirmation Dialog to Delete Post ********/

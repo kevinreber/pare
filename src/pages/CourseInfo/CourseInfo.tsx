@@ -85,14 +85,17 @@ export const CourseInfo = () => {
 
 	// get course assignments
 	useEffect(() => {
+		let unsubCourse: (() => void) | undefined;
+		let unsubAssignments: (() => void) | undefined;
+
 		if (courseId && isLoading) {
-			db.collection('courses')
+			unsubCourse = db.collection('courses')
 				.doc(courseId)
 				.onSnapshot((snapshot: any) => setCourse(snapshot.data()));
 		}
 
 		if (course && isLoading) {
-			db.collection('courses')
+			unsubAssignments = db.collection('courses')
 				.doc(courseId)
 				.collection('assignments')
 				.orderBy('dueDate', 'asc')
@@ -108,6 +111,11 @@ export const CourseInfo = () => {
 				);
 			setIsLoading(false);
 		}
+
+		return () => {
+			if (unsubCourse) unsubCourse();
+			if (unsubAssignments) unsubAssignments();
+		};
 	}, [courseId, course, isLoading]);
 
 	if (showForm) {

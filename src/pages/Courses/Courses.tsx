@@ -92,8 +92,10 @@ export const Courses = (): JSX.Element => {
 	};
 
 	useEffect(() => {
+		let unsubCourses: (() => void) | undefined;
+
 		const getData = () => {
-			db.collection(FB.collection)
+			unsubCourses = db.collection(FB.collection)
 				// @ts-ignore
 				.where(FB.field, FB.filter, currentUser.uid)
 				.onSnapshot((snapshot: any) =>
@@ -109,6 +111,10 @@ export const Courses = (): JSX.Element => {
 		if (isLoading) {
 			getData();
 		}
+
+		return () => {
+			if (unsubCourses) unsubCourses();
+		};
 	}, [currentUser, isLoading]);
 
 	useEffect(() => {

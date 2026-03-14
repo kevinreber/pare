@@ -45,7 +45,6 @@ export function Login() {
 			})
 		);
 		history.push('/feed');
-		console.log(user.uid, 'This is a demo');
 	};
 
 	return (

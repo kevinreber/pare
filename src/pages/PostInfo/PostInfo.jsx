@@ -46,14 +46,17 @@ export function PostInfo() {
 	);
 
 	useEffect(() => {
+		let unsubPost;
+		let unsubComments;
+
 		/** Get Post Info */
 		const getData = () => {
-			db.collection(FB.collection)
+			unsubPost = db.collection(FB.collection)
 				.doc(postId)
 				.onSnapshot((snapshot) => setPost(snapshot.data()));
 
 			/** Get Post Comments */
-			db.collection(FB.collection)
+			unsubComments = db.collection(FB.collection)
 				.doc(postId)
 				.collection(FB.subCollection)
 				.orderBy(FB.orderBy, FB.order)
@@ -68,6 +71,11 @@ export function PostInfo() {
 		if (postId) {
 			getData();
 		}
+
+		return () => {
+			if (unsubPost) unsubPost();
+			if (unsubComments) unsubComments();
+		};
 	}, [postId]);
 
 	if (!post) {
@@ -78,9 +86,7 @@ export function PostInfo() {
 	const sendComment = (data) => {
 		try {
 			dispatch(addCommentToPost(postId, data));
-		} catch (err) {
-			console.log(err);
-		}
+		} catch (err) {}
 	};
 
 	/** Prompts Confirmation Dialog to Delete Comment */
@@ -110,7 +116,7 @@ export function PostInfo() {
 	};
 
 	const editComment = (id) => {
-		console.log('editing...', postId, id);
+		// TODO: implement comment editing
 	};
 
 	/** Prompts Confirmation Dialog to Delete Post*/

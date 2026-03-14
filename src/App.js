@@ -23,7 +23,7 @@ function App() {
 				if (user) {
 					dispatch(setCurrentUser(user));
 				} else {
-					console.log('no user');
+					// no user logged in
 				}
 			});
 		}

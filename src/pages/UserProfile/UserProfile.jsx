@@ -40,6 +40,10 @@ export function UserProfile() {
 	});
 
 	useEffect(() => {
+		let unsubUser;
+		let unsubAvailability;
+		let unsubCourses;
+
 		async function getUserData() {
 			const doc = await db.collection(FB.users).doc(userId).get();
 
@@ -54,11 +58,11 @@ export function UserProfile() {
 					})
 				);
 			} else {
-				db.collection(FB.users)
+				unsubUser = db.collection(FB.users)
 					.doc(userId)
 					.onSnapshot((snapshot) => setUser(snapshot.data()));
 
-				db.collection(FB.users)
+				unsubAvailability = db.collection(FB.users)
 					.doc(userId)
 					.collection(FB.availability)
 					.orderBy(FB.day)
@@ -73,7 +77,7 @@ export function UserProfile() {
 						)
 					);
 
-				db.collection(FB.courses)
+				unsubCourses = db.collection(FB.courses)
 					.where(FB.users, 'array-contains', userId)
 					.onSnapshot((snapshot) =>
 						setUserCourses(
@@ -96,8 +100,7 @@ export function UserProfile() {
 								data: doc.data(),
 							}))
 						);
-					})
-					.catch((err) => console.log(err));
+					});
 
 				// Loading finished
 				setIsLoading(false);
@@ -106,6 +109,12 @@ export function UserProfile() {
 		if (userId) {
 			getUserData();
 		}
+
+		return () => {
+			if (unsubUser) unsubUser();
+			if (unsubAvailability) unsubAvailability();
+			if (unsubCourses) unsubCourses();
+		};
 	}, [userId, dispatch, history]);
 
 	const toggleEditProfile = () => setEditProfile((edit) => !edit);

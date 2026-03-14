@@ -17,12 +17,10 @@ const authReducer = (state = INITIAL_STATE, action) => {
 				user: action.user,
 			};
 		case LOGIN_FAIL:
-			console.log(action.type, action.error);
 			return { ...state, ...action.error };
 		case LOGOUT_USER:
 			return { ...state, user: null };
 		case LOGOUT_FAIL:
-			console.log(action.type, action.error);
 			return { ...state, ...action.error };
 		default:
 			return state;

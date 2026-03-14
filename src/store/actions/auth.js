@@ -35,7 +35,7 @@ async function checkIfUserExists(user) {
 				addNewUserToDB(user);
 			}
 		})
-		.catch((err) => console.log(err));
+		.catch((err) => {});
 }
 
 /** Adds new User to DB
@@ -98,11 +98,9 @@ async function addNewUserToDB(user) {
 				day: idx + 1,
 			});
 	});
-	console.log('New user created', data);
 }
 
 async function updateUserLogin(user) {
-	console.log('updating user last login...');
 	await db
 		.collection('users')
 		.doc(user.uid)
@@ -159,7 +157,7 @@ export function setCurrentUser(user) {
 			.then((doc) => {
 				dispatch(setCurrUser(doc.data()));
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => {});
 	};
 }
 
@@ -176,7 +174,6 @@ export function logOut() {
 		auth
 			.signOut()
 			.then(() => {
-				console.log('Sign out successful');
 				dispatch(logOutUser(LOGOUT_USER));
 			})
 			.catch((err) => dispatch(dispatchError(LOGOUT_FAIL, err)));
@@ -195,18 +192,12 @@ export function deleteAccount(id) {
 		auth
 			.signOut()
 			.then(() => {
-				console.log('Sign out successful');
 				dispatch(logOutUser(LOGOUT_USER));
 			})
 			.then(() => {
 				db.collection('users').doc(id).delete();
 			})
-			.then(() => {
-				console.log('Account successfully deleted!');
-			})
-			.catch((err) => {
-				console.error('Error removing account: ', err);
-			});
+			.catch((err) => {});
 	};
 }
 

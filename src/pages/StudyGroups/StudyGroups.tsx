@@ -50,7 +50,7 @@ export function StudyGroups() {
 					);
 				})
 				.then(() => setGetUserStudyGroups(true))
-				.catch((err) => console.log(err));
+				.catch(() => {});
 		};
 		if (isLoading) {
 			getData();

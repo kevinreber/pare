@@ -66,7 +66,7 @@ export const Search = () => {
 							}
 						});
 					})
-					.catch((err) => console.log(err));
+					.catch(() => {});
 			} else {
 				db.collection('feeds')
 					.where('type', '==', quickSearch)
@@ -80,7 +80,7 @@ export const Search = () => {
 							}))
 						);
 					})
-					.catch((err) => console.log(err));
+					.catch(() => {});
 			}
 			setIsLoading(false);
 		}
@@ -107,7 +107,7 @@ export const Search = () => {
 						}
 					});
 				})
-				.catch((err) => console.log(err));
+				.catch(() => {});
 
 			setIsLoading(false);
 			setStartSearch(false);

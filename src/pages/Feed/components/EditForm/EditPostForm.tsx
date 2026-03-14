@@ -149,12 +149,7 @@ const EditPostForm = memo(
 
 					await storageImage
 						.delete()
-						.then(() => {
-							console.log('Removed image');
-						})
-						.catch((err) => {
-							console.log(err);
-						});
+						.catch(() => {});
 				}
 				setImage(INITIAL_STATE_IMAGE);
 				setProgressBar(0);

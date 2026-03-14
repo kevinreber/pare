@@ -22,6 +22,8 @@ const MessageCard = ({ message, userId }: MessageCardProps): JSX.Element => {
 	const [chats, setChats] = useState<ChatsProps[]>([]);
 
 	useEffect(() => {
+		let unsubChats: (() => void) | undefined;
+
 		// get Receiver's ID
 		const getReceiver = () => {
 			const id = message.data.users.filter((uid: string) => uid !== userId);
@@ -30,7 +32,7 @@ const MessageCard = ({ message, userId }: MessageCardProps): JSX.Element => {
 
 		/** Get Chat Messages */
 		const getChat = () => {
-			db.collection('messages')
+			unsubChats = db.collection('messages')
 				.doc(message.id)
 				.collection('chats')
 				.orderBy('createdAt', 'desc')
@@ -44,18 +46,28 @@ const MessageCard = ({ message, userId }: MessageCardProps): JSX.Element => {
 			getReceiver();
 			getChat();
 		}
+
+		return () => {
+			if (unsubChats) unsubChats();
+		};
 	}, [message, userId]);
 	// @ts-ignore
 	const [receiver, setReceiver] = useState<ChatReceiver>({});
 	useEffect(() => {
+		let unsubReceiver: (() => void) | undefined;
+
 		// get Receiver's data
 		if (receiverId) {
-			db.collection('users')
+			unsubReceiver = db.collection('users')
 				// @ts-ignore
 
 				.doc(receiverId[0])
 				.onSnapshot((snapshot: any) => setReceiver(snapshot.data()));
 		}
+
+		return () => {
+			if (unsubReceiver) unsubReceiver();
+		};
 	}, [receiverId]);
 
 	// Create content truncated preview of message content

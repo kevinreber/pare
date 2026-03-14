@@ -33,8 +33,6 @@ function MessageFooter({ send, uid }: MessageFooterProps): JSX.Element {
 		if (formData.content && formData.content.trim() !== '') {
 			send(formData);
 			resetFormData();
-		} else {
-			console.log('error');
 		}
 	};
 

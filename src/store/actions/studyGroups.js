@@ -10,7 +10,6 @@ export function addNewStudyGroup(data) {
 	return (dispatch) => {
 		db.collection('study-groups')
 			.add(data)
-			.then((res) => console.log(res))
 			.then(() => {
 				// make async call to DB
 				dispatch(addNewStudyGroupToFB(data));

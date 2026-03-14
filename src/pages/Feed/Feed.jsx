@@ -55,7 +55,7 @@ export function Feed() {
 						}))
 					);
 				})
-				.catch((err) => console.log(err))
+				.catch(() => {})
 				.finally(() => setIsLoading(false));
 		};
 

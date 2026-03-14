@@ -76,9 +76,11 @@ function BeTutorForm({ uid, user }) {
 	};
 
 	useEffect(() => {
+		let unsubAvailability;
+
 		/** Get User Availability */
 		const getData = () => {
-			db.collection('users')
+			unsubAvailability = db.collection('users')
 				.doc(uid)
 				.collection('availability')
 				.orderBy('day')
@@ -99,6 +101,10 @@ function BeTutorForm({ uid, user }) {
 		if (uid && isLoading) {
 			getData();
 		}
+
+		return () => {
+			if (unsubAvailability) unsubAvailability();
+		};
 	}, [uid, isLoading]);
 
 	/** Handles general fields in form */

@@ -20,7 +20,6 @@ export function addPostToFB(post) {
 		db.collection('feeds')
 			.add(post)
 			.then(() => {
-				console.log('Post successful');
 				dispatch(addPost(post));
 			})
 			.catch((err) => dispatch(dispatchError(ADD_POST_FAIL, err)));
@@ -42,14 +41,12 @@ export function deletePostFromFB(postId, userId, image = '') {
 			const storageImage = storageRef.child(`feed/${userId}/${image}`);
 
 			storageImage.delete();
-			console.log('Removed image');
 		}
 
 		db.collection('feeds')
 			.doc(postId)
 			.delete()
 			.then(() => {
-				console.log('Post removed');
 				dispatch(deletePost(postId));
 			})
 			.catch((err) => dispatch(dispatchError(DELETE_POST_FAIL, err)));
@@ -71,7 +68,6 @@ export function editPostInFB(id, data) {
 			.doc(id)
 			.update(data)
 			.then(() => {
-				console.log('Post updated');
 				dispatch(editPost(id, data));
 			})
 			.catch((err) => dispatch(dispatchError(EDIT_POST_FAIL, err)));
@@ -93,7 +89,6 @@ export function addCommentToPost(postId, comment) {
 			.collection('comments')
 			.add(comment)
 			.then(() => {
-				console.log('Comment successful');
 				dispatch(addComment(comment));
 			})
 			.catch((err) => dispatch(dispatchError(ADD_COMMENT_ON_POST_FAIL, err)));
@@ -118,7 +113,6 @@ export function deleteCommentFromPost(postId, commentId) {
 			.doc(commentId)
 			.delete()
 			.then(() => {
-				console.log('Comment removed');
 				dispatch(deleteComment(commentId));
 			})
 			.catch((err) =>
