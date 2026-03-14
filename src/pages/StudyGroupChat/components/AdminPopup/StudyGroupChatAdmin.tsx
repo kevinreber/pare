@@ -18,7 +18,6 @@ import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import Avatar from '@material-ui/core/Avatar';
 import MoreHorizOutlinedIcon from '@material-ui/icons/MoreHorizOutlined';
-// import AddCircleOutlineRoundedIcon from '@material-ui/icons/AddCircleOutlineRounded';
 import BlockIcon from '@material-ui/icons/Block';
 import LinkRoundedIcon from '@material-ui/icons/LinkRounded';
 
@@ -244,12 +243,6 @@ const StudyGroupChatAdmin = ({
 				</div>
 				{userAdminStatus && (
 					<div className="Admin-Members__Add">
-						{/* <div className="Add__Btn">
-							<IconButton>
-								<AddCircleOutlineRoundedIcon />
-							</IconButton>
-							<p>Add Members</p>
-						</div> */}
 						<div className="Add__Btn">
 							<IconButton onClick={shareLink}>
 								<LinkRoundedIcon />

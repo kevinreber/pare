@@ -136,16 +136,6 @@ function BeTutorForm({ uid, user }) {
 			});
 	};
 
-	// ! Temp
-	// const handleSubmit = (e) => {
-	// 	e.preventDefault();
-	// 	update(formData);
-
-	// 	// Clear state of form
-	// 	setFormData(INITIAL_STATE);
-	// 	setChangeMade(false);
-	// };
-
 	// 'Start' and 'End' Time Pickers
 	const timePickers = (day, index = 0) => {
 		let startTime = null;
@@ -196,12 +186,6 @@ function BeTutorForm({ uid, user }) {
 	const dayFields = userAvailability.map((day) => (
 		<div key={day.id} className="Availability__Day">
 			<div className="Availability__TimePicker">{timePickers(day)}</div>
-			{/** ! Temp */}
-			{/* <div className="Availability__Add">
-				<IconButton>
-					<AddCircleOutlineRoundedIcon />
-				</IconButton>
-			</div> */}
 		</div>
 	));
 
@@ -335,7 +319,6 @@ function BeTutorForm({ uid, user }) {
 						handleChange={promptTutorDialog}
 						name={'is-tutor-toggle'}
 					/>
-					{/* <form className="container mb-3" onSubmit={handleSubmit}> */}
 					<div className="form-group">
 						<label className="float-left">I can help in...</label>
 						<small className="char-count">
@@ -413,10 +396,6 @@ function BeTutorForm({ uid, user }) {
 							{dayFields}
 						</MuiPickersUtilsProvider>
 					</div>
-					{/* <div className={`Search__Footer ${!changeMade ? 'disabled-btn' : ''}`}>
-							<CTAButton text="Save" />
-						</div>
-					</form> */}
 				</>
 			)}
 		</div>

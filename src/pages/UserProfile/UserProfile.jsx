@@ -159,13 +159,13 @@ export function UserProfile() {
 	/** if User is viewing their own profile, show edit button instead of message button */
 	const DisplayButton =
 		userId !== currentUser.uid ? (
-			<div onClick={sendMessagePrompt} className="font-italic">
+			<button type="button" onClick={sendMessagePrompt} className="font-italic unstyled-btn">
 				<CTAButton text="Send Message" />
-			</div>
+			</button>
 		) : (
-			<div onClick={toggleEditProfile} className="font-italic">
+			<button type="button" onClick={toggleEditProfile} className="font-italic unstyled-btn">
 				<CTAButton text="Edit" />
-			</div>
+			</button>
 		);
 
 	const updateUserData = (data) => {

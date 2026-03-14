@@ -224,14 +224,15 @@ export const Search = () => {
 			<div className="Search__List">
 				{isLoading && posts.length === 0 ? <Loader /> : SearchBody}
 			</div>
-			<div
+			<button
+				type="button"
 				onClick={handleSubmit}
-				className={`Search__Footer ${
+				className={`Search__Footer unstyled-btn ${
 					search.length === 0 ? 'disabled-btn' : ''
 				}`}>
 				<CTAButton text="Search" />
 				{errors !== '' && <div className="alert errors">{errors}</div>}
-			</div>
+			</button>
 		</div>
 	);
 };

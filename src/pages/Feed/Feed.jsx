@@ -1,5 +1,5 @@
 /** Dependencies */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 /** Components & Helpers */
@@ -34,6 +34,7 @@ export function Feed() {
 	const currentUser = useSelector((state) => state.auth.user);
 
 	const [isLoading, setIsLoading] = useState(true);
+	const [error, setError] = useState(null);
 	const [confirmDialog, setConfirmDialog] = useState({
 		isOpen: false,
 		title: '',
@@ -55,7 +56,7 @@ export function Feed() {
 						}))
 					);
 				})
-				.catch(() => {})
+				.catch((err) => setError('Failed to load posts. Please try again.'))
 				.finally(() => setIsLoading(false));
 		};
 
@@ -86,8 +87,20 @@ export function Feed() {
 		setIsLoading(true);
 	};
 
+	/** Delete Post */
+	const deletePost = useCallback((id, image) => {
+		setConfirmDialog((prev) => ({
+			...prev,
+			isOpen: false,
+		}));
+		dispatch(deletePostFromFB(id, currentUser.uid, image));
+		setFlashMessages(MESSAGE.deletePost, MESSAGE.error);
+		// get most recent posts
+		setIsLoading(true);
+	}, [dispatch, currentUser, setFlashMessages]);
+
 	/** Prompts Confirmation Dialog to Delete Post*/
-	const deletePostPrompt = (id, image) => {
+	const deletePostPrompt = useCallback((id, image) => {
 		setConfirmDialog({
 			isOpen: true,
 			title: CONFIRM.title,
@@ -96,27 +109,15 @@ export function Feed() {
 				deletePost(id, image);
 			},
 		});
-	};
-
-	/** Delete Post */
-	const deletePost = (id, image) => {
-		setConfirmDialog({
-			...confirmDialog,
-			isOpen: false,
-		});
-		dispatch(deletePostFromFB(id, currentUser.uid, image));
-		setFlashMessages(MESSAGE.deletePost, MESSAGE.error);
-		// get most recent posts
-		setIsLoading(true);
-	};
+	}, [deletePost]);
 
 	/** Updates Post */
-	const editPost = (id, data) => {
+	const editPost = useCallback((id, data) => {
 		dispatch(editPostInFB(id, data));
 		setFlashMessages(MESSAGE.updatePost, MESSAGE.success);
 		// get most recent posts
 		setIsLoading(true);
-	};
+	}, [dispatch, setFlashMessages]);
 
 	if (showForm) {
 		return (
@@ -141,14 +142,16 @@ export function Feed() {
 			</div>
 			<div className="Feed__List">
 				{isLoading ? <Loader /> : null}
-				{posts.length === 0 && !isLoading ? (
+				{error && !isLoading ? (
+					<div className="alert errors">{error}</div>
+				) : posts.length === 0 && !isLoading ? (
 					<NoData text="posts" />
 				) : (
 					<FeedList posts={posts} remove={deletePostPrompt} edit={editPost} />
 				)}
 			</div>
-			<Fab id="Feed-Add-Post-Btn" aria-label="add">
-				<AddIcon onClick={toggleForm} />
+			<Fab id="Feed-Add-Post-Btn" aria-label="Create new post" onClick={toggleForm}>
+				<AddIcon />
 			</Fab>
 		</div>
 	);

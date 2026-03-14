@@ -31,7 +31,6 @@ export const Notifications = (): JSX.Element => {
 	useEffect(() => {
 		db.collection('messages')
 			.where('users', 'array-contains', currentUser.uid)
-			// .orderBy('lastUpdatedAt')
 			.get()
 			.then((snapshot: any) => {
 				setMessages(

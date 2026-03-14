@@ -36,9 +36,9 @@ const MessagesList = ({
 			<div className="MessageList">
 				<ul>{List}</ul>
 			</div>
-			<div onClick={() => toggleForm()} className="font-italic">
+			<button type="button" onClick={() => toggleForm()} className="font-italic unstyled-btn">
 				<CTAButton text="New Message" />
-			</div>
+			</button>
 		</>
 	);
 };

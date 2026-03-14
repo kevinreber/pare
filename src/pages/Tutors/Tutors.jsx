@@ -18,6 +18,7 @@ export function Tutors() {
 	);
 	const [tutors, setTutors] = useState([]);
 	const [user, setUser] = useState(null);
+	const [error, setError] = useState(null);
 
 	useEffect(() => {
 		// Gets all available tutors data
@@ -36,7 +37,9 @@ export function Tutors() {
 						})
 					);
 				})
-				.catch(() => {});
+				.catch(() => {
+					setError('Failed to load tutors. Please try again.');
+				});
 			setIsLoadingTutors(false);
 			setLoadTutorsAvailabilities(true);
 		}
@@ -119,29 +122,49 @@ export function Tutors() {
 
 	return (
 		<div className="Tutors">
-			<div className="Tutors-Header Body-Header">
+			<div className="Tutors-Header Body-Header" role="tablist">
 				<div className="Tutor-Find-Tutor">
 					<h5
 						id="findTutor"
+						role="tab"
+						aria-selected={active === 'findTutor'}
+						tabIndex={0}
 						className={
 							active === 'findTutor' ? 'mate-text-primary' : 'mate-text-active'
 						}
-						onClick={toggleTutor}>
+						onClick={toggleTutor}
+						onKeyDown={(e) => {
+							if (e.key === 'Enter' || e.key === ' ') {
+								e.preventDefault();
+								toggleTutor(e);
+							}
+						}}>
 						Find a Tutor
 					</h5>
 				</div>
 				<div className="Tutor-Be-Tutor">
 					<h5
 						id="beTutor"
+						role="tab"
+						aria-selected={active === 'beTutor'}
+						tabIndex={0}
 						className={
 							active === 'beTutor' ? 'mate-text-primary' : 'mate-text-active'
 						}
-						onClick={toggleTutor}>
+						onClick={toggleTutor}
+						onKeyDown={(e) => {
+							if (e.key === 'Enter' || e.key === ' ') {
+								e.preventDefault();
+								toggleTutor(e);
+							}
+						}}>
 						Be a Tutor
 					</h5>
 				</div>
 			</div>
-			<div className="Tutors__Body">{TutorsBody}</div>
+			<div className="Tutors__Body">
+				{error ? <div className="alert errors">{error}</div> : TutorsBody}
+			</div>
 		</div>
 	);
 }

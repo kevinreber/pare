@@ -256,6 +256,16 @@ select option:disabled {
 	text-transform: lowercase;
 }
 
+.unstyled-btn {
+	background: none;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	font: inherit;
+	color: inherit;
+	width: 100%;
+}
+
 .errors,
 .error-limit {
 	color: var(--danger-color);

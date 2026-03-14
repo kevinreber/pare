@@ -32,6 +32,7 @@ export function StudyGroups() {
 	const [allStudyGroups, setAllStudyGroups] = useState([]);
 	const [filter, setFilter] = useState('');
 	const [isLoading, setIsLoading] = useState(true);
+	const [error, setError] = useState('');
 
 	const [showForm, setShowForm] = useState(false);
 	const toggleForm = () => setShowForm((show) => !show);
@@ -50,7 +51,10 @@ export function StudyGroups() {
 					);
 				})
 				.then(() => setGetUserStudyGroups(true))
-				.catch(() => {});
+				.catch(() => {
+					setError('Failed to load study groups. Please try again.');
+					setIsLoading(false);
+				});
 		};
 		if (isLoading) {
 			getData();
@@ -143,12 +147,14 @@ export function StudyGroups() {
 				<Searchbar value={filter} setValue={setFilter} />
 			</div>
 			<div className="StudyGroups__Body">
-				{isLoading ? <Loader /> : <>{List}</>}
+				{isLoading ? <Loader /> : error ? (
+					<div className="alert errors">{error}</div>
+				) : <>{List}</>}
 			</div>
 			<div className="CourseForm p-3">
-				<div onClick={toggleForm} className="font-italic">
+				<button type="button" onClick={toggleForm} className="font-italic unstyled-btn">
 					<CTAButton text="Add Study Group" />
-				</div>
+				</button>
 			</div>
 		</div>
 	);

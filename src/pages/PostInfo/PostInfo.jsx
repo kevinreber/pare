@@ -8,6 +8,7 @@ import BackButton from '../../components/BackButton/BackButton';
 import PostCard from '../Feed/components/Card/PostCard';
 import ChatFooter from '../../components/ChatFooter/ChatFooter';
 import NoData from '../../components/NoData/NoData';
+import Loader from '../../components/layout/Loader/Loader';
 import CommentsList from './components/List/CommentsList';
 import {
 	addCommentToPost,
@@ -79,7 +80,7 @@ export function PostInfo() {
 	}, [postId]);
 
 	if (!post) {
-		return <p>Loading...</p>;
+		return <Loader />;
 	}
 
 	/** Sends Comment from ChatFooter */

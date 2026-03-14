@@ -165,33 +165,51 @@ export const Courses = (): JSX.Element => {
 
 	return (
 		<div className="Courses">
-			<div className="Courses-Header Body-Header">
+			<div className="Courses-Header Body-Header" role="tablist">
 				<div className="Courses-Current">
 					<h5
 						id="current"
+						role="tab"
+						aria-selected={active === 'current'}
+						tabIndex={0}
 						className={
 							active === 'current' ? 'mate-text-primary' : 'mate-text-active'
 						}
-						onClick={toggleCourses}>
+						onClick={toggleCourses}
+						onKeyDown={(e: React.KeyboardEvent<HTMLHeadingElement>) => {
+							if (e.key === 'Enter' || e.key === ' ') {
+								e.preventDefault();
+								toggleCourses(e as unknown as MouseEvent<HTMLHeadingElement>);
+							}
+						}}>
 						Current Semester
 					</h5>
 				</div>
 				<div className="Courses-Past">
 					<h5
 						id="past"
+						role="tab"
+						aria-selected={active === 'past'}
+						tabIndex={0}
 						className={
 							active === 'past' ? 'mate-text-primary' : 'mate-text-active'
 						}
-						onClick={toggleCourses}>
+						onClick={toggleCourses}
+						onKeyDown={(e: React.KeyboardEvent<HTMLHeadingElement>) => {
+							if (e.key === 'Enter' || e.key === ' ') {
+								e.preventDefault();
+								toggleCourses(e as unknown as MouseEvent<HTMLHeadingElement>);
+							}
+						}}>
 						Past Semester
 					</h5>
 				</div>
 			</div>
 			<div className="Courses__CourseList">{courseList}</div>
 			<div className="CourseForm p-3">
-				<div onClick={toggleForm} className="font-italic">
+				<button type="button" onClick={toggleForm} className="font-italic unstyled-btn">
 					<CTAButton text="Join Class" />
-				</div>
+				</button>
 			</div>
 		</div>
 	);

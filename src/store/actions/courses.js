@@ -10,37 +10,7 @@ import firebase from 'firebase';
 
 export function fetchCoursesfromFB(courses) {
 	return (dispatch) => {
-		const response = courses;
-		// for (let courseData of response.data.courses) {
-		// ! To load all courses onto DB
-		// ! Last courses added was { abbreviation: TURKISH, course_number: 15A, id : 10897 }
-		// 	try {
-		// 		const response = await axios.get(
-		// 			`${BASE_URL}/api/catalog/catalog_json/course_box/?course_id=${courseData.id}`
-		// 		);
-		// 		const course = response.data;
-		// 		// append semester
-		// 		course.semester = '';
-
-		// 		// Add first user into to class
-		// 		course.users = [];
-
-		// 		// store course ID as document ID
-		// 		db.collection('courses')
-		// 			.doc(course.course.id.toString())
-		// 			.set(course)
-		// 			.then(() => {
-		// 				console.log('added course...', courseData);
-		// 			})
-		// 			.catch((err) => {
-		// 				dispatch(dispatchError('ADD_COURSE_ERROR', err));
-		// 			});
-		// 	} catch (err) {
-		// 		console.log(err);
-		// 	}
-		// }
-		// make async call to DB
-		return dispatch(getCourses(response));
+		return dispatch(getCourses(courses));
 	};
 }
 

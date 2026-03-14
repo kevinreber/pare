@@ -90,24 +90,6 @@ export function StudyGroupChat() {
 					)
 				);
 
-			// Verify if user has access to Study Group Chat
-			// if (isLoading && studyGroup.users) {
-			// 	const userAccess = studyGroup.users.some(
-			// 		(user) => user.uid === currentUser.uid
-			// 	);
-			// 	if (!userAccess) {
-			// 		history.push('/study-groups');
-			// 		/** Prompt change made */
-			// 		dispatch(
-			// 			addFlashMessage({
-			// 				isOpen: true,
-			// 				message: 'Unauthorized Access',
-			// 				type: 'error',
-			// 			})
-			// 		);
-			// 	}
-			// }
-
 			// add studyGroup.title value to input in StudyGroupChatAdmin
 			// if user wants to change Study Group's title
 			// ! CHECK members /
